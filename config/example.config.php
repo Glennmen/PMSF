@@ -38,6 +38,11 @@ $gmapsKey = "";                                                     // Google Ma
 
 $gAnalyticsId = "";                                                 // "" for empty, "UA-XXXXX-Y" add your Google Analytics tracking ID
 
+/* MOTD */
+
+$motdTitle = "Message of the Day";
+$motdContent = "This is an example MOTD<br>Do whatever you like with it.";
+
 
 //-----------------------------------------------------
 // FRONTEND SETTINGS
