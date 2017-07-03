@@ -491,6 +491,8 @@ if (!empty($lat) && !empty($lon)) {
         <center><h1>Loading...</h1></center>
     </nav>
 
+    <div id="motd" title="<?= $motdTitle; ?>"><?= $motdContent; ?></div>
+
     <div id="map"></div>
 </div>
 <!-- Scripts -->
