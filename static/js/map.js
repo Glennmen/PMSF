@@ -1426,6 +1426,13 @@ function processGyms(i, item) {
     }
 
     if (!Store.get('showGyms') && Store.get('showRaids')) {
+        if (item.raid_end === undefined) {
+            removeGymFromMap(item['gym_id'])
+            return true
+        }
+    }
+
+    if (!Store.get('showGyms') && Store.get('showRaids')) {
         if (item.raid_end < Date.now()) {
             removeGymFromMap(item['gym_id'])
             return true
@@ -2525,14 +2532,6 @@ $(function () {
     $('#gyms-switch').change(function () {
         var options = {
             'duration': 500
-        }
-        var wrapper = $('#gym-sidebar-wrapper')
-        if (this.checked) {
-            lastgyms = false
-            wrapper.show(options)
-        } else {
-            lastgyms = false
-            wrapper.hide(options)
         }
         var wrapper2 = $('#gyms-filter-wrapper')
         if (this.checked) {
