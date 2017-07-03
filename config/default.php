@@ -36,6 +36,10 @@ $gmapsKey = "";                                                     // Google Ma
 
 $gAnalyticsId = "";                                                 // "" for empty, "UA-XXXXX-Y" add your Google Analytics tracking ID
 
+/* MOTD */
+
+$motdTitle = "";
+$motdContent ="";
 
 //-----------------------------------------------------
 // FRONTEND SETTINGS

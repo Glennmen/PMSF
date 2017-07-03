@@ -2090,6 +2090,11 @@ $(function () {
     }
 })
 
+$(function() {
+    // load MOTD, if set
+    initMOTD()
+})
+
 $(function () {
     // populate Navbar Style menu
     $selectStyle = $('#map-style')
