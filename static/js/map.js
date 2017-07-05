@@ -852,7 +852,7 @@ function setupGymMarker(item) {
         map: map,
         content: getGymMarkerIcon(item),
         flat: true,
-        anchor: RichMarkerPosition.TOP
+        anchor: RichMarkerPosition.MIDDLE
     })
 
     if (!marker.rangeCircle && isRangeActive(map)) {
