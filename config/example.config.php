@@ -43,6 +43,10 @@ $gAnalyticsId = "";                                                 // "" for em
 $piwikUrl = "";
 $piwikSiteId = "";
 
+/* PayPal */
+
+$paypalUrl = "";                                                    // PayPal donation URL, leave "" for empty
+
 /* MOTD */
 
 $motdTitle = "Message of the Day";
