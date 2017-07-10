@@ -1155,14 +1155,3 @@ function isMobileDevice() {
 return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 );
 }
-
-function initMOTD() {
-    $('#motd').dialog({ autoOpen: false });
-<?php
-if (($motdTitle) && ($motdContent)) {
-    ?>
-    $('#motd').dialog('open');
-    <?php
-}
-?>
-}
