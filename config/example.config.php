@@ -52,7 +52,6 @@ $paypalUrl = "";                                                    // PayPal do
 $motdTitle = "Message of the Day";
 $motdContent = "This is an example MOTD<br>Do whatever you like with it.";
 
-
 //-----------------------------------------------------
 // FRONTEND SETTINGS
 //-----------------------------------------------------

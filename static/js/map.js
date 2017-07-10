@@ -2155,8 +2155,7 @@ $(function () {
         fail: function() {
             return false
         }
-    });
-
+    })
 })
 
 $(function () {
