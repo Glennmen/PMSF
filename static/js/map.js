@@ -72,8 +72,6 @@ createjs.Sound.registerSound('static/sounds/ding.mp3', 'ding')
 var genderType = ['♂', '♀', '⚲']
 var unownForm = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?']
 
-var initMOTD
-
 /*
  text place holders:
  <pkm> - pokemon name
@@ -2147,12 +2145,11 @@ $(function () {
         type: 'GET',
         dataType: 'json',
         cache: false,
-        success: function(data) {
+        success: function (data) {
             // set content of motd banner
             $('#motd').attr('title', data.title).html(data.content).dialog()
-
         },
-        fail: function() {
+        fail: function () {
             return false
         }
     })
