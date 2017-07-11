@@ -2158,6 +2158,20 @@ $(function () {
     if (Store.get('playCries')) {
         fetchCriesJson()
     }
+    // load MOTD, if set
+    $.ajax({
+        url: 'motd_data',
+        type: 'GET',
+        dataType: 'json',
+        cache: false,
+        success: function (data) {
+            // set content of motd banner
+            $('#motd').attr('title', data.title).html(data.content).dialog()
+        },
+        fail: function () {
+            return false
+        }
+    })
 })
 
 $(function () {
