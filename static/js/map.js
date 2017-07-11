@@ -67,6 +67,8 @@ var updateWorker
 var lastUpdateTime
 
 var cries
+var criesLoaded = false
+
 var assetsPath = 'static/sounds/'
 
 var gymTypes = ['Uncontested', 'Mystic', 'Valor', 'Instinct']
@@ -2125,6 +2127,20 @@ function toggleGymPokemonDetails(e) { // eslint-disable-line no-unused-vars
     e.nextElementSibling.classList.toggle('visible')
 }
 
+function fetchCriesJson() {
+    $.ajax({
+        'global': false,
+        'url': 'static/dist/data/cries.min.json',
+        'dataType': 'json',
+        'success': function (data) {
+            cries = data
+            createjs.Sound.alternateExtensions = ['mp3']
+            createjs.Sound.registerSounds(cries, assetsPath)
+            criesLoaded = true
+        }
+    })
+}
+
 //
 // Page Ready Exection
 //
@@ -2139,16 +2155,9 @@ $(function () {
 })
 
 $(function () {
-    $.ajax({
-        'global': false,
-        'url': 'static/dist/data/cries.min.json',
-        'dataType': 'json',
-        'success': function (data) {
-            cries = data
-            createjs.Sound.alternateExtensions = ['mp3']
-            createjs.Sound.registerSounds(cries, assetsPath)
-        }
-    })
+    if (Store.get('playCries')) {
+        fetchCriesJson()
+    }
 })
 
 $(function () {
@@ -2623,6 +2632,9 @@ $(function () {
 
     $('#cries-switch').change(function () {
         Store.set('playCries', this.checked)
+        if (this.checked && !criesLoaded) {
+            fetchCriesJson()
+        }
     })
 
     $('#start-at-user-location-switch').change(function () {
