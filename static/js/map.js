@@ -66,6 +66,7 @@ var selectedStyle = 'light'
 var updateWorker
 var lastUpdateTime
 
+var cries
 var assetsPath = 'static/sounds/'
 
 var gymTypes = ['Uncontested', 'Mystic', 'Valor', 'Instinct']
@@ -937,7 +938,7 @@ function updateGymMarker(item, marker) {
     var raidLevel = item.raid_level
     if (raidLevel >= Store.get('remember_raid_notify') && item.raid_end > Date.now() && Store.get('remember_raid_notify') !== 0) {
         var raidPokemon = mapData.gyms[item['gym_id']].raid_pokemon_id
-        if (item.raid_pokemon_id !== raidPokemon)
+        if (item.raid_pokemon_id !== raidPokemon) {
             var title = 'Raid level: ' + raidLevel
 
             var raidStartStr = getTimeStr(item['raid_start'])
