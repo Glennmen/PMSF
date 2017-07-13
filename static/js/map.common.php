@@ -1002,7 +1002,7 @@ default: <?php echo $noCriesSound ? 'false' : $criesSound ?>,
 type: StoreTypes.Boolean
 },
 'criesType': {
-default: <?php echo $noCriesType ? 'false' : '"'.$criesType.'"' ?>,
+default: "<?php echo $criesType; ?>",
 type: StoreTypes.String
 },
 'geoLocate': {
