@@ -2827,9 +2827,9 @@ function openFile(event) { // eslint-disable-line no-unused-vars
 function checkAndCreateSound(pokemonId = 0) {
     if (Store.get('playSound')) {
         if (!Store.get('playCries') || pokemonId === 0) {
-            createjs.Sound.play('ding', {'pan': 0.0001})
+            createjs.Sound.play('ding')
         } else {
-            createjs.Sound.play(pokemonId, {'pan': 0.0001})
+            createjs.Sound.play(pokemonId)
         }
     }
 }
