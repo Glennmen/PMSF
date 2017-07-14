@@ -52,6 +52,10 @@ $paypalUrl = "";                                                    // PayPal do
 $motdTitle = "Message of the Day";
 $motdContent = "This is an example MOTD<br>Do whatever you like with it.";
 
+/* Multiple Locations in Nav */
+
+$location = "";                                                     // Ex: $location = [[lat_1, lon_1, "city_1"], [lat_2, lon_2, "city_2"]];
+
 //-----------------------------------------------------
 // FRONTEND SETTINGS
 //-----------------------------------------------------
