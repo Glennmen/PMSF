@@ -1,13 +1,17 @@
 <?php
 include('config/config.php');
-include('utils.php');
 
-if (!isset($_GET['id'])) {
+if (!isset($_POST['id'])) {
+    http_response_code(400);
+    die();
+}
+if (!validateToken($_POST['token'])) {
     http_response_code(400);
     die();
 }
 
-$id = $_GET['id'];
+
+$id = $_POST['id'];
 
 global $db;
 

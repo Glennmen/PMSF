@@ -1,6 +1,5 @@
 <?php
 include('config/config.php');
-include('utils.php');
 
 $now = new DateTime();
 
@@ -8,27 +7,27 @@ $d = array();
 
 $d["timestamp"] = $now->getTimestamp();
 
-$swLat = isset($_GET['swLat']) ? $_GET['swLat'] : 0;
-$neLng = isset($_GET['neLng']) ? $_GET['neLng'] : 0;
-$swLng = isset($_GET['swLng']) ? $_GET['swLng'] : 0;
-$neLat = isset($_GET['neLat']) ? $_GET['neLat'] : 0;
-$oSwLat = isset($_GET['oSwLat']) ? $_GET['oSwLat'] : 0;
-$oSwLng = isset($_GET['oSwLng']) ? $_GET['oSwLng'] : 0;
-$oNeLat = isset($_GET['oNeLat']) ? $_GET['oNeLat'] : 0;
-$oNeLng = isset($_GET['oNeLng']) ? $_GET['oNeLng'] : 0;
-$luredonly = isset($_GET['luredonly']) ? $_GET['luredonly'] : false;
-$lastpokemon = isset($_GET['lastpokemon']) ? $_GET['lastpokemon'] : false;
-$lastgyms = isset($_GET['lastgyms']) ? $_GET['lastgyms'] : false;
-$lastpokestops = isset($_GET['lastpokestops']) ? $_GET['lastpokestops'] : false;
-$lastlocs = isset($_GET['lastslocs']) ? $_GET['lastslocs'] : false;
-$lastspawns = isset($_GET['lastspawns']) ? $_GET['lastspawns'] : false;
-$d["lastpokestops"] = isset($_GET['pokestops']) ? $_GET['pokestops'] : false;
-$d["lastgyms"] = isset($_GET['gyms']) ? $_GET['gyms'] : false;
-$d["lastslocs"] = isset($_GET['scanned']) ? $_GET['scanned'] : false;
-$d["lastspawns"] = isset($_GET['spawnpoints']) ? $_GET['spawnpoints'] : false;
-$d["lastpokemon"] = isset($_GET['pokemon']) ? $_GET['pokemon'] : false;
+$swLat = isset($_POST['swLat']) ? $_POST['swLat'] : 0;
+$neLng = isset($_POST['neLng']) ? $_POST['neLng'] : 0;
+$swLng = isset($_POST['swLng']) ? $_POST['swLng'] : 0;
+$neLat = isset($_POST['neLat']) ? $_POST['neLat'] : 0;
+$oSwLat = isset($_POST['oSwLat']) ? $_POST['oSwLat'] : 0;
+$oSwLng = isset($_POST['oSwLng']) ? $_POST['oSwLng'] : 0;
+$oNeLat = isset($_POST['oNeLat']) ? $_POST['oNeLat'] : 0;
+$oNeLng = isset($_POST['oNeLng']) ? $_POST['oNeLng'] : 0;
+$luredonly = isset($_POST['luredonly']) ? $_POST['luredonly'] : false;
+$lastpokemon = isset($_POST['lastpokemon']) ? $_POST['lastpokemon'] : false;
+$lastgyms = isset($_POST['lastgyms']) ? $_POST['lastgyms'] : false;
+$lastpokestops = isset($_POST['lastpokestops']) ? $_POST['lastpokestops'] : false;
+$lastlocs = isset($_POST['lastslocs']) ? $_POST['lastslocs'] : false;
+$lastspawns = isset($_POST['lastspawns']) ? $_POST['lastspawns'] : false;
+$d["lastpokestops"] = isset($_POST['pokestops']) ? $_POST['pokestops'] : false;
+$d["lastgyms"] = isset($_POST['gyms']) ? $_POST['gyms'] : false;
+$d["lastslocs"] = isset($_POST['scanned']) ? $_POST['scanned'] : false;
+$d["lastspawns"] = isset($_POST['spawnpoints']) ? $_POST['spawnpoints'] : false;
+$d["lastpokemon"] = isset($_POST['pokemon']) ? $_POST['pokemon'] : false;
 
-$timestamp = isset($_GET['timestamp']) ? $_GET['timestamp'] : 0;
+$timestamp = isset($_POST['timestamp']) ? $_POST['timestamp'] : 0;
 
 $useragent = $_SERVER['HTTP_USER_AGENT'];
 if (empty($swLat) || empty($swLng) || empty($neLat) || empty($neLng) || preg_match("/curl|libcurl/", $useragent)) {
@@ -36,6 +35,11 @@ if (empty($swLat) || empty($swLng) || empty($neLat) || empty($neLng) || preg_mat
     die();
 }
 if ($maxLatLng > 0 && ((($neLat - $swLat) > $maxLatLng) || (($neLng - $swLng) > $maxLatLng))) {
+    http_response_code(400);
+    die();
+}
+
+if (!validateToken($_POST['token'])) {
     http_response_code(400);
     die();
 }
@@ -72,8 +76,8 @@ if (!$noPokemon) {
             }
         }
 
-        if (isset($_GET['eids'])) {
-            $eids = explode(",", $_GET['eids']);
+        if (isset($_POST['eids'])) {
+            $eids = explode(",", $_POST['eids']);
 
             foreach ($d['pokemons'] as $elementKey => $element) {
                 foreach ($element as $valueKey => $value) {
@@ -87,12 +91,12 @@ if (!$noPokemon) {
             }
         }
 
-        if (isset($_GET['reids'])) {
-            $reids = explode(",", $_GET['reids']);
+        if (isset($_POST['reids'])) {
+            $reids = explode(",", $_POST['reids']);
 
             $d["pokemons"] = $d["pokemons"] + (get_active_by_id($reids, $swLat, $swLng, $neLat, $neLng));
 
-            $d["reids"] = !empty($_GET['reids']) ? $reids : null;
+            $d["reids"] = !empty($_POST['reids']) ? $reids : null;
         }
     }
 }
