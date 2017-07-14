@@ -29,8 +29,21 @@ function i8ln($word)
 function getAndSetToken()
 {
     if (! isset($_SESSION['token'])) {
-        $_SESSION['token'] = base64_encode(openssl_random_pseudo_bytes(32));
+        generateToken();
     }
+}
+function checkForTokenReset() {
+    global $sessionLifetime;
+    if (time() - $_SESSION['c'] > $sessionLifetime) {
+        session_regenerate_id(true);
+        generateToken();
+    }
+    return $_SESSION['token'];
+}
+function generateToken()
+{
+    $_SESSION['token'] = base64_encode(openssl_random_pseudo_bytes(32));
+    $_SESSION['c'] = time();
 }
 function validateToken($token)
 {

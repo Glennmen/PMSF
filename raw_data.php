@@ -161,6 +161,8 @@ if (!$noScannedLocations) {
     }
 }
 
+$d['token'] = checkForTokenReset();
+
 $jaysson = json_encode($d);
 echo $jaysson;
 

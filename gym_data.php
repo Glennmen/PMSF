@@ -132,4 +132,6 @@ if ($map != "monocle") {
     unset($raid);
 }
 
+$p['token'] = checkForTokenReset();
+
 echo json_encode($p);

@@ -1665,6 +1665,8 @@ function updateMap() {
         }
         timestamp = result.timestamp
         lastUpdateTime = Date.now()
+        token = result.token
+        console.log(token)
     })
 }
 
@@ -2152,6 +2154,8 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             event.stopPropagation()
             sidebar.classList.remove('visible')
         })
+        token = result.token
+        console.log(token)
     })
 }
 
