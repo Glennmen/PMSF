@@ -466,7 +466,7 @@ function gymLabel(item) {
     var lastScanned = item['last_scanned']
     var lastModified = item['last_modified']
     var name = item['name']
-    var members = item['pokemon']
+    var members = item['pokemon'] || []
 
     var raidSpawned = item['raid_level'] != null
     var raidStarted = item['raid_pokemon_id'] != null

@@ -547,15 +547,12 @@ function get_gyms($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSw
         global $fork;
         $ids = join("','", $gym_ids);
         if ($fork != "asner")
-            $raids = $db->query("select t1.fort_id, level, pokemon_id, time_battle as raid_start, time_end as raid_end from (select fort_id, MAX(time_end) AS MaxTimeEnd from raids group by fort_id) t1 left join raids t2 on t1.fort_id = t2.fort_id and MaxTimeEnd = time_end where t1.fort_id in ('" . $ids . "')")->fetchAll();
+            $raids = $db->query("select t3.external_id, t1.fort_id, level, pokemon_id, time_battle as raid_start, time_end as raid_end from (select fort_id, MAX(time_end) AS MaxTimeEnd from raids group by fort_id) t1 left join raids t2 on t1.fort_id = t2.fort_id and MaxTimeEnd = time_end left join forts t3 on t3.id = t1.fort_id where t3.external_id in ('" . $ids . "')")->fetchAll();
         else
             $raids = $db->query("select t3.external_id, t1.fort_id, raid_level as level, pokemon_id, cp, move_1, move_2, raid_start, raid_end from (select fort_id, MAX(raid_end) AS MaxTimeEnd from raid_info group by fort_id) t1 left join raid_info t2 on t1.fort_id = t2.fort_id and MaxTimeEnd = raid_end join forts t3 on t2.fort_id = t3.id where t3.external_id in ('" . $ids . "')")->fetchAll();
 
         foreach ($raids as $raid) {
-            if ($fork != "asner")
-                $id = $raid["fort_id"];
-            else
-                $id = $raid["external_id"];
+            $id = $raid["external_id"];
 
             $rpid = intval($raid['pokemon_id']);
             $gyms[$id]['raid_level'] = intval($raid['level']);
