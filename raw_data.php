@@ -1190,8 +1190,6 @@ ORDER  BY gymmember.gym_id,
         }
     } else {
         global $fork;
-        $ids = array_combine(range(1, count($gym_ids)), array_values($gym_ids));
-        $qMarks = str_repeat('?,', count($gym_ids) - 1).'?';
         $gyms_in = '';
         if (count($gym_ids)) {
             $i=1;
@@ -1202,7 +1200,7 @@ ORDER  BY gymmember.gym_id,
             }
             $gyms_in = substr($gyms_in, 0, -1);
         } else {
-            $gyms_in = [];
+            $gym_in_ids = [];
         }
         if ($fork != "asner")
             $raids = $db->query("SELECT t1.fort_id, 
