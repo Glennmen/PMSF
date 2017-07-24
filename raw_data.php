@@ -1192,7 +1192,18 @@ ORDER  BY gymmember.gym_id,
         global $fork;
         $ids = array_combine(range(1, count($gym_ids)), array_values($gym_ids));
         $qMarks = str_repeat('?,', count($gym_ids) - 1).'?';
-
+        $gyms_in = '';
+        if (count($gym_ids)) {
+            $i=1;
+            foreach ($gym_ids as $id) {
+                $gym_in_ids[':qry_'.$i] = $id;
+                $gyms_in .= ':'.'qry_'.$i.",";
+                $i++;
+            }
+            $gyms_in = substr($gyms_in, 0, -1);
+        } else {
+            $gyms_in = [];
+        }
         if ($fork != "asner")
             $raids = $db->query("SELECT t1.fort_id, 
        level, 
@@ -1206,7 +1217,7 @@ FROM   (SELECT fort_id,
        LEFT JOIN raids t2 
               ON t1.fort_id = t2.fort_id 
                  AND maxtimeend = time_end 
-WHERE  t1.fort_id IN ( $qMarks ) ", $ids)->fetchAll();
+WHERE  t1.fort_id IN ( $gyms_in ) ", $gym_in_ids)->fetchAll();
         else
             $raids = $db->query("SELECT t3.external_id, 
        t1.fort_id, 
@@ -1226,7 +1237,7 @@ FROM   (SELECT fort_id,
                  AND maxtimeend = raid_end 
        JOIN forts t3 
          ON t2.fort_id = t3.id 
-WHERE  t3.external_id IN ( $qMarks ) ", $ids)->fetchAll();
+WHERE  t3.external_id IN ( $gyms_in ) ", $gym_in_ids)->fetchAll();
 
         foreach ($raids as $raid) {
             if ($fork != "asner")
