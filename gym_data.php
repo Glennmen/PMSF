@@ -33,7 +33,7 @@ FROM   (SELECT fort_id,
                  AND t2.maxlastmodified = t1.last_modified 
        LEFT JOIN forts t3 
               ON t1.fort_id = t3.id 
-WHERE  t3.external_id = :id ", ['id'=>$id])->fetch();
+WHERE  t3.external_id = :id ", [':id'=>$id])->fetch();
 } else {
     global $fork;
     if ($fork != "sloppy")
@@ -70,7 +70,7 @@ FROM   gym
               ON gym.gym_id = gymdetails.gym_id 
        LEFT JOIN raid 
               ON gym.gym_id = raid.gym_id 
-WHERE  gym.gym_id = :id", ['id'=>$id])->fetch();
+WHERE  gym.gym_id = :id", [':id'=>$id])->fetch();
     else
         $row = $db->query("SELECT gym.gym_id 
        AS 
@@ -109,7 +109,7 @@ WHERE  gym.gym_id = :id", ['id'=>$id])->fetch();
 FROM   gym 
        LEFT JOIN gymdetails 
               ON gym.gym_id = gymdetails.gym_id 
-WHERE  gym.gym_id = :id". ['id'=>$id])->fetch();
+WHERE  gym.gym_id = :id". [':id'=>$id])->fetch();
 }
 
 $json_poke = "static/data/pokemon.json";
@@ -180,7 +180,7 @@ FROM   gymmember
 WHERE  gymmember.last_scanned > gym.last_modified 
        AND gymmember.gym_id IN ( :id ) 
 GROUP  BY name 
-ORDER  BY gympokemon.cp DESC ", ['id'=>$id])->fetchAll();
+ORDER  BY gympokemon.cp DESC ", [':id'=>$id])->fetchAll();
 
     foreach ($pokemons as $pokemon) {
         $pid = $pokemon["pokemon_id"];
@@ -250,7 +250,7 @@ FROM   (SELECT fort_id,
                  AND maxtimeend = raid_end 
        JOIN forts t3 
          ON t2.fort_id = t3.id 
-WHERE  t3.external_id IN ( :id ) ", ['id'=>$id])->fetch();
+WHERE  t3.external_id IN ( :id ) ", [':id'=>$id])->fetch();
 
     $rpid = intval($raid['pokemon_id']);
     $p['raid_level'] = intval($raid['level']);
