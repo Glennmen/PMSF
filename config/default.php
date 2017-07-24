@@ -8,7 +8,7 @@
 // PMSF - DEFAULT CONFIG FILE
 // https://github.com/Glennmen/PMSF
 //======================================================================
-
+session_start();
 require_once(__DIR__.'/../utils.php');
 getAndSetToken();
 
