@@ -55,6 +55,10 @@ $paypalUrl = "";                                                    // PayPal do
 $motdTitle = "";
 $motdContent ="";
 
+/* Multiple Locations in Nav */
+
+$location = "";                                                     // Ex: $location = [[lat_1, lon_1, "city_1"], [lat_2, lon_2, "city_2"]];
+
 //-----------------------------------------------------
 // FRONTEND SETTINGS
 //-----------------------------------------------------

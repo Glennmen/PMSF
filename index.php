@@ -102,6 +102,14 @@ if (!empty($lat) && !empty($lon)) {
     <!-- NAV -->
     <nav id="nav">
         <div id="nav-accordion">
+            <?php if ($location != "") {
+                echo '<h3><i class="fa fa-compass fa-fw"></i>Location</h3>' ;
+                echo '<div>' ;
+                foreach ($location as list($tmp_lat, $tmp_lon, $tmp_loc)) {
+                    echo '<h3><a href="?lat=' . $tmp_lat . '&amp;lon=' . $tmp_lon . '">' . $tmp_loc . '</a></h3>' ;
+                }                
+                echo '</div>' ;
+            } ?>
             <h3>Marker Settings</h3>
             <div>
                 <?php if (!$noPokemon) {
