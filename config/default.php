@@ -10,7 +10,7 @@
 //======================================================================
 session_start();
 require_once(__DIR__.'/../utils.php');
-getAndSetToken();
+setSessionCsrfToken();
 
 //-----------------------------------------------------
 // MAP SETTINGS
@@ -25,8 +25,8 @@ $startingLng = -122.4194155;                                        // Starting 
 
 $maxLatLng = 1;                                                     // Max latitude and longitude size (1 = ~110km, 0 to disable)
 $maxZoomOut = 0;                                                    // Max zoom out level (11 ~= $maxLatLng = 1, 0 to disable, lower = the further you can zoom out)
-$enableCsrf = true;                                                 // Don't disable this unless you know why you need to :)
-$sessionLifetime = 43200;                                           // session lifetime, in seconds
+$enableCsrf = false;                                                // Don't disable this unless you know why you need to :)
+$sessionLifetime = 43200;                                           // Session lifetime, in seconds
 
 /* Map Title + Language */
 

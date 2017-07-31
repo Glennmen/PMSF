@@ -9,27 +9,27 @@ $d = array();
 
 $d["timestamp"] = $now->getTimestamp();
 
-$swLat = isset($_POST['swLat']) ? $_POST['swLat'] : 0;
-$neLng = isset($_POST['neLng']) ? $_POST['neLng'] : 0;
-$swLng = isset($_POST['swLng']) ? $_POST['swLng'] : 0;
-$neLat = isset($_POST['neLat']) ? $_POST['neLat'] : 0;
-$oSwLat = isset($_POST['oSwLat']) ? $_POST['oSwLat'] : 0;
-$oSwLng = isset($_POST['oSwLng']) ? $_POST['oSwLng'] : 0;
-$oNeLat = isset($_POST['oNeLat']) ? $_POST['oNeLat'] : 0;
-$oNeLng = isset($_POST['oNeLng']) ? $_POST['oNeLng'] : 0;
-$luredonly = isset($_POST['luredonly']) ? $_POST['luredonly'] : false;
-$lastpokemon = isset($_POST['lastpokemon']) ? $_POST['lastpokemon'] : false;
-$lastgyms = isset($_POST['lastgyms']) ? $_POST['lastgyms'] : false;
-$lastpokestops = isset($_POST['lastpokestops']) ? $_POST['lastpokestops'] : false;
-$lastlocs = isset($_POST['lastslocs']) ? $_POST['lastslocs'] : false;
-$lastspawns = isset($_POST['lastspawns']) ? $_POST['lastspawns'] : false;
-$d["lastpokestops"] = isset($_POST['pokestops']) ? $_POST['pokestops'] : false;
-$d["lastgyms"] = isset($_POST['gyms']) ? $_POST['gyms'] : false;
-$d["lastslocs"] = isset($_POST['scanned']) ? $_POST['scanned'] : false;
-$d["lastspawns"] = isset($_POST['spawnpoints']) ? $_POST['spawnpoints'] : false;
-$d["lastpokemon"] = isset($_POST['pokemon']) ? $_POST['pokemon'] : false;
+$swLat = !empty($_POST['swLat']) ? $_POST['swLat'] : 0;
+$neLng = !empty($_POST['neLng']) ? $_POST['neLng'] : 0;
+$swLng = !empty($_POST['swLng']) ? $_POST['swLng'] : 0;
+$neLat = !empty($_POST['neLat']) ? $_POST['neLat'] : 0;
+$oSwLat = !empty($_POST['oSwLat']) ? $_POST['oSwLat'] : 0;
+$oSwLng = !empty($_POST['oSwLng']) ? $_POST['oSwLng'] : 0;
+$oNeLat = !empty($_POST['oNeLat']) ? $_POST['oNeLat'] : 0;
+$oNeLng = !empty($_POST['oNeLng']) ? $_POST['oNeLng'] : 0;
+$luredonly = !empty($_POST['luredonly']) ? $_POST['luredonly'] : false;
+$lastpokemon = !empty($_POST['lastpokemon']) ? $_POST['lastpokemon'] : false;
+$lastgyms = !empty($_POST['lastgyms']) ? $_POST['lastgyms'] : false;
+$lastpokestops = !empty($_POST['lastpokestops']) ? $_POST['lastpokestops'] : false;
+$lastlocs = !empty($_POST['lastslocs']) ? $_POST['lastslocs'] : false;
+$lastspawns = !empty($_POST['lastspawns']) ? $_POST['lastspawns'] : false;
+$d["lastpokestops"] = !empty($_POST['pokestops']) ? $_POST['pokestops'] : false;
+$d["lastgyms"] = !empty($_POST['gyms']) ? $_POST['gyms'] : false;
+$d["lastslocs"] = !empty($_POST['scanned']) ? $_POST['scanned'] : false;
+$d["lastspawns"] = !empty($_POST['spawnpoints']) ? $_POST['spawnpoints'] : false;
+$d["lastpokemon"] = !empty($_POST['pokemon']) ? $_POST['pokemon'] : false;
 
-$timestamp = isset($_POST['timestamp']) ? $_POST['timestamp'] : 0;
+$timestamp = !empty($_POST['timestamp']) ? $_POST['timestamp'] : 0;
 
 $useragent = $_SERVER['HTTP_USER_AGENT'];
 if (empty($swLat) || empty($swLng) || empty($neLat) || empty($neLng) || preg_match("/curl|libcurl/", $useragent)) {
@@ -78,7 +78,7 @@ if (!$noPokemon) {
             }
         }
 
-        if (isset($_POST['eids'])) {
+        if (!empty($_POST['eids'])) {
             $eids = explode(",", $_POST['eids']);
 
             foreach ($d['pokemons'] as $elementKey => $element) {
@@ -93,7 +93,7 @@ if (!$noPokemon) {
             }
         }
 
-        if (isset($_POST['reids'])) {
+        if (!empty($_POST['reids'])) {
             $reids = explode(",", $_POST['reids']);
 
             $d["pokemons"] = $d["pokemons"] + (get_active_by_id($reids, $swLat, $swLng, $neLat, $neLng));
@@ -163,7 +163,7 @@ if (!$noScannedLocations) {
     }
 }
 
-$d['token'] = checkForTokenReset();
+$d['token'] = refreshCsrfToken();
 
 $jaysson = json_encode($d);
 echo $jaysson;
@@ -176,7 +176,7 @@ function get_active($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $o
     global $map;
     if ($map == "monocle") {
         if ($swLat == 0) {
-            $datas = $db->query("SELECT * FROM sightings WHERE expire_timestamp > :time", ['time'=> time()])->fetchAll();
+            $datas = $db->query("SELECT * FROM sightings WHERE expire_timestamp > :time", [':time'=> time()])->fetchAll();
         } elseif ($tstamp > 0) {
             $datas = $db->query("SELECT * 
 FROM   sightings 
@@ -295,18 +295,18 @@ AND    longitude < :neLng",  [':disappearTime' => date_format($time, 'y-m-d H:I:
         $lon = floatval($row["lon"]);
         $pokeid = intval($row["pokemon_id"]);
 
-        $atk = isset($row["atk_iv"]) ? intval($row["atk_iv"]) : null;
-        $def = isset($row["def_iv"]) ? intval($row["def_iv"]) : null;
-        $sta = isset($row["sta_iv"]) ? intval($row["sta_iv"]) : null;
-        $mv1 = isset($row["move_1"]) ? intval($row["move_1"]) : null;
-        $mv2 = isset($row["move_2"]) ? intval($row["move_2"]) : null;
-        $weight = isset($row["weight"]) ? floatval($row["weight"]) : null;
-        $height = isset($row["height"]) ? floatval($row["height"]) : null;
-        $gender = isset($row["gender"]) ? intval($row["gender"]) : null;
-        $form = isset($row["form"]) ? intval($row["form"]) : null;
-        $cp = isset($row["cp"]) ? intval($row["cp"]) : null;
-        $cpm = isset($row["cp_multiplier"]) ? floatval($row["cp_multiplier"]) : null;
-        $level = isset($row["level"]) ? intval($row["level"]) : null;
+        $atk = !empty($row["atk_iv"]) ? intval($row["atk_iv"]) : null;
+        $def = !empty($row["def_iv"]) ? intval($row["def_iv"]) : null;
+        $sta = !empty($row["sta_iv"]) ? intval($row["sta_iv"]) : null;
+        $mv1 = !empty($row["move_1"]) ? intval($row["move_1"]) : null;
+        $mv2 = !empty($row["move_2"]) ? intval($row["move_2"]) : null;
+        $weight = !empty($row["weight"]) ? floatval($row["weight"]) : null;
+        $height = !empty($row["height"]) ? floatval($row["height"]) : null;
+        $gender = !empty($row["gender"]) ? intval($row["gender"]) : null;
+        $form = !empty($row["form"]) ? intval($row["form"]) : null;
+        $cp = !empty($row["cp"]) ? intval($row["cp"]) : null;
+        $cpm = !empty($row["cp_multiplier"]) ? floatval($row["cp_multiplier"]) : null;
+        $level = !empty($row["level"]) ? intval($row["level"]) : null;
 
         $p["disappear_time"] = $dissapear; //done
         $p["encounter_id"] = $row["encounter_id"]; //done
@@ -437,18 +437,18 @@ AND    longitude < :neLng", array_merge($pkmn_ids, [':disappearTime' => date_for
         $lon = floatval($row["lon"]);
         $pokeid = intval($row["pokemon_id"]);
 
-        $atk = isset($row["atk_iv"]) ? intval($row["atk_iv"]) : null;
-        $def = isset($row["def_iv"]) ? intval($row["def_iv"]) : null;
-        $sta = isset($row["sta_iv"]) ? intval($row["sta_iv"]) : null;
-        $mv1 = isset($row["move_1"]) ? intval($row["move_1"]) : null;
-        $mv2 = isset($row["move_2"]) ? intval($row["move_2"]) : null;
-        $weight = isset($row["weight"]) ? floatval($row["weight"]) : null;
-        $height = isset($row["height"]) ? floatval($row["height"]) : null;
-        $gender = isset($row["gender"]) ? intval($row["gender"]) : null;
-        $form = isset($row["form"]) ? intval($row["form"]) : null;
-        $cp = isset($row["cp"]) ? intval($row["cp"]) : null;
-        $cpm = isset($row["cp_multiplier"]) ? floatval($row["cp_multiplier"]) : null;
-        $level = isset($row["level"]) ? intval($row["level"]) : null;
+        $atk = !empty($row["atk_iv"]) ? intval($row["atk_iv"]) : null;
+        $def = !empty($row["def_iv"]) ? intval($row["def_iv"]) : null;
+        $sta = !empty($row["sta_iv"]) ? intval($row["sta_iv"]) : null;
+        $mv1 = !empty($row["move_1"]) ? intval($row["move_1"]) : null;
+        $mv2 = !empty($row["move_2"]) ? intval($row["move_2"]) : null;
+        $weight = !empty($row["weight"]) ? floatval($row["weight"]) : null;
+        $height = !empty($row["height"]) ? floatval($row["height"]) : null;
+        $gender = !empty($row["gender"]) ? intval($row["gender"]) : null;
+        $form = !empty($row["form"]) ? intval($row["form"]) : null;
+        $cp = !empty($row["cp"]) ? intval($row["cp"]) : null;
+        $cpm = !empty($row["cp_multiplier"]) ? floatval($row["cp_multiplier"]) : null;
+        $level = !empty($row["level"]) ? intval($row["level"]) : null;
 
         $p["disappear_time"] = $dissapear; //done
         $p["encounter_id"] = $row["encounter_id"]; //done
@@ -673,12 +673,12 @@ AND    longitude < :neLng", [':swLat' => $swLat, ':swLng' => $swLng, ':neLat' =>
         $lat = floatval($row["lat"]);
         $lon = floatval($row["lon"]);
 
-        $p["active_fort_modifier"] = isset($row["active_fort_modifier"]) ? $row["active_fort_modifier"] : null;
-        $p["enabled"] = isset($row["enabled"]) ? boolval($row["enabled"]) : true;
-        $p["last_modified"] = isset($row["last_modified"]) ? $row["last_modified"] * 1000 : 0;
+        $p["active_fort_modifier"] = !empty($row["active_fort_modifier"]) ? $row["active_fort_modifier"] : null;
+        $p["enabled"] = !empty($row["enabled"]) ? boolval($row["enabled"]) : true;
+        $p["last_modified"] = !empty($row["last_modified"]) ? $row["last_modified"] * 1000 : 0;
         $p["latitude"] = $lat;
         $p["longitude"] = $lon;
-        $p["lure_expiration"] = isset($row["lure_expiration"]) ? $row["lure_expiration"] * 1000 : null;
+        $p["lure_expiration"] = !empty($row["lure_expiration"]) ? $row["lure_expiration"] * 1000 : null;
         $p["pokestop_id"] = $row["external_id"];
 
         $pokestops[] = $p;
@@ -1093,14 +1093,14 @@ AND       longitude < :neLng",[':swLat' => $swLat, ':swLng' => $swLng, ':neLat' 
         $lon = floatval($row["lon"]);
         $gpid = intval($row["guard_pokemon_id"]);
         $lm = $row["last_modified"] * 1000;
-        $ls = isset($row["last_scanned"]) ? $row["last_scanned"] * 1000 : null;
-        $ti = isset($row["team"]) ? intval($row["team"]) : null;
-        $tc = isset($row["total_cp"]) ? intval($row["total_cp"]) : null;
+        $ls = !empty($row["last_scanned"]) ? $row["last_scanned"] * 1000 : null;
+        $ti = !empty($row["team"]) ? intval($row["team"]) : null;
+        $tc = !empty($row["total_cp"]) ? intval($row["total_cp"]) : null;
         $sa = intval($row["slots_available"]);
 
         $p = array();
 
-        $p["enabled"] = isset($row["enabled"]) ? boolval($row["enabled"]) : true;
+        $p["enabled"] = !empty($row["enabled"]) ? boolval($row["enabled"]) : true;
         $p["guard_pokemon_id"] = $gpid;
         $p["gym_id"] = $row["external_id"];
         $p["slots_available"] = $sa;
@@ -1108,7 +1108,7 @@ AND       longitude < :neLng",[':swLat' => $swLat, ':swLng' => $swLng, ':neLat' 
         $p["last_scanned"] = $ls;
         $p["latitude"] = $lat;
         $p["longitude"] = $lon;
-        $p["name"] = isset($row["name"]) ? $row["name"] : null;
+        $p["name"] = !empty($row["name"]) ? $row["name"] : null;
         $p["team_id"] = $ti;
         $p["pokemon"] = [];
         $p['total_gym_cp'] = $tc;
@@ -1120,9 +1120,9 @@ AND       longitude < :neLng",[':swLat' => $swLat, ':swLng' => $swLng, ':neLat' 
                 $p['raid_pokemon_id'] = $rpid;
             if ($rpid)
                 $p['raid_pokemon_name'] = i8ln($data[$rpid]['name']);
-            $p['raid_pokemon_cp'] = isset($row['cp']) ? intval($row['cp']) : null;
-            $p['raid_pokemon_move_1'] = isset($row['move_1']) ? intval($row['move_1']) : null;
-            $p['raid_pokemon_move_2'] = isset($row['move_2']) ? intval($row['move_2']) : null;
+            $p['raid_pokemon_cp'] = !empty($row['cp']) ? intval($row['cp']) : null;
+            $p['raid_pokemon_move_1'] = !empty($row['move_1']) ? intval($row['move_1']) : null;
+            $p['raid_pokemon_move_2'] = !empty($row['move_2']) ? intval($row['move_2']) : null;
             $p['raid_start'] = $row["raid_start"] * 1000;
             $p['raid_end'] = $row["raid_end"] * 1000;
         }
@@ -1249,9 +1249,9 @@ WHERE  t3.external_id IN ( $gyms_in ) ", $gym_in_ids)->fetchAll();
                 $gyms[$id]['raid_pokemon_id'] = $rpid;
             if ($rpid)
                 $gyms[$id]['raid_pokemon_name'] = i8ln($data[$rpid]['name']);
-            $gyms[$id]['raid_pokemon_cp'] = isset($raid['cp']) ? intval($raid['cp']) : null;
-            $gyms[$id]['raid_pokemon_move_1'] = isset($raid['move_1']) ? intval($raid['move_1']) : null;
-            $gyms[$id]['raid_pokemon_move_2'] = isset($raid['move_2']) ? intval($raid['move_2']) : null;
+            $gyms[$id]['raid_pokemon_cp'] = !empty($raid['cp']) ? intval($raid['cp']) : null;
+            $gyms[$id]['raid_pokemon_move_1'] = !empty($raid['move_1']) ? intval($raid['move_1']) : null;
+            $gyms[$id]['raid_pokemon_move_2'] = !empty($raid['move_2']) ? intval($raid['move_2']) : null;
             $gyms[$id]['raid_start'] = $raid["raid_start"] * 1000;
             $gyms[$id]['raid_end'] = $raid["raid_end"] * 1000;
 

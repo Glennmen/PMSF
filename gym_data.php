@@ -1,7 +1,7 @@
 <?php
 include('config/config.php');
 
-if (!isset($_POST['id'])) {
+if (empty($_POST['id'])) {
     http_response_code(400);
     die();
 }
@@ -230,7 +230,7 @@ FROM   (SELECT fort_id,
        LEFT JOIN raids t2 
               ON t1.fort_id = t2.fort_id 
                  AND maxtimeend = time_end 
-WHERE  t1.fort_id IN ( :id ) ")->fetch();
+WHERE  t1.fort_id IN ( :id ) ", [':id'=>$id])->fetch();
     else
         $raid = $db->query("SELECT t3.external_id, 
        t1.fort_id, 
@@ -267,6 +267,6 @@ WHERE  t3.external_id IN ( :id ) ", [':id'=>$id])->fetch();
     unset($raid);
 }
 
-$p['token'] = checkForTokenReset();
+$p['token'] = refreshCsrfToken();
 
 echo json_encode($p);

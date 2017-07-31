@@ -26,13 +26,13 @@ function i8ln($word)
     }
 }
 
-function getAndSetToken()
+function setSessionCsrfToken()
 {
-    if (! isset($_SESSION['token'])) {
+    if (empty($_SESSION['token'])) {
         generateToken();
     }
 }
-function checkForTokenReset() {
+function refreshCsrfToken() {
     global $sessionLifetime;
     if (time() - $_SESSION['c'] > $sessionLifetime) {
         session_regenerate_id(true);
