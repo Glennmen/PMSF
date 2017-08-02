@@ -38,6 +38,7 @@ var notifiedPokemon = []
 var notifiedRarity = []
 var notifiedMinPerfection = null
 var onlyPokemon = 0
+var showAllZoomLevel
 
 var buffer = []
 var reincludedPokemon = []
@@ -1304,7 +1305,7 @@ function loadRawData() {
             'oSwLng': oSwLng,
             'oNeLat': oNeLat,
             'oNeLng': oNeLng,
-            'reids': String(isShowAllZoom() ? excludedPokemon :  reincludedPokemon),
+            'reids': String(isShowAllZoom() ? excludedPokemon : reincludedPokemon),
             'eids': String(getExcludedPokemon()),
             'token': token
         },
