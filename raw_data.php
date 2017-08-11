@@ -240,7 +240,7 @@ AND    last_modified > :lastModified
 AND    latitude > :swLat 
 AND    longitude > :swLng
 AND    latitude < :neLat
-AND    longitude < :neLng", [':disappearTime' => date_format($time, 'Y-m-d H:i:s'), ':lastModified'=>date_format($date, 'y -m-d H:I:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
+AND    longitude < :neLng", [':disappearTime' => date_format($time, 'Y-m-d H:i:s'), ':lastModified'=>date_format($date, 'Y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
         } elseif ($oSwLat != 0) {
             $datas = $db->query("SELECT *, 
        Unix_timestamp(Convert_tz(disappear_time, '+00:00', @@global.time_zone)) AS expire_timestamp,
