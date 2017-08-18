@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve oauth2
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/var/www/html/PMSF/oauth2
+Environment="PATH=/var/www/html/PMSF/oauth2/env/bin"
+ExecStart=/var/www/html/PMSF/oauth2/env/bin/gunicorn --workers 3 --bind unix:oauth2.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
