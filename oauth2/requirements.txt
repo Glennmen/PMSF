@@ -1,0 +1,5 @@
+discord.py
+requests_oauthlib
+flask
+gunicorn
+configargparse
