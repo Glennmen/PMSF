@@ -703,7 +703,8 @@ function get_gyms($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSw
         if ($swLat == 0) {
             $datas = $db->query("SELECT t3.external_id, 
        t3.lat, 
-       t3.lon, 
+       t3.lon,
+	   t3.name,
        t1.last_modified, 
        t1.team, 
        t1.slots_available, 
@@ -720,7 +721,8 @@ FROM   (SELECT fort_id,
         } elseif ($tstamp > 0) {
             $datas = $db->query("SELECT t3.external_id, 
        t3.lat, 
-       t3.lon, 
+       t3.lon,
+	   t3.name,
        t1.last_modified, 
        t1.team, 
        t1.slots_available, 
@@ -742,6 +744,7 @@ WHERE  t3.lat > :swLat
             $datas = $db->query("SELECT t3.external_id, 
        t3.lat, 
        t3.lon, 
+	   t3.name,
        t1.last_modified, 
        t1.team, 
        t1.slots_available, 
@@ -767,6 +770,8 @@ WHERE  t3.lat > :swLat
             $datas = $db->query("SELECT    t3.external_id, 
           t3.lat, 
           t3.lon, 
+		  t3.name,
+		  t3.url,
           t1.last_modified, 
           t1.team, 
           t1.slots_available, 
@@ -1137,8 +1142,50 @@ AND       longitude < :neLng",[':swLat' => $swLat, ':swLng' => $swLng, ':neLat' 
     }
     $j = 0;
 
+/*
 
+	$gym_in = '';
+	if (count($gym_ids)) {
+		$i=1;
+		foreach ($gym_ids as $id) {
+			$gym_qry_ids[':qry_'.$i] = $id;
+			$gym_in .= ':'.'qry_'.$i.",";
+			$i++;
+		}
+		$gym_in = substr($gym_in, 0, -1);
+	} else {
+		$gym_qry_ids = [];
+	}
+	$pokemons = $db->query("SELECT gym_defenders.fort_id, 
+	pokemon_id, 
+	cp, 
+	owner_name
+	FROM   gym_defenders
+	JOIN forts 
+	 ON forts.id = gym_defenders.fort_id 
+	WHERE  gym_defenders.fort_id IN ( $gym_in ) 
+	GROUP  BY owner_name 
+	ORDER  BY gym_defenders.fort_id, 
+	  cp ", $gym_qry_ids)->fetchAll();
 
+	foreach ($pokemons as $pokemon) {
+		$p = array();
+
+		$pid = $pokemon["pokemon_id"];
+
+		$p["pokemon_id"] = $pid;
+		$p["pokemon_name"] = $data[$pid]['name'];
+		$p["trainer_name"] = $pokemon["owner_name"];
+		$p["pokemon_cp"] = $pokemon["cp"];
+
+		$gyms[$pokemon["fort_id"]]["pokemon"][] = $p;
+
+		unset($pokemons[$j]);
+
+		$j++;
+	}
+
+*/
 
     if ($map != "monocle") {
         $gym_in = '';
