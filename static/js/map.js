@@ -281,7 +281,6 @@ function createLocationMarker() {
 }
 
 function initSidebar() {
-
     $('#gyms-switch').prop('checked', Store.get('showGyms'))
     $('#gym-sidebar-switch').prop('checked', Store.get('useGymSidebar'))
     $('#gym-sidebar-wrapper').toggle(Store.get('showGyms') || Store.get('showRaids'))
@@ -453,7 +452,6 @@ function pokemonLabel(item) {
     if (id === 201 && form !== null && form > 0) {
         contentstring += ' (' + unownForm[item['form']] + ')'
     }
-	
     contentstring += '<span> - </span>' +
         '<small>' +
         '<a href="https://pokemon.gameinfo.io/en/pokemon/' + id + '" target="_blank" title="View in Pokedex">#' + id + '</a>' +
@@ -472,7 +470,7 @@ function pokemonLabel(item) {
         details +
         '<div>' +
         '<a href="javascript:excludePokemon(' + id + ')">Exclude</a>&nbsp&nbsp' +
-        //'<a href="javascript:notifyAboutPokemon(' + id + ')">Notify</a>&nbsp&nbsp' +
+        '<a href="javascript:notifyAboutPokemon(' + id + ')">Notify</a>&nbsp&nbsp' +
         '<a href="javascript:removePokemonMarker(\'' + encounterId + '\')">Remove</a>&nbsp&nbsp' +
         '<a href="javascript:void(0);" onclick="javascript:toggleOtherPokemon(' + id + ');" title="Toggle display of other Pokemon">Toggle Others</a>' +
         '</div>'
@@ -488,7 +486,7 @@ function gymLabel(item) {
     var lastModified = item['last_modified']
     var name = item['name']
     var members = item['pokemon']
-	
+
     var raidSpawned = item['raid_level'] != null
     var raidStarted = item['raid_pokemon_id'] != null
 
@@ -553,8 +551,8 @@ function gymLabel(item) {
 
     var lastModifiedStr = getDateStr(lastModified)
 
-    var nameStr = (name ? '<div><u>' + name + '</u></div>' : '')
-	
+    var nameStr = (name ? '<div>' + name + '</div>' : '')
+
     var gymColor = ['0, 0, 0, .4', '74, 138, 202, .6', '240, 68, 58, .6', '254, 217, 40, .6']
     var str
     if (teamId === 0) {
@@ -589,8 +587,6 @@ function gymLabel(item) {
             '<div>' +
             '<center>' +
             '<div style="padding-bottom: 2px">' +
-            '<div style="padding-bottom: 2px">' +
-            nameStr +
             'Gym owned by:' +
             '</div>' +
             '<div>' +
@@ -598,6 +594,7 @@ function gymLabel(item) {
             '<img height="70px" style="padding: 5px;" src="static/forts/' + teamName + '_large.png">' +
             raidIcon +
             '</div>' +
+            nameStr +
             raidStr +
             '<div><b>' + freeSlots + ' Free Slots</b></div>' +
             gymCp +
@@ -843,7 +840,7 @@ function getGymMarkerIcon(item) {
     }
     if (item['raid_pokemon_id'] != null && item.raid_end > Date.now()) {
         return '<div style="position:relative;">' +
-            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:26px;height:auto;"/>' +
+            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:55px;height:auto;"/>' +
             '<i class="pokemon-raid-sprite n' + item.raid_pokemon_id + '"></i>' +
             '</div>'
     } else if (item['raid_level'] !== null && item.raid_end > Date.now()) {
@@ -856,12 +853,12 @@ function getGymMarkerIcon(item) {
             raidEgg = 'legendary'
         }
         return '<div style="position:relative;">' +
-            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:26px;height:auto;"/>' +
-            '<img src="static/raids/egg_' + raidEgg + '.png" style="width:18px;height:auto;position:absolute;top:8px;right:12px;"/>' +
+            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:55px;height:auto;"/>' +
+            '<img src="static/raids/egg_' + raidEgg + '.png" style="width:30px;height:auto;position:absolute;top:8px;right:12px;"/>' +
             '</div>'
     } else {
         return '<div>' +
-            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + gymTypes[item['team_id']] + '.png" style="width:18px;height: auto;"/>' +
+            '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + gymTypes[item['team_id']] + '.png" style="width:48px;height: auto;"/>' +
             '</div>'
     }
 }
@@ -1974,7 +1971,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         if (result.team_id !== 0) {
             gymLevelStr =
                 '<center class="team-' + result.team_id + '-text">' +
-                //'<b class="team-' + result.team_id + '-text">' + freeSlots + ' Free Slots</b>' +
+                '<b class="team-' + result.team_id + '-text">' + freeSlots + ' Free Slots</b>' +
                 '</center>'
         }
 
@@ -1983,7 +1980,6 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
 
         var raidStr = ''
         var raidIcon = ''
-		
         if (raidSpawned && result.raid_end > Date.now()) {
             var levelStr = ''
             for (var i = 0; i < result['raid_level']; i++) {
@@ -2023,16 +2019,6 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
                 raidIcon = '<img src="static/raids/egg_' + raidEgg + '.png">'
             }
         }
-		
-		if(result.team_id == 0){
-			var stopIcon = (result.url ? '<div style="width: 100px; height: 100px; position: relative; border: 2px solid black; -webkit-border-radius: 50px; -moz-border-radius: 50px; border-radius: 50px; overflow:hidden;"><img style="display: block; margin: 0 auto; height: 100%; width: 100%;" src="' + result.url + '"></div>' : '<img height="100px" style="padding: 5px;" src="static/forts/' + gymTypes[result.team_id] + '_large.png">')
-		} else if(result.team_id == 1){
-			var stopIcon = (result.url ? '<div style="width: 100px; height: 100px; position: relative; border: 2px solid blue; -webkit-border-radius: 50px; -moz-border-radius: 50px; border-radius: 50px; overflow:hidden;"><img style="display: block; margin: 0 auto; height: 100%; width: 100%;" src="' + result.url + '"></div>' : '<img height="100px" style="padding: 5px;" src="static/forts/' + gymTypes[result.team_id] + '_large.png">')
-		} else if(result.team_id == 2){
-			var stopIcon = (result.url ? '<div style="width: 100px; height: 100px; position: relative; border: 2px solid red; -webkit-border-radius: 50px; -moz-border-radius: 50px; border-radius: 50px; overflow:hidden;"><img style="display: block; margin: 0 auto; height: 100%; width: 100%;" src="' + result.url + '"></div>' : '<img height="100px" style="padding: 5px;" src="static/forts/' + gymTypes[result.team_id] + '_large.png">')
-		} else if(result.team_id == 3){
-			var stopIcon = (result.url ? '<div style="width: 100px; height: 100px; position: relative; border: 2px solid yellow; -webkit-border-radius: 50px; -moz-border-radius: 50px; border-radius: 50px; overflow:hidden;"><img style="display: block; margin: 0 auto; height: 100%; width: 100%;" src="' + result.url + '"></div>' : '<img height="100px" style="padding: 5px;" src="static/forts/' + gymTypes[result.team_id] + '_large.png">')
-		}
 
         var pokemonHtml = ''
 
@@ -2042,11 +2028,15 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             '<b class="team-' + result.team_id + '-text">' + (result.name || '') + '</b>' +
             '</div>' +
             '<div>' +
-            stopIcon +
+            '<img height="100px" style="padding: 5px;" src="static/forts/' + gymTypes[result.team_id] + '_large.png">' +
             raidIcon +
             '</div>' +
             raidStr +
             gymLevelStr +
+            '<div style="font-size: .7em">' +
+            'Last Modified: ' + lastModifiedStr +
+            '</div>' +
+            lastScannedStr +
             '<div>' +
             '<a href=\'javascript:void(0)\' onclick=\'javascript:openMapDirections(' + result.latitude + ',' + result.longitude + ')\' title=\'View in Maps\'>Get directions</a>' +
             '</div>' +
@@ -2067,6 +2057,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
                     '<div class="cp">CP ' + pokemon.pokemon_cp + '</div>' +
                     '</td>' +
                     '<td width="190" class="team-' + result.team_id + '-text" align="center">' +
+                    '<div class="trainer-level">' + pokemon.trainer_level + '</div>' +
                     '<div style="line-height: 1em">' + pokemon.trainer_name + '</div>' +
                     '</td>' +
                     '<td width="10">' +
@@ -2133,15 +2124,8 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
                     '</td>' +
                     '</tr>'
             })
-			
-            pokemonHtml = '<table><tbody>' + pokemonHtml + '</tbody></table>' +
-				'<center><b class="team-' + result.team_id + '-text">' +
-				'<div style="font-size: .7em">' +
-				'Last Modified: ' + lastModifiedStr +
-				'</div>' +
-				lastScannedStr +
-				'</b></center>'
-				
+
+            pokemonHtml = '<table><tbody>' + pokemonHtml + '</tbody></table>'
         } else if (result.team_id === 0) {
             pokemonHtml = ''
         } else {
@@ -2151,12 +2135,8 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
                 '<i class="pokemon-large-sprite n' + result.guard_pokemon_id + '"></i><br>' +
                 '<b class="team-' + result.team_id + '-text">' + result.guard_pokemon_name + '</b>' +
                 '<p style="font-size: .75em margin: 5px">' +
-                'Sorry, we don\'t have any more<br>data for this gym at the moment :/' +
+                'No additional gym information is available for this gym. Make sure you are collecting detailed gym info. If you have detailed gym info collection running, this gym\'s Pokemon information may be out of date.' +
                 '</p>' +
-				'<div style="font-size: .7em">' +
-				'Last Modified: ' + lastModifiedStr +
-				'</div>' +
-				lastScannedStr +
                 '</center>'
         }
 
@@ -2457,20 +2437,20 @@ $(function () {
             centerMapOnLocation()
         }
 
-		var currentLocation = window.location.href;
-		if(currentLocation.includes('lat') && currentLocation.includes('lon')){
-			//Getting position from URL
-		} else {
-			if (Store.get('startAtLastLocation')) {
-				var position = Store.get('startAtLastLocationPosition')
-				var lat = 'lat' in position ? position.lat : centerLat
-				var lng = 'lng' in position ? position.lng : centerLng
+        var currentLocation = window.location.href;
+	if(currentLocation.includes('lat') && currentLocation.includes('lon')){
+		//Getting position from URL
+	} else {
+		if (Store.get('startAtLastLocation')) {
+			var position = Store.get('startAtLastLocationPosition')
+			var lat = 'lat' in position ? position.lat : centerLat
+			var lng = 'lng' in position ? position.lng : centerLng
 
-				var latlng = new google.maps.LatLng(lat, lng)
-				locationMarker.setPosition(latlng)
-				map.setCenter(latlng)
-			}
+			var latlng = new google.maps.LatLng(lat, lng)
+			locationMarker.setPosition(latlng)
+			map.setCenter(latlng)
 		}
+	}
 
         $selectLocationIconMarker.select2({
             placeholder: 'Select Location Marker',
