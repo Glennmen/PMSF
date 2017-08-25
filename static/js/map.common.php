@@ -981,6 +981,14 @@ type: StoreTypes.Boolean
 default: <?php echo $map != "monocle" ? $enableLured : 0 ?>,
 type: StoreTypes.Number
 },
+'showTimers': {
+default: <?php echo $noTimers ? 'false' : $enableTimers ?>,
+type: StoreTypes.Boolean
+},
+'hideTimersAtZoomLevel': {
+default: <?php echo $hideTimersAtZoomLevel ?>,
+type: StoreTypes.Number
+},
 'showScanned': {
 default: <?php echo $map != "monocle" && !$noScannedLocations ? $enableScannedLocations : 'false' ?>,
 type: StoreTypes.Boolean
@@ -1133,13 +1141,31 @@ var iconSize = 2 + (map.getZoom() - 3) * (map.getZoom() - 3) * 0.2 + Store.get('
 var pokemonIndex = item['pokemon_id'] - 1;
 var sprite = pokemonSprites[Store.get('pokemonIcons')] || pokemonSprites['monoclehq'];
 var icon = getGoogleSprite(pokemonIndex, sprite, iconSize);
+var hideTimersAtZoomLevel = Store.get('hideTimersAtZoomLevel');
+var showTimers = Store.get('showTimers');
 
 var animationDisabled = false;
 if (isBounceDisabled === true) {
 animationDisabled = true;
 }
 
-var marker = new google.maps.Marker({
+var marker
+if (showTimers && (map.getZoom() >= hideTimersAtZoomLevel)) {
+marker = new MarkerWithLabel({ // eslint-disable-line no-undef
+position: {
+lat: item['latitude'],
+lng: item['longitude']
+},
+zIndex: 9999,
+map: map,
+icon: icon,
+labelAnchor: new google.maps.Point(iconSize / 1.5, -iconSize / 2.4),
+labelContent: '<span class=\'label-countdown\' disappears-at=\'' + item['disappear_time'] + '\'> </span>',
+labelClass: 'pokemonlabel',
+animationDisabled: animationDisabled
+})
+} else {
+marker = new google.maps.Marker({
 position: {
 lat: item['latitude'],
 lng: item['longitude']
@@ -1148,10 +1174,11 @@ zIndex: 9999,
 map: map,
 icon: icon,
 animationDisabled: animationDisabled
-});
-
+})
+}
 return marker;
 }
+
 
 function isTouchDevice() {
 // Should cover most browsers

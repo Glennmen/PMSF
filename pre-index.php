@@ -115,6 +115,19 @@ if (!empty($_GET['lat']) && !empty($_GET['lon'])) {
                     </div>
                 </div>';
                 } ?>
+                <?php if (!$noTimers) {
+                    echo '<div class="form-control switch-container" id="timers-wrapper">
+                    <h3>Timers</h3>
+                    <div class="onoffswitch">
+                        <input id="timer-switch" type="checkbox" name="timer-switch"
+                               class="onoffswitch-checkbox" checked>
+                        <label class="onoffswitch-label" for="timer-switch">
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>';
+                } ?>
                 <?php if (!$noRaids) {
                     echo '<div class="form-control switch-container" id="raids-wrapper">
                     <h3>Raids</h3>
@@ -609,6 +622,7 @@ if (!empty($_GET['lat']) && !empty($_GET['lon'])) {
 <script src="static/dist/js/stats.min.js"></script>
 <script defer
         src="https://maps.googleapis.com/maps/api/js?key=<?= $gmapsKey ?>&amp;callback=initMap&amp;libraries=places,geometry"></script>
+<script defer src="static/js/label.js"></script>
 <script defer src="static/js/vendor/richmarker-compiled.js"></script>
 </body>
 </html>
