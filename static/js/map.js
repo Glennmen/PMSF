@@ -2437,9 +2437,9 @@ $(function () {
             centerMapOnLocation()
         }
 
-        var currentLocation = window.location.href;
-        if(currentLocation.includes('lat') && currentLocation.includes('lon')){
-            //Getting position from URL
+        var currentLocation = window.location.href
+        if (currentLocation.includes('lat') && currentLocation.includes('lon')) {
+            // Getting position from URL
         } else {
             if (Store.get('startAtLastLocation')) {
                 var position = Store.get('startAtLastLocationPosition')
