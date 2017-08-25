@@ -465,7 +465,7 @@ function pokemonLabel(item) {
         ' <span class="label-countdown" disappears-at="' + disappearTime + '">(00m00s)</span>' +
         '</div>' +
         '<div>' +
-        'Location: <a href="javascript:void(0)" onclick="javascript:openMapDirections(' + latitude + ', ' + longitude + ')" title="View in Maps">' + latitude.toFixed(6) + ', ' + longitude.toFixed(7) + '</a> - <a href="./?lat=' + latitude + '&lon=' + longitude + '&zoom=16">Share link</a>' +
+        'Location: <a href="javascript:void(0)" onclick="javascript:openMapDirections(' + latitude + ', ' + longitude + ')" title="View in Maps">' + latitude.toFixed(6) + ', ' + longitude.toFixed(7) + '</a>' +
         '</div>' +
         details +
         '<div>' +
@@ -2437,20 +2437,15 @@ $(function () {
             centerMapOnLocation()
         }
 
-        var currentLocation = window.location.href;
-	if(currentLocation.includes('lat') && currentLocation.includes('lon')){
-		//Getting position from URL
-	} else {
-		if (Store.get('startAtLastLocation')) {
-			var position = Store.get('startAtLastLocationPosition')
-			var lat = 'lat' in position ? position.lat : centerLat
-			var lng = 'lng' in position ? position.lng : centerLng
+        if (Store.get('startAtLastLocation')) {
+            var position = Store.get('startAtLastLocationPosition')
+            var lat = 'lat' in position ? position.lat : centerLat
+            var lng = 'lng' in position ? position.lng : centerLng
 
-			var latlng = new google.maps.LatLng(lat, lng)
-			locationMarker.setPosition(latlng)
-			map.setCenter(latlng)
-		}
-	}
+            var latlng = new google.maps.LatLng(lat, lng)
+            locationMarker.setPosition(latlng)
+            map.setCenter(latlng)
+        }
 
         $selectLocationIconMarker.select2({
             placeholder: 'Select Location Marker',
