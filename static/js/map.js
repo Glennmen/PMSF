@@ -281,6 +281,7 @@ function createLocationMarker() {
 }
 
 function initSidebar() {
+
     $('#gyms-switch').prop('checked', Store.get('showGyms'))
     $('#gym-sidebar-switch').prop('checked', Store.get('useGymSidebar'))
     $('#gym-sidebar-wrapper').toggle(Store.get('showGyms') || Store.get('showRaids'))
@@ -452,6 +453,7 @@ function pokemonLabel(item) {
     if (id === 201 && form !== null && form > 0) {
         contentstring += ' (' + unownForm[item['form']] + ')'
     }
+	
     contentstring += '<span> - </span>' +
         '<small>' +
         '<a href="https://pokemon.gameinfo.io/en/pokemon/' + id + '" target="_blank" title="View in Pokedex">#' + id + '</a>' +
@@ -470,7 +472,7 @@ function pokemonLabel(item) {
         details +
         '<div>' +
         '<a href="javascript:excludePokemon(' + id + ')">Exclude</a>&nbsp&nbsp' +
-        '<a href="javascript:notifyAboutPokemon(' + id + ')">Notify</a>&nbsp&nbsp' +
+        //'<a href="javascript:notifyAboutPokemon(' + id + ')">Notify</a>&nbsp&nbsp' +
         '<a href="javascript:removePokemonMarker(\'' + encounterId + '\')">Remove</a>&nbsp&nbsp' +
         '<a href="javascript:void(0);" onclick="javascript:toggleOtherPokemon(' + id + ');" title="Toggle display of other Pokemon">Toggle Others</a>' +
         '</div>'
@@ -486,7 +488,7 @@ function gymLabel(item) {
     var lastModified = item['last_modified']
     var name = item['name']
     var members = item['pokemon']
-
+	
     var raidSpawned = item['raid_level'] != null
     var raidStarted = item['raid_pokemon_id'] != null
 
@@ -2455,15 +2457,20 @@ $(function () {
             centerMapOnLocation()
         }
 
-        if (Store.get('startAtLastLocation')) {
-            var position = Store.get('startAtLastLocationPosition')
-            var lat = 'lat' in position ? position.lat : centerLat
-            var lng = 'lng' in position ? position.lng : centerLng
+		var currentLocation = window.location.href;
+		if(currentLocation.includes('lat') && currentLocation.includes('lon')){
+			//Getting position from URL
+		} else {
+			if (Store.get('startAtLastLocation')) {
+				var position = Store.get('startAtLastLocationPosition')
+				var lat = 'lat' in position ? position.lat : centerLat
+				var lng = 'lng' in position ? position.lng : centerLng
 
-            var latlng = new google.maps.LatLng(lat, lng)
-            locationMarker.setPosition(latlng)
-            map.setCenter(latlng)
-        }
+				var latlng = new google.maps.LatLng(lat, lng)
+				locationMarker.setPosition(latlng)
+				map.setCenter(latlng)
+			}
+		}
 
         $selectLocationIconMarker.select2({
             placeholder: 'Select Location Marker',
