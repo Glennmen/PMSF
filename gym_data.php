@@ -20,8 +20,6 @@ if ($map == "monocle") {
     $row = $db->query("SELECT t3.external_id, 
        t3.lat, 
        t3.lon, 
-       t3.name,
-       t3.url,
        t1.last_modified, 
        t1.team, 
        t1.slots_available, 
@@ -137,7 +135,6 @@ $p["last_scanned"] = $ls;
 $p["latitude"] = $lat;
 $p["longitude"] = $lon;
 $p["name"] = !empty($row["name"]) ? $row["name"] : null;
-$p["url"] = !empty($row["url"]) ? $row["url"] : null;
 $p["team_id"] = $ti;
 if ($gpid)
     $p["guard_pokemon_name"] = i8ln($data[$gpid]['name']);
@@ -273,59 +270,6 @@ WHERE  t3.external_id IN ( :id ) ", [':id'=>$id])->fetch();
     $p['raid_end'] = $raid["raid_end"] * 1000;
 
     unset($raid);
-    
-    $j = 0;
-    $json_moves = "static/data/moves.json";
-    $json_contents = file_get_contents($json_moves);
-    $moves = json_decode($json_contents, TRUE);
-    $pokemons = $db->query("SELECT gym_defenders.fort_id, 
-       gym_defenders.pokemon_id,
-       gym_defenders.cp, 
-       gym_defenders.owner_name,
-       gym_defenders.move_1, 
-       gym_defenders.move_2, 
-       gym_defenders.atk_iv, 
-       gym_defenders.def_iv, 
-       gym_defenders.sta_iv 
-FROM   gym_defenders  
-       JOIN forts 
-         ON forts.id = gym_defenders.fort_id 
-WHERE  gym_defenders.fort_id IN ( :id ) 
-GROUP  BY owner_name 
-ORDER  BY gym_defenders.cp DESC ", [':id'=>$id])->fetchAll();
-
-    foreach ($pokemons as $pokemon) {
-        $pid = $pokemon["pokemon_id"];
-
-        $p1 = array();
-
-        $p1["pokemon_id"] = $pid;
-        $p1["pokemon_name"] = i8ln($data[$pid]['name']);
-        $p1["trainer_name"] = $pokemon["owner_name"];
-        $p1["pokemon_cp"] = $pokemon["cp"];
-
-        $p1["iv_attack"] = intval($pokemon["atk_iv"]);
-        $p1["iv_defense"] = intval($pokemon["def_iv"]);
-        $p1["iv_stamina"] = intval($pokemon["sta_iv"]);
-
-        $p1['move_1_name'] = i8ln($moves[$pokemon['move_1']]['name']);
-        $p1['move_1_damage'] = $moves[$pokemon['move_1']]['damage'];
-        $p1['move_1_energy'] = $moves[$pokemon['move_1']]['energy'];
-        $p1['move_1_type']['type'] = i8ln($moves[$pokemon['move_1']]['type']);
-        $p1['move_1_type']['type_en'] = $moves[$pokemon['move_1']]['type'];
-
-        $p1['move_2_name'] = i8ln($moves[$pokemon['move_2']]['name']);
-        $p1['move_2_damage'] = $moves[$pokemon['move_2']]['damage'];
-        $p1['move_2_energy'] = $moves[$pokemon['move_2']]['energy'];
-        $p1['move_2_type']['type'] = i8ln($moves[$pokemon['move_2']]['type']);
-        $p1['move_2_type']['type_en'] = $moves[$pokemon['move_2']]['type'];
-
-        $p['pokemon'][] = $p1;
-
-        unset($pokemons[$j]);
-
-        $j++;
-	}
 }
 
 $p['token'] = refreshCsrfToken();
