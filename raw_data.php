@@ -853,7 +853,7 @@ LEFT JOIN raid
 ON        gym.gym_id = raid.gym_id 
 WHERE     gym.last_scanned > :lastScanned
 AND       latitude > :swLat
-AND       longitude > :swLat
+AND       longitude > :swLng
 AND       latitude < :neLat
 AND       longitude < :neLng", [':lastScanned' => date_format($date, 'Y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
             } elseif ($oSwLat != 0) {
