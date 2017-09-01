@@ -60,3 +60,11 @@ config/*
 /static/dist/
 package-lock.json
 index.php
+
+#oauth2
+oauth2/config/*
+!oauth2/config/config.ini.example
+oauth2/__pycache__
+oauth2/env
+oauth2/oauth2.sock
+oauth2/server_info.json

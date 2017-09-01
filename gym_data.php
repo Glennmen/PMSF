@@ -1,5 +1,8 @@
 <?php
+
 include('config/config.php');
+include('adapter.php');
+
 
 if (empty($_POST['id'])) {
     http_response_code(400);
@@ -13,9 +16,17 @@ if (!validateToken($_POST['token'])) {
 
 $id = $_POST['id'];
 
+global $map;
+global $adapter;
+if (!is_null($adapter)) {
+  $gym = $adapter->get_gym($id);
+  $gym['token'] = refreshCsrfToken();
+  echo json_encode($gym);
+  die();
+}
+
 global $db;
 
-global $map;
 if ($map == "monocle") {
     $row = $db->query("SELECT t3.external_id, 
        t3.lat, 
