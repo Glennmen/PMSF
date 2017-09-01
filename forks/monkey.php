@@ -93,8 +93,8 @@ class MonkeyFork {
       $gym["latitude"] = floatval($gym["latitude"]);
       $gym["longitude"] = floatval($gym["longitude"]);
       $gym["last_modified"] = $gym["last_modified"] * 1000;
-      $gym["raid_start"] = $gym["raid_start"] * 1000; // needs to be banged do that raid_start * 1000
-      $gym["raid_end"] = $gym["raid_end"] * 1000; // something has to be changed here so that raid_end is *1000
+      $gym["raid_start"] = $gym["raid_start"] * 1000;
+      $gym["raid_end"] = $gym["raid_end"] * 1000;
       $data[$gym["gym_id"]] = $gym;
     }
     return $data;
