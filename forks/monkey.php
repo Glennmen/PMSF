@@ -108,7 +108,11 @@ class MonkeyFork {
     $json_contents = file_get_contents($json_moves);
     $moves = json_decode($json_contents, TRUE);
 
-    $query = "SELECT gd.*,
+    $query = "SELECT gd.pokemon_id,
+        gd.cp pokemon_cp,
+        gd.move_1,
+        gd.move_2,
+        gd.nickname,
         gd.atk_iv iv_attack,
         gd.def_iv iv_defense,
         gd.sta_iv iv_stamina,
@@ -121,7 +125,6 @@ class MonkeyFork {
     $gym_defenders = $db->query($query, [":gymId"=>$gymId])->fetchAll(PDO::FETCH_ASSOC);
 
     $data = array();
-
     foreach ($gym_defenders as $defender) {
       $pid = $defender["pokemon_id"];
       $defender["pokemon_name"] = i8ln($pokemon_data[$pid]["name"]);
@@ -136,6 +139,7 @@ class MonkeyFork {
       $defender['move_2_energy'] = $moves[$defender['move_2']]['energy'];
       $defender['move_2_type']['type'] = i8ln($moves[$defender['move_2']]['type']);
       $defender['move_2_type']['type_en'] = $moves[$defender['move_2']]['type'];
+
       $data[] = $defender;
     }
     return $data;
