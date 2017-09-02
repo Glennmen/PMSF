@@ -60,3 +60,6 @@ config/*
 /static/dist/
 package-lock.json
 index.php
+
+# lint
+php-lint/
