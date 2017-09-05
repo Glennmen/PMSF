@@ -37,11 +37,6 @@ class MonkeyFork {
       $params[':oneLng'] = $oNeLng;
     }
 
-    if ($tstamp != 0) {
-      $conds[] = "fs.last_modified > :timestamp";
-      $params[':timestamp'] = $tstamp;
-    }
-
     return $this->query_gyms($conds, $params);
   }
 
