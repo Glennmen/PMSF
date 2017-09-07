@@ -81,10 +81,13 @@ class MonkeyFork {
 
     $data = array();
     foreach ($gyms as $gym) {
+      $guard_pid = $gym["guard_pokemon_id"];
+      $raid_pid = $gym["raid_pokemon_id"];
+
       $gym["enabled"] = true;
       $gym["pokemon"] = [];
-      $gym["guard_pokemon_name"] = i8ln($pokemon_data[$gym["guard_pokemon_id"]]["name"]);
-      $gym["raid_pokemon_name"] = i8ln($pokemon_data[$gym["raid_pokemon_id"]]["name"]);
+      $gym["guard_pokemon_name"] = empty($guard_pid) ? NULL : i8ln($pokemon_data[$guard_pid]["name"]);
+      $gym["raid_pokemon_name"] = empty($raid_pid) ? NULL : i8ln($pokemon_data[$raid_pid]["name"]);
       $gym["latitude"] = floatval($gym["latitude"]);
       $gym["longitude"] = floatval($gym["longitude"]);
       $gym["last_modified"] = $gym["last_modified"] * 1000;
