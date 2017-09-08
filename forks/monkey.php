@@ -82,8 +82,15 @@ class MonkeyFork {
     $data = array();
     foreach ($gyms as $gym) {
       $guard_pid = $gym["guard_pokemon_id"];
+      if ($guard_pid=="0") {
+        $guard_pid = NULL;
+        $gym["guard_pokemon_id"] = NULL;
+      }
       $raid_pid = $gym["raid_pokemon_id"];
-
+      if ($raid_pid=="0") {
+        $raid_pid = NULL;
+        $gym["raid_pokemon_id"] = NULL;
+      }
       $gym["enabled"] = true;
       $gym["pokemon"] = [];
       $gym["guard_pokemon_name"] = empty($guard_pid) ? NULL : i8ln($pokemon_data[$guard_pid]["name"]);
