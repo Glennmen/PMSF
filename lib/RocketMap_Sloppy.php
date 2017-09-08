@@ -87,7 +87,7 @@ WHERE     gym.last_scanned > :lastScanned
 AND       latitude > :swLat 
 AND       longitude > :swLng 
 AND       latitude < :neLat 
-AND       longitude < :neLng". ['lastScanned'=>date_format($date, 'y-m-d H:I:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
+AND       longitude < :neLng". ['lastScanned'=>date_format($date, 'Y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
         } elseif ($oSwLat != 0) {
             $datas = $db->query("SELECT gym.gym_id 
        AS 
