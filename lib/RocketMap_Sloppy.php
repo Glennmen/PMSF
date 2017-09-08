@@ -206,7 +206,7 @@ ORDER  BY gymmember.gym_id,
         $pid = $pokemon["pokemon_id"];
 
         $p["pokemon_id"] = $pid;
-        $p["pokemon_name"] = $data[$pid]['name'];
+        $p["pokemon_name"] = $this->data[$pid]['name'];
         $p["trainer_name"] = $pokemon["name"];
         $p["trainer_level"] = $pokemon["level"];
         $p["pokemon_cp"] = $pokemon["cp"];
@@ -221,4 +221,108 @@ ORDER  BY gymmember.gym_id,
 
     return $gyms;
 }
+
+    public function get_gym($id)
+    {
+        global $db;
+        $row = $db->query("SELECT gym.gym_id 
+       AS 
+       external_id, 
+       latitude 
+       AS lat, 
+       longitude 
+       AS lon, 
+       guard_pokemon_id, 
+       slots_available, 
+       Unix_timestamp(Convert_tz(last_modified, '+00:00', @@global.time_zone)) 
+       AS 
+       last_modified, 
+       Unix_timestamp(Convert_tz(gym.last_scanned, '+00:00', 
+       @@global.time_zone)) AS 
+       last_scanned, 
+       team_id 
+       AS team, 
+       enabled, 
+       name, 
+       raid_level 
+       AS level, 
+       raid_pokemon_id 
+       AS pokemon_id, 
+       raid_pokemon_cp 
+       AS cp, 
+       raid_pokemon_move_1 
+       AS move_1, 
+       raid_pokemon_move_2 
+       AS move_2, 
+       Unix_timestamp(Convert_tz(raid_battle, '+00:00', @@global.time_zone)) 
+       AS 
+       raid_start, 
+       Unix_timestamp(Convert_tz(raid_end, '+00:00', @@global.time_zone)) 
+       AS raid_end 
+FROM   gym 
+       LEFT JOIN gymdetails 
+              ON gym.gym_id = gymdetails.gym_id 
+WHERE  gym.gym_id = :id". [':id'=>$id])->fetch();
+
+
+        $pokemons = $db->query("SELECT gymmember.gym_id, 
+       pokemon_id, 
+       cp, 
+       trainer.name, 
+       trainer.level, 
+       move_1, 
+       move_2, 
+       iv_attack, 
+       iv_defense, 
+       iv_stamina 
+FROM   gymmember 
+       JOIN gympokemon 
+         ON gymmember.pokemon_uid = gympokemon.pokemon_uid 
+       JOIN trainer 
+         ON gympokemon.trainer_name = trainer.name 
+       JOIN gym 
+         ON gym.gym_id = gymmember.gym_id 
+WHERE  gymmember.last_scanned > gym.last_modified 
+       AND gymmember.gym_id IN ( :id ) 
+GROUP  BY name 
+ORDER  BY gympokemon.cp DESC ", [':id'=>$id])->fetchAll();
+
+        foreach ($pokemons as $pokemon) {
+            $pid = $pokemon["pokemon_id"];
+
+            $p1 = array();
+
+            $p1["pokemon_id"] = $pid;
+            $p1["pokemon_name"] = i8ln($data[$pid]['name']);
+            $p1["trainer_name"] = $pokemon["name"];
+            $p1["trainer_level"] = $pokemon["level"];
+            $p1["pokemon_cp"] = $pokemon["cp"];
+
+            $p1["iv_attack"] = intval($pokemon["iv_attack"]);
+            $p1["iv_defense"] = intval($pokemon["iv_defense"]);
+            $p1["iv_stamina"] = intval($pokemon["iv_stamina"]);
+
+            $p1['move_1_name'] = i8ln($moves[$pokemon['move_1']]['name']);
+            $p1['move_1_damage'] = $moves[$pokemon['move_1']]['damage'];
+            $p1['move_1_energy'] = $moves[$pokemon['move_1']]['energy'];
+            $p1['move_1_type']['type'] = i8ln($moves[$pokemon['move_1']]['type']);
+            $p1['move_1_type']['type_en'] = $moves[$pokemon['move_1']]['type'];
+
+            $p1['move_2_name'] = i8ln($moves[$pokemon['move_2']]['name']);
+            $p1['move_2_damage'] = $moves[$pokemon['move_2']]['damage'];
+            $p1['move_2_energy'] = $moves[$pokemon['move_2']]['energy'];
+            $p1['move_2_type']['type'] = i8ln($moves[$pokemon['move_2']]['type']);
+            $p1['move_2_type']['type_en'] = $moves[$pokemon['move_2']]['type'];
+
+            $p['pokemon'][] = $p1;
+
+            unset($pokemons[$j]);
+
+            $j++;
+        }
+        $return = $this->returnGymInfo($row);
+
+        return $return;
+
+    }
 }

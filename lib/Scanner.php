@@ -3,14 +3,18 @@ namespace Scanner;
 class Scanner
 {
     // Common functions for both RM and Monocle
+    var $data = [];
+    
+    public function __construct()
+    {
+        $json_poke = "static/data/pokemon.json";
+        $json_contents = file_get_contents($json_poke);
+        $this->data = json_decode($json_contents, TRUE);
+    }
 
     public function returnPokemon($datas)
     {
         $pokemons = array();
-
-        $json_poke = "static/data/pokemon.json";
-        $json_contents = file_get_contents($json_poke);
-        $data = json_decode($json_contents, TRUE);
 
         $i = 0;
 
@@ -58,10 +62,10 @@ class Scanner
             $p["gender"] = $gender;
             $p["form"] = $form;
             $p["pokemon_id"] = $pokeid;
-            $p["pokemon_name"] = i8ln($data[$pokeid]['name']);
-            $p["pokemon_rarity"] = i8ln($data[$pokeid]['rarity']);
+            $p["pokemon_name"] = i8ln($this->data[$pokeid]['name']);
+            $p["pokemon_rarity"] = i8ln($this->data[$pokeid]['rarity']);
 
-            $types = $data[$pokeid]["types"];
+            $types = $this->data[$pokeid]["types"];
             foreach ($types as $k => $v) {
                 $types[$k]['type'] = i8ln($v['type']);
             }
@@ -112,9 +116,7 @@ class Scanner
         $gyms = array();
         $gym_ids = array();
         $i = 0;
-        $json_poke = "static/data/pokemon.json";
-        $json_contents = file_get_contents($json_poke);
-        $data = json_decode($json_contents, TRUE);
+
 
         /* fetch associative array */
         foreach ($datas as $row) {
@@ -148,7 +150,7 @@ class Scanner
                 if ($rpid)
                     $p['raid_pokemon_id'] = $rpid;
                 if ($rpid)
-                    $p['raid_pokemon_name'] = i8ln($data[$rpid]['name']);
+                    $p['raid_pokemon_name'] = i8ln($this->data[$rpid]['name']);
                 $p['raid_pokemon_cp'] = !empty($row['cp']) ? intval($row['cp']) : null;
                 $p['raid_pokemon_move_1'] = !empty($row['move_1']) ? intval($row['move_1']) : null;
                 $p['raid_pokemon_move_2'] = !empty($row['move_2']) ? intval($row['move_2']) : null;
@@ -166,4 +168,7 @@ class Scanner
         }
         return ['gyms'=>$gyms, 'gym_ids'=>$gym_ids];
     }
+
+
+
 }

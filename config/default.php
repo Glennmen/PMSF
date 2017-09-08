@@ -10,6 +10,18 @@
 //======================================================================
 session_start();
 require_once(__DIR__.'/../utils.php');
+
+$libs[] = "Scanner.php";
+$libs[] = "Monocle.php";
+$libs[] = "Monocle_Asner.php";
+$libs[] = "Monocle_Monkey.php";
+$libs[] = "RocketMap.php";
+$libs[] = "RocketMap_Sloppy.php";
+
+// Include libraries
+foreach ($libs as $file) {
+    include(__DIR__.'/../lib/'.$file);
+}
 setSessionCsrfToken();
 
 //-----------------------------------------------------
