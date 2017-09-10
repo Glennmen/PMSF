@@ -31,7 +31,7 @@ $dbUser = "root";
 $dbPwd = "toor";
 $dbName = "monocle";
 
-$mysqli = new mysqli('$dbIP', '$dbUser', '$dbPwd', '$dbName');
+$mysqli = new mysqli($dbIP, $dbUser, $dbPwd, $dbName);
 if ($mysqli->connect_errno) {
 	echo "Error: Failed to make a MySQL connection, here is why: \n";
 	echo "Errno: " . $mysqli->connect_errno . "\n";
