@@ -1,5 +1,5 @@
 <?php
-
+$timing['start'] = microtime(true);
 include('config/config.php');
 global $map, $fork;
 
@@ -81,6 +81,7 @@ $d["oNeLng"] = $neLng;
 $ids = array();
 $eids = array();
 $reids = array();
+$debug['1_before_functions'] = microtime(true) - $timing['start'];
 
 global $noPokemon;
 if (!$noPokemon) {
@@ -119,6 +120,7 @@ if (!$noPokemon) {
         }
     }
 }
+$debug['2_after_pokemon'] = microtime(true) - $timing['start'];
 
 global $noPokestops;
 if (!$noPokestops) {
@@ -134,6 +136,8 @@ if (!$noPokestops) {
         }
     }
 }
+$debug['3_after_pokestops'] = microtime(true) - $timing['start'];
+
 global $noGyms, $noRaids;
 if (!$noGyms || !$noRaids) {
     if ($d["lastgyms"] == "true") {
@@ -148,6 +152,7 @@ if (!$noGyms || !$noRaids) {
         }
     }
 }
+$debug['4_after_gyms'] = microtime(true) - $timing['start'];
 
 global $noSpawnPoints;
 if (!$noSpawnPoints) {
@@ -163,6 +168,7 @@ if (!$noSpawnPoints) {
         }
     }
 }
+$debug['5_after_spawnpoints'] = microtime(true) - $timing['start'];
 
 global $noScannedLocations;
 if (!$noScannedLocations) {
@@ -178,8 +184,16 @@ if (!$noScannedLocations) {
         }
     }
 }
+$debug['6_after_recent'] = microtime(true) - $timing['start'];
 
 $d['token'] = refreshCsrfToken();
+$debug['7_end'] = microtime(true) - $timing['start'];
+
+if ($enableDebug == true) {
+    foreach ($debug as $k => $v) {
+        header("X-Debug-Time-" . $k . ": " . $v);
+    }
+ }
 
 $jaysson = json_encode($d);
 echo $jaysson;
