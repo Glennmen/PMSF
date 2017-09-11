@@ -49,6 +49,10 @@ $piwikSiteId = "";
 
 $paypalUrl = "";                                                    // PayPal donation URL, leave "" for empty
 
+/* Discord */
+
+$discordUrl = "https://discord.gg/INVITE_LINK";                     // Discord URL, leave "" for empty
+
 /* MOTD */
 
 $motdTitle = "Message of the Day";
