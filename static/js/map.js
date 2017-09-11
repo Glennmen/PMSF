@@ -406,7 +406,10 @@ function pokemonLabel(item) {
     var cp = item['cp']
     var cpMultiplier = item['cp_multiplier']
     var level = item['level']
-
+    var pokeBall = item['catch_prob_1']
+    var greatBall = item['catch_prob_2']
+    var ultraBall = item['catch_prob_3']
+    
     $.each(types, function (index, type) {
         typesDisplay += getTypeSpan(type)
     })
@@ -436,6 +439,13 @@ function pokemonLabel(item) {
             '<div>' +
             'Moves: ' + pMove1 + ' / ' + pMove2 +
             '</div>'
+	    
+	if (pokeBall != null && greatBall != null && ultraBall !=null) {
+			details +=
+				'<div>' +
+				'Poké ball: ' + pokeBall + ', Great ball: ' + greatBall + ', Ultra ball: ' + ultraBall +
+				'</div>'
+	}
     }
     if (gender != null) {
         details +=
