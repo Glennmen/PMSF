@@ -805,10 +805,6 @@ ORDER  BY gympokemon.cp DESC ", [':id'=>$id])->fetchAll();
 
     public function returnGymInfo($row)
     {
-        $json_moves = "static/data/moves.json";
-        $json_contents = file_get_contents($json_moves);
-        $moves = json_decode($json_contents, TRUE);
-
         $rpid = intval($row['pokemon_id']);
         $p['raid_level'] = intval($row['level']);
         if ($rpid)

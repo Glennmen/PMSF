@@ -3,15 +3,40 @@ namespace Scanner;
 class Scanner
 {
     // Common functions for both RM and Monocle
+    /**
+     * $data
+     * Used for Pokemon data
+     * @var array|mixed
+     */
     var $data = [];
-    
+    /**
+     * $moves
+     * Used for Pokemon moves
+     * @var array|mixed
+     */
+    var $moves = [];
+
+    /**
+     * Scanner constructor.
+     * Loads in the JSON arrays for Pokemon and moves
+     */
     public function __construct()
     {
         $json_poke = "static/data/pokemon.json";
         $json_contents = file_get_contents($json_poke);
         $this->data = json_decode($json_contents, TRUE);
+
+        $json_moves = "static/data/moves.json";
+        $json_contents = file_get_contents($json_moves);
+        $this->moves = json_decode($json_contents, TRUE);
     }
 
+    /**
+     * returnPokemon
+     * Reads the database output from RM/Monocle and returns an array of Pokemon
+     * @param $datas array
+     * @return array
+     */
     public function returnPokemon($datas)
     {
         $pokemons = array();
@@ -81,6 +106,12 @@ class Scanner
         return $pokemons;
     }
 
+    /**
+     * returnPokestops
+     * Reads the database output from RM/Monocle and returns an array of Pokestops
+     * @param $datas
+     * @return array
+     */
     public function returnPokestops($datas)
     {
         $pokestops = array();
@@ -110,6 +141,12 @@ class Scanner
     }
 
 
+    /**
+     * returnGyms
+     * Reads the database output from RM/Monocle and returns an array of Gyms
+     * @param $datas
+     * @return array
+     */
     public function returnGyms($datas)
     {
         global $map;

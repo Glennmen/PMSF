@@ -47,9 +47,6 @@ class Monkey extends Monocle
 
     private function query_gyms($conds, $params) {
         global $db;
-        $json_poke = "static/data/pokemon.json";
-        $json_contents = file_get_contents($json_poke);
-        $pokemon_data = json_decode($json_contents, TRUE);
 
         $query = "SELECT f.external_id as gym_id,
       fs.last_modified last_modified,
@@ -100,8 +97,8 @@ class Monkey extends Monocle
             }
             $gym["enabled"] = true;
             $gym["pokemon"] = [];
-            $gym["guard_pokemon_name"] = empty($guard_pid) ? NULL : i8ln($pokemon_data[$guard_pid]["name"]);
-            $gym["raid_pokemon_name"] = empty($raid_pid) ? NULL : i8ln($pokemon_data[$raid_pid]["name"]);
+            $gym["guard_pokemon_name"] = empty($guard_pid) ? NULL : i8ln($this->data[$guard_pid]["name"]);
+            $gym["raid_pokemon_name"] = empty($raid_pid) ? NULL : i8ln($this->data[$raid_pid]["name"]);
             $gym["latitude"] = floatval($gym["latitude"]);
             $gym["longitude"] = floatval($gym["longitude"]);
             $gym["last_modified"] = $gym["last_modified"] * 1000;
@@ -114,13 +111,7 @@ class Monkey extends Monocle
 
     private function query_gym_defenders($gymId) {
         global $db;
-        $json_poke = "static/data/pokemon.json";
-        $json_contents = file_get_contents($json_poke);
-        $pokemon_data = json_decode($json_contents, TRUE);
 
-        $json_moves = "static/data/moves.json";
-        $json_contents = file_get_contents($json_moves);
-        $moves = json_decode($json_contents, TRUE);
 
         $query = "SELECT gd.pokemon_id,
         gd.cp pokemon_cp,
@@ -143,21 +134,21 @@ class Monkey extends Monocle
             $pid = $defender["pokemon_id"];
             if ($defender['nickname']) {
                 // If defender has nickname, eg Pippa, put it alongside poke
-                $defender["pokemon_name"] = i8ln($pokemon_data[$pid]["name"]) . "<br><small style='font-size: 70%;'>(". $defender['nickname'].")</small>";
+                $defender["pokemon_name"] = i8ln($this->data[$pid]["name"]) . "<br><small style='font-size: 70%;'>(". $defender['nickname'].")</small>";
             } else {
-                $defender["pokemon_name"] = i8ln($pokemon_data[$pid]["name"]);
+                $defender["pokemon_name"] = i8ln($this->data[$pid]["name"]);
             }
             $defender["trainer_level"] = "";
-            $defender['move_1_name'] = i8ln($moves[$defender['move_1']]['name']);
-            $defender['move_1_damage'] = $moves[$defender['move_1']]['damage'];
-            $defender['move_1_energy'] = $moves[$defender['move_1']]['energy'];
-            $defender['move_1_type']['type'] = i8ln($moves[$defender['move_1']]['type']);
-            $defender['move_1_type']['type_en'] = $moves[$defender['move_1']]['type'];
-            $defender['move_2_name'] = i8ln($moves[$defender['move_2']]['name']);
-            $defender['move_2_damage'] = $moves[$defender['move_2']]['damage'];
-            $defender['move_2_energy'] = $moves[$defender['move_2']]['energy'];
-            $defender['move_2_type']['type'] = i8ln($moves[$defender['move_2']]['type']);
-            $defender['move_2_type']['type_en'] = $moves[$defender['move_2']]['type'];
+            $defender['move_1_name'] = i8ln($this->moves[$defender['move_1']]['name']);
+            $defender['move_1_damage'] = $this->moves[$defender['move_1']]['damage'];
+            $defender['move_1_energy'] = $this->moves[$defender['move_1']]['energy'];
+            $defender['move_1_type']['type'] = i8ln($this->moves[$defender['move_1']]['type']);
+            $defender['move_1_type']['type_en'] = $this->moves[$defender['move_1']]['type'];
+            $defender['move_2_name'] = i8ln($this->moves[$defender['move_2']]['name']);
+            $defender['move_2_damage'] = $this->moves[$defender['move_2']]['damage'];
+            $defender['move_2_energy'] = $this->moves[$defender['move_2']]['energy'];
+            $defender['move_2_type']['type'] = i8ln($this->moves[$defender['move_2']]['type']);
+            $defender['move_2_type']['type_en'] = $this->moves[$defender['move_2']]['type'];
 
             $data[] = $defender;
         }

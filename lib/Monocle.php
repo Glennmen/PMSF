@@ -419,9 +419,6 @@ FROM   (SELECT fort_id,
 
     public function returnGymInfo($row, $raid)
     {
-        $json_poke = "static/data/pokemon.json";
-        $json_contents = file_get_contents($json_poke);
-        $data = json_decode($json_contents, TRUE);
 
         $p = array();
 
@@ -444,7 +441,7 @@ FROM   (SELECT fort_id,
         $p["name"] = !empty($row["name"]) ? $row["name"] : null;
         $p["team_id"] = $ti;
         if ($gpid)
-            $p["guard_pokemon_name"] = i8ln($data[$gpid]['name']);
+            $p["guard_pokemon_name"] = i8ln($this->data[$gpid]['name']);
 
 
         $rpid = intval($raid['pokemon_id']);
@@ -452,7 +449,7 @@ FROM   (SELECT fort_id,
         if ($rpid)
             $p['raid_pokemon_id'] = $rpid;
         if ($rpid)
-            $p['raid_pokemon_name'] = i8ln($data[$rpid]['name']);
+            $p['raid_pokemon_name'] = i8ln($this->data[$rpid]['name']);
             $p['raid_pokemon_cp'] = !empty($row['cp']) ? intval($row['cp']) : null;
             $p['raid_pokemon_move_1'] = !empty($row['move_1']) ? intval($row['move_1']) : null;
             $p['raid_pokemon_move_2'] = !empty($row['move_2']) ? intval($row['move_2']) : null;
