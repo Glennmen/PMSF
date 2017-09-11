@@ -30,6 +30,7 @@ if (!validateToken($_POST['token'])) {
 $id = $_POST['id'];
 
 $p = $scanner->get_gym($id);
+
 $p['token'] = refreshCsrfToken();
 
 echo json_encode($p);

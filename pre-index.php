@@ -2,8 +2,8 @@
 include('config/config.php');
 $zoom = !empty($_GET['zoom']) ? $_GET['zoom'] : null;
 if (!empty($_GET['lat']) && !empty($_GET['lon'])) {
-        $startingLat = $_GET['lat'];
-        $startingLng = $_GET['lon'];
+    $startingLat = $_GET['lat'];
+    $startingLng = $_GET['lon'];
 }
 ?>
 <!DOCTYPE html>
