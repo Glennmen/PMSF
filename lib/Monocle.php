@@ -257,6 +257,9 @@ FROM   (SELECT fort_id,
                Max(time_end) AS MaxTimeEnd 
         FROM   raids 
         GROUP  BY fort_id) t1 
+       LEFT JOIN raids t2 
+              ON t1.fort_id = t2.fort_id 
+                 AND maxtimeend = time_end 
        LEFT JOIN forts t3
                ON t3.id = t1.fort_id
  WHERE  t3.external_id IN ( $gyms_in ) ", $gym_in_ids)->fetchAll();
