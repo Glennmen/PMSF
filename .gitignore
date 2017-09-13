@@ -32,6 +32,13 @@
 # IntelliJ
 /out/
 
+# vim
+*.swo
+*.swp
+
+# logs
+logs
+
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
@@ -53,3 +60,6 @@ config/*
 /static/dist/
 package-lock.json
 index.php
+
+# lint
+php-lint/

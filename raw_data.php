@@ -1,7 +1,7 @@
 <?php
 
 include('config/config.php');
-
+include('adapter.php');
 
 $now = new DateTime();
 
@@ -693,6 +693,11 @@ AND    longitude < :neLng", [':swLat' => $swLat, ':swLng' => $swLng, ':neLat' =>
 
 function get_gyms($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
 {
+    global $adapter;
+
+    if (!is_null($adapter)) {
+      return $adapter->get_gyms($swLat, $swLng, $neLat, $neLng, $tstamp, $oSwLat, $oSwLng, $oNeLat, $oNeLng);
+    }
 
     global $db;
 
