@@ -175,7 +175,7 @@ $enableDebug = false;
 //-----------------------------------------------------
 
 $map = "monocle";                                                   // monocle/rm
-$fork = "default";                                                  // default/asner/sloppy
+$fork = "default";                                                  // default/asner/sloppy/monkey
 
 $db = new Medoo([// required
     'database_type' => 'mysql',                                     // mysql/mariadb/pgsql/sybase/oracle/mssql/sqlite
