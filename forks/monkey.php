@@ -132,6 +132,9 @@ class MonkeyFork {
     $data = array();
     foreach ($gym_defenders as $defender) {
       $pid = $defender["pokemon_id"];
+      $defender["iv_attack"] = floatval($defender["iv_attack"]);
+      $defender["iv_defense"] = floatval($defender["iv_defense"]);
+      $defender["iv_stamina"] = floatval($defender["iv_stamina"]);
       $defender["pokemon_name"] = i8ln($pokemon_data[$pid]["name"]);
       $defender["trainer_level"] = "";
       $defender['move_1_name'] = i8ln($moves[$defender['move_1']]['name']);
