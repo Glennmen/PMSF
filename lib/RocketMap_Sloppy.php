@@ -59,8 +59,8 @@ FROM   gym
        LEFT JOIN gymdetails 
               ON gym.gym_id = gymdetails.gym_id")->fetchAll();
         } elseif ($tstamp > 0) {
-            $date = new DateTime();
-            $date->setTimezone(new DateTimeZone('UTC'));
+            $date = new \DateTime();
+            $date->setTimezone(new \DateTimeZone('UTC'));
             $date->setTimestamp($tstamp);
             $datas = $db->query("SELECT    gym.gym_id AS external_id, 
           latitude   AS lat, 
@@ -87,7 +87,7 @@ WHERE     gym.last_scanned > :lastScanned
 AND       latitude > :swLat 
 AND       longitude > :swLng 
 AND       latitude < :neLat 
-AND       longitude < :neLng". ['lastScanned'=>date_format($date, 'Y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
+AND       longitude < :neLng". ['lastScanned'=>date_format($date, 'y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
         } elseif ($oSwLat != 0) {
             $datas = $db->query("SELECT gym.gym_id 
        AS 
@@ -287,13 +287,15 @@ WHERE  gymmember.last_scanned > gym.last_modified
 GROUP  BY name 
 ORDER  BY gympokemon.cp DESC ", [':id'=>$id])->fetchAll();
 
+        $j = 0;
+
         foreach ($pokemons as $pokemon) {
             $pid = $pokemon["pokemon_id"];
 
             $p1 = array();
 
             $p1["pokemon_id"] = $pid;
-            $p1["pokemon_name"] = i8ln($data[$pid]['name']);
+            $p1["pokemon_name"] = i8ln($this->data[$pid]['name']);
             $p1["trainer_name"] = $pokemon["name"];
             $p1["trainer_level"] = $pokemon["level"];
             $p1["pokemon_cp"] = $pokemon["cp"];
@@ -302,22 +304,21 @@ ORDER  BY gympokemon.cp DESC ", [':id'=>$id])->fetchAll();
             $p1["iv_defense"] = intval($pokemon["iv_defense"]);
             $p1["iv_stamina"] = intval($pokemon["iv_stamina"]);
 
-            $p1['move_1_name'] = i8ln($moves[$pokemon['move_1']]['name']);
-            $p1['move_1_damage'] = $moves[$pokemon['move_1']]['damage'];
-            $p1['move_1_energy'] = $moves[$pokemon['move_1']]['energy'];
-            $p1['move_1_type']['type'] = i8ln($moves[$pokemon['move_1']]['type']);
-            $p1['move_1_type']['type_en'] = $moves[$pokemon['move_1']]['type'];
+            $p1['move_1_name'] = i8ln($this->moves[$pokemon['move_1']]['name']);
+            $p1['move_1_damage'] = $this->moves[$pokemon['move_1']]['damage'];
+            $p1['move_1_energy'] = $this->moves[$pokemon['move_1']]['energy'];
+            $p1['move_1_type']['type'] = i8ln($this->moves[$pokemon['move_1']]['type']);
+            $p1['move_1_type']['type_en'] = $this->moves[$pokemon['move_1']]['type'];
 
-            $p1['move_2_name'] = i8ln($moves[$pokemon['move_2']]['name']);
-            $p1['move_2_damage'] = $moves[$pokemon['move_2']]['damage'];
-            $p1['move_2_energy'] = $moves[$pokemon['move_2']]['energy'];
-            $p1['move_2_type']['type'] = i8ln($moves[$pokemon['move_2']]['type']);
-            $p1['move_2_type']['type_en'] = $moves[$pokemon['move_2']]['type'];
+            $p1['move_2_name'] = i8ln($this->moves[$pokemon['move_2']]['name']);
+            $p1['move_2_damage'] = $this->moves[$pokemon['move_2']]['damage'];
+            $p1['move_2_energy'] = $this->moves[$pokemon['move_2']]['energy'];
+            $p1['move_2_type']['type'] = i8ln($this->moves[$pokemon['move_2']]['type']);
+            $p1['move_2_type']['type_en'] = $this->moves[$pokemon['move_2']]['type'];
 
             $p['pokemon'][] = $p1;
 
             unset($pokemons[$j]);
-
             $j++;
         }
         $return = $this->returnGymInfo($row);
