@@ -11,7 +11,8 @@ namespace Scanner;
 
 class Monkey extends Monocle
 {
-    public function get_gym($gymId) {
+    public function get_gym($gymId)
+    {
         $conds = array();
         $params = array();
 
@@ -24,7 +25,8 @@ class Monkey extends Monocle
         return $gym;
     }
 
-    public function get_gyms($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0) {
+    public function get_gyms($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    {
         $conds = array();
         $params = array();
 
@@ -45,7 +47,8 @@ class Monkey extends Monocle
         return $this->query_gyms($conds, $params);
     }
 
-    private function query_gyms($conds, $params) {
+    private function query_gyms($conds, $params)
+    {
         global $db;
 
         $query = "SELECT f.external_id as gym_id,
@@ -80,18 +83,19 @@ class Monkey extends Monocle
         LEFT JOIN raids r ON r.id = f.raid_id";
 
         $query = str_replace(":conditions", join(" AND ", $conds), $query);
-
         $gyms = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
 
         $data = array();
+        $i = 0;
+
         foreach ($gyms as $gym) {
             $guard_pid = $gym["guard_pokemon_id"];
-            if ($guard_pid=="0") {
+            if ($guard_pid == "0") {
                 $guard_pid = NULL;
                 $gym["guard_pokemon_id"] = NULL;
             }
             $raid_pid = $gym["raid_pokemon_id"];
-            if ($raid_pid=="0") {
+            if ($raid_pid == "0") {
                 $raid_pid = NULL;
                 $gym["raid_pokemon_id"] = NULL;
             }
@@ -105,11 +109,15 @@ class Monkey extends Monocle
             $gym["raid_start"] = $gym["raid_start"] * 1000;
             $gym["raid_end"] = $gym["raid_end"] * 1000;
             $data[$gym["gym_id"]] = $gym;
+
+            unset($gyms[$i]);
+            $i++;
         }
         return $data;
     }
 
-    private function query_gym_defenders($gymId) {
+    private function query_gym_defenders($gymId)
+    {
         global $db;
 
 
@@ -127,23 +135,30 @@ class Monkey extends Monocle
       LEFT JOIN forts f ON gd.fort_id = f.id
       WHERE f.external_id = :gymId";
 
-        $gym_defenders = $db->query($query, [":gymId"=>$gymId])->fetchAll(\PDO::FETCH_ASSOC);
+        $gym_defenders = $db->query($query, [":gymId" => $gymId])->fetchAll(\PDO::FETCH_ASSOC);
 
         $data = array();
+        $i = 0;
+
         foreach ($gym_defenders as $defender) {
             $pid = $defender["pokemon_id"];
             if ($defender['nickname']) {
                 // If defender has nickname, eg Pippa, put it alongside poke
-                $defender["pokemon_name"] = i8ln($this->data[$pid]["name"]) . "<br><small style='font-size: 70%;'>(". $defender['nickname'].")</small>";
+                $defender["pokemon_name"] = i8ln($this->data[$pid]["name"]) . "<br><small style='font-size: 70%;'>(" . $defender['nickname'] . ")</small>";
             } else {
                 $defender["pokemon_name"] = i8ln($this->data[$pid]["name"]);
             }
+            $defender["iv_attack"] = floatval($defender["iv_attack"]);
+            $defender["iv_defense"] = floatval($defender["iv_defense"]);
+            $defender["iv_stamina"] = floatval($defender["iv_stamina"]);
             $defender["trainer_level"] = "";
+
             $defender['move_1_name'] = i8ln($this->moves[$defender['move_1']]['name']);
             $defender['move_1_damage'] = $this->moves[$defender['move_1']]['damage'];
             $defender['move_1_energy'] = $this->moves[$defender['move_1']]['energy'];
             $defender['move_1_type']['type'] = i8ln($this->moves[$defender['move_1']]['type']);
             $defender['move_1_type']['type_en'] = $this->moves[$defender['move_1']]['type'];
+
             $defender['move_2_name'] = i8ln($this->moves[$defender['move_2']]['name']);
             $defender['move_2_damage'] = $this->moves[$defender['move_2']]['damage'];
             $defender['move_2_energy'] = $this->moves[$defender['move_2']]['energy'];
@@ -151,6 +166,9 @@ class Monkey extends Monocle
             $defender['move_2_type']['type_en'] = $this->moves[$defender['move_2']]['type'];
 
             $data[] = $defender;
+
+            unset($gym_defenders[$i]);
+            $i++;
         }
         return $data;
     }
