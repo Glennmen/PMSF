@@ -136,7 +136,7 @@ AND    longitude > :swLng
 AND    latitude < :neLat 
 AND    longitude < :neLng", array_merge($pkmn_ids, [':disappearTime' => date_format($time, 'y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng]))->fetchAll();
         }
-        $pokemons = $this->returnPokemon($datas);
+        return $this->returnPokemon($datas);
     }
 
 

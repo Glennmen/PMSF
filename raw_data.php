@@ -114,7 +114,7 @@ if (!$noPokemon) {
         if (!empty($_POST['reids'])) {
             $reids = explode(",", $_POST['reids']);
 
-            $d["pokemons"] = $d["pokemons"] + ($scanner->get_active_by_id($reids, $swLat, $swLng, $neLat, $neLng));
+            $d["pokemons"] = array_merge($d["pokemons"], $scanner->get_active_by_id($reids, $swLat, $swLng, $neLat, $neLng));
 
             $d["reids"] = !empty($_POST['reids']) ? $reids : null;
         }

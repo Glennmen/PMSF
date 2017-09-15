@@ -79,7 +79,7 @@ AND    lat < :neLat
 AND    lon < :neLng", array_merge($pkmn_ids, [':timeStamp'=> time(), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng]))->fetchAll();
             }
 
-        $pokemons = $this->returnPokemon($datas);
+        return $this->returnPokemon($datas);
 
     }
 
