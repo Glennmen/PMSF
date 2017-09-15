@@ -165,6 +165,14 @@ $noLocationStyle = false;                                           // true/fals
 $locationStyle = 'none';                                            // none, google, red, red_animated, blue, blue_animated, yellow, yellow_animated, pokesition, pokeball
 
 //-----------------------------------------------------
+// DEBUGGING
+//-----------------------------------------------------
+
+// Do not enable unless requested
+
+$enableDebug = false;
+
+//-----------------------------------------------------
 // DATABASE CONFIG
 //-----------------------------------------------------
 
