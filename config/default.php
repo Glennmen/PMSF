@@ -62,6 +62,10 @@ $piwikSiteId = "";
 
 $paypalUrl = "";                                                    // PayPal donation URL, leave "" for empty
 
+/* Discord */
+
+$discordUrl = "";                                                    // Discord URL, leave "" for empty
+
 /* MOTD */
 
 $motdTitle = "";
