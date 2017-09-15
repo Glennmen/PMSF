@@ -1,4 +1,5 @@
 <?php
+
 namespace Scanner;
 
 /**
@@ -9,15 +10,15 @@ namespace Scanner;
  */
 class Sloppy extends RocketMap
 {
-public function get_gyms($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
-{
+    public function get_gyms($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    {
 
-    global $db;
+        global $db;
 
-    $datas = array();
+        $datas = array();
 
-    global $map;
-    global $fork;
+        global $map;
+        global $fork;
         if ($swLat == 0) {
             $datas = $db->query("SELECT gym.gym_id 
        AS 
@@ -87,7 +88,7 @@ WHERE     gym.last_scanned > :lastScanned
 AND       latitude > :swLat 
 AND       longitude > :swLng 
 AND       latitude < :neLat 
-AND       longitude < :neLng". ['lastScanned'=>date_format($date, 'Y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
+AND       longitude < :neLng" . ['lastScanned' => date_format($date, 'Y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
         } elseif ($oSwLat != 0) {
             $datas = $db->query("SELECT gym.gym_id 
        AS 
@@ -135,7 +136,7 @@ WHERE  latitude > :swLat
        AND NOT( latitude > :oSwLat 
                 AND longitude > :oSwLng 
                 AND latitude < :oNeLat 
-                AND longitude < :oNeLng)", [':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng,  ':oSwLat' => $oSwLat, ':oSwLng' => $oSwLng, ':oNeLat' => $oNeLat, ':oNeLng' => $oNeLng])->fetchAll();
+                AND longitude < :oNeLng)", [':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng, ':oSwLat' => $oSwLat, ':oSwLng' => $oSwLng, ':oNeLat' => $oNeLat, ':oNeLng' => $oNeLng])->fetchAll();
         } else {
             $datas = $db->query("SELECT    gym.gym_id AS external_id, 
           latitude   AS lat, 
@@ -161,28 +162,28 @@ ON        gym.gym_id = gymdetails.gym_id
 WHERE     latitude > :swLat 
 AND       longitude > :swLng 
 AND       latitude < :neLat 
-AND       longitude < :neLng",[':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
+AND       longitude < :neLng", [':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
         }
 
-    $gyminfo = $this->returnGyms($datas);
-    $gyms = $gyminfo['gyms'];
-    $gym_ids = $gyminfo['gym_ids'];
+        $gyminfo = $this->returnGyms($datas);
+        $gyms = $gyminfo['gyms'];
+        $gym_ids = $gyminfo['gym_ids'];
 // todo: up to here.
-    $j = 0;
+        $j = 0;
 
-    $gym_in = '';
-    if (count($gym_ids)) {
-        $i=1;
-        foreach ($gym_ids as $id) {
-            $gym_qry_ids[':qry_'.$i] = $id;
-            $gym_in .= ':'.'qry_'.$i.",";
-            $i++;
+        $gym_in = '';
+        if (count($gym_ids)) {
+            $i = 1;
+            foreach ($gym_ids as $id) {
+                $gym_qry_ids[':qry_' . $i] = $id;
+                $gym_in .= ':' . 'qry_' . $i . ",";
+                $i++;
+            }
+            $gym_in = substr($gym_in, 0, -1);
+        } else {
+            $gym_qry_ids = [];
         }
-        $gym_in = substr($gym_in, 0, -1);
-    } else {
-        $gym_qry_ids = [];
-    }
-    $pokemons = $db->query("SELECT gymmember.gym_id, 
+        $pokemons = $db->query("SELECT gymmember.gym_id, 
        pokemon_id, 
        cp, 
        trainer.name, 
@@ -200,27 +201,27 @@ GROUP  BY name
 ORDER  BY gymmember.gym_id, 
           gympokemon.cp ", $gym_qry_ids)->fetchAll();
 
-    foreach ($pokemons as $pokemon) {
-        $p = array();
+        foreach ($pokemons as $pokemon) {
+            $p = array();
 
-        $pid = $pokemon["pokemon_id"];
+            $pid = $pokemon["pokemon_id"];
 
-        $p["pokemon_id"] = $pid;
-        $p["pokemon_name"] = $this->data[$pid]['name'];
-        $p["trainer_name"] = $pokemon["name"];
-        $p["trainer_level"] = $pokemon["level"];
-        $p["pokemon_cp"] = $pokemon["cp"];
+            $p["pokemon_id"] = $pid;
+            $p["pokemon_name"] = $this->data[$pid]['name'];
+            $p["trainer_name"] = $pokemon["name"];
+            $p["trainer_level"] = $pokemon["level"];
+            $p["pokemon_cp"] = $pokemon["cp"];
 
-        $gyms[$pokemon["gym_id"]]["pokemon"][] = $p;
+            $gyms[$pokemon["gym_id"]]["pokemon"][] = $p;
 
-        unset($pokemons[$j]);
+            unset($pokemons[$j]);
 
-        $j++;
+            $j++;
+        }
+
+
+        return $gyms;
     }
-
-
-    return $gyms;
-}
 
     public function get_gym($id)
     {
@@ -262,7 +263,7 @@ ORDER  BY gymmember.gym_id,
 FROM   gym 
        LEFT JOIN gymdetails 
               ON gym.gym_id = gymdetails.gym_id 
-WHERE  gym.gym_id = :id". [':id'=>$id])->fetch();
+WHERE  gym.gym_id = :id" . [':id' => $id])->fetch();
 
 
         $pokemons = $db->query("SELECT gymmember.gym_id, 
@@ -285,7 +286,7 @@ FROM   gymmember
 WHERE  gymmember.last_scanned > gym.last_modified 
        AND gymmember.gym_id IN ( :id ) 
 GROUP  BY name 
-ORDER  BY gympokemon.cp DESC ", [':id'=>$id])->fetchAll();
+ORDER  BY gympokemon.cp DESC ", [':id' => $id])->fetchAll();
 
         $j = 0;
 

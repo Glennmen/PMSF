@@ -354,7 +354,7 @@ LEFT JOIN raid
 ON        gym.gym_id = raid.gym_id 
 WHERE     gym.last_scanned > :lastScanned
 AND       latitude > :swLat
-AND       longitude > :swLat
+AND       longitude > :swLng
 AND       latitude < :neLat
 AND       longitude < :neLng", [':lastScanned' => date_format($date, 'Y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
         } elseif ($oSwLat != 0) {
@@ -488,6 +488,7 @@ ORDER  BY gymmember.gym_id,
 
         return $gyms;
     }
+
 
     public function get_spawnpoints($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
@@ -704,6 +705,7 @@ ORDER BY last_modified ASC", [':lastModified' => date_format($date, 'Y-m-d H:i:s
         return $recent;
     }
 
+
     public function get_gym($id)
     {
         global $db;
@@ -805,6 +807,7 @@ ORDER  BY gympokemon.cp DESC ", [':id' => $id])->fetchAll();
         return $p;
 
     }
+
 
     public function returnGymInfo($row)
     {
