@@ -1027,11 +1027,11 @@ default: 16,
 type: StoreTypes.Number
 },
 'spritefile': {
-default: '<?php echo $copyrightSafe ? '../../../static/icons-safe-1.png' : '../../../static/icons-im-1.png' ?>',
+default: '<?php echo $copyrightSafe ? 'static/icons-safe-1.png' : 'static/icons-im-1.png' ?>',
 type: StoreTypes.String
 },
 'spritefileLarge': {
-default: '<?php echo $copyrightSafe ? '../../../static/icons-safe-1-bigger.png' : '../../../static/icons-im-1-bigger.png' ?>',
+default: '<?php echo $copyrightSafe ? 'static/icons-safe-1-bigger.png' : 'static/icons-im-1-bigger.png' ?>',
 type: StoreTypes.String
 }
 };
