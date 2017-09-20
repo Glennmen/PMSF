@@ -837,7 +837,7 @@ function getGymMarkerIcon(item) {
     if (item['raid_pokemon_id'] !== null && item.raid_end > Date.now()) {
         return '<div style="position:relative;">' +
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + teamStr + '.png" style="width:55px;height:auto;"/>' +
-            '<i class="pokemon-raid-sprite n' + item.graid_pokemon_id + '"></i>' +
+            '<i class="pokemon-raid-sprite n' + item.raid_pokemon_id + '"></i>' +
             '</div>'
     } else if (item['raid_level'] !== null && item.raid_end > Date.now()) {
         var raidEgg = ''
