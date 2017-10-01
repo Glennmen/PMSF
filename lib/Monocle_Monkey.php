@@ -11,6 +11,100 @@ namespace Scanner;
 
 class Monkey extends Monocle
 {
+    public function get_active($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    {
+        global $db;
+
+        $datas = array();
+        global $map;
+        if ($swLat == 0) {
+            $datas = $db->query("SELECT * FROM sightings WHERE expire_timestamp > :time", [':time' => time()])->fetchAll();
+        } elseif ($tstamp > 0) {
+            $date = new \DateTime();
+            $date->setTimezone(new \DateTimeZone('UTC'));
+            $date->setTimestamp($tstamp);
+            $datas = $db->query("SELECT * 
+FROM   sightings 
+WHERE  expire_timestamp > :time 
+AND    last_updated > :lastUpdated
+AND    lat > :swLat 
+AND    lon > :swLng 
+AND    lat < :neLat 
+AND    lon < :neLng", [':time' => time(), ':lastUpdated' => date_format($date, 'Y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
+        } elseif ($oSwLat != 0) {
+            $datas = $db->query("SELECT * 
+FROM   sightings 
+WHERE  expire_timestamp > :time 
+   AND lat > :swLat
+   AND lon > :swLng 
+   AND lat < :neLat 
+   AND lon < :neLng 
+   AND NOT( lat > :oSwLat 
+            AND lon > :oSwLng 
+            AND lat < :oNeLat 
+            AND lon < :oNeLng ) ", [':time' => time(), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng, ':oSwLat' => $oSwLat, ':oSwLng' => $oSwLng, ':oNeLat' => $oNeLat, ':oNeLng' => $oNeLng])->fetchAll();
+        } else {
+
+            $datas = $db->query("SELECT * 
+FROM   sightings 
+WHERE  expire_timestamp > :time 
+AND    lat > :swLat 
+AND    lon > :swLng 
+AND    lat < :neLat 
+AND    lon < :neLng", [':time' => time(), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
+        }
+        return $this->returnPokemon($datas);
+    }
+
+    public function get_stops($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0, $lured = false)
+    {
+
+        global $db;
+
+        $datas = array();
+        global $map;
+        if ($swLat == 0) {
+            $datas = $db->query("SELECT external_id, lat, lon FROM pokestops")->fetchAll();
+        } elseif ($tstamp > 0) {
+            $date = new \DateTime();
+            $date->setTimezone(new \DateTimeZone('UTC'));
+            $date->setTimestamp($tstamp);
+            $datas = $db->query("SELECT external_id, 
+       lat, 
+       lon 
+FROM   pokestops 
+WHERE  last_updated > :lastUpdated
+AND    lat > :swLat 
+AND    lon > :swLng 
+AND    lat < :neLat 
+AND    lon < :neLng", [':lastUpdated' => date_format($date, 'Y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
+        } elseif ($oSwLat != 0) {
+            $datas = $db->query("SELECT external_id, 
+       lat, 
+       lon 
+FROM   pokestops 
+WHERE  lat > :swLat
+       AND lon > :swLng 
+       AND lat < :neLat 
+       AND lon < :neLng
+       AND NOT( lat > :oSwLat 
+                AND lon > :oSwLng 
+                AND lat < :oNeLat 
+                AND lon < :oNeLng ) ", [':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng, ':oSwLat' => $oSwLat, ':oSwLng' => $oSwLng, ':oNeLat' => $oNeLat, ':oNeLng' => $oNeLng])->fetchAll();
+        } else {
+            $datas = $db->query("SELECT external_id, 
+       lat, 
+       lon 
+FROM   pokestops 
+WHERE  lat > :swLat 
+AND    lon > :swLng 
+AND    lat < :neLat 
+AND    lon < :neLng", [':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
+        }
+
+        return $this->returnPokestops($datas);
+    }
+
     public function get_gym($gymId)
     {
         $conds = array();
@@ -42,6 +136,12 @@ class Monkey extends Monocle
             $params[':oswLng'] = $oSwLng;
             $params[':oneLat'] = $oNeLat;
             $params[':oneLng'] = $oNeLng;
+        } elseif ($tstamp > 0) {
+            $date = new \DateTime();
+            $date->setTimezone(new \DateTimeZone('UTC'));
+            $date->setTimestamp($tstamp);
+            $conds[] = "last_updated > :lastUpdated";
+            $params[':lastUpdated'] = date_format($date, 'Y-m-d H:i:s');
         }
 
         return $this->query_gyms($conds, $params);
@@ -52,9 +152,10 @@ class Monkey extends Monocle
         global $db;
 
         $query = "SELECT f.external_id as gym_id,
-      fs.last_modified last_modified,
-      f.latitude,
-      f.longitude,
+      fs.last_modified as last_modified,
+      Unix_timestamp(Convert_tz(fs.last_updated, '+00:00', @@global.time_zone)) as last_scanned,
+      f.lat as latitude,
+      f.lon as longitude,
       f.name,
       fs.team team_id,
       fs.guard_pokemon_id,
@@ -66,21 +167,10 @@ class Monkey extends Monocle
       r.cp raid_pokemon_cp,
       r.move_1 raid_pokemon_move_1,
       r.move_2 raid_pokemon_move_2
-        FROM
-        (SELECT f.id,
-         f.lat latitude,
-         f.lon longitude,
-         f.external_id,
-         f.name,
-         MAX(fs.id) fort_sighting_id,
-         MAX(r.id) raid_id
-         FROM forts f
-         LEFT JOIN fort_sightings fs ON fs.fort_id = f.id
-         LEFT JOIN raids r ON r.fort_id = f.id
-         WHERE :conditions
-         GROUP BY f.id) f
-        LEFT JOIN fort_sightings fs ON fs.id = f.fort_sighting_id
-        LEFT JOIN raids r ON r.id = f.raid_id";
+        FROM forts f
+        LEFT JOIN fort_sightings fs ON fs.fort_id = f.id
+        LEFT JOIN raids r ON r.fort_id = f.id
+        WHERE :conditions";
 
         $query = str_replace(":conditions", join(" AND ", $conds), $query);
         $gyms = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
@@ -107,6 +197,7 @@ class Monkey extends Monocle
             $gym["latitude"] = floatval($gym["latitude"]);
             $gym["longitude"] = floatval($gym["longitude"]);
             $gym["last_modified"] = $gym["last_modified"] * 1000;
+            $gym["last_scanned"] = $gym["last_scanned"] * 1000;
             $gym["raid_start"] = $gym["raid_start"] * 1000;
             $gym["raid_end"] = $gym["raid_end"] * 1000;
             $data[$gym["gym_id"]] = $gym;
