@@ -20,17 +20,14 @@ class Monkey extends Monocle
         if ($swLat == 0) {
             $datas = $db->query("SELECT * FROM sightings WHERE expire_timestamp > :time", [':time' => time()])->fetchAll();
         } elseif ($tstamp > 0) {
-            $date = new \DateTime();
-            $date->setTimezone(new \DateTimeZone('UTC'));
-            $date->setTimestamp($tstamp);
             $datas = $db->query("SELECT * 
 FROM   sightings 
 WHERE  expire_timestamp > :time 
-AND    last_updated > :lastUpdated
+AND    updated > :lastUpdated
 AND    lat > :swLat 
 AND    lon > :swLng 
 AND    lat < :neLat 
-AND    lon < :neLng", [':time' => time(), ':lastUpdated' => date_format($date, 'Y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
+AND    lon < :neLng", [':time' => time(), ':lastUpdated' => $tstamp, ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
         } elseif ($oSwLat != 0) {
             $datas = $db->query("SELECT * 
 FROM   sightings 
@@ -66,18 +63,15 @@ AND    lon < :neLng", [':time' => time(), ':swLat' => $swLat, ':swLng' => $swLng
         if ($swLat == 0) {
             $datas = $db->query("SELECT external_id, lat, lon FROM pokestops")->fetchAll();
         } elseif ($tstamp > 0) {
-            $date = new \DateTime();
-            $date->setTimezone(new \DateTimeZone('UTC'));
-            $date->setTimestamp($tstamp);
             $datas = $db->query("SELECT external_id, 
        lat, 
        lon 
 FROM   pokestops 
-WHERE  last_updated > :lastUpdated
+WHERE  updated > :lastUpdated
 AND    lat > :swLat 
 AND    lon > :swLng 
 AND    lat < :neLat 
-AND    lon < :neLng", [':lastUpdated' => date_format($date, 'Y-m-d H:i:s'), ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
+AND    lon < :neLng", [':lastUpdated' => $tstamp, ':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLat, ':neLng' => $neLng])->fetchAll();
         } elseif ($oSwLat != 0) {
             $datas = $db->query("SELECT external_id, 
        lat, 
@@ -136,12 +130,10 @@ AND    lon < :neLng", [':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLa
             $params[':oswLng'] = $oSwLng;
             $params[':oneLat'] = $oNeLat;
             $params[':oneLng'] = $oNeLng;
-        } elseif ($tstamp > 0) {
-            $date = new \DateTime();
-            $date->setTimezone(new \DateTimeZone('UTC'));
-            $date->setTimestamp($tstamp);
-            $conds[] = "last_updated > :lastUpdated";
-            $params[':lastUpdated'] = date_format($date, 'Y-m-d H:i:s');
+        }
+        if ($tstamp > 0) {
+            $conds[] = "updated > :lastUpdated";
+            $params[':lastUpdated'] = $tstamp;
         }
 
         return $this->query_gyms($conds, $params);
@@ -153,7 +145,7 @@ AND    lon < :neLng", [':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLa
 
         $query = "SELECT f.external_id as gym_id,
       fs.last_modified as last_modified,
-      Unix_timestamp(Convert_tz(fs.last_updated, '+00:00', @@global.time_zone)) as last_scanned,
+      fs.updated as last_scanned,
       f.lat as latitude,
       f.lon as longitude,
       f.name,
