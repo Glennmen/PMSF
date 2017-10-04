@@ -9,7 +9,7 @@ if ($map == "monocle") {
     } else {
         $scanner = new \Scanner\Monocle();
     }
-} elseif ($map =="rm") {
+} elseif ($map == "rm") {
     if ($fork == "sloppy") {
         $scanner = new \Scanner\Sloppy();
     } else {

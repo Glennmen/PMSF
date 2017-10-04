@@ -32,7 +32,9 @@ function setSessionCsrfToken()
         generateToken();
     }
 }
-function refreshCsrfToken() {
+
+function refreshCsrfToken()
+{
     global $sessionLifetime;
     if (time() - $_SESSION['c'] > $sessionLifetime) {
         session_regenerate_id(true);
@@ -40,11 +42,13 @@ function refreshCsrfToken() {
     }
     return $_SESSION['token'];
 }
+
 function generateToken()
 {
     $_SESSION['token'] = base64_encode(openssl_random_pseudo_bytes(32));
     $_SESSION['c'] = time();
 }
+
 function validateToken($token)
 {
     global $enableCsrf;

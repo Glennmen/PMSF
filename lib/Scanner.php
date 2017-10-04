@@ -1,4 +1,5 @@
 <?php
+
 namespace Scanner;
 class Scanner
 {
@@ -203,9 +204,8 @@ class Scanner
 
             $i++;
         }
-        return ['gyms'=>$gyms, 'gym_ids'=>$gym_ids];
+        return ['gyms' => $gyms, 'gym_ids' => $gym_ids];
     }
-
 
 
 }

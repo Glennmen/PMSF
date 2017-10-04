@@ -3,7 +3,6 @@ $timing['start'] = microtime(true);
 include('config/config.php');
 global $map, $fork;
 
-
 $now = new DateTime();
 
 $d = array();
@@ -56,7 +55,7 @@ if ($map == "monocle") {
     } else {
         $scanner = new \Scanner\Monocle();
     }
-} elseif ($map =="rm") {
+} elseif ($map == "rm") {
     if ($fork == "sloppy") {
         $scanner = new \Scanner\Sloppy();
     } else {
@@ -193,7 +192,7 @@ if ($enableDebug == true) {
     foreach ($debug as $k => $v) {
         header("X-Debug-Time-" . $k . ": " . $v);
     }
- }
+}
 
 $jaysson = json_encode($d);
 echo $jaysson;

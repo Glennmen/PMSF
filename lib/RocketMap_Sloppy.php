@@ -1,13 +1,6 @@
 <?php
 
 namespace Scanner;
-
-/**
- * Created by PhpStorm.
- * User: JamesHarland
- * Date: 09/08/2017
- * Time: 17:12
- */
 class Sloppy extends RocketMap
 {
     public function get_gyms($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)

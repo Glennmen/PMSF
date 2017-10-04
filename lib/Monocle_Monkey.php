@@ -1,14 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: JamesHarland
- * Date: 08/09/2017
- * Time: 15:09
- */
 
 namespace Scanner;
-
-
 class Monkey extends Monocle
 {
     public function get_active($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
