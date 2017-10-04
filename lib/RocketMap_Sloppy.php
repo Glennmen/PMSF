@@ -1,11 +1,11 @@
 <?php
 
 namespace Scanner;
-class Sloppy extends RocketMap
+
+class RocketMap_Sloppy extends RocketMap
 {
     public function get_gyms($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
-
         global $db;
 
         $datas = array();
@@ -161,7 +161,6 @@ AND       longitude < :neLng", [':swLat' => $swLat, ':swLng' => $swLng, ':neLat'
         $gyminfo = $this->returnGyms($datas);
         $gyms = $gyminfo['gyms'];
         $gym_ids = $gyminfo['gym_ids'];
-// todo: up to here.
         $j = 0;
 
         $gym_in = '';
@@ -318,6 +317,5 @@ ORDER  BY gympokemon.cp DESC ", [':id' => $id])->fetchAll();
         $return = $this->returnGymInfo($row);
 
         return $return;
-
     }
 }

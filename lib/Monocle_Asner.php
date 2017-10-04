@@ -1,11 +1,11 @@
 <?php
 
 namespace Scanner;
-class Asner extends Monocle
+
+class Monocle_Asner extends Monocle
 {
     public function get_gyms($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
-
         global $db;
 
         $datas = array();
@@ -143,10 +143,10 @@ WHERE  t3.external_id IN ( $gyms_in ) ", $gym_in_ids)->fetchAll();
             $id = $raid["external_id"];
             $rpid = intval($raid['pokemon_id']);
             $gyms[$id]['raid_level'] = intval($raid['level']);
-            if ($rpid)
+            if ($rpid) {
                 $gyms[$id]['raid_pokemon_id'] = $rpid;
-            if ($rpid)
                 $gyms[$id]['raid_pokemon_name'] = i8ln($this->data[$rpid]['name']);
+            }
             $gyms[$id]['raid_pokemon_cp'] = !empty($raid['cp']) ? intval($raid['cp']) : null;
             $gyms[$id]['raid_pokemon_move_1'] = !empty($raid['move_1']) ? intval($raid['move_1']) : null;
             $gyms[$id]['raid_pokemon_move_2'] = !empty($raid['move_2']) ? intval($raid['move_2']) : null;
