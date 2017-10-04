@@ -844,5 +844,4 @@ ORDER  BY gympokemon.cp DESC ", [':id' => $id])->fetchAll();
 
         return $p;
     }
-
 }

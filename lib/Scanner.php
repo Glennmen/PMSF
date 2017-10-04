@@ -207,6 +207,4 @@ class Scanner
         }
         return ['gyms' => $gyms, 'gym_ids' => $gym_ids];
     }
-
-
 }
