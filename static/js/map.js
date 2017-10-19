@@ -69,9 +69,7 @@ var lastUpdateTime
 var token
 
 var cries
-var animeCries
 var criesLoaded = false
-var animeCriesLoaded = false
 
 var assetsPath = 'static/sounds/'
 var iconpath = null
@@ -2190,30 +2188,8 @@ function fetchCriesJson() {
         'success': function (data) {
             cries = data
             createjs.Sound.alternateExtensions = ['mp3']
-            if (animeCriesLoaded) {
-                createjs.Sound.removeSounds(animeCries, assetsPath)
-                animeCriesLoaded = false
-            }
             createjs.Sound.registerSounds(cries, assetsPath)
             criesLoaded = true
-        }
-    })
-}
-
-function fetchAnimeCriesJson() {
-    $.ajax({
-        'global': false,
-        'url': 'static/dist/data/cries_anime.min.json',
-        'dataType': 'json',
-        'success': function (data) {
-            animeCries = data
-            createjs.Sound.alternateExtensions = ['mp3']
-            if (criesLoaded) {
-                createjs.Sound.removeSounds(cries, assetsPath)
-                criesLoaded = false
-            }
-            createjs.Sound.registerSounds(animeCries, assetsPath)
-            animeCriesLoaded = true
         }
     })
 }
@@ -2233,11 +2209,7 @@ $(function () {
 
 $(function () {
     if (Store.get('playCries')) {
-        if (Store.get('criesType') === 'anime') {
-            fetchAnimeCriesJson()
-        } else {
-            fetchCriesJson()
-        }
+        fetchCriesJson()
     }
     // load MOTD, if set
     $.ajax({
@@ -2491,14 +2463,6 @@ $(function () {
         minimumResultsForSearch: Infinity
     })
 
-    $selectCriesType.on('change', function () {
-        Store.set('criesType', this.value)
-        if (this.value === 'anime') {
-            fetchAnimeCriesJson()
-        } else {
-            fetchCriesJson()
-        }
-    })
 })
 
 $(function () {
@@ -2752,12 +2716,7 @@ $(function () {
         }
         Store.set('playCries', this.checked)
         if (this.checked) {
-            if (Store.get('criesType') === 'anime') {
-                fetchAnimeCriesJson()
-            } else {
-                console.log('loading normal cries...')
-                fetchCriesJson()
-            }
+            fetchCriesJson()
         }
     })
 
