@@ -21,7 +21,6 @@ var $selectLuredPokestopsOnly
 var $selectGymMarkerStyle
 var $selectLocationIconMarker
 var $switchGymSidebar
-var $selectCriesType
 
 var language = document.documentElement.lang === '' ? 'en' : document.documentElement.lang
 var idToPokemon = {}
@@ -69,7 +68,6 @@ var lastUpdateTime
 var token
 
 var cries
-var criesLoaded = false
 
 var assetsPath = 'static/sounds/'
 var iconpath = null
@@ -312,7 +310,6 @@ function initSidebar() {
     $('#cries-switch').prop('checked', Store.get('playCries'))
     $('#cries-switch-wrapper').toggle(Store.get('playSound'))
     $('#cries-type-filter-wrapper').toggle(Store.get('playCries'))
-    $('#cries-type-filter-switch').val(Store.get('criesType'))
     if (document.getElementById('next-location')) {
         var searchBox = new google.maps.places.Autocomplete(document.getElementById('next-location'))
         $('#next-location').css('background-color', $('#geoloc-switch').prop('checked') ? '#e0e0e0' : '#ffffff')
@@ -2189,7 +2186,6 @@ function fetchCriesJson() {
             cries = data
             createjs.Sound.alternateExtensions = ['mp3']
             createjs.Sound.registerSounds(cries, assetsPath)
-            criesLoaded = true
         }
     })
 }
@@ -2454,15 +2450,6 @@ $(function () {
     })
 
     $selectGymMarkerStyle.val(Store.get('gymMarkerStyle')).trigger('change')
-
-
-    $selectCriesType = $('#cries-type-filter-switch')
-
-    $selectCriesType.select2({
-        placeholder: 'Cry Style',
-        minimumResultsForSearch: Infinity
-    })
-
 })
 
 $(function () {
