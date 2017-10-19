@@ -661,6 +661,7 @@ if (!empty($_GET['lat']) && !empty($_GET['lon'])) {
     var zoom<?php echo $zoom ? " = " . $zoom : null; ?>;
     var minZoom = <?= $maxZoomOut; ?>;
     var maxLatLng = <?= $maxLatLng; ?>;
+    var showAllZoomLevel = <?= $showAllAtZoom; ?>;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="static/js/map.common.js"></script>
