@@ -1,0 +1,6 @@
+OAUTH2_CLIENT_ID:				##bot client id
+OAUTH2_CLIENT_SECRET:			##bot client secret
+OAUTH2_REDIRECT_URI:			##bot redirect uri
+bot_token:						##bot token
+verified_role:					##minimum role for access (default=@everyone)
+two-factor_auth:				##whether 2FA is required for access or not (default=False)
