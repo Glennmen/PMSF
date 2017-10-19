@@ -963,7 +963,7 @@ default: <?php echo $noCriesSound ? 'false' : $criesSound ?>,
 type: StoreTypes.Boolean
 },
 'criesType': {
-default: "<?php echo $criesType; ?>",
+default: "<?php echo 'game' ?>",
 type: StoreTypes.String
 },
 'geoLocate': {

@@ -144,8 +144,8 @@ $notifySound = 'false';                                             // true/fals
 $noCriesSound = false;                                             // true/false
 $criesSound = 'false';                                             // true/false
 
-$noCriesType = false;                                              // true/false
-$criesType = 'game';                                               // game/anime
+$noCriesType = true;                                               // true
+$criesType = 'game';                                               // game
 
 /* Style Settings */
 
