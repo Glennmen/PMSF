@@ -2513,7 +2513,7 @@ $(function () {
     $selectRarityNotify = $('#notify-rarity')
     $textPerfectionNotify = $('#notify-perfection')
     $raidNotify = $('#notify-raid')
-    var numberOfPokemon = 493
+    var numberOfPokemon = 386
 
     $raidNotify.select2({
         placeholder: 'Minimum raid level',
