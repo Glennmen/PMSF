@@ -122,8 +122,7 @@ if (!$noPokemon) {
                 foreach ($element as $valueKey => $value) {
                     if ($valueKey == 'encounter_id') {
                         $ignoreExclusion = $value == $enc_id;
-                    }
-                    elseif ($valueKey == 'pokemon_id') {
+                    } elseif ($valueKey == 'pokemon_id') {
                         if (!$ignoreExclusion && in_array($value, $eids)) {
                             //delete this particular object from the $array
                             unset($d['pokemons'][$elementKey]);
