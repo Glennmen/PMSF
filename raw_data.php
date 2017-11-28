@@ -41,7 +41,9 @@ $d["lastspawns"] = !empty($_POST['spawnpoints']) ? $_POST['spawnpoints'] : false
 $d["lastpokemon"] = !empty($_POST['pokemon']) ? $_POST['pokemon'] : false;
 if ($minIv < $prevMinIv || $minLevel < $prevMinLevel) {
     $lastpokemon = false;
+
 }
+$enc_id = !empty($_POST['enc_id']) ? $_POST['enc_id'] : null;
 
 $timestamp = !empty($_POST['timestamp']) ? $_POST['timestamp'] : 0;
 
@@ -111,6 +113,25 @@ if (!$noPokemon) {
         }
         $d["preMinIV"] = $minIv;
         $d["preMinLevel"] = $minLevel;
+
+        if (!empty($_POST['eids'])) {
+            $eids = explode(",", $_POST['eids']);
+
+            foreach ($d['pokemons'] as $elementKey => $element) {
+                $ignoreExclusion = false;
+                foreach ($element as $valueKey => $value) {
+                    if ($valueKey == 'encounter_id') {
+                        $ignoreExclusion = $value == $enc_id;
+                    }
+                    elseif ($valueKey == 'pokemon_id') {
+                        if (!$ignoreExclusion && in_array($value, $eids)) {
+                            //delete this particular object from the $array
+                            unset($d['pokemons'][$elementKey]);
+                        }
+                    }
+                }
+            }
+        }
 
         if (!empty($_POST['reids'])) {
             $reids = !empty($_POST['reids']) ? explode(",", $_POST['reids']) : array();
