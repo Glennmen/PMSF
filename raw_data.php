@@ -43,7 +43,7 @@ if ($minIv < $prevMinIv || $minLevel < $prevMinLevel) {
     $lastpokemon = false;
 
 }
-$enc_id = !empty($_POST['enc_id']) ? $_POST['enc_id'] : null;
+$enc_id = !empty($_POST['encId']) ? $_POST['encId'] : null;
 
 $timestamp = !empty($_POST['timestamp']) ? $_POST['timestamp'] : 0;
 
