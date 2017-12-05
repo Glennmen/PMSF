@@ -618,12 +618,13 @@ function gymLabel(item) {
     return str
 }
 
-function pokestopLabel(expireTime, latitude, longitude) {
+function pokestopLabel(expireTime, latitude, longitude, stopName) {
     var str
+    if(stopName == undefined) {stopName = "Pokestop"}
     if (expireTime) {
         str =
             '<div>' +
-            '<b>Lured Pokéstop</b>' +
+            '<b>' + stopName + ' (Lured)</b>' +
             '</div>' +
             '<div>' +
             'Lure expires at ' + getTimeStr(expireTime) +
@@ -635,7 +636,7 @@ function pokestopLabel(expireTime, latitude, longitude) {
     } else {
         str =
             '<div>' +
-            '<b>Pokéstop</b>' +
+            '<b>' + stopName + '</b>' +
             '</div>' +
             '<div>' +
             'Location: <a href="javascript:void(0)" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ')" title="View in Maps">' + latitude.toFixed(6) + ', ' + longitude.toFixed(7) + '</a>' +
