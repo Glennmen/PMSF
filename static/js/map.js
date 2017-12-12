@@ -208,7 +208,7 @@ function initMap() { // eslint-disable-line no-unused-vars
     // OpenStreetMap support
     map.mapTypes.set('openstreetmap', new google.maps.ImageMapType({
         getTileUrl: function (coord, zoom) {
-            return '//' + osmTileServer + '/' + zoom + '.' + coord.x + '.' + coord.y + '.png'
+            return '//' + osmTileServer + '/' + zoom + '/' + coord.x + '/' + coord.y + '.png'
         },
         tileSize: new google.maps.Size(256, 256),
         name: 'OpenStreetMap',
