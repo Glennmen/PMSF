@@ -48,6 +48,7 @@ var rangeMarkers = ['pokemon', 'pokestop', 'gym']
 var storeZoom = true
 var scanPath
 var moves
+var osmTileServer
 
 var oSwLat
 var oSwLng
@@ -205,12 +206,12 @@ function initMap() { // eslint-disable-line no-unused-vars
     map.mapTypes.set('style_pgo_night', stylePgoNight)
 
     // OpenStreetMap support
-    map.mapTypes.set("openstreetmap", new google.maps.ImageMapType({
-        getTileUrl: function(coord, zoom) {
-            return "//" + osmTileServer + "/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+    map.mapTypes.set('openstreetmap', new google.maps.ImageMapType({
+        getTileUrl: function (coord, zoom) {
+            return '//' + osmTileServer + '/' + zoom + '.' + coord.x + '.' + coord.y + '.png'
         },
         tileSize: new google.maps.Size(256, 256),
-        name: "OpenStreetMap",
+        name: 'OpenStreetMap',
         maxZoom: 18
     }))
 
