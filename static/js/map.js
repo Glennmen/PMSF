@@ -2253,7 +2253,7 @@ $(function () {
 
 	
     var ville = getUrlParameter('ville')
-	if(ville != "CHOLET" && ville != "REIMS") {
+	if(ville != "CHOLET") {
 		setInterval(ping, 5000);
 		
 		function ping() {
