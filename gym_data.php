@@ -1,5 +1,26 @@
 <?php
+$_GET['ville'] = $_POST['ville'];
+$ville = $_POST['ville'];
+
 include('config/config.php');
+include(dirname(__FILE__).'/config.php');
+include(dirname(__FILE__)."/Entities/User.php");
+
+if(!in_array($ville,array("CHOLET"))) {
+	if(!isset($_SESSION['User'])) {
+		die();
+	}
+	$User = unserialize($_SESSION['User']);
+	$memberLimitTimestamp = strtotime($User->getMemberLimitTime());
+	if($memberLimitTimestamp < time()) {
+		die();
+	}
+	if(!$User->checkUniqueUser()) {
+		die();
+	} else {
+		$User->ping();
+	}
+}
 // init map
 if ($map == "monocle") {
     if ($fork == "asner") {

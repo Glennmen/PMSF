@@ -1,7 +1,37 @@
 <?php
+
+$_GET['ville'] = $_POST['ville'];
+$ville = $_GET['ville'];
 $timing['start'] = microtime(true);
 include('config/config.php');
+include(dirname(__FILE__).'/config.php');
+include(dirname(__FILE__)."/Entities/User.php");
+ini_set('memory_limit', '2048M');
 global $map, $fork;
+
+/* Location Settings */
+if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+if(!in_array($ville,array("CHOLET"))) {
+	if(!isset($_SESSION['User'])) {
+		redirect('/login.php');exit();
+	}
+	$User = unserialize($_SESSION['User']);
+	$memberLimitTimestamp = strtotime($User->getMemberLimitTime());
+	if($memberLimitTimestamp < time()) {
+		redirect('/login.php');exit();
+	}
+	if(!$User->checkUniqueUser()) {
+		die();
+	} else {
+		$User->ping();
+	}
+}
 
 $now = new DateTime();
 $now->sub(new DateInterval('PT20S'));
