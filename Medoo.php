@@ -237,7 +237,8 @@ class Medoo
 			}
 		}
 		catch (PDOException $e) {
-			throw new Exception($e->getMessage());
+			echo "Problème de connexion au serveur... Un administrateur interviendra rapidement.";die();
+			// throw new Exception($e->getMessage());
 		}
 	}
 
