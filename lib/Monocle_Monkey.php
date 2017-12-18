@@ -156,6 +156,7 @@ AND    lon < :neLng", [':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLa
         WHERE :conditions";
 
         $query = str_replace(":conditions", join(" AND ", $conds), $query);
+		
         $gyms = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
 
         $data = array();
@@ -207,8 +208,11 @@ AND    lon < :neLng", [':swLat' => $swLat, ':swLng' => $swLng, ':neLat' => $neLa
         gd.cp pokemon_cp,
         gd.owner_name trainer_name
       FROM gym_defenders gd
-      LEFT JOIN forts f ON gd.fort_id = f.id
-      WHERE f.external_id = :gymId";
+      INNER JOIN forts f ON gd.fort_id = f.id
+      INNER JOIN fort_sightings fs ON gd.fort_id = fs.fort_id
+      WHERE f.external_id = :gymId
+      AND gd.last_modified = fs.last_modified";
+      // ";
 
         $gym_defenders = $db->query($query, [":gymId" => $gymId])->fetchAll(\PDO::FETCH_ASSOC);
 
