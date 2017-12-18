@@ -1,5 +1,36 @@
 <?php
 include('config/config.php');
+include(dirname(__FILE__).'/config.php');
+include(dirname(__FILE__)."/Entities/User.php");
+/* Location Settings */
+if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+if(!in_array($ip,array("127.0.0.1","0.0.0.0","5.196.7.202"))) {
+	if(!in_array($ville,array("CHOLET"))) {
+		if(!isset($_SESSION['User'])) {
+			redirect('/login.php');
+		}
+		$User = unserialize($_SESSION['User']);
+		$memberLimitTimestamp = strtotime($User->getMemberLimitTime());
+		if($memberLimitTimestamp < time()) {
+			redirect('/login.php');
+		}
+
+
+		$User->ping();
+		// if(!$User->checkUniqueUser()) {
+			// session_destroy();
+			// redirect('/index.php?err=alreadycon');
+		// } else {
+			// $User->ping();
+		// }	
+	}
+}
 $zoom = !empty($_GET['zoom']) ? $_GET['zoom'] : null;
 if (!empty($_GET['lat']) && !empty($_GET['lon'])) {
     $startingLat = $_GET['lat'];
@@ -20,32 +51,16 @@ if (!empty($_GET['lat']) && !empty($_GET['lon'])) {
     <meta name="theme-color" content="#3b3b3b">
     <!-- Fav- & Apple-Touch-Icons -->
     <!-- Favicon -->
-    <link rel="shortcut icon" href="static/appicons/favicon.ico"
-          type="image/x-icon">
-    <!-- non-retina iPhone pre iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/114x114.png"
-          sizes="57x57">
-    <!-- non-retina iPad pre iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/144x144.png"
-          sizes="72x72">
-    <!-- non-retina iPad iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/152x152.png"
-          sizes="76x76">
-    <!-- retina iPhone pre iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/114x114.png"
-          sizes="114x114">
-    <!-- retina iPhone iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/120x120.png"
-          sizes="120x120">
-    <!-- retina iPad pre iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/144x144.png"
-          sizes="144x144">
-    <!-- retina iPad iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/152x152.png"
-          sizes="152x152">
-    <!-- retina iPhone 6 iOS 7 -->
-    <link rel="apple-touch-icon" href="static/appicons/180x180.png"
-          sizes="180x180">
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+
     <?php
     if ($gAnalyticsId != "") {
         echo '<!-- Google Analytics -->
