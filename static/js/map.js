@@ -330,7 +330,14 @@ function initSidebar() {
     if (window.location.port.length > 0) {
         port = ':' + window.location.port
     }
-    var path = window.location.protocol + '//' + window.location.hostname + port + window.location.pathname
+	var pathnameClean = ""
+	if(window.location.pathname.slice(-1) != "/") {
+		pathnameClean = "/"
+	} else {
+		pathnameClean = window.location.pathname
+	}
+    var path = window.location.protocol + '//' + window.location.hostname + port + pathnameClean
+
     var r = new RegExp('^(?:[a-z]+:)?//', 'i')
     var urlSprite = r.test(Store.get('spritefile')) ? Store.get('spritefile') : path + Store.get('spritefile')
     var urlSpriteLarge = r.test(Store.get('spritefileLarge')) ? Store.get('spritefileLarge') : path + Store.get('spritefileLarge')
@@ -513,8 +520,8 @@ function gymLabel(item) {
 
         var raidStartStr = getTimeStr(item['raid_start'])
         var raidEndStr = getTimeStr(item['raid_end'])
-        raidStr += '<div>Start: <b>' + raidStartStr + '</b> <span class="label-countdown" disappears-at="' + item['raid_start'] + '" start>(00m00s)</span></div>'
-        raidStr += '<div>End: <b>' + raidEndStr + '</b> <span class="label-countdown" disappears-at="' + item['raid_end'] + '" end>(00m00s)</span></div>'
+        raidStr += '<div>Début: <b>' + raidStartStr + '</b> <span class="label-countdown" disappears-at="' + item['raid_start'] + '" start>(00m00s)</span></div>'
+        raidStr += '<div>Fin: <b>' + raidEndStr + '</b> <span class="label-countdown" disappears-at="' + item['raid_end'] + '" end>(00m00s)</span></div>'
 
         if (raidStarted) {
             raidIcon = '<i class="pokemon-large-raid-sprite n' + item.raid_pokemon_id + '"></i>'
@@ -1253,7 +1260,23 @@ function showInBoundsMarkers(markers, type) {
     })
 }
 
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
 function loadRawData() {
+    var ville = getUrlParameter('ville')
     var loadPokemon = Store.get('showPokemon')
     var loadGyms = (Store.get('showGyms') || Store.get('showRaids')) ? 'true' : 'false'
     var loadPokestops = Store.get('showPokestops')
@@ -1296,13 +1319,14 @@ function loadRawData() {
             'oNeLng': oNeLng,
             'reids': String(reincludedPokemon),
             'eids': String(excludedPokemon),
-            'token': token
+            'token': token,
+            'ville': ville
         },
         dataType: 'json',
         cache: false,
         beforeSend: function beforeSend() {
             if (maxLatLng > 0 && (((neLat - swLat) > maxLatLng) || ((neLng - swLng) > maxLatLng))) {
-                toastr['error']('Please zoom in to get data.', 'Max zoom')
+                toastr['error']('Veuillez zoomer pour afficher les pokémons, arènes etc.', 'Erreur')
                 toastr.options = {
                     'closeButton': true,
                     'debug': false,
@@ -1729,11 +1753,11 @@ var updateLabelDiffTime = function updateLabelDiffTime() {
 
         if (disappearsAt.time < disappearsAt.now) {
             if (element.hasAttribute('start')) {
-                timestring = '(started)'
+                timestring = '(Démarré)'
             } else if (element.hasAttribute('end')) {
-                timestring = '(ended)'
+                timestring = '(Terminé)'
             } else {
-                timestring = '(expired)'
+                timestring = '(Expiré)'
             }
         } else {
             timestring = '('
@@ -1954,6 +1978,7 @@ function createUpdateWorker() {
 
 function showGymDetails(id) { // eslint-disable-line no-unused-vars
     var sidebar = document.querySelector('#gym-details')
+    var ville = getUrlParameter('ville')
     var sidebarClose
 
     sidebar.classList.add('visible')
@@ -1964,7 +1989,8 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         timeout: 300000,
         data: {
             'id': id,
-            'token': token
+            'token': token,
+            'ville': ville
         },
         dataType: 'json',
         cache: false
@@ -2016,8 +2042,8 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
 
             var raidStartStr = getTimeStr(result['raid_start'])
             var raidEndStr = getTimeStr(result['raid_end'])
-            raidStr += '<div>Start: <b>' + raidStartStr + '</b> <span class="label-countdown" disappears-at="' + result['raid_start'] + '" start>(00m00s)</span></div>'
-            raidStr += '<div>End: <b>' + raidEndStr + '</b> <span class="label-countdown" disappears-at="' + result['raid_end'] + '" end>(00m00s)</span></div>'
+            raidStr += '<div>Début: <b>' + raidStartStr + '</b> <span class="label-countdown" disappears-at="' + result['raid_start'] + '" start>(00m00s)</span></div>'
+            raidStr += '<div>Fin: <b>' + raidEndStr + '</b> <span class="label-countdown" disappears-at="' + result['raid_end'] + '" end>(00m00s)</span></div>'
 
             if (raidStarted) {
                 raidIcon = '<i class="pokemon-large-raid-sprite n' + result.raid_pokemon_id + '"></i>'
@@ -2224,6 +2250,23 @@ $(function () {
 })
 
 $(function () {
+
+	
+    var ville = getUrlParameter('ville')
+	if(ville != "CHOLET" && ville != "REIMS") {
+		setInterval(ping, 5000);
+		
+		function ping() {
+			$.ajax({
+				type: "GET",
+				url: "ping.php",
+			}).done(function(response) {
+				if(response == 2) {
+					location.href = "/index.php?err=alreadycon";
+				}
+			});
+		}
+	}
     // populate Navbar Style menu
     $selectStyle = $('#map-style')
 
@@ -2568,7 +2611,7 @@ $(function () {
 
     // run interval timers to regularly update map and timediffs
     window.setInterval(updateLabelDiffTime, 1000)
-    window.setInterval(updateMap, 5000)
+    window.setInterval(updateMap, 30000)
     window.setInterval(updateGeoLocation, 1000)
 
     createUpdateWorker()
