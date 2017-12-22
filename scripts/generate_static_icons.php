@@ -7,6 +7,10 @@ if (!`which convert`) {
     throw new Exception("It would appear ImageMagick is not installed on your server.\nPlease install it using your favourite package manager, or compiling from source.");
 }
 
+if (!file_exists('config/config.php')) {
+    die("\033[31mCowardly refusing to create static icons. You need a config file to create them.\033[0m");
+}
+
 include('config/config.php');
 if (!$copyrightSafe) {
     $iconsDir = 'static/icons-pokemon/';
