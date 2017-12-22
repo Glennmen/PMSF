@@ -39,3 +39,4 @@ config/*
 /static/icons-pokemon/
 package-lock.json
 index.php
+/static/spawns/*/*.png

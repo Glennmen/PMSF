@@ -2,6 +2,11 @@
 ini_set('max_execution_time', 0);
 set_time_limit(0);
 
+
+if (!`which convert`) {
+    throw new Exception("It would appear ImageMagick is not installed on your server.\nPlease install it using your favourite package manager, or compiling from source.");
+}
+
 include('config/config.php');
 if (!$copyrightSafe) {
     $iconsDir = 'static/icons-pokemon/';
@@ -18,6 +23,9 @@ $y = $radius + 1;
 $y2 = 1;
 
 $imagick = "";
+
+echo "Building static spawn icons. This will take a few seconds...\n";
+
 foreach ($weather as $k => $v) {
     $weatherIcon = 'static/weather/'.$v.'.png';
     if ($k == 0) {
@@ -28,6 +36,7 @@ foreach ($weather as $k => $v) {
             copy($iconsDir.$i.".png", $baseDir.$i.".png");
         }
     } else {
+        echo "Building icons: \033[32m".$v. "\033[0m\n";
         for ($i = 1; $i <= 386; $i++) {
             if ($v !== null) {
                 $imagick .= ' -gravity northeast -fill "#FFFD" -stroke black -draw "circle ' . $x . ',' . $y . ' ' . $x . ',' . $y2 . '" -draw "image over 1,1 30,30 \'' . $weatherIcon . '\'"';
