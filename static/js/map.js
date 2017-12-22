@@ -453,7 +453,7 @@ function pokemonLabel(item) {
     if (weatherBoostedCondition !== 0) {
         details +=
             '<div>' +
-            'Boosted by: ' + weather[weatherBoostedCondition] + ' weather' +
+            'Boosted by: ' + weather[weatherBoostedCondition] +
             '</div>'
     }
     if (gender != null) {
