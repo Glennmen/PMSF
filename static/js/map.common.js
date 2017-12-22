@@ -1130,7 +1130,6 @@ function setupPokemonMarker(item, map, isBounceDisabled) {
     if (isBounceDisabled === true) {
         animationDisabled = true
     }
-    console.log(item)
 
     return new google.maps.Marker({
         position: {

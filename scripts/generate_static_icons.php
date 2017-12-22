@@ -17,6 +17,10 @@ if (!$copyrightSafe) {
 } else {
     $iconsDir = 'static/icons-safe/';
 }
+
+if (!is_dir($iconsDir)) {
+    throw new Exception("Couldn't locate your icons directory. If using non-copyright safe icons, please ensure you have also extracted the icons-pokemon folder to static");
+}
 /* Sprite config */
 $iconWidth = 80;
 
