@@ -682,6 +682,7 @@ if ($blockIframe) {
     var notifyPokemon = <?php echo $noNotifyPokemon ? '[]' : $notifyPokemon ?>;
     var notifyRarity = <?php echo $noNotifyRarity ? '[]' : $notifyRarity ?>;
     var notifyIv = <?php echo $noNotifyIv ? '""' : $notifyIv ?>;
+    var notifyLevel = <?php echo $noNotifyLevel ? '""' : $notifyLevel ?>;
     var notifyRaid = <?php echo $noNotifyRaid ? 0 : $notifyRaid ?>;
     var enableRaids = <?php echo $noRaids ? 'false' : $enableRaids ?>;
     var activeRaids = <?php echo $activeRaids ?>;
