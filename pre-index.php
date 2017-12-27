@@ -471,6 +471,17 @@ if ($blockIframe) {
             }
             ?>
             <?php
+            if (!$noNotifyLevel) {
+                echo '<div class="form-control">
+                <label for="notify-level">
+                    <h3>'.i8ln('Notify of Level').'</h3>
+                    <input id="notify-level" type="text" name="notify-level"
+                           placeholder="'.i8ln('Minimum level').'"/>
+                </label>
+            </div>';
+            }
+            ?>
+            <?php
             if (!$noNotifyRaid) {
                 echo '<div class="form-control switch-container" id="notify-raid-wrapper">
                         <h3>Notify of Minimum Raid Level</h3>
