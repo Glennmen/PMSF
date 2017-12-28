@@ -184,8 +184,8 @@ class Monocle extends Scanner
             $params[':oneLng'] = $oNeLng;
         }
         if ($tstamp > 0) {
-            $conds[] = "updated > :lastUpdated";
-            $params[':lastUpdated'] = $tstamp;
+            $conds[] = "updated > :updated";
+            $params[':updated'] = $tstamp;
         }
 
         return $this->query_spawnpoints($conds, $params);
@@ -198,7 +198,8 @@ class Monocle extends Scanner
         $query = "SELECT lat AS latitude, 
         lon AS longitude, 
         spawn_id AS spawnpoint_id, 
-        despawn_time AS time 
+        despawn_time,
+        duration
         FROM   spawnpoints 
         WHERE :conditions";
 
@@ -211,6 +212,8 @@ class Monocle extends Scanner
         foreach ($spawnpoints as $spawnpoint) {
             $spawnpoint["latitude"] = floatval($spawnpoint["latitude"]);
             $spawnpoint["longitude"] = floatval($spawnpoint["longitude"]);
+            $spawnpoint["time"] = intval($spawnpoint["despawn_time"]);
+            $spawnpoint["duration"] = intval($spawnpoint["duration"]);
             $data[] = $spawnpoint;
 
             unset($spawnpoints[$i]);
