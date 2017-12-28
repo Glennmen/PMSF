@@ -675,7 +675,7 @@ function spawnpointLabel(item) {
         'Every hour from ' + formatSpawnTime(item.time + 1800) + ' to ' + formatSpawnTime(item.time) +
         '</div>'
     if (item.duration === 60) {
-        var str =
+        str =
         '<div>' +
         '<b>Spawn Point</b>' +
         '</div>' +
