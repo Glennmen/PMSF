@@ -602,7 +602,7 @@ if ($blockIframe) {
         <div>
             <center>
                 <button class="settings"
-                        onclick="download('<?= $title ?>', JSON.stringify(JSON.stringify(localStorage)))">
+                        onclick="download('<?= addslashes($title) ?>', JSON.stringify(JSON.stringify(localStorage)))">
                     <i class="fa fa-upload" aria-hidden="true"></i> <?php echo i8ln('Export Settings') ?>
                 </button>
             </center>
