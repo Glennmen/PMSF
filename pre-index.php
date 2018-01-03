@@ -474,6 +474,20 @@ if ($blockIframe) {
             }
             ?>
             <?php
+            if (!$noNotifyIv0) {
+                echo '<div class="form-control switch-container">
+                <h3>Notify on 0iv</h3>
+                <div class="onoffswitch">
+                    <input id="notifyiv0-switch" type="checkbox" name="notifyiv0-switch" class="onoffswitch-checkbox"
+                           checked>
+                    <label class="onoffswitch-label" for="notifyiv0-switch">
+                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                        <span class="switch-handle"></span>
+                    </label>
+                </div></div>';
+            }
+            ?>
+            <?php
             if (!$noNotifyLevel) {
                 echo '<div class="form-control">
                 <label for="notify-level">
