@@ -323,6 +323,7 @@ function initSidebar() {
     $('#spawnpoints-switch').prop('checked', Store.get('showSpawnpoints'))
     $('#ranges-switch').prop('checked', Store.get('showRanges'))
     $('#sound-switch').prop('checked', Store.get('playSound'))
+    $('#notifyivzero-switch').prop('checked', Store.get('remember_show_ivzero'))
     $('#cries-switch').prop('checked', Store.get('playCries'))
     $('#cries-switch-wrapper').toggle(Store.get('playSound'))
     $('#cries-type-filter-wrapper').toggle(Store.get('playCries'))
@@ -2586,9 +2587,6 @@ $(function () {
             $textPerfectionNotify.val(notifiedMinPerfection)
             Store.set('remember_text_perfection_notify', notifiedMinPerfection)
         })
-        $selectNotifyIvZero.on('change', function () {
-            Store.set('remember_show_ivzero', this.value)
-        })
         $textLevelNotify.on('change', function (e) {
             notifiedMinLevel = parseInt($textLevelNotify.val(), 10)
             if (isNaN(notifiedMinLevel) || notifiedMinLevel <= 0) {
@@ -2725,6 +2723,9 @@ $(function () {
             wrapper.hide(options)
         }
         return buildSwitchChangeListener(mapData, ['pokestops'], 'showPokestops').bind(this)()
+    })
+    $('#notifyivzero-switch').change(function () {
+         Store.set('remember_show_ivzero', this.checked)
     })
 
     $('#sound-switch').change(function () {
