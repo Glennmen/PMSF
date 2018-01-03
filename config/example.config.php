@@ -125,8 +125,8 @@ $notifyRarity = '[]';                                               // "Common",
 $noNotifyIv = false;                                                // true/false
 $notifyIv = '""';                                                   // "" for empty or a number
 
-$noNotifyIv0 = false;                                                // true/false
-$notifyIv0 = false;                                                // true/false
+$noNotifyIvZero = false;                                                // true/false
+$notifyIvZero = false;                                                // true/false
 
 $noNotifyLevel = false;                                                // true/false
 $notifyLevel = '""';                                                   // "" for empty or a number

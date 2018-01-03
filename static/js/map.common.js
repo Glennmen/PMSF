@@ -869,6 +869,11 @@ var StoreOptions = {
             default: notifyIv,
             type: StoreTypes.Number
         },
+    'remember_show_ivzero':
+        {
+            default: notifyIvZero,
+            type: StoreTypes.Boolean
+        },
     'remember_text_level_notify':
         {
             default: notifyLevel,

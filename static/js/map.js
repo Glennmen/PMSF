@@ -7,6 +7,7 @@ var $selectPokemonNotify
 var $selectRarityNotify
 var $textPerfectionNotify
 var $textLevelNotify
+var $selectNotifyIvZero
 var $raidNotify
 var $selectStyle
 var $selectIconSize
@@ -2500,6 +2501,7 @@ $(function () {
     $selectRarityNotify = $('#notify-rarity')
     $textPerfectionNotify = $('#notify-perfection')
     $textLevelNotify = $('#notify-level')
+    $selectNotifyIvZero = $('#notifyivzero-switch')
     $raidNotify = $('#notify-raid')
     var numberOfPokemon = 386
 
@@ -2584,6 +2586,9 @@ $(function () {
             $textPerfectionNotify.val(notifiedMinPerfection)
             Store.set('remember_text_perfection_notify', notifiedMinPerfection)
         })
+        $selectNotifyIvZero.on('change', function () {
+            Store.set('remember_show_ivzero', this.value)
+        })
         $textLevelNotify.on('change', function (e) {
             notifiedMinLevel = parseInt($textLevelNotify.val(), 10)
             if (isNaN(notifiedMinLevel) || notifiedMinLevel <= 0) {
@@ -2601,6 +2606,7 @@ $(function () {
         $selectPokemonNotify.val(Store.get('remember_select_notify')).trigger('change')
         $selectRarityNotify.val(Store.get('remember_select_rarity_notify')).trigger('change')
         $textPerfectionNotify.val(Store.get('remember_text_perfection_notify')).trigger('change')
+        $selectNotifyIvZero.val(Store.get('remember_show_ivzero')).trigger('change')
         $textLevelNotify.val(Store.get('remember_text_level_notify')).trigger('change')
         $raidNotify.val(Store.get('remember_raid_notify')).trigger('change')
 

@@ -72,7 +72,7 @@
     "notifyPokemon": true,
     "notifyRarity": true,
     "notifyIv": true,
-    "notifyIv0": true,
+    "notifyIvZero": true,
     "notifyLevel": true,
     "notifyRaid": true,
     "enableRaids": true,
