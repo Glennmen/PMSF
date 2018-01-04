@@ -540,7 +540,7 @@ if ($blockIframe) {
             ?>
 
             <?php
-            if (!$noMapStyle || !$noIconSize || !$noGymStyle || !$noLocationStyle) {
+            if (!$noMapStyle || !$noIconSize || !$noIconNotifySize || !$noGymStyle || !$noLocationStyle) {
                 echo '<h3>Style Settings</h3>
             <div>';
             }
@@ -567,6 +567,19 @@ if ($blockIframe) {
             }
             ?>
             <?php
+            if (!$noIconNotifySize) {
+                echo '<div class="form-control switch-container">
+                <h3>'.i8ln('Increase Notified Icon Size').'</h3>
+                <select name="pokemon-icon-notify-size" id="pokemon-icon-notify-size">
+                    <option value="0">'.i8ln('Disable').'</option>
+                    <option value="15">'.i8ln('Large').'</option>
+                    <option value="30">'.i8ln('X-Large').'</option>
+                    <option value="45">'.i8ln('XX-Large').'</option>
+                </select>
+            </div>';
+            }
+            ?>
+            <?php
             if (!$noGymStyle) {
                 echo '<div class="form-control switch-container">
                 <h3>Gym Marker Style</h3>
@@ -586,7 +599,7 @@ if ($blockIframe) {
             }
             ?>
             <?php
-            if (!$noMapStyle || !$noIconSize || !$noGymStyle || !$noLocationStyle) {
+            if (!$noMapStyle || !$noIconSize || !$noIconNotifySize || !$noGymStyle || !$noLocationStyle) {
                 echo '</div>';
             }
             ?>
@@ -707,6 +720,7 @@ if ($blockIframe) {
     var enableFollowMe = <?php echo $noFollowMe ? 'false' : $enableFollowMe ?>;
     var enableSpawnArea = <?php echo $noSpawnArea ? 'false' : $enableSpawnArea ?>;
     var iconSize = <?php echo $iconSize ?>;
+    var iconNotifySize = <?php echo $iconNotifySize ?>;
     var locationStyle = '<?php echo $locationStyle ?>';
     var gymStyle = '<?php echo $gymStyle ?>';
     var spriteFile = '<?php echo $copyrightSafe ? 'static/icons-safe-1.png' : 'static/icons-im-1.png' ?>';

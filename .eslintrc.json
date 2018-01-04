@@ -93,6 +93,7 @@
     "enableFollowMe": true,
     "enableSpawnArea": true,
     "iconSize": true,
+    "iconNotifySize": true,
     "locationStyle": true,
     "gymStyle": true,
     "spriteFile": true,
