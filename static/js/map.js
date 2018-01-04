@@ -842,7 +842,7 @@ function customizePokemonMarker(marker, item, skipNotification) {
                 marker.setAnimation(google.maps.Animation.BOUNCE)
             }
         }
-        if (Store.get('remember_show_ivzero') && perfection == 0) {
+        if (Store.get('remember_show_ivzero') && perfection === 0) {
             if (marker.animationDisabled !== true) {
                 marker.setAnimation(google.maps.Animation.BOUNCE)
             }
