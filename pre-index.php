@@ -476,7 +476,7 @@ if ($blockIframe) {
             <?php
             if (!$noNotifyIvZero) {
                 echo '<div class="form-control switch-container">
-                <h3>Notify on 0iv</h3>
+                <h3>Notify on 0 iv</h3>
                 <div class="onoffswitch">
                     <input id="notifyivzero-switch" type="checkbox" name="notifyivzero-switch" class="onoffswitch-checkbox"
                            checked>
