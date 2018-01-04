@@ -842,7 +842,7 @@ function customizePokemonMarker(marker, item, skipNotification) {
                 marker.setAnimation(google.maps.Animation.BOUNCE)
             }
         }
-        if (Store.get('remember_show_ivzero') && perfection < 1) {
+        if (Store.get('remember_show_ivzero') && perfection == 0) {
             if (marker.animationDisabled !== true) {
                 marker.setAnimation(google.maps.Animation.BOUNCE)
             }
@@ -2730,7 +2730,7 @@ $(function () {
         return buildSwitchChangeListener(mapData, ['pokestops'], 'showPokestops').bind(this)()
     })
     $('#notifyivzero-switch').change(function () {
-         Store.set('remember_show_ivzero', this.checked)
+        Store.set('remember_show_ivzero', this.checked)
     })
 
     $('#sound-switch').change(function () {
