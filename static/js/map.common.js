@@ -1127,12 +1127,18 @@ function getGoogleSprite(index, sprite, displayHeight) {
 
 function setupPokemonMarker(item, map, isBounceDisabled) {
 // Scale icon size up with the map exponentially
+    var atk = item['individual_attack']
+    var def = item['individual_defense']
+    var sta = item['individual_stamina']
     var level = item['level']
-    var iv = getIv(item['individual_attack'], item['individual_defense'], item['individual_stamina'])
+    var iv = getIv(atk, def, sta)
     var iconNotifySize = 0
-    if ((iv >= notifiedMinPerfection && notifiedMinPerfection > 0) 
-        || notifiedPokemon.indexOf(item['pokemon_id']) > -1 
-        || (notifiedMinLevel > 0 && level >= notifiedMinLevel)) {
+    var notifiedMinPerfection = Store.get('remember_text_perfection_notify')
+    var notifiedPokemon = Store.get('remember_select_notify')
+    if ((iv >= notifiedMinPerfection && notifiedMinPerfection > 0) ||
+        notifiedPokemon.indexOf(item['pokemon_id']) > -1 ||
+        (notifiedMinLevel > 0 && level >= notifiedMinLevel))
+    {
         iconNotifySize = Store.get('iconNotifySizeModifier')
     }
     var iconSize = 2 + (map.getZoom() - 3) * (map.getZoom() - 3) * 0.2 + Store.get('iconSizeModifier') + iconNotifySize
@@ -1154,6 +1160,14 @@ function setupPokemonMarker(item, map, isBounceDisabled) {
         icon: icon,
         animationDisabled: animationDisabled
     })
+}
+
+function getIv(atk, def, sta) {
+    if (atk !== null) {
+        return 100.0 * (atk + def + sta) / 45
+    }
+
+    return false
 }
 
 function isTouchDevice() {
