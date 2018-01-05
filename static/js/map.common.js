@@ -1134,11 +1134,11 @@ function setupPokemonMarker(item, map, isBounceDisabled) {
     var iv = getIv(atk, def, sta)
     var iconNotifySize = 0
     var notifiedMinPerfection = Store.get('remember_text_perfection_notify')
+    var notifyLevel = Store.get('remember_text_level_notify')
     var notifiedPokemon = Store.get('remember_select_notify')
     if ((iv >= notifiedMinPerfection && notifiedMinPerfection > 0) ||
         notifiedPokemon.indexOf(item['pokemon_id']) > -1 ||
-        (notifiedMinLevel > 0 && level >= notifiedMinLevel))
-    {
+        (notifyLevel > 0 && level >= notifyLevel)) {
         iconNotifySize = Store.get('iconNotifySizeModifier')
     }
     var iconSize = 2 + (map.getZoom() - 3) * (map.getZoom() - 3) * 0.2 + Store.get('iconSizeModifier') + iconNotifySize
