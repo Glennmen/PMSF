@@ -314,7 +314,7 @@ function initSidebar() {
     $('#max-level-raids-filter-switch').val(Store.get('maxRaidLevel'))
     $('#last-update-gyms-switch').val(Store.get('showLastUpdatedGymsOnly'))
     $('#pokemon-switch').prop('checked', Store.get('showPokemon'))
-    $('#pokemon-filter-wrapper').toggle(Store.get('showPokemon'));
+    $('#pokemon-filter-wrapper').toggle(Store.get('showPokemon'))
     $('#pokestops-switch').prop('checked', Store.get('showPokestops'))
     $('#lured-pokestops-only-switch').val(Store.get('showLuredPokestopsOnly'))
     $('#lured-pokestops-only-wrapper').toggle(Store.get('showPokestops'))
@@ -1324,7 +1324,7 @@ function loadRawData() {
             'lastslocs': lastslocs,
             'spawnpoints': loadSpawnpoints,
             'lastspawns': lastspawns,
-            'miniv':loadMinIV,
+            'miniv': loadMinIV,
             'swLat': swLat,
             'swLng': swLng,
             'neLat': neLat,

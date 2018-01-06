@@ -44,11 +44,10 @@ class Monocle_Monkey extends Monocle
             $pkmn_in = substr($pkmn_in, 0, -1);
             $conds[] = "pokemon_id NOT IN ( $pkmn_in )";
         }
-        if(!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0){
-            if(empty($exminiv)){
+        if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
+            if (empty($exminiv)) {
                 $conds[] = '((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv;
-            }
-            else{
+            } else{
                 $conds[] = '(((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
@@ -78,11 +77,10 @@ class Monocle_Monkey extends Monocle
             $conds[] = "updated > :lastUpdated";
             $params[':lastUpdated'] = $tstamp;
         }
-        if(!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0){
-            if(empty($exminiv)){
+        if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
+            if (empty($exminiv)) {
                 $conds[] = '((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv;
-            }
-            else{
+            } else {
                 $conds[] = '(((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }

@@ -856,8 +856,8 @@ var StoreOptions = {
     },
     'remember_select_exclude_min_iv':
         {
-         default: excludeMinIV ,
-        type: StoreTypes.JSON
+            default: excludeMinIV,
+            type: StoreTypes.JSON
         },
     'remember_select_notify':
         {
