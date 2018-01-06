@@ -2228,25 +2228,23 @@ function fetchCriesJson() {
     })
 }
 
-function pokemonSpritesFilter (){
+function pokemonSpritesFilter() {
     jQuery('.pokemon-list').parent().find('.select2').hide()
     jQuery('.pokemon-list img').on('click', function () {
         var img = jQuery(this)
         var select = jQuery(this).parent().parent().find('select')
-        var value = select.select2("val")
+        var value = select.select2('val')
         var id = img.data('value').toString()
-        if(img.hasClass('active')) {
+        if (img.hasClass('active')) {
             select.val(value.filter( function (elem) {
-                return elem != id
+                return elem !== id
             })).trigger('change')
             img.removeClass('active')
-        }
-        else {
+        } else {
             select.val((value.concat(id))).trigger('change')
             img.addClass('active')
         }
-    });
-
+    })
 }
 //
 // Page Ready Exection
@@ -2508,7 +2506,7 @@ $(function () {
     })
 
     $selectGymMarkerStyle.val(Store.get('gymMarkerStyle')).trigger('change')
-    pokemonSpritesFilter();
+    pokemonSpritesFilter()
 })
 
 $(function () {
