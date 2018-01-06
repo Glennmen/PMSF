@@ -63,8 +63,9 @@ if ($blockIframe) {
             }
             echo '<div class="pokemon-list">';
             foreach ($mons as $k => $pokemon) {
-                if ($k > 386)
+                if ($k > 386) {
                     break;
+                }
                 echo "<img src='" . $pathToImages . "$k.png' class='$k pokemon-icon' data-value='" . $k . "' alt='" . $pokemon['name'] . "' title='" . $pokemon['name'] . "'/>";
             }
             echo '</div>';
@@ -111,7 +112,8 @@ if ($blockIframe) {
     <script src="static/js/vendor/modernizr.custom.js"></script>
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <?php if (!$noImageSelect) { ?>
+    <?php if (!$noImageSelect) {
+        ?>
         <style>
             .pokemon-list {
                 max-width: 100%;
@@ -139,7 +141,8 @@ if ($blockIframe) {
                 display: none;
             }
         </style>
-    <?php } ?>
+    <?php
+    } ?>
 </head>
 <body id="top">
 <div class="wrapper">
@@ -204,12 +207,12 @@ if ($blockIframe) {
                                     <?php
                                     if (!$noImageSelect) {
                                         pokemonFilterImages($pathToImages);
-                                    }
-                                    ?>
+                                    } ?>
                                 </div>
                             </label>
                         </div>
-                    <?php }
+                    <?php
+                    }
                     ?>
                 </div>
                 <?php
@@ -425,8 +428,7 @@ if ($blockIframe) {
                                 <?php
                                 if (!$noImageSelect) {
                                     pokemonFilterImages($pathToImages);
-                                }
-                                ?>
+                                } ?>
                             </div>
                         </label>
                     </div>
@@ -534,8 +536,7 @@ if ($blockIframe) {
                             <?php
                             if (!$noImageSelect) {
                                 pokemonFilterImages($pathToImages);
-                            }
-                            ?>
+                            } ?>
                         </div>
                     </label>
                 </div>
