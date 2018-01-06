@@ -78,6 +78,9 @@ $motdContent = "";
 
 /* Marker Settings */
 
+$noImageSelect = false;                                             // Select whether to turn on sprite based image select
+$pathToImages = '/static/icons-safe/';                              // Path to images. Images must not contain 0s
+
 $noPokemon = false;                                                 // true/false
 $enablePokemon = 'true';                                            // true/false
 $noHighLevelData = false;                                           // true/false

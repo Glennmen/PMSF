@@ -53,6 +53,26 @@ if ($blockIframe) {
     <link rel="apple-touch-icon" href="static/appicons/180x180.png"
           sizes="180x180">
     <?php
+    if (!$noImageSelect) {
+        function pokemonFilterImages($pathToImages)
+        {
+            global $mons;
+            if (empty($mons)) {
+                $json = file_get_contents('static/dist/data/pokemon.min.json');
+                $mons = json_decode($json, true);
+            }
+            echo '<div class="pokemon-list">';
+            foreach ($mons as $k => $pokemon) {
+                if ($k > 386)
+                    break;
+                echo "<img src='" . $pathToImages . "$k.png' class='$k pokemon-icon' data-value='" . $k . "' alt='" . $pokemon['name'] . "' title='" . $pokemon['name'] . "'/>";
+            }
+            echo '</div>';
+        }
+    }
+    ?>
+
+    <?php
     if ($gAnalyticsId != "") {
         echo '<!-- Google Analytics -->
             <script>
@@ -91,6 +111,35 @@ if ($blockIframe) {
     <script src="static/js/vendor/modernizr.custom.js"></script>
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <?php if (!$noImageSelect) { ?>
+        <style>
+            .pokemon-list {
+                max-width: 100%;
+            }
+
+            img {
+                width: calc(20% - 10px);
+                padding: 2px;
+                margin: 2px 5px;
+                box-sizing: border-box;
+            }
+
+            .active {
+                border: 1px solid red;
+            }
+
+            .hide-select-2 label > div {
+                max-height: 200px !important;
+                overflow-y: auto !important;
+                padding: 5px !important;
+                box-shadow: 0 0 2px #000 !important;
+            }
+
+            .hide-select-2 .select2 {
+                display: none;
+            }
+        </style>
+    <?php } ?>
 </head>
 <body id="top">
 <div class="wrapper">
@@ -135,27 +184,33 @@ if ($blockIframe) {
                 }
                 ?>
                 <div id="pokemon-filter-wrapper" style="display:none">
-                <?php
-                if (!$noMinIV) {
-                    echo '<div class="form-control">
+                    <?php
+                    if (!$noMinIV) {
+                        echo '<div class="form-control">
                 <label for="min-iv">
                     <h3 style="display:inline-block">Min IV</h3>
                     <input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="Minimum IV" style="float: right;width: 75px;text-align:center"/>
                 </label>
             </div>';
-                } ?>
-                <?php
-                if (!$noExcludeMinIV) {
-                    echo '<div class="form-control">
-                <label for="exclude-min-iv">
-                    <h3>Exclude from Min IV</h3>
-                    <div style="max-height:165px;overflow-y:auto">
-                        <select id="exclude-min-iv" multiple="multiple"></select>
-                    </div>
-                </label>
-            </div>';
-                }
-                ?>
+                    } ?>
+                    <?php
+                    if (!$noExcludeMinIV) {
+                        ?>
+                        <div class="form-control hide-select-2">
+                            <label for="exclude-min-iv">
+                                <h3>Exclude from Min IV</h3>
+                                <div style="max-height:165px;overflow-y:auto;">
+                                    <select id="exclude-min-iv" multiple="multiple"></select>
+                                    <?php
+                                    if (!$noImageSelect) {
+                                        pokemonFilterImages($pathToImages);
+                                    }
+                                    ?>
+                                </div>
+                            </label>
+                        </div>
+                    <?php }
+                    ?>
                 </div>
                 <?php
                 if (!$noRaids) {
@@ -361,14 +416,21 @@ if ($blockIframe) {
                 ?>
                 <?php
                 if (!$noHidePokemon) {
-                    echo '<div class="form-control">
-                    <label for="exclude-pokemon">
-                        <h3>Hide Pokemon</h3>
-                        <div style="max-height:165px;overflow-y:auto">
-                            <select id="exclude-pokemon" multiple="multiple"></select>
-                        </div>
-                    </label>
-                </div>';
+                    ?>
+                    <div class="form-control hide-select-2">
+                        <label for="exclude-pokemon">
+                            <h3>Hide Pokemon</h3>
+                            <div style="max-height:165px;overflow-y:auto;">
+                                <select id="exclude-pokemon" multiple="multiple"></select>
+                                <?php
+                                if (!$noImageSelect) {
+                                    pokemonFilterImages($pathToImages);
+                                }
+                                ?>
+                            </div>
+                        </label>
+                    </div>
+                    <?php
                 }
                 ?>
             </div>
@@ -463,14 +525,21 @@ if ($blockIframe) {
             ?>
             <?php
             if (!$noNotifyPokemon) {
-                echo '<div class="form-control">
-                <label for="notify-pokemon">
-                    <h3>Notify of Pokemon</h3>
-                    <div style="max-height:165px;overflow-y:auto">
-                        <select id="notify-pokemon" multiple="multiple"></select>
-                    </div>
-                </label>
-            </div>';
+                ?>
+                <div class="form-control hide-select-2">
+                    <label for="notify-pokemon">
+                        <h3>Notify of Pokemon</h3>
+                        <div style="max-height:165px;overflow-y:auto;">
+                            <select id="notify-pokemon" multiple="multiple"></select>
+                            <?php
+                            if (!$noImageSelect) {
+                                pokemonFilterImages($pathToImages);
+                            }
+                            ?>
+                        </div>
+                    </label>
+                </div>
+                <?php
             }
             ?>
             <?php
@@ -500,9 +569,9 @@ if ($blockIframe) {
             if (!$noNotifyLevel) {
                 echo '<div class="form-control">
                 <label for="notify-level">
-                    <h3>'.i8ln('Notify of Level').'</h3>
+                    <h3>' . i8ln('Notify of Level') . '</h3>
                     <input id="notify-level" type="text" name="notify-level"
-                           placeholder="'.i8ln('Minimum level').'"/>
+                           placeholder="' . i8ln('Minimum level') . '"/>
                 </label>
             </div>';
             }
