@@ -1126,21 +1126,12 @@ function getGoogleSprite(index, sprite, displayHeight) {
 }
 
 function setupPokemonMarker(item, map, isBounceDisabled) {
-// Scale icon size up with the map exponentially
-    var atk = item['individual_attack']
-    var def = item['individual_defense']
-    var sta = item['individual_stamina']
-    var level = item['level']
-    var iv = getIv(atk, def, sta)
+// Scale icon size of notified Pokemon
     var iconNotifySize = 0
-    var notifiedMinPerfection = Store.get('remember_text_perfection_notify')
-    var notifyLevel = Store.get('remember_text_level_notify')
-    var notifiedPokemon = Store.get('remember_select_notify')
-    if ((iv >= notifiedMinPerfection && notifiedMinPerfection > 0) ||
-        notifiedPokemon.indexOf(item['pokemon_id']) > -1 ||
-        (notifyLevel > 0 && level >= notifyLevel)) {
+    if (isNotified(item) === true)  {
         iconNotifySize = Store.get('iconNotifySizeModifier')
     }
+// Scale icon size up with the map exponentially
     var iconSize = 2 + (map.getZoom() - 3) * (map.getZoom() - 3) * 0.2 + Store.get('iconSizeModifier') + iconNotifySize
     var pokemonIndex = item['pokemon_id'] - 1
     var icon = getGoogleSprite(pokemonIndex, pokemonSprites, iconSize)
@@ -1160,6 +1151,27 @@ function setupPokemonMarker(item, map, isBounceDisabled) {
         icon: icon,
         animationDisabled: animationDisabled
     })
+}
+
+function isNotified(item) {
+    var atk = item['individual_attack']
+    var def = item['individual_defense']
+    var sta = item['individual_stamina']
+    var level = item['level']
+    var iv = getIv(atk, def, sta)
+    var notifiedMinPerfection = Store.get('remember_text_perfection_notify')
+    var notifyLevel = Store.get('remember_text_level_notify')
+    var notifiedPokemon = Store.get('remember_select_notify')
+    var notifiedRarity = Store.get('remember_select_rarity_notify')
+
+    if ((iv >= notifiedMinPerfection && notifiedMinPerfection > 0) ||
+        notifiedPokemon.indexOf(item['pokemon_id']) > -1 ||
+        notifiedRarity.indexOf(item['pokemon_rarity']) > -1 ||
+        (notifyLevel > 0 && level >= notifyLevel)) {
+        return true
+    }
+
+    return false
 }
 
 function getIv(atk, def, sta) {
