@@ -67,12 +67,21 @@ $motdContent = "This is an example MOTD<br>Do whatever you like with it.";
 
 /* Marker Settings */
 
+$noImageSelect = false;                                             // Select whether to turn on sprite based image select
+$pathToImages = '/static/icons-safe/';                              // Path to images. Images must not contain 0s
+
 $noPokemon = false;                                                 // true/false
 $enablePokemon = 'true';                                            // true/false
 $noHighLevelData = false;                                           // true/false
 $noHidePokemon = false;                                             // true/false
 $hidePokemon = '[10, 13, 16, 19, 21, 29, 32, 41, 46, 48, 50, 52, 56, 74, 77, 96, 111, 133,
                   161, 163, 167, 177, 183, 191, 194, 168]';         // [] for empty
+
+$noExcludeMinIV = false;                                            // true/false
+$excludeMinIV = '[131, 143, 147, 148, 149, 248]';                   // [] for empty
+
+$noMinIV = false;                                                   // true/false
+$MinIV = '0';                                                       // "0" for empty or a number
 
 $noGyms = false;                                                    // true/false
 $enableGyms = 'false';                                              // true/false
