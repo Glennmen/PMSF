@@ -2236,7 +2236,7 @@ function pokemonSpritesFilter() {
         var value = select.select2('val')
         var id = img.data('value').toString()
         if (img.hasClass('active')) {
-            select.val(value.filter( function (elem) {
+            select.val(value.filter(function (elem) {
                 return elem !== id
             })).trigger('change')
             img.removeClass('active')
