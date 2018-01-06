@@ -1126,12 +1126,11 @@ function getGoogleSprite(index, sprite, displayHeight) {
 }
 
 function setupPokemonMarker(item, map, isBounceDisabled) {
-// Scale icon size of notified Pokemon
+// Scale icon size up with the map exponentially
     var iconNotifySize = 0
-    if (isNotified(item) === true)  {
+    if (isNotified(item) === true) {
         iconNotifySize = Store.get('iconNotifySizeModifier')
     }
-// Scale icon size up with the map exponentially
     var iconSize = 2 + (map.getZoom() - 3) * (map.getZoom() - 3) * 0.2 + Store.get('iconSizeModifier') + iconNotifySize
     var pokemonIndex = item['pokemon_id'] - 1
     var icon = getGoogleSprite(pokemonIndex, pokemonSprites, iconSize)
