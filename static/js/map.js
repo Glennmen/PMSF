@@ -3,10 +3,12 @@
 //
 
 var $selectExclude
+var $selectExcludeMinIV
 var $selectPokemonNotify
 var $selectRarityNotify
 var $textPerfectionNotify
 var $textLevelNotify
+var $textMinIV
 var $raidNotify
 var $selectStyle
 var $selectIconSize
@@ -33,10 +35,12 @@ var searchMarkerStyles
 
 var timestamp
 var excludedPokemon = []
+var excludedMinIV = []
 var notifiedPokemon = []
 var notifiedRarity = []
 var notifiedMinPerfection = null
 var notifiedMinLevel = null
+var minIV = null
 var onlyPokemon = 0
 
 var buffer = []
@@ -1292,6 +1296,7 @@ function loadRawData() {
     var loadScanned = Store.get('showScanned')
     var loadSpawnpoints = Store.get('showSpawnpoints')
     var loadLuredOnly = Boolean(Store.get('showLuredPokestopsOnly'))
+    var loadMinIV = Store.get('remember_text_min_iv')
 
     var bounds = map.getBounds()
     var swPoint = bounds.getSouthWest()
@@ -1318,6 +1323,7 @@ function loadRawData() {
             'lastslocs': lastslocs,
             'spawnpoints': loadSpawnpoints,
             'lastspawns': lastspawns,
+            'miniv':loadMinIV,
             'swLat': swLat,
             'swLng': swLng,
             'neLat': neLat,
@@ -1328,6 +1334,7 @@ function loadRawData() {
             'oNeLng': oNeLng,
             'reids': String(reincludedPokemon),
             'eids': String(excludedPokemon),
+            'exminiv': String(excludedMinIV),
             'token': token
         },
         dataType: 'json',
@@ -2496,9 +2503,11 @@ $(function () {
     })
 
     $selectExclude = $('#exclude-pokemon')
+    $selectExcludeMinIV = $('#exclude-min-iv')
     $selectPokemonNotify = $('#notify-pokemon')
     $selectRarityNotify = $('#notify-rarity')
     $textPerfectionNotify = $('#notify-perfection')
+    $textMinIV = $('#min-iv')
     $textLevelNotify = $('#notify-level')
     $raidNotify = $('#notify-raid')
     var numberOfPokemon = 386
@@ -2553,6 +2562,11 @@ $(function () {
             data: [i8ln('Common'), i8ln('Uncommon'), i8ln('Rare'), i8ln('Very Rare'), i8ln('Ultra Rare')],
             templateResult: formatState
         })
+        $selectExcludeMinIV.select2({
+            placeholder: i8ln('Select Pokémon'),
+            data: pokeList,
+            templateResult: formatState
+        })
 
         // setup list change behavior now that we have the list to work from
         $selectExclude.on('change', function (e) {
@@ -2565,6 +2579,23 @@ $(function () {
             clearStaleMarkers()
             Store.set('remember_select_exclude', excludedPokemon)
         })
+        $selectExcludeMinIV.on('change', function (e) {
+            excludedMinIV = $selectExcludeMinIV.val().map(Number)
+            clearStaleMarkers()
+            Store.set('remember_select_exclude_min_iv', excludedMinIV)
+        })
+        $textMinIV.on('change', function (e) {
+            minIV = parseInt($textMinIV.val(), 10)
+            if (isNaN(minIV) || minIV < 0) {
+                minIV = ''
+            }
+            if (minIV > 100) {
+                minIV = 100
+            }
+            $textMinIV.val(minIV)
+            Store.set('remember_text_min_iv', minIV)
+        })
+
         $selectPokemonNotify.on('change', function (e) {
             notifiedPokemon = $selectPokemonNotify.val().map(Number)
             Store.set('remember_select_notify', notifiedPokemon)
@@ -2598,10 +2629,12 @@ $(function () {
 
         // recall saved lists
         $selectExclude.val(Store.get('remember_select_exclude')).trigger('change')
+        $selectExcludeMinIV.val(Store.get('remember_select_exclude_min_iv')).trigger('change')
         $selectPokemonNotify.val(Store.get('remember_select_notify')).trigger('change')
         $selectRarityNotify.val(Store.get('remember_select_rarity_notify')).trigger('change')
         $textPerfectionNotify.val(Store.get('remember_text_perfection_notify')).trigger('change')
         $textLevelNotify.val(Store.get('remember_text_level_notify')).trigger('change')
+        $textMinIV.val(Store.get('remember_text_min_iv')).trigger('change')
         $raidNotify.val(Store.get('remember_raid_notify')).trigger('change')
 
         if (isTouchDevice() && isMobileDevice()) {

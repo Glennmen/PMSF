@@ -135,6 +135,27 @@ if ($blockIframe) {
                 }
                 ?>
                 <?php
+                if (!$noMinIV) {
+                    echo '<div id="pokemon-filter-wrapper"><div class="form-control">
+                <label for="min-iv">
+                    <h3>Min IV</h3>
+                    <input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="Minimum IV"/>
+                </label>
+            </div></div>';
+                } ?>
+                <?php
+                if (!$noExcludeMinIV) {
+                    echo '<div class="form-control">
+                <label for="exclude-min-iv">
+                    <h3>Exclude from Min IV</h3>
+                    <div style="max-height:165px;overflow-y:auto">
+                        <select id="exclude-min-iv" multiple="multiple"></select>
+                    </div>
+                </label>
+            </div>';
+                }
+                ?>
+                <?php
                 if (!$noRaids) {
                     echo '<div class="form-control switch-container" id="raids-wrapper">
                     <h3>Raids</h3>

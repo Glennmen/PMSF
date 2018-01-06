@@ -4,7 +4,7 @@ namespace Scanner;
 
 class Monocle_Monkey extends Monocle
 {
-    public function get_active($eids, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    public function get_active($eids, $miniv, $exminiv, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
         $conds = array();
         $params = array();
@@ -44,6 +44,9 @@ class Monocle_Monkey extends Monocle
             $pkmn_in = substr($pkmn_in, 0, -1);
             $conds[] = "pokemon_id NOT IN ( $pkmn_in )";
         }
+        if(!is_nan($miniv) && $miniv > 0){
+            $this->minIV($miniv, $exminiv,$conds);
+        }
 
         return $this->query_active($select, $conds, $params);
     }
@@ -69,6 +72,14 @@ class Monocle_Monkey extends Monocle
         if ($tstamp > 0) {
             $conds[] = "updated > :lastUpdated";
             $params[':lastUpdated'] = $tstamp;
+        }
+        if(!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0){
+            if(empty($exminiv)){
+                $conds[] = '((individual_attack + individual_defense + individual_stamina) / 45) * 100 > ' . $miniv;
+            }
+            else{
+                $conds[] = '(((individual_attack + individual_defense + individual_stamina) / 45) * 100 > ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+            }
         }
 
         return $this->query_stops($conds, $params);

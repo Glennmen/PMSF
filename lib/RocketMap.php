@@ -4,7 +4,7 @@ namespace Scanner;
 
 class RocketMap extends Scanner
 {
-    public function get_active($eids, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    public function get_active($eids, $miniv, $exminiv, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
         $conds = array();
         $params = array();
@@ -48,11 +48,13 @@ class RocketMap extends Scanner
             $pkmn_in = substr($pkmn_in, 0, -1);
             $conds[] = "pokemon_id NOT IN ( $pkmn_in )";
         }
-
+        if(!is_nan($miniv) && $miniv > 0){
+            $this->minIV($miniv, $exminiv,$conds);
+        }
         return $this->query_active($select, $conds, $params);
     }
 
-    public function get_active_by_id($ids, $swLat, $swLng, $neLat, $neLng)
+    public function get_active_by_id($miniv, $exminiv, $ids, $swLat, $swLng, $neLat, $neLng)
     {
         $conds = array();
         $params = array();
@@ -82,6 +84,9 @@ class RocketMap extends Scanner
             }
             $pkmn_in = substr($pkmn_in, 0, -1);
             $conds[] = "pokemon_id IN ( $pkmn_in )";
+        }
+        if(!is_nan($miniv) && $miniv > 0){
+            $this->minIV($miniv, $exminiv,$conds);
         }
 
         return $this->query_active($select, $conds, $params);

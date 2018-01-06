@@ -22,6 +22,8 @@ $oSwLng = !empty($_POST['oSwLng']) ? $_POST['oSwLng'] : 0;
 $oNeLat = !empty($_POST['oNeLat']) ? $_POST['oNeLat'] : 0;
 $oNeLng = !empty($_POST['oNeLng']) ? $_POST['oNeLng'] : 0;
 $luredonly = !empty($_POST['luredonly']) ? $_POST['luredonly'] : false;
+$miniv = !empty($_POST['miniv']) ? $_POST['miniv'] : false;
+$exminiv = !empty($_POST['exminiv']) ? $_POST['exminiv'] : '';
 $lastpokemon = !empty($_POST['lastpokemon']) ? $_POST['lastpokemon'] : false;
 $lastgyms = !empty($_POST['lastgyms']) ? $_POST['lastgyms'] : false;
 $lastpokestops = !empty($_POST['lastpokestops']) ? $_POST['lastpokestops'] : false;
@@ -91,19 +93,19 @@ if (!$noPokemon) {
     if ($d["lastpokemon"] == "true") {
         $eids = !empty($_POST['eids']) ? explode(",", $_POST['eids']) : null;
         if ($lastpokemon != 'true') {
-            $d["pokemons"] = $scanner->get_active($eids, $swLat, $swLng, $neLat, $neLng);
+            $d["pokemons"] = $scanner->get_active($eids, $miniv, $exminiv, $swLat, $swLng, $neLat, $neLng);
         } else {
             if ($newarea) {
-                $d["pokemons"] = $scanner->get_active($eids, $swLat, $swLng, $neLat, $neLng, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng);
+                $d["pokemons"] = $scanner->get_active($eids, $miniv, $exminiv, $swLat, $swLng, $neLat, $neLng, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng);
             } else {
-                $d["pokemons"] = $scanner->get_active($eids, $swLat, $swLng, $neLat, $neLng, $timestamp);
+                $d["pokemons"] = $scanner->get_active($eids, $miniv, $exminiv, $swLat, $swLng, $neLat, $neLng, $timestamp);
             }
         }
 
         if (!empty($_POST['reids'])) {
             $reids = !empty($_POST['reids']) ? explode(",", $_POST['reids']) : null;
 
-            $d["pokemons"] = array_merge($d["pokemons"], $scanner->get_active_by_id($reids, $swLat, $swLng, $neLat, $neLng));
+            $d["pokemons"] = array_merge($d["pokemons"], $scanner->get_active_by_id($reids, $miniv, $exminiv, $swLat, $swLng, $neLat, $neLng));
 
             $d["reids"] = $reids;
         }
