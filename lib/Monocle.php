@@ -43,8 +43,7 @@ class Monocle extends Scanner
         if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
             if (empty($exminiv)) {
                 $conds[] = '((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv;
-            }
-            else{
+            } else {
                 $conds[] = '(((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
@@ -82,7 +81,7 @@ class Monocle extends Scanner
         if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
             if (empty($exminiv)) {
                 $conds[] = '((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv;
-            } else{
+            } else {
                 $conds[] = '(((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
