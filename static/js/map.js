@@ -2230,6 +2230,7 @@ function fetchCriesJson() {
 
 function pokemonSpritesFilter() {
     jQuery('.pokemon-list').parent().find('.select2').hide()
+    loadDefaultImages()
     jQuery('.pokemon-list img').on('click', function () {
         var img = jQuery(this)
         var select = jQuery(this).parent().parent().find('select')
@@ -2243,6 +2244,27 @@ function pokemonSpritesFilter() {
         } else {
             select.val((value.concat(id))).trigger('change')
             img.addClass('active')
+        }
+    })
+}
+
+function loadDefaultImages() {
+    var ep = Store.get('remember_select_exclude')
+    var eminiv = Store.get('remember_select_exclude_min_iv')
+    var en = Store.get('remember_select_notify')
+    $('label[for="exclude-pokemon"] .pokemon-list img').each(function () {
+        if (ep.indexOf($(this).data('value')) !== -1) {
+            $(this).addClass('active')
+        }
+    })
+    $('label[for="exclude-min-iv"] .pokemon-list img').each(function () {
+        if (eminiv.indexOf($(this).data('value')) !== -1) {
+            $(this).addClass('active')
+        }
+    })
+    $('label[for="notify-pokemon"] .pokemon-list img').each(function () {
+        if (en.indexOf($(this).data('value')) !== -1) {
+            $(this).addClass('active')
         }
     })
 }
