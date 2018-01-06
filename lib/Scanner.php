@@ -32,15 +32,4 @@ class Scanner
         $json_contents = file_get_contents($json_moves);
         $this->moves = json_decode($json_contents, true);
     }
-
-    public function minIV($miniv,$exminiv,&$conds){
-        if(!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0){
-            if(empty($exminiv)){
-                $conds[] = '((individual_attack + individual_defense + individual_stamina) / 45) * 100 > ' . $miniv;
-            }
-            else{
-                $conds[] = '(((individual_attack + individual_defense + individual_stamina) / 45) * 100 > ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
-            }
-        }
-    }
 }

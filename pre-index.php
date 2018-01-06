@@ -134,14 +134,15 @@ if ($blockIframe) {
                 </div>';
                 }
                 ?>
+                <div id="pokemon-filter-wrapper" style="display:none">
                 <?php
                 if (!$noMinIV) {
-                    echo '<div id="pokemon-filter-wrapper"><div class="form-control">
+                    echo '<div class="form-control">
                 <label for="min-iv">
-                    <h3>Min IV</h3>
-                    <input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="Minimum IV"/>
+                    <h3 style="display:inline-block">Min IV</h3>
+                    <input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="Minimum IV" style="float: right;width: 75px;text-align:center"/>
                 </label>
-            </div></div>';
+            </div>';
                 } ?>
                 <?php
                 if (!$noExcludeMinIV) {
@@ -155,6 +156,7 @@ if ($blockIframe) {
             </div>';
                 }
                 ?>
+                </div>
                 <?php
                 if (!$noRaids) {
                     echo '<div class="form-control switch-container" id="raids-wrapper">
@@ -704,6 +706,8 @@ if ($blockIframe) {
     var osmTileServer = '<?php echo $osmTileServer; ?>';
     var mapStyle = '<?php echo $mapStyle ?>';
     var hidePokemon = <?php echo $noHidePokemon ? '[]' : $hidePokemon ?>;
+    var excludeMinIV = <?php echo $noExcludeMinIV ? '[]' : $excludeMinIV ?>;
+    var miniv = <?php echo $noMinIV ? '""' : $minIV ?>;
     var notifyPokemon = <?php echo $noNotifyPokemon ? '[]' : $notifyPokemon ?>;
     var notifyRarity = <?php echo $noNotifyRarity ? '[]' : $notifyRarity ?>;
     var notifyIv = <?php echo $noNotifyIv ? '""' : $notifyIv ?>;

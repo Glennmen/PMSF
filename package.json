@@ -34,7 +34,6 @@
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
-    "grunt": "^1.0.1",
     "grunt-babel": "^7.0.0",
     "grunt-cache-bust": "^1.6.0",
     "grunt-cli": "^1.2.0",
@@ -52,8 +51,12 @@
     "grunt-sass": "latest",
     "grunt-unused": "latest",
     "grunt-usemin": "latest",
-    "jit-grunt": "^0.10.0",
-    "phplint": "^1.7.4",
     "push.js": "^1.0.4"
+  },
+  "devDependencies": {
+    "clean": "^4.0.2",
+    "grunt": "^1.0.1",
+    "jit-grunt": "^0.10.0",
+    "phplint": "^1.7.4"
   }
 }

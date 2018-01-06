@@ -40,8 +40,13 @@ class Monocle extends Scanner
             $pkmn_in = substr($pkmn_in, 0, -1);
             $conds[] = "pokemon_id NOT IN ( $pkmn_in )";
         }
-        if(!is_nan($miniv) && $miniv > 0){
-            $this->minIV($miniv, $exminiv,$conds);
+        if(!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0){
+            if(empty($exminiv)){
+                $conds[] = '((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv;
+            }
+            else{
+                $conds[] = '(((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+            }
         }
         return $this->query_active($select, $conds, $params);
     }
@@ -74,8 +79,13 @@ class Monocle extends Scanner
             $pkmn_in = substr($pkmn_in, 0, -1);
             $conds[] = "pokemon_id IN ( $pkmn_in )";
         }
-        if(!is_nan($miniv) && $miniv > 0){
-            $this->minIV($miniv, $exminiv,$conds);
+        if(!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0){
+            if(empty($exminiv)){
+                $conds[] = '((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv;
+            }
+            else{
+                $conds[] = '(((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+            }
         }
         return $this->query_active($select, $conds, $params);
     }
@@ -91,7 +101,7 @@ class Monocle extends Scanner
         $query = str_replace(":select", $select, $query);
         $query = str_replace(":conditions", join(" AND ", $conds), $query);
         $pokemons = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
-
+        //var_dump(print_r($db->last(),true));
         $data = array();
         $i = 0;
 

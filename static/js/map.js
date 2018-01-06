@@ -314,6 +314,7 @@ function initSidebar() {
     $('#max-level-raids-filter-switch').val(Store.get('maxRaidLevel'))
     $('#last-update-gyms-switch').val(Store.get('showLastUpdatedGymsOnly'))
     $('#pokemon-switch').prop('checked', Store.get('showPokemon'))
+    $('#pokemon-filter-wrapper').toggle(Store.get('showPokemon'));
     $('#pokestops-switch').prop('checked', Store.get('showPokestops'))
     $('#lured-pokestops-only-switch').val(Store.get('showLuredPokestopsOnly'))
     $('#lured-pokestops-only-wrapper').toggle(Store.get('showPokestops'))
@@ -2729,6 +2730,15 @@ $(function () {
         buildSwitchChangeListener(mapData, ['gyms'], 'showGyms').bind(this)()
     })
     $('#pokemon-switch').change(function () {
+        var options = {
+            'duration': 500
+        }
+        var wrapper = $('#pokemon-filter-wrapper')
+        if (this.checked) {
+            wrapper.show(options)
+        } else {
+            wrapper.hide(options)
+        }
         buildSwitchChangeListener(mapData, ['pokemons'], 'showPokemon').bind(this)()
     })
     $('#scanned-switch').change(function () {

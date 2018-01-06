@@ -69,6 +69,8 @@
     "moment": false,
     "mapStyle": true,
     "hidePokemon": true,
+    "excludeMinIV": true,
+    "miniv": true,
     "notifyPokemon": true,
     "notifyRarity": true,
     "notifyIv": true,
