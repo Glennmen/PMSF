@@ -119,14 +119,14 @@ if ($blockIframe) {
                 max-width: 100%;
             }
 
-            img {
+            .pokemon-list img {
                 width: calc(20% - 10px);
                 padding: 2px;
                 margin: 2px 5px;
                 box-sizing: border-box;
             }
 
-            .active {
+            .pokemon-list .active {
                 border: 1px solid red;
             }
 
