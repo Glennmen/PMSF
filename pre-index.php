@@ -164,8 +164,7 @@ if ($blockIframe) {
                                     <input id="exclude-pokemon" type="text" readonly="true">
                                     <!--<select id="exclude-pokemon" multiple="multiple"></select>-->
                                     <?php
-                                    pokemonFilterImages($pathToImages);
-                                    ?>
+                                    pokemonFilterImages($pathToImages); ?>
                                 </div>
                             </label>
                         </div>
@@ -190,8 +189,7 @@ if ($blockIframe) {
                                 <div style="max-height:165px;overflow-y:auto;">
                                     <input id="exclude-min-iv" type="text" readonly="true">
                                     <?php
-                                        pokemonFilterImages($pathToImages);
-                                        ?>
+                                        pokemonFilterImages($pathToImages); ?>
                                 </div>
                             </label>
                         </div>
@@ -501,8 +499,7 @@ if ($blockIframe) {
                         <div style="max-height:165px;overflow-y:auto;">
                             <input id="notify-pokemon" type="text" readonly="true"/>
                             <?php
-                                pokemonFilterImages($pathToImages);
-                            ?>
+                                pokemonFilterImages($pathToImages); ?>
                         </div>
                     </label>
                 </div>
