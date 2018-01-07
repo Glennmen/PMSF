@@ -23,6 +23,7 @@ $oNeLat = !empty($_POST['oNeLat']) ? $_POST['oNeLat'] : 0;
 $oNeLng = !empty($_POST['oNeLng']) ? $_POST['oNeLng'] : 0;
 $luredonly = !empty($_POST['luredonly']) ? $_POST['luredonly'] : false;
 $miniv = !empty($_POST['miniv']) ? $_POST['miniv'] : false;
+$prevminiv = !empty($_POST['prevminiv']) ? $_POST['prevminiv'] : false;
 $exminiv = !empty($_POST['exminiv']) ? $_POST['exminiv'] : '';
 $lastpokemon = !empty($_POST['lastpokemon']) ? $_POST['lastpokemon'] : false;
 $lastgyms = !empty($_POST['lastgyms']) ? $_POST['lastgyms'] : false;
@@ -34,6 +35,9 @@ $d["lastgyms"] = !empty($_POST['gyms']) ? $_POST['gyms'] : false;
 $d["lastslocs"] = !empty($_POST['scanned']) ? $_POST['scanned'] : false;
 $d["lastspawns"] = !empty($_POST['spawnpoints']) ? $_POST['spawnpoints'] : false;
 $d["lastpokemon"] = !empty($_POST['pokemon']) ? $_POST['pokemon'] : false;
+if($miniv !== $prevminiv){
+    $lastpokemon = false;
+}
 
 $timestamp = !empty($_POST['timestamp']) ? $_POST['timestamp'] : 0;
 
@@ -109,6 +113,13 @@ if (!$noPokemon) {
 
             $d["reids"] = $reids;
         }
+        /*if (!empty($_POST['prevminiv'])) {
+            $prevminiv = !empty($_POST['prevminiv']) ? $_POST['prevminiv'] : false;
+
+            $d["pokemons"] = array_merge($d["pokemons"], $scanner->get_active_by_iv($eids, $prevminiv, $miniv, $exminiv, $swLat, $swLng, $neLat, $neLng));
+
+        }
+        $d["prevminiv"] = $miniv;*/
     }
 }
 $debug['2_after_pokemon'] = microtime(true) - $timing['start'];

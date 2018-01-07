@@ -53,7 +53,6 @@ if ($blockIframe) {
     <link rel="apple-touch-icon" href="static/appicons/180x180.png"
           sizes="180x180">
     <?php
-    if (!$noImageSelect) {
         function pokemonFilterImages($pathToImages)
         {
             global $mons;
@@ -70,7 +69,6 @@ if ($blockIframe) {
             }
             echo '</div>';
         }
-    }
     ?>
 
     <?php
@@ -112,37 +110,6 @@ if ($blockIframe) {
     <script src="static/js/vendor/modernizr.custom.js"></script>
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <?php if (!$noImageSelect) {
-        ?>
-        <style>
-            .pokemon-list {
-                max-width: 100%;
-            }
-
-            .pokemon-list img {
-                width: calc(20% - 10px);
-                padding: 2px;
-                margin: 2px 5px;
-                box-sizing: border-box;
-            }
-
-            .pokemon-list .active {
-                border: 1px solid red;
-            }
-
-            .hide-select-2 label > div {
-                max-height: 200px !important;
-                overflow-y: auto !important;
-                padding: 5px !important;
-                box-shadow: 0 0 2px #000 !important;
-            }
-
-            .hide-select-2 .select2 {
-                display: none;
-            }
-        </style>
-    <?php
-    } ?>
 </head>
 <body id="top">
 <div class="wrapper">
@@ -188,10 +155,28 @@ if ($blockIframe) {
                 ?>
                 <div id="pokemon-filter-wrapper" style="display:none">
                     <?php
+                    if (!$noHidePokemon) {
+                        ?>
+                        <div class="form-control hide-select-2">
+                            <label for="exclude-pokemon">
+                                <h3>Hide Pokemon</h3><a href="#" class="select-all">All</a>/<a href="#" class="hide-all">None</a>
+                                <div style="max-height:165px;overflow-y:auto;">
+                                    <input id="exclude-pokemon" type="text" readonly="true">
+                                    <!--<select id="exclude-pokemon" multiple="multiple"></select>-->
+                                    <?php
+                                    pokemonFilterImages($pathToImages);
+                                    ?>
+                                </div>
+                            </label>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <?php
                     if (!$noMinIV) {
                         echo '<div class="form-control">
                 <label for="min-iv">
-                    <h3 style="display:inline-block">Min IV</h3>
+                    <h3 style="float:left">Min IV</h3>
                     <input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="Minimum IV" style="float: right;width: 75px;text-align:center"/>
                 </label>
             </div>';
@@ -201,13 +186,12 @@ if ($blockIframe) {
                         ?>
                         <div class="form-control hide-select-2">
                             <label for="exclude-min-iv">
-                                <h3>Exclude from Min IV</h3>
+                                <h3>Exclude from Min IV</h3><a href="#" class="select-all">All</a>/<a href="#" class="hide-all">None</a>
                                 <div style="max-height:165px;overflow-y:auto;">
-                                    <select id="exclude-min-iv" multiple="multiple"></select>
+                                    <input id="exclude-min-iv" type="text" readonly="true">
                                     <?php
-                                    if (!$noImageSelect) {
                                         pokemonFilterImages($pathToImages);
-                                    } ?>
+                                        ?>
                                 </div>
                             </label>
                         </div>
@@ -417,24 +401,7 @@ if ($blockIframe) {
                 </div>';
                 }
                 ?>
-                <?php
-                if (!$noHidePokemon) {
-                    ?>
-                    <div class="form-control hide-select-2">
-                        <label for="exclude-pokemon">
-                            <h3>Hide Pokemon</h3>
-                            <div style="max-height:165px;overflow-y:auto;">
-                                <select id="exclude-pokemon" multiple="multiple"></select>
-                                <?php
-                                if (!$noImageSelect) {
-                                    pokemonFilterImages($pathToImages);
-                                } ?>
-                            </div>
-                        </label>
-                    </div>
-                    <?php
-                }
-                ?>
+
             </div>
 
             <?php
@@ -530,13 +497,12 @@ if ($blockIframe) {
                 ?>
                 <div class="form-control hide-select-2">
                     <label for="notify-pokemon">
-                        <h3>Notify of Pokemon</h3>
+                        <h3>Notify of Pokemon</h3><a href="#" class="select-all">All</a>/<a href="#" class="hide-all">None</a>
                         <div style="max-height:165px;overflow-y:auto;">
-                            <select id="notify-pokemon" multiple="multiple"></select>
+                            <input id="notify-pokemon" type="text" readonly="true"/>
                             <?php
-                            if (!$noImageSelect) {
                                 pokemonFilterImages($pathToImages);
-                            } ?>
+                            ?>
                         </div>
                     </label>
                 </div>
@@ -559,9 +525,9 @@ if ($blockIframe) {
             if (!$noNotifyIv) {
                 echo '<div class="form-control">
                 <label for="notify-perfection">
-                    <h3>Notify of Perfection</h3>
-                    <input id="notify-perfection" type="text" name="notify-perfection"
-                           placeholder="Minimum perfection %"/>
+                    <h3 style="float:left;">Notify of Perfection</h3>
+                    <input id="notify-perfection" min="0" max="100" type="number" name="notify-perfection"
+                           placeholder="IV" style="float: right;width: 75px;text-align:center"/>
                 </label>
             </div>';
             }
@@ -570,9 +536,9 @@ if ($blockIframe) {
             if (!$noNotifyLevel) {
                 echo '<div class="form-control">
                 <label for="notify-level">
-                    <h3>' . i8ln('Notify of Level') . '</h3>
-                    <input id="notify-level" type="text" name="notify-level"
-                           placeholder="' . i8ln('Minimum level') . '"/>
+                    <h3 style="float:left;">' . i8ln('Notify of Level') . '</h3>
+                    <input id="notify-level" min="1" max="35" type="number" name="notify-level"
+                           placeholder="' . i8ln('Level') . '" style="float: right;width: 75px;text-align:center"/>
                 </label>
             </div>';
             }
@@ -758,7 +724,7 @@ if ($blockIframe) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
 <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>

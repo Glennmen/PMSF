@@ -41,6 +41,7 @@ var notifiedRarity = []
 var notifiedMinPerfection = null
 var notifiedMinLevel = null
 var minIV = null
+var prevMinIV = null
 var onlyPokemon = 0
 
 var buffer = []
@@ -1212,7 +1213,7 @@ function addListeners(marker) {
 
 function clearStaleMarkers() {
     $.each(mapData.pokemons, function (key, value) {
-        if (mapData.pokemons[key]['disappear_time'] < new Date().getTime() || excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id'])) {
+        if (mapData.pokemons[key]['disappear_time'] < new Date().getTime() || excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id']) || (mapData.pokemons[key]['individual_attack'] + mapData.pokemons[key]['individual_defense'] + mapData.pokemons[key]['individual_stamina']) / 45 * 100 < minIV) {
             if (mapData.pokemons[key].marker.rangeCircle) {
                 mapData.pokemons[key].marker.rangeCircle.setMap(null)
                 delete mapData.pokemons[key].marker.rangeCircle
@@ -1325,6 +1326,7 @@ function loadRawData() {
             'spawnpoints': loadSpawnpoints,
             'lastspawns': lastspawns,
             'miniv': loadMinIV,
+            'prevminiv': prevMinIV,
             'swLat': swLat,
             'swLng': swLng,
             'neLat': neLat,
@@ -1681,7 +1683,6 @@ function updateMap() {
         $.each(result.scanned, processScanned)
         $.each(result.spawnpoints, processSpawnpoints)
         showInBoundsMarkers(mapData.pokemons, 'pokemon')
-        showInBoundsMarkers(mapData.lurePokemons, 'pokemon')
         showInBoundsMarkers(mapData.gyms, 'gym')
         showInBoundsMarkers(mapData.pokestops, 'pokestop')
         showInBoundsMarkers(mapData.scanned, 'scanned')
@@ -1709,6 +1710,7 @@ function updateMap() {
         lastslocs = result.lastslocs
         lastspawns = result.lastspawns
 
+        prevMinIV = result.preminiv
         reids = result.reids
         if (reids instanceof Array) {
             reincludedPokemon = reids.filter(function (e) {
@@ -2233,16 +2235,16 @@ function pokemonSpritesFilter() {
     loadDefaultImages()
     jQuery('.pokemon-list img').on('click', function () {
         var img = jQuery(this)
-        var select = jQuery(this).parent().parent().find('select')
-        var value = select.select2('val')
+        var select = jQuery(this).parent().parent().find('input')
+        var value = select.val().split(',')
         var id = img.data('value').toString()
         if (img.hasClass('active')) {
             select.val(value.filter(function (elem) {
                 return elem !== id
-            })).trigger('change')
+            }).join(',')).trigger('change')
             img.removeClass('active')
         } else {
-            select.val((value.concat(id))).trigger('change')
+            select.val((value.concat(id).join(','))).trigger('change')
             img.addClass('active')
         }
     })
@@ -2268,6 +2270,7 @@ function loadDefaultImages() {
         }
     })
 }
+
 //
 // Page Ready Exection
 //
@@ -2554,6 +2557,20 @@ $(function () {
     $raidNotify = $('#notify-raid')
     var numberOfPokemon = 386
 
+    $('.select-all').on('click', function (e) {
+        e.preventDefault()
+        var parent = $(this).parent()
+        parent.find('.pokemon-list img').addClass('active')
+        parent.find('input').val(Array.from(Array(numberOfPokemon + 1).keys()).slice(1).join(',')).trigger('change')
+    })
+
+    $('.hide-all').on('click', function (e) {
+        e.preventDefault()
+        var parent = $(this).parent()
+        parent.find('.pokemon-list img').removeClass('active')
+        parent.find('input').val('').trigger('change')
+    })
+
     $raidNotify.select2({
         placeholder: 'Minimum raid level',
         minimumResultsForSearch: Infinity
@@ -2592,13 +2609,18 @@ $(function () {
         $selectExclude.select2({
             placeholder: i8ln('Select Pokémon'),
             data: pokeList,
-            templateResult: formatState
+            templateResult: formatState,
+            multiple: true,
+            maximumSelectionSize: 1
         })
         $selectPokemonNotify.select2({
             placeholder: i8ln('Select Pokémon'),
             data: pokeList,
-            templateResult: formatState
+            templateResult: formatState,
+            multiple: true,
+            maximumSelectionSize: 1
         })
+
         $selectRarityNotify.select2({
             placeholder: i8ln('Select Rarity'),
             data: [i8ln('Common'), i8ln('Uncommon'), i8ln('Rare'), i8ln('Very Rare'), i8ln('Ultra Rare')],
@@ -2613,7 +2635,7 @@ $(function () {
         // setup list change behavior now that we have the list to work from
         $selectExclude.on('change', function (e) {
             buffer = excludedPokemon
-            excludedPokemon = $selectExclude.val().map(Number)
+            excludedPokemon = $selectExclude.val().split(',').map(Number).sort(function (a, b) { return parseInt(a) - parseInt(b) })
             buffer = buffer.filter(function (e) {
                 return this.indexOf(e) < 0
             }, excludedPokemon)
@@ -2622,7 +2644,7 @@ $(function () {
             Store.set('remember_select_exclude', excludedPokemon)
         })
         $selectExcludeMinIV.on('change', function (e) {
-            excludedMinIV = $selectExcludeMinIV.val().map(Number)
+            excludedMinIV = $selectExcludeMinIV.val().split(',').map(Number).sort(function (a, b) { return parseInt(a) - parseInt(b) })
             clearStaleMarkers()
             Store.set('remember_select_exclude_min_iv', excludedMinIV)
         })
@@ -2639,7 +2661,7 @@ $(function () {
         })
 
         $selectPokemonNotify.on('change', function (e) {
-            notifiedPokemon = $selectPokemonNotify.val().map(Number)
+            notifiedPokemon = $selectPokemonNotify.val().split(',').map(Number).sort(function (a, b) { return parseInt(a) - parseInt(b) })
             Store.set('remember_select_notify', notifiedPokemon)
         })
         $selectRarityNotify.on('change', function (e) {

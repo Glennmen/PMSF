@@ -60,6 +60,61 @@
       }
     }
   }
+  .pokemon-list {
+    max-width: 100%;
+    img {
+      width: calc(20% - 10px);
+      padding: 2px;
+      margin: 2px 5px;
+      box-sizing: border-box;
+    }
+  }
+  label[for="min-iv"],label[for="notify-perfection"],label[for="notify-level"]{
+    h3{
+      float:left;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      height: 34px;
+      -webkit-align-items:center;
+      align-items: center;
+      margin-bottom: 0;
+    }
+  }
+  label[for="notify-pokemon"]{
+    .pokemon-list .active{
+      border: 1px solid #0089ff;
+      background: rgba(0, 114, 255, 0.4);
+    }
+  }
+  label[for="exclude-pokemon"]{
+    .pokemon-list .active {
+      border: 1px solid red;
+      background: rgba(255, 0, 0, 0.4);
+    }
+  }
+  label[for="exclude-min-iv"]{
+    .pokemon-list .active {
+      border: 1px solid #12940a;
+      background: rgba(45, 234, 11, 0.4);
+    }
+  }
+  .hide-select-2{
+    h3{
+      display:inline-block;
+      margin-right:10px;
+    }
+    label > div {
+      max-height: 200px !important;
+      overflow-y: auto !important;
+      padding: 5px !important;
+      box-shadow: 0 0 2px #000 !important;
+    }
+    .select2 {
+      display: none;
+    }
+  }
 
   .form-control > select,
   .form-control > span {
@@ -122,10 +177,10 @@
     color: #d6d6d6;
   }
   .ui-corner-all {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
   .ui-state-focus {
     outline: none;
