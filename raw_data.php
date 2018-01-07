@@ -105,6 +105,7 @@ if (!$noPokemon) {
                 $d["pokemons"] = $scanner->get_active($eids, $miniv, $exminiv, $swLat, $swLng, $neLat, $neLng, $timestamp);
             }
         }
+        $d["preminiv"] = $miniv;
 
         if (!empty($_POST['reids'])) {
             $reids = !empty($_POST['reids']) ? explode(",", $_POST['reids']) : null;
@@ -113,13 +114,6 @@ if (!$noPokemon) {
 
             $d["reids"] = $reids;
         }
-        /*if (!empty($_POST['prevminiv'])) {
-            $prevminiv = !empty($_POST['prevminiv']) ? $_POST['prevminiv'] : false;
-
-            $d["pokemons"] = array_merge($d["pokemons"], $scanner->get_active_by_iv($eids, $prevminiv, $miniv, $exminiv, $swLat, $swLng, $neLat, $neLng));
-
-        }
-        $d["prevminiv"] = $miniv;*/
     }
 }
 $debug['2_after_pokemon'] = microtime(true) - $timing['start'];
