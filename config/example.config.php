@@ -147,8 +147,8 @@ $mapStyle = 'style_pgo_dynamic';                                    // roadmap, 
 $noIconSize = false;                                                // true/false
 $iconSize = 0;                                                      // -8, 0, 10, 20
 
-$noIconNotifySize = false;                                          // true/false
-$iconNotifySize = 45;                                               // 0, 15, 30, 45
+$noIconNotifySizeModifier = false;                                  // true/false
+$IconNotifySizeModifier = 45;                                       // 0, 15, 30, 45
 
 $noGymStyle = false;                                                // true/false
 $gymStyle = 'ingame';                                               // ingame, shield
