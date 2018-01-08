@@ -1125,7 +1125,7 @@ function getGoogleSprite(index, sprite, displayHeight) {
     }
 }
 
-function setupPokemonMarker(item, map, isBounceDisabled, getIv) {
+function setupPokemonMarker(item, map, isBounceDisabled) {
 // Scale icon size up with the map exponentially
     var iconSize = 2 + (map.getZoom() - 3) * (map.getZoom() - 3) * 0.2 + Store.get('iconSizeModifier')
     if (isNotified(item, getIv) === true) {
