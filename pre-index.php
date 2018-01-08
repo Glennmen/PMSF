@@ -96,7 +96,7 @@ if ($blockIframe) {
 <div class="wrapper">
     <!-- Header -->
     <header id="header">
-        <a href="#nav"><span class="label">Options</span></a>
+        <a href="#nav"><span class="label"><?php echo i8ln('Options') ?></span></a>
 
         <h1><a href="#"><?= $title ?></a></h1>
         <?php
@@ -271,7 +271,7 @@ if ($blockIframe) {
                 <?php
                 if (!$noPokestops) {
                     echo '<div class="form-control switch-container">
-                    <h3>Pokestops</h3>
+                    <h3>'.i8ln('Pokestops').'</h3>
                     <div class="onoffswitch">
                         <input id="pokestops-switch" type="checkbox" name="pokestops-switch"
                                class="onoffswitch-checkbox" checked>
