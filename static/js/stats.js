@@ -20,6 +20,7 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
     var thisPokeIsVisible = false
     var thisGymIsVisible = false
     var thisPokestopIsVisible = false
+	var i8lnDictionary = {}
 
     if (Store.get('showPokemon')) {
         $.each(mapData.pokemons, function (key, value) {
@@ -91,13 +92,13 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
         for (i = 0; i < arenaCount.length; i++) {
             if (arenaCount[i] > 0) {
                 if (i === 1) {
-                    arenaListString += '<tr><td><img src="static/forts/Mystic.png" /></td><td>' +  i8ln('Blue') + '</td><td>' + arenaCount[i] + '</td><td>' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
+                    arenaListString += '<tr><td><img src="static/forts/Mystic.png" /></td><td>' + i8ln('Blue') + '</td><td>' + arenaCount[i] + '</td><td>' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
                 } else if (i === 2) {
-                    arenaListString += '<tr><td><img src="static/forts/Valor.png" /></td><td>' +  i8ln('Red') + '</td><td>' + arenaCount[i] + '</td><td>' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
+                    arenaListString += '<tr><td><img src="static/forts/Valor.png" /></td><td>' + i8ln('Red') + '</td><td>' + arenaCount[i] + '</td><td>' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
                 } else if (i === 3) {
-                    arenaListString += '<tr><td><img src="static/forts/Instinct.png" /></td><td>' +  i8ln('Yellow') + '</td><td>' + arenaCount[i] + '</td><td>' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
+                    arenaListString += '<tr><td><img src="static/forts/Instinct.png" /></td><td>' + i8ln('Yellow') + '</td><td>' + arenaCount[i] + '</td><td>' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
                 } else {
-                    arenaListString += '<tr><td><img src="static/forts/Uncontested.png" /></td><td>' +  i8ln('Clear') + '</td><td>' + arenaCount[i] + '</td><td>' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
+                    arenaListString += '<tr><td><img src="static/forts/Uncontested.png" /></td><td>' + i8ln('Clear') + '</td><td>' + arenaCount[i] + '</td><td>' + Math.round(arenaCount[i] * 100 / arenaTotal * 10) / 10 + '%</td></tr>'
                 }
             }
         }
@@ -132,7 +133,7 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
                 pokestopTotal++
             }
         })
-        var pokestopListString = '<table><th>' +  i8ln('Icon') + '</th><th>' +  i8ln('Status') + '</th><th>' +  i8ln('Count') + '</th><th>%</th><tr><td></td><td>' +  i8ln('Total') + '</td><td>' + pokestopTotal + '</td></tr>'
+        var pokestopListString = '<table><th>' + i8ln('Icon') + '</th><th>' + i8ln('Status') + '</th><th>' + i8ln('Count') + '</th><th>%</th><tr><td></td><td>' + i8ln('Total') + '</td><td>' + pokestopTotal + '</td></tr>'
         for (i = 0; i < pokestopCount.length; i++) {
             if (pokestopCount[i] > 0) {
                 if (i === 0) {
@@ -148,3 +149,28 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
         document.getElementById('pokestopList').innerHTML = i8ln('PokéStops markers are disabled')
     }
 }
+
+
+function i8ln(word) {
+    if ($.isEmptyObject(i8lnDictionary) && language !== 'en' && languageLookups < languageLookupThreshold) {
+        $.ajax({
+            url: 'static/dist/locales/' + language + '.min.json',
+            dataType: 'json',
+            async: false,
+            success: function success(data) {
+                i8lnDictionary = data
+            },
+            error: function error(jqXHR, status, _error) {
+                console.log('Error loading i8ln dictionary: ' + _error)
+                languageLookups++
+            }
+        })
+    }
+    if (word in i8lnDictionary) {
+        return i8lnDictionary[word]
+    } else {
+        // Word doesn't exist in dictionary return it as is
+        return word
+    }
+}
+
