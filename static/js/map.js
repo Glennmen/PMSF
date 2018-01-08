@@ -842,7 +842,11 @@ function customizePokemonMarker(marker, item, skipNotification) {
                 marker.setAnimation(google.maps.Animation.BOUNCE)
             }
         }
-        if (Store.get('remember_show_ivzero') && perfection === 0) {
+        if ($selectNotifyIvZero && perfection === 0) {
+            if (!skipNotification) {
+                checkAndCreateSound(item['pokemon_id'])
+                sendNotification(getNotifyText(item).fav_title, getNotifyText(item).fav_text, iconpath + item['pokemon_id'] + '.png', item['latitude'], item['longitude'])
+            }
             if (marker.animationDisabled !== true) {
                 marker.setAnimation(google.maps.Animation.BOUNCE)
             }
