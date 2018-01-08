@@ -1,3 +1,8 @@
+var language = document.documentElement.lang === '' ? 'en' : document.documentElement.lang
+var i8lnDictionary = {}
+var languageLookups = 0
+var languageLookupThreshold = 3
+
 function countMarkers(map) { // eslint-disable-line no-unused-vars
     document.getElementById('stats-ldg-label').innerHTML = ''
     document.getElementById('stats-pkmn-label').innerHTML = i8ln('Pokémon')
@@ -20,7 +25,6 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
     var thisPokeIsVisible = false
     var thisGymIsVisible = false
     var thisPokestopIsVisible = false
-	var i8lnDictionary = {}
 
     if (Store.get('showPokemon')) {
         $.each(mapData.pokemons, function (key, value) {
@@ -70,7 +74,7 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
 
         document.getElementById('pokeStatStatus').innerHTML = i8ln('Pokémon markers are disabled')
         $('#pokemonList_table').dataTable().hide()
-    }       // end Pokémon processing
+    } // end Pokémon processing
 
     // begin Gyms processing
     if (Store.get('showGyms')) {
@@ -105,7 +109,7 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
         arenaListString += '</table>'
         document.getElementById('arenaList').innerHTML = arenaListString
     } else {
-        document.getElementById('arenaList').innerHTML =  i8ln('Gyms markers are disabled')
+        document.getElementById('arenaList').innerHTML = i8ln('Gyms markers are disabled')
     }
 
     if (Store.get('showPokestops')) {
