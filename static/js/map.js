@@ -10,7 +10,7 @@ var $textLevelNotify
 var $raidNotify
 var $selectStyle
 var $selectIconSize
-var $selectIconNotifySize
+var $selectIconNotifySizeModifier
 var $switchOpenGymsOnly
 var $selectTeamGymsOnly
 var $selectLastUpdateGymsOnly
@@ -2301,14 +2301,14 @@ $(function () {
         redrawPokemon(mapData.lurePokemons)
     })
 
-    $selectIconNotifySize = $('#pokemon-icon-notify-size')
+    $selectIconNotifySizeModifier = $('#pokemon-icon-notify-size')
 
-    $selectIconNotifySize.select2({
-        placeholder: 'Select Notify Icon Size increase',
+    $selectIconNotifySizeModifier.select2({
+        placeholder: 'Increase Size Of Notified',
         minimumResultsForSearch: Infinity
     })
 
-    $selectIconNotifySize.on('change', function () {
+    $selectIconNotifySizeModifier.on('change', function () {
         Store.set('iconNotifySizeModifier', this.value)
         redrawPokemon(mapData.pokemons)
         redrawPokemon(mapData.lurePokemons)
