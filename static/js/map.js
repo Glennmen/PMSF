@@ -115,7 +115,7 @@ function excludePokemon(id) { // eslint-disable-line no-unused-vars
     $selectExclude.val(
         $selectExclude.val().split(',').concat(id).join(',')
     ).trigger('change')
-    $('label[for="exclude-pokemon"] .pokemon-list span[data-value="' + id + '"]').addClass('active')
+    $('label[for="exclude-pokemon"] .pokemon-list .pokemon-icon-sprite[data-value="' + id + '"]').addClass('active')
     clearStaleMarkers()
 }
 
@@ -123,7 +123,7 @@ function notifyAboutPokemon(id) { // eslint-disable-line no-unused-vars
     $selectPokemonNotify.val(
         $selectPokemonNotify.val().split(',').concat(id).join(',')
     ).trigger('change')
-    $('label[for="notify-pokemon"] .pokemon-list span[data-value="' + id + '"]').addClass('active')
+    $('label[for="notify-pokemon"] .pokemon-list .pokemon-icon-sprite[data-value="' + id + '"]').addClass('active')
 }
 
 function removePokemonMarker(encounterId) { // eslint-disable-line no-unused-vars
@@ -2565,14 +2565,14 @@ $(function () {
     $('.select-all').on('click', function (e) {
         e.preventDefault()
         var parent = $(this).parent()
-        parent.find('.pokemon-list span').addClass('active')
+        parent.find('.pokemon-list .pokemon-icon-sprite').addClass('active')
         parent.find('input').val(Array.from(Array(numberOfPokemon + 1).keys()).slice(1).join(',')).trigger('change')
     })
 
     $('.hide-all').on('click', function (e) {
         e.preventDefault()
         var parent = $(this).parent()
-        parent.find('.pokemon-list span').removeClass('active')
+        parent.find('.pokemon-list .pokemon-icon-sprite').removeClass('active')
         parent.find('input').val('').trigger('change')
     })
 
