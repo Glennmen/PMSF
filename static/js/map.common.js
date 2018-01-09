@@ -1064,6 +1064,11 @@ var StoreOptions = {
             default: spriteFile,
             type: StoreTypes.String
         },
+    'spritefileNav':
+        {
+            default: spriteFileNav,
+            type: StoreTypes.String
+        },
     'spritefileLarge':
         {
             default: spriteFileLarge,

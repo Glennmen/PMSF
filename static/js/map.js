@@ -356,8 +356,10 @@ function initSidebar() {
     var path = window.location.protocol + '//' + window.location.hostname + port + window.location.pathname
     var r = new RegExp('^(?:[a-z]+:)?//', 'i')
     var urlSprite = r.test(Store.get('spritefile')) ? Store.get('spritefile') : path + Store.get('spritefile')
+    var urlSpriteNav = r.test(Store.get('spritefileNav')) ? Store.get('spritefileNav') : path + Store.get('spritefileNav')
     var urlSpriteLarge = r.test(Store.get('spritefileLarge')) ? Store.get('spritefileLarge') : path + Store.get('spritefileLarge')
     document.body.style.setProperty('--sprite', 'url(' + urlSprite + ')')
+    document.body.style.setProperty('--sprite-nav', 'url(' + urlSpriteNav + ')')
     document.body.style.setProperty('--sprite-large', 'url(' + urlSpriteLarge + ')')
     iconpath = r.test(Store.get('icons')) ? Store.get('icons') : path + Store.get('icons')
 }
@@ -2563,14 +2565,14 @@ $(function () {
     $('.select-all').on('click', function (e) {
         e.preventDefault()
         var parent = $(this).parent()
-        parent.find('.pokemon-list img').addClass('active')
+        parent.find('.pokemon-list span').addClass('active')
         parent.find('input').val(Array.from(Array(numberOfPokemon + 1).keys()).slice(1).join(',')).trigger('change')
     })
 
     $('.hide-all').on('click', function (e) {
         e.preventDefault()
         var parent = $(this).parent()
-        parent.find('.pokemon-list img').removeClass('active')
+        parent.find('.pokemon-list span').removeClass('active')
         parent.find('input').val('').trigger('change')
     })
 

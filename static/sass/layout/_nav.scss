@@ -86,7 +86,10 @@
       .inner-bg{
         width: 48.13px;
         height: 48.13px;
-        background:url('/static/icons-safe-1-nav.png') no-repeat left;
+        background-image: url($spriteNav);
+        background-image: var(--sprite-nav);
+        background-repeat:no-repeat;
+        background-position:left;
         display: block;
         margin: 0 auto;
       }
