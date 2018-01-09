@@ -50,9 +50,9 @@ class RocketMap extends Scanner
         }
         if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
             if (empty($exminiv)) {
-                $conds[] = '((individual_attack + individual_defense + individual_stamina) / 45) * 100 > ' . $miniv;
+                $conds[] = '((individual_attack + individual_defense + individual_stamina) / 45) * 100 >= ' . $miniv;
             } else {
-                $conds[] = '(((individual_attack + individual_defense + individual_stamina) / 45) * 100 > ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+                $conds[] = '(((individual_attack + individual_defense + individual_stamina) / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
         return $this->query_active($select, $conds, $params);
@@ -91,9 +91,9 @@ class RocketMap extends Scanner
         }
         if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
             if (empty($exminiv)) {
-                $conds[] = '((individual_attack + individual_defense + individual_stamina) / 45) * 100 > ' . $miniv;
+                $conds[] = '((individual_attack + individual_defense + individual_stamina) / 45) * 100 >= ' . $miniv;
             } else {
-                $conds[] = '(((individual_attack + individual_defense + individual_stamina) / 45) * 100 > ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+                $conds[] = '(((individual_attack + individual_defense + individual_stamina) / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
 

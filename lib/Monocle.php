@@ -42,9 +42,9 @@ class Monocle extends Scanner
         }
         if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
             if (empty($exminiv)) {
-                $conds[] = '((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv;
+                $conds[] = '((atk_iv + def_iv + sta_iv) / 45) * 100 >= ' . $miniv;
             } else {
-                $conds[] = '(((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+                $conds[] = '(((atk_iv + def_iv + sta_iv) / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
         return $this->query_active($select, $conds, $params);
@@ -80,9 +80,9 @@ class Monocle extends Scanner
         }
         if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
             if (empty($exminiv)) {
-                $conds[] = '((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv;
+                $conds[] = '((atk_iv + def_iv + sta_iv) / 45) * 100 >= ' . $miniv;
             } else {
-                $conds[] = '(((atk_iv + def_iv + sta_iv) / 45) * 100 > ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+                $conds[] = '(((atk_iv + def_iv + sta_iv) / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
         return $this->query_active($select, $conds, $params);

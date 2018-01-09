@@ -61,11 +61,19 @@ if ($blockIframe) {
                 $mons = json_decode($json, true);
             }
             echo '<div class="pokemon-list">';
+            $i = 0;
+            $z = 0;
             foreach ($mons as $k => $pokemon) {
                 if ($k > 386) {
                     break;
                 }
-                echo "<img src='" . $pathToImages . "$k.png' class='$k pokemon-icon' data-value='" . $k . "' alt='" . $pokemon['name'] . "' title='" . $pokemon['name'] . "'/>";
+                echo "<span class='pokemon-icon-sprite' data-value='" . $k . "'><span class='$k inner-bg' style='background-position:-" . $i * 48.25 . "px -".$z."px'></span></span>";
+                //echo "<img src='" . $pathToImages . "$k.png' class='$k pokemon-icon' data-value='" . $k . "' alt='" . $pokemon['name'] . "' title='" . $pokemon['name'] . "'/>";
+                if($i == 27){
+                    $i = -1;
+                    $z = $z + 48.25;
+                }
+                $i++;
             }
             echo '</div>';
         }

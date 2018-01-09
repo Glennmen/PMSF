@@ -2234,7 +2234,7 @@ function fetchCriesJson() {
 function pokemonSpritesFilter() {
     jQuery('.pokemon-list').parent().find('.select2').hide()
     loadDefaultImages()
-    jQuery('.pokemon-list img').on('click', function () {
+    jQuery('.pokemon-list .pokemon-icon-sprite').on('click', function () {
         var img = jQuery(this)
         var select = jQuery(this).parent().parent().find('input')
         var value = select.val().split(',')
@@ -2255,17 +2255,17 @@ function loadDefaultImages() {
     var ep = Store.get('remember_select_exclude')
     var eminiv = Store.get('remember_select_exclude_min_iv')
     var en = Store.get('remember_select_notify')
-    $('label[for="exclude-pokemon"] .pokemon-list img').each(function () {
+    $('label[for="exclude-pokemon"] .pokemon-icon-sprite').each(function () {
         if (ep.indexOf($(this).data('value')) !== -1) {
             $(this).addClass('active')
         }
     })
-    $('label[for="exclude-min-iv"] .pokemon-list img').each(function () {
+    $('label[for="exclude-min-iv"] .pokemon-icon-sprite').each(function () {
         if (eminiv.indexOf($(this).data('value')) !== -1) {
             $(this).addClass('active')
         }
     })
-    $('label[for="notify-pokemon"] .pokemon-list img').each(function () {
+    $('label[for="notify-pokemon"] .pokemon-icon-sprite').each(function () {
         if (en.indexOf($(this).data('value')) !== -1) {
             $(this).addClass('active')
         }
@@ -2645,7 +2645,12 @@ $(function () {
             Store.set('remember_select_exclude', excludedPokemon)
         })
         $selectExcludeMinIV.on('change', function (e) {
+            buffer = excludedMinIV
             excludedMinIV = $selectExcludeMinIV.val().split(',').map(Number).sort(function (a, b) { return parseInt(a) - parseInt(b) })
+            buffer = buffer.filter(function (e) {
+                return this.indexOf(e) < 0
+            }, excludedMinIV)
+            reincludedPokemon = reincludedPokemon.concat(buffer)
             clearStaleMarkers()
             Store.set('remember_select_exclude_min_iv', excludedMinIV)
         })

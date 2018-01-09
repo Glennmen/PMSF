@@ -61,6 +61,15 @@
     }
   }
   .pokemon-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-align-items:center;
+    align-items: center;
+    text-align:center;
     max-width: 100%;
     img {
       width: calc(20% - 10px);
@@ -68,7 +77,22 @@
       margin: 2px 5px;
       box-sizing: border-box;
     }
+    .pokemon-icon-sprite{
+      border:1px solid #FFF;
+      width: calc( 20% - 2px);
+      margin-bottom: 5px;
+      margin-left: 1px;
+      margin-right: 1px;
+      .inner-bg{
+        width: 48.13px;
+        height: 48.13px;
+        background:url('/static/icons-safe-1-nav.png') no-repeat left;
+        display: block;
+        margin: 0 auto;
+      }
+    }
   }
+
   label[for="min-iv"],label[for="notify-perfection"],label[for="notify-level"]{
     h3{
       float:left;
