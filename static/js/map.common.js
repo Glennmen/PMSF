@@ -1128,7 +1128,7 @@ function getGoogleSprite(index, sprite, displayHeight) {
 function setupPokemonMarker(item, map, isBounceDisabled) {
 // Scale icon size up with the map exponentially
     var iconSize = 2 + (map.getZoom() - 3) * (map.getZoom() - 3) * 0.2 + Store.get('iconSizeModifier')
-    if (isNotified(item, getIv) === true) {
+    if (isNotifiedPokemon(item) === true) {
         iconSize += Store.get('iconNotifySizeModifier')
     }
     var pokemonIndex = item['pokemon_id'] - 1
@@ -1151,19 +1151,16 @@ function setupPokemonMarker(item, map, isBounceDisabled) {
     })
 }
 
-function isNotified(item, getIv) {
+function isNotifiedPokemon(item) {
     var level = item['level']
-    var atk = item['individual_attack']
-    var def = item['individual_defense']
-    var sta = item['individual_stamina']
-    var iv = getIv(atk, def, sta)
+    var iv = getIv(item['individual_attack'], item['individual_defense'], item['individual_stamina'])
     var notifiedMinPerfection = Store.get('remember_text_perfection_notify')
-    var notifyLevel = Store.get('remember_text_level_notify')
+    var notifiedMinLevel = Store.get('remember_text_level_notify')
     var notifiedPokemon = Store.get('remember_select_notify')
     var notifiedRarity = Store.get('remember_select_rarity_notify')
 
     if ((iv >= notifiedMinPerfection && notifiedMinPerfection > 0) || notifiedPokemon.indexOf(item['pokemon_id']) > -1 ||
-        notifiedRarity.indexOf(item['pokemon_rarity']) > -1 || (notifyLevel > 0 && level >= notifyLevel)) {
+        notifiedRarity.indexOf(item['pokemon_rarity']) > -1 || (notifiedMinLevel > 0 && level >= notifiedMinLevel)) {
         return true
     }
 
