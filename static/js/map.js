@@ -113,15 +113,17 @@ var notifyText = 'disappears at <dist> (<udist>)'
 
 function excludePokemon(id) { // eslint-disable-line no-unused-vars
     $selectExclude.val(
-        $selectExclude.val().concat(id)
+        $selectExclude.val().split(',').concat(id).join(',')
     ).trigger('change')
+    $('label[for="exclude-pokemon"] .pokemon-list span[data-value="' + id + '"]').addClass('active')
     clearStaleMarkers()
 }
 
 function notifyAboutPokemon(id) { // eslint-disable-line no-unused-vars
     $selectPokemonNotify.val(
-        $selectPokemonNotify.val().concat(id)
+        $selectPokemonNotify.val().split(',').concat(id).join(',')
     ).trigger('change')
+    $('label[for="notify-pokemon"] .pokemon-list span[data-value="' + id + '"]').addClass('active')
 }
 
 function removePokemonMarker(encounterId) { // eslint-disable-line no-unused-vars
