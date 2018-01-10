@@ -86,8 +86,9 @@
       .inner-bg{
         width: 48.13px;
         height: 48.13px;
-        background-image: url($spriteNav);
-        background-image: var(--sprite-nav);
+        background-image: url($spriteLarge);
+        background-image: var(--sprite-large);
+        background-size:1350px;
         background-repeat:no-repeat;
         background-position:left;
         display: block;
