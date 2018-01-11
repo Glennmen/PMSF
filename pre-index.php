@@ -772,7 +772,7 @@ if ($blockIframe) {
     var mapStyle = '<?php echo $mapStyle ?>';
     var hidePokemon = <?php echo $noHidePokemon ? '[]' : $hidePokemon ?>;
     var excludeMinIV = <?php echo $noExcludeMinIV ? '[]' : $excludeMinIV ?>;
-    var minIv = <?php echo $noMinIV ? '""' : $minIV ?>;
+    var minIV = <?php echo $noMinIV ? '""' : $minIV ?>;
     var minLevel = <?php echo $noMinLevel ? '""' : $minLevel ?>;
     var notifyPokemon = <?php echo $noNotifyPokemon ? '[]' : $notifyPokemon ?>;
     var notifyRarity = <?php echo $noNotifyRarity ? '[]' : $notifyRarity ?>;
