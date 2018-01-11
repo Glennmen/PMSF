@@ -144,11 +144,11 @@ if ($blockIframe) {
     <!-- NAV -->
     <nav id="nav">
         <div id="nav-accordion">
-            <h3>Marker Settings</h3>
+            <h3>Pokemon</h3>
             <div>
                 <?php
                 if (!$noPokemon) {
-                    echo '<div class="form-control switch-container">
+                    echo '<div class=" form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
                     <h3>Pokemon</h3>
                     <div class="onoffswitch">
                         <input id="pokemon-switch" type="checkbox" name="pokemon-switch" class="onoffswitch-checkbox"
@@ -162,49 +162,74 @@ if ($blockIframe) {
                 }
                 ?>
                 <div id="pokemon-filter-wrapper" style="display:none">
-                    <?php
-                    if (!$noHidePokemon) {
-                        ?>
-                        <div class="form-control hide-select-2">
-                            <label for="exclude-pokemon">
-                                <h3>Hide Pokemon</h3><a href="#" class="select-all">All</a>/<a href="#" class="hide-all">None</a>
-                                <div style="max-height:165px;overflow-y:auto;">
-                                    <input id="exclude-pokemon" type="text" readonly="true">
-                                    <!--<select id="exclude-pokemon" multiple="multiple"></select>-->
-                                    <?php
-                                    pokemonFilterImages($pathToImages); ?>
+                    <div id="tabs">
+                        <ul>
+                            <li><a href="#tabs-1">Hide Pokemon</a></li>
+                            <li><a href="#tabs-2">Excl. Min IV/Lvl</a></li>
+                        </ul>
+                        <div id="tabs-1">
+                            <?php
+                            if (!$noHidePokemon) {
+                                ?>
+                                <div class="form-control hide-select-2">
+                                    <label for="exclude-pokemon">
+                                        <div class="pokemon-container">
+                                            <input id="exclude-pokemon" type="text" readonly="true">
+                                            <?php
+                                            pokemonFilterImages($pathToImages); ?>
+                                        </div>
+                                        <a href="#" class="select-all">All</a><a href="#" class="hide-all">None</a>
+                                    </label>
                                 </div>
-                            </label>
+                                <?php
+                            }
+                            ?>
                         </div>
+                        <div id="tabs-2" >
+                            <?php
+                            if (!$noExcludeMinIV) {
+                                ?>
+                                <div class="form-control hide-select-2">
+                                    <label for="exclude-min-iv">
+                                        <div class="pokemon-container">
+                                            <input id="exclude-min-iv" type="text" readonly="true">
+                                            <?php
+                                            pokemonFilterImages($pathToImages); ?>
+                                        </div>
+                                        <a href="#" class="select-all">All</a><a href="#" class="hide-all">None</a>
+                                    </label>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="form-row min-stats-row">
                         <?php
-                    }
-                    ?>
-                    <?php
-                    if (!$noMinIV) {
-                        echo '<div class="form-control">
-                <label for="min-iv">
-                    <h3 style="float:left">Min IV</h3>
-                    <input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="Minimum IV" style="float: right;width: 75px;text-align:center"/>
-                </label>
-            </div>';
-                    } ?>
-                    <?php
-                    if (!$noExcludeMinIV) {
-                        ?>
-                        <div class="form-control hide-select-2">
-                            <label for="exclude-min-iv">
-                                <h3>Exclude from Min IV</h3><a href="#" class="select-all">All</a>/<a href="#" class="hide-all">None</a>
-                                <div style="max-height:165px;overflow-y:auto;">
-                                    <input id="exclude-min-iv" type="text" readonly="true">
-                                    <?php
-                                        pokemonFilterImages($pathToImages); ?>
-                                </div>
+                        if (!$noMinIV) {
+                            echo '<div class="form-control" >
+                            <label for="min-iv">
+                                <h3 style="">Min IV</h3>
+                                <input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="Minimum IV"/>
                             </label>
-                        </div>
-                    <?php
-                    }
-                    ?>
+                        </div>';
+                        } ?>
+                        <?php
+                        if (!$noMinLevel) {
+                            echo '<div class="form-control">
+                            <label for="min-level">
+                                <h3>Min Lvl</h3>
+                                <input id="min-level" type="number" min="0" max="100" name="min-level" placeholder="Minimum Level"/>
+                            </label>
+                        </div>';
+                        } ?>
+                    </div>
+
                 </div>
+            </div>
+            <h3>Gym/Raid</h3>
+            <div>
                 <?php
                 if (!$noRaids) {
                     echo '<div class="form-control switch-container" id="raids-wrapper">
@@ -412,7 +437,7 @@ if ($blockIframe) {
 
             <?php
             if (!$noSearchLocation || !$noStartMe || !$noStartLast || !$noFollowMe) {
-                echo '<h3>Location &amp; Search Settings</h3>
+                echo '<h3>Location &amp; Search</h3>
             <div>';
             }
             ?>
@@ -494,7 +519,7 @@ if ($blockIframe) {
 
             <?php
             if (!$noNotifyPokemon || !$noNotifyRarity || !$noNotifyIv || !$noNotifySound || !$noNotifyRaid) {
-                echo '<h3>Notification Settings</h3>
+                echo '<h3>Notification</h3>
             <div>';
             }
             ?>
@@ -605,7 +630,7 @@ if ($blockIframe) {
 
             <?php
             if (!$noMapStyle || !$noIconSize || !$noGymStyle || !$noLocationStyle) {
-                echo '<h3>Style Settings</h3>
+                echo '<h3>Style</h3>
             <div>';
             }
             ?>
@@ -743,12 +768,12 @@ if ($blockIframe) {
     var zoom<?php echo $zoom ? " = " . $zoom : null; ?>;
     var minZoom = <?= $maxZoomOut; ?>;
     var maxLatLng = <?= $maxLatLng; ?>;
-
     var osmTileServer = '<?php echo $osmTileServer; ?>';
     var mapStyle = '<?php echo $mapStyle ?>';
     var hidePokemon = <?php echo $noHidePokemon ? '[]' : $hidePokemon ?>;
     var excludeMinIV = <?php echo $noExcludeMinIV ? '[]' : $excludeMinIV ?>;
-    var miniv = <?php echo $noMinIV ? '""' : $minIV ?>;
+    var minIv = <?php echo $noMinIV ? '""' : $minIV ?>;
+    var minLevel = <?php echo $noMinLevel ? '""' : $minLevel ?>;
     var notifyPokemon = <?php echo $noNotifyPokemon ? '[]' : $notifyPokemon ?>;
     var notifyRarity = <?php echo $noNotifyRarity ? '[]' : $notifyRarity ?>;
     var notifyIv = <?php echo $noNotifyIv ? '""' : $notifyIv ?>;

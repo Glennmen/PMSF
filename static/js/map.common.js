@@ -881,7 +881,12 @@ var StoreOptions = {
         },
     'remember_text_min_iv':
         {
-            default: miniv,
+            default: minIV,
+            type: StoreTypes.Number
+        },
+    'remember_text_min_level':
+        {
+            default: minLevel,
             type: StoreTypes.Number
         },
     'remember_raid_notify':

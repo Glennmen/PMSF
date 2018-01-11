@@ -4,8 +4,9 @@ namespace Scanner;
 
 class Monocle_Monkey extends Monocle
 {
-    public function get_active($eids, $miniv, $exminiv, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    public function get_active($eids, $miniv, $minlevel, $exminiv, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
+        global $db;
         $conds = array();
         $params = array();
 
@@ -46,9 +47,16 @@ class Monocle_Monkey extends Monocle
         }
         if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
             if (empty($exminiv)) {
-                $conds[] = '((atk_iv + def_iv + sta_iv) / 45) * 100 >= ' . $miniv;
+                $conds[] = '((atk_iv + def_iv + sta_iv) / 45)'.$db->info()['driver'] == 'pgsql' ? "::float" : "".' * 100 >= ' . $miniv;
             } else {
-                $conds[] = '(((atk_iv + def_iv + sta_iv) / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+                $conds[] = '(((atk_iv + def_iv + sta_iv) / 45)' . $db->info()['driver'] == 'pgsql' ? "::float" : "" . ' * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+            }
+        }
+        if (!empty($minlevel) && !is_nan((float)$minlevel) && $minlevel != 0) {
+            if (empty($exminiv)) {
+                $conds[] = '(level >= ' . $minlevel;
+            } else {
+                $conds[] = '(level >= ' . $minlevel . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
 
@@ -77,14 +85,6 @@ class Monocle_Monkey extends Monocle
             $conds[] = "updated > :lastUpdated";
             $params[':lastUpdated'] = $tstamp;
         }
-        if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
-            if (empty($exminiv)) {
-                $conds[] = '((atk_iv + def_iv + sta_iv) / 45) * 100 >= ' . $miniv;
-            } else {
-                $conds[] = '(((atk_iv + def_iv + sta_iv) / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
-            }
-        }
-
         return $this->query_stops($conds, $params);
     }
 

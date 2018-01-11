@@ -96,8 +96,97 @@
       }
     }
   }
+  #pokemon-filter-wrapper{
+    #tabs{
+      padding:0;
+      border:0;
+      &:after{
+        display: table;
+        content: "";
+        clear: both;
+      }
+      .ui-tabs-nav{
+        background: transparent;
+        border: 0;
+        padding: 0;
+        li{
+          width: 50%;
+          box-sizing: border-box;
+          margin:0;
+          border-right:1px solid #fff;
+          &:last-child{
+            border-right-color:#c5c5c5;
+          }
+          &:focus{
 
-  label[for="min-iv"],label[for="notify-perfection"],label[for="notify-level"]{
+          }
+          a{
+            padding: 0.5em 0.1em;
+            text-align: center;
+            width: 100%;
+          }
+        }
+      }
+      .ui-tabs-panel{
+        padding:0;
+        .form-control{
+          float:none;
+          .pokemon-container{
+            box-shadow:none!important;
+            border:1px solid #3b3b3b;
+            max-height:350px!important;
+          }
+          a{
+            width: 50%;
+            float: left;
+            background: #3b3b3b;
+            text-align: center;
+            padding: 10px;
+            color: white;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-right:1px solid #FFF;
+            &:last-child{
+              border-right:0;
+            }
+          }
+        }
+      }
+    }
+    .min-stats-row{
+      clear:both;
+      margin-top:10px;
+      .form-control{
+        margin-bottom:0;
+      }
+    }
+    .form-row{
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display:flex;
+      align-items:center;
+      .form-control{
+        label{
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display:flex;
+          align-items:center;
+        }
+        h3{
+          float:left;
+          margin-bottom:0;
+        }
+        input{
+          float:left;
+          width: 50px;
+          text-align:center;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
+  label[for="notify-perfection"],label[for="notify-level"]{
     h3{
       float:left;
       display: -webkit-box;

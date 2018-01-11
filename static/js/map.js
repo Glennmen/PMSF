@@ -9,6 +9,7 @@ var $selectRarityNotify
 var $textPerfectionNotify
 var $textLevelNotify
 var $textMinIV
+var $textMinLevel
 var $raidNotify
 var $selectStyle
 var $selectIconSize
@@ -42,6 +43,7 @@ var notifiedMinPerfection = null
 var notifiedMinLevel = null
 var minIV = null
 var prevMinIV = null
+var prevMinLevel = null
 var onlyPokemon = 0
 
 var buffer = []
@@ -1215,7 +1217,7 @@ function addListeners(marker) {
 
 function clearStaleMarkers() {
     $.each(mapData.pokemons, function (key, value) {
-        if (mapData.pokemons[key]['disappear_time'] < new Date().getTime() || excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id']) || ((mapData.pokemons[key]['individual_attack'] + mapData.pokemons[key]['individual_defense'] + mapData.pokemons[key]['individual_stamina']) / 45 * 100 < minIV && !excludedMinIV.includes(mapData.pokemons[key]['pokemon_id']))) {
+        if (mapData.pokemons[key]['disappear_time'] < new Date().getTime() || excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id']) || (((mapData.pokemons[key]['individual_attack'] + mapData.pokemons[key]['individual_defense'] + mapData.pokemons[key]['individual_stamina']) / 45 * 100 < minIV || mapData.pokemons[key]['level'] < minLevel) && !excludedMinIV.includes(mapData.pokemons[key]['pokemon_id']))) {
             if (mapData.pokemons[key].marker.rangeCircle) {
                 mapData.pokemons[key].marker.rangeCircle.setMap(null)
                 delete mapData.pokemons[key].marker.rangeCircle
@@ -1301,6 +1303,7 @@ function loadRawData() {
     var loadSpawnpoints = Store.get('showSpawnpoints')
     var loadLuredOnly = Boolean(Store.get('showLuredPokestopsOnly'))
     var loadMinIV = Store.get('remember_text_min_iv')
+    var loadMinLevel = Store.get('remember_text_min_level')
 
     var bounds = map.getBounds()
     var swPoint = bounds.getSouthWest()
@@ -1329,6 +1332,8 @@ function loadRawData() {
             'lastspawns': lastspawns,
             'miniv': loadMinIV,
             'prevminiv': prevMinIV,
+            'minlevel': loadMinLevel,
+            'prevminlevel': prevMinLevel,
             'swLat': swLat,
             'swLng': swLng,
             'neLat': neLat,
@@ -1714,6 +1719,7 @@ function updateMap() {
         lastspawns = result.lastspawns
 
         prevMinIV = result.preminiv
+        prevMinLevel = result.preminlevel
         reids = result.reids
         if (reids instanceof Array) {
             reincludedPokemon = reids.filter(function (e) {
@@ -2556,6 +2562,7 @@ $(function () {
     $selectRarityNotify = $('#notify-rarity')
     $textPerfectionNotify = $('#notify-perfection')
     $textMinIV = $('#min-iv')
+    $textMinLevel = $('#min-level')
     $textLevelNotify = $('#notify-level')
     $raidNotify = $('#notify-raid')
     var numberOfPokemon = 386
@@ -2667,6 +2674,17 @@ $(function () {
             $textMinIV.val(minIV)
             Store.set('remember_text_min_iv', minIV)
         })
+        $textMinLevel.on('change', function (e) {
+            minLevel = parseInt($textMinLevel.val(), 10)
+            if (isNaN(minLevel) || minLevel < 0) {
+                minLevel = ''
+            }
+            if (minLevel > 35) {
+                minLevel = 35
+            }
+            $textMinLevel.val(minLevel)
+            Store.set('remember_text_min_level', minLevel)
+        })
 
         $selectPokemonNotify.on('change', function (e) {
             notifiedPokemon = $selectPokemonNotify.val().split(',').map(Number).sort(function (a, b) { return parseInt(a) - parseInt(b) })
@@ -2707,11 +2725,13 @@ $(function () {
         $textPerfectionNotify.val(Store.get('remember_text_perfection_notify')).trigger('change')
         $textLevelNotify.val(Store.get('remember_text_level_notify')).trigger('change')
         $textMinIV.val(Store.get('remember_text_min_iv')).trigger('change')
+        $textMinLevel.val(Store.get('remember_text_min_level')).trigger('change')
         $raidNotify.val(Store.get('remember_raid_notify')).trigger('change')
 
         if (isTouchDevice() && isMobileDevice()) {
             $('.select2-search input').prop('readonly', true)
         }
+        $( "#tabs" ).tabs();
     })
 
     // run interval timers to regularly update map and timediffs

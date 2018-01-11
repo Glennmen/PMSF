@@ -92,6 +92,9 @@ $excludeMinIV = '[131, 143, 147, 148, 149, 248]';                         // [] 
 $noMinIV = false;                                                // true/false
 $minIV = '0';                                                   // "0" for empty or a number
 
+$noMinLevel = false;                                                // true/false
+$minLevel = '0';                                                   // "0" for empty or a number
+
 $noGyms = false;                                                    // true/false
 $enableGyms = 'false';                                              // true/false
 $noGymSidebar = false;                                              // true/false
