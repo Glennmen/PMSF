@@ -2731,7 +2731,7 @@ $(function () {
         if (isTouchDevice() && isMobileDevice()) {
             $('.select2-search input').prop('readonly', true)
         }
-        $( "#tabs" ).tabs();
+        $('#tabs').tabs()
     })
 
     // run interval timers to regularly update map and timediffs
