@@ -68,7 +68,7 @@ if ($blockIframe) {
                     break;
                 }
                 echo "<span class='pokemon-icon-sprite' data-value='" . $k . "'><span class='$k inner-bg' style='background-position:-" . $i * 48.25 . "px -".$z."px'></span>";
-                if(!$noPokemonNumbers){
+                if (!$noPokemonNumbers) {
                     echo "<span class='pokemon-number'>" . $k . "</span>";
                 }
                 echo "</span>";
@@ -149,7 +149,7 @@ if ($blockIframe) {
         <div id="nav-accordion">
             <?php
             if (!$noPokemon) {
-            ?>
+                ?>
             <h3>Pokemon</h3>
             <div>
                 <?php
@@ -163,8 +163,7 @@ if ($blockIframe) {
                             <span class="switch-handle"></span>
                         </label>
                     </div>
-                </div>';
-                ?>
+                </div>'; ?>
                 <div id="pokemon-filter-wrapper" style="display:none">
                     <div id="tabs">
                         <ul>
@@ -186,8 +185,7 @@ if ($blockIframe) {
                                     </label>
                                 </div>
                                 <?php
-                            }
-                            ?>
+                            } ?>
                         </div>
                         <div id="tabs-2">
                             <?php
@@ -204,8 +202,7 @@ if ($blockIframe) {
                                     </label>
                                 </div>
                                 <?php
-                            }
-                            ?>
+                            } ?>
                         </div>
                     </div>
 
@@ -300,8 +297,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                    }
-                    ?>
+                    } ?>
                     <?php
                     if (!$noGyms) {
                         echo '<div class="form-control switch-container">
@@ -314,8 +310,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                    }
-                    ?>
+                    } ?>
                     <div id="gyms-filter-wrapper" style="display:none">
                         <div class="form-control switch-container" id="team-gyms-only-wrapper">
                             <h3>Team</h3>
