@@ -53,7 +53,7 @@ if ($blockIframe) {
     <link rel="apple-touch-icon" href="static/appicons/180x180.png"
           sizes="180x180">
     <?php
-        function pokemonFilterImages($pathToImages)
+        function pokemonFilterImages($noPokemonNumbers)
         {
             global $mons;
             if (empty($mons)) {
@@ -67,8 +67,11 @@ if ($blockIframe) {
                 if ($k > 386) {
                     break;
                 }
-                echo "<span class='pokemon-icon-sprite' data-value='" . $k . "'><span class='$k inner-bg' style='background-position:-" . $i * 48.25 . "px -".$z."px'></span></span>";
-                //echo "<img src='" . $pathToImages . "$k.png' class='$k pokemon-icon' data-value='" . $k . "' alt='" . $pokemon['name'] . "' title='" . $pokemon['name'] . "'/>";
+                echo "<span class='pokemon-icon-sprite' data-value='" . $k . "'><span class='$k inner-bg' style='background-position:-" . $i * 48.25 . "px -".$z."px'></span>";
+                if(!$noPokemonNumbers){
+                    echo "<span class='pokemon-number'>" . $k . "</span>";
+                }
+                echo "</span>";
                 if ($i == 27) {
                     $i = -1;
                     $z = $z + 48.25;
@@ -144,11 +147,13 @@ if ($blockIframe) {
     <!-- NAV -->
     <nav id="nav">
         <div id="nav-accordion">
+            <?php
+            if (!$noPokemon) {
+            ?>
             <h3>Pokemon</h3>
             <div>
                 <?php
-                if (!$noPokemon) {
-                    echo '<div class=" form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
+                echo '<div class=" form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
                     <h3>Pokemon</h3>
                     <div class="onoffswitch">
                         <input id="pokemon-switch" type="checkbox" name="pokemon-switch" class="onoffswitch-checkbox"
@@ -159,7 +164,6 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                }
                 ?>
                 <div id="pokemon-filter-wrapper" style="display:none">
                     <div id="tabs">
@@ -176,7 +180,7 @@ if ($blockIframe) {
                                         <div class="pokemon-container">
                                             <input id="exclude-pokemon" type="text" readonly="true">
                                             <?php
-                                            pokemonFilterImages($pathToImages); ?>
+                                            pokemonFilterImages($noPokemonNumbers); ?>
                                         </div>
                                         <a href="#" class="select-all">All</a><a href="#" class="hide-all">None</a>
                                     </label>
@@ -185,7 +189,7 @@ if ($blockIframe) {
                             }
                             ?>
                         </div>
-                        <div id="tabs-2" >
+                        <div id="tabs-2">
                             <?php
                             if (!$noExcludeMinIV) {
                                 ?>
@@ -194,7 +198,7 @@ if ($blockIframe) {
                                         <div class="pokemon-container">
                                             <input id="exclude-min-iv" type="text" readonly="true">
                                             <?php
-                                            pokemonFilterImages($pathToImages); ?>
+                                            pokemonFilterImages($noPokemonNumbers); ?>
                                         </div>
                                         <a href="#" class="select-all">All</a><a href="#" class="hide-all">None</a>
                                     </label>
@@ -225,14 +229,19 @@ if ($blockIframe) {
                         </div>';
                         } ?>
                     </div>
-
                 </div>
             </div>
-            <h3>Gym/Raid</h3>
-            <div>
-                <?php
-                if (!$noRaids) {
-                    echo '<div class="form-control switch-container" id="raids-wrapper">
+            <?php
+            }
+            ?>
+            <?php
+            if (!$noRaids || !$noGyms) {
+                ?>
+                <h3>Gym/Raid</h3>
+                <div>
+                    <?php
+                    if (!$noRaids) {
+                        echo '<div class="form-control switch-container" id="raids-wrapper">
                     <h3>Raids</h3>
                     <div class="onoffswitch">
                         <input id="raids-switch" type="checkbox" name="raids-switch"
@@ -243,44 +252,44 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                }
-                ?>
-                <div id="raids-filter-wrapper" style="display:none">
-                    <div class="form-control switch-container" id="active-raids-wrapper">
-                        <h3>Only Active Raids</h3>
-                        <div class="onoffswitch">
-                            <input id="active-raids-switch" type="checkbox" name="active-raids-switch"
-                                   class="onoffswitch-checkbox" checked>
-                            <label class="onoffswitch-label" for="active-raids-switch">
-                                <span class="switch-label" data-on="On" data-off="Off"></span>
-                                <span class="switch-handle"></span>
-                            </label>
+                    }
+                    ?>
+                    <div id="raids-filter-wrapper" style="display:none">
+                        <div class="form-control switch-container" id="active-raids-wrapper">
+                            <h3>Only Active Raids</h3>
+                            <div class="onoffswitch">
+                                <input id="active-raids-switch" type="checkbox" name="active-raids-switch"
+                                       class="onoffswitch-checkbox" checked>
+                                <label class="onoffswitch-label" for="active-raids-switch">
+                                    <span class="switch-label" data-on="On" data-off="Off"></span>
+                                    <span class="switch-handle"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-control switch-container" id="min-level-raids-filter-wrapper">
+                            <h3>Minimum Raid Level</h3>
+                            <select name="min-level-raids-filter-switch" id="min-level-raids-filter-switch">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form-control switch-container" id="max-level-raids-filter-wrapper">
+                            <h3>Maximum Raid Level</h3>
+                            <select name="max-level-raids-filter-switch" id="max-level-raids-filter-switch">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="form-control switch-container" id="min-level-raids-filter-wrapper">
-                        <h3>Minimum Raid Level</h3>
-                        <select name="min-level-raids-filter-switch" id="min-level-raids-filter-switch">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                    <div class="form-control switch-container" id="max-level-raids-filter-wrapper">
-                        <h3>Maximum Raid Level</h3>
-                        <select name="max-level-raids-filter-switch" id="max-level-raids-filter-switch">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                </div>
-                <?php
-                if (!$noGymSidebar && (!$noGyms || !$noRaids)) {
-                    echo '<div id="gym-sidebar-wrapper" class="form-control switch-container">
+                    <?php
+                    if (!$noGymSidebar && (!$noGyms || !$noRaids)) {
+                        echo '<div id="gym-sidebar-wrapper" class="form-control switch-container">
                     <h3>Use Gym Sidebar</h3>
                     <div class="onoffswitch">
                         <input id="gym-sidebar-switch" type="checkbox" name="gym-sidebar-switch"
@@ -291,11 +300,11 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                }
-                ?>
-                <?php
-                if (!$noGyms) {
-                    echo '<div class="form-control switch-container">
+                    }
+                    ?>
+                    <?php
+                    if (!$noGyms) {
+                        echo '<div class="form-control switch-container">
                     <h3>Gyms</h3>
                     <div class="onoffswitch">
                         <input id="gyms-switch" type="checkbox" name="gyms-switch" class="onoffswitch-checkbox" checked>
@@ -305,68 +314,79 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                }
-                ?>
-                <div id="gyms-filter-wrapper" style="display:none">
-                    <div class="form-control switch-container" id="team-gyms-only-wrapper">
-                        <h3>Team</h3>
-                        <select name="team-gyms-filter-switch" id="team-gyms-only-switch">
-                            <option value="0">All</option>
-                            <option value="1">Mystic</option>
-                            <option value="2">Valor</option>
-                            <option value="3">Instinct</option>
-                        </select>
-                    </div>
-                    <div class="form-control switch-container" id="open-gyms-only-wrapper">
-                        <h3>Open Spot</h3>
-                        <div class="onoffswitch">
-                            <input id="open-gyms-only-switch" type="checkbox" name="open-gyms-only-switch"
-                                   class="onoffswitch-checkbox" checked>
-                            <label class="onoffswitch-label" for="open-gyms-only-switch">
-                                <span class="switch-label" data-on="On" data-off="Off"></span>
-                                <span class="switch-handle"></span>
-                            </label>
+                    }
+                    ?>
+                    <div id="gyms-filter-wrapper" style="display:none">
+                        <div class="form-control switch-container" id="team-gyms-only-wrapper">
+                            <h3>Team</h3>
+                            <select name="team-gyms-filter-switch" id="team-gyms-only-switch">
+                                <option value="0">All</option>
+                                <option value="1">Mystic</option>
+                                <option value="2">Valor</option>
+                                <option value="3">Instinct</option>
+                            </select>
                         </div>
-                    </div>
-                    <div class="form-control switch-container" id="min-level-gyms-filter-wrapper">
-                        <h3>Minimum Free Slots</h3>
-                        <select name="min-level-gyms-filter-switch" id="min-level-gyms-filter-switch">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                    </div>
-                    <div class="form-control switch-container" id="max-level-gyms-filter-wrapper">
-                        <h3>Maximum Free Slots</h3>
-                        <select name="max-level-gyms-filter-switch" id="max-level-gyms-filter-switch">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                    </div>
-                    <div class="form-control switch-container" id="last-update-gyms-wrapper">
-                        <h3>Last Scan</h3>
-                        <select name="last-update-gyms-switch" id="last-update-gyms-switch">
-                            <option value="0">All</option>
-                            <option value="1">Last Hour</option>
-                            <option value="6">Last 6 Hours</option>
-                            <option value="12">Last 12 Hours</option>
-                            <option value="24">Last 24 Hours</option>
-                            <option value="168">Last Week</option>
-                        </select>
+                        <div class="form-control switch-container" id="open-gyms-only-wrapper">
+                            <h3>Open Spot</h3>
+                            <div class="onoffswitch">
+                                <input id="open-gyms-only-switch" type="checkbox" name="open-gyms-only-switch"
+                                       class="onoffswitch-checkbox" checked>
+                                <label class="onoffswitch-label" for="open-gyms-only-switch">
+                                    <span class="switch-label" data-on="On" data-off="Off"></span>
+                                    <span class="switch-handle"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-control switch-container" id="min-level-gyms-filter-wrapper">
+                            <h3>Minimum Free Slots</h3>
+                            <select name="min-level-gyms-filter-switch" id="min-level-gyms-filter-switch">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                        <div class="form-control switch-container" id="max-level-gyms-filter-wrapper">
+                            <h3>Maximum Free Slots</h3>
+                            <select name="max-level-gyms-filter-switch" id="max-level-gyms-filter-switch">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                        <div class="form-control switch-container" id="last-update-gyms-wrapper">
+                            <h3>Last Scan</h3>
+                            <select name="last-update-gyms-switch" id="last-update-gyms-switch">
+                                <option value="0">All</option>
+                                <option value="1">Last Hour</option>
+                                <option value="6">Last 6 Hours</option>
+                                <option value="12">Last 12 Hours</option>
+                                <option value="24">Last 24 Hours</option>
+                                <option value="168">Last Week</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <?php
-                if (!$noPokestops) {
-                    echo '<div class="form-control switch-container">
+            }
+            ?>
+
+            <?php
+            if (!$noSearchLocation || !$noStartMe || !$noStartLast || !$noFollowMe) {
+                echo '<h3>Location &amp; Search</h3>
+            <div>';
+            }
+            ?>
+            <?php
+            if (!$noPokestops) {
+                echo '<div class="form-control switch-container">
                     <h3>Pokestops</h3>
                     <div class="onoffswitch">
                         <input id="pokestops-switch" type="checkbox" name="pokestops-switch"
@@ -377,21 +397,21 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                }
-                ?>
-                <?php
-                if ($map != "monocle") {
-                    echo '<div class="form-control switch-container" id = "lured-pokestops-only-wrapper" style = "display:none">
+            }
+            ?>
+            <?php
+            if ($map != "monocle") {
+                echo '<div class="form-control switch-container" id = "lured-pokestops-only-wrapper" style = "display:none">
                     <select name = "lured-pokestops-only-switch" id = "lured-pokestops-only-switch">
                         <option value = "0"> All</option>
                         <option value = "1"> Only Lured </option>
                     </select>
                 </div>';
-                }
-                ?>
-                <?php
-                if ($map != "monocle" && !$noScannedLocations) {
-                    echo '<div class="form-control switch-container">
+            }
+            ?>
+            <?php
+            if ($map != "monocle" && !$noScannedLocations) {
+                echo '<div class="form-control switch-container">
                     <h3> Scanned Locations </h3>
                     <div class="onoffswitch">
                         <input id = "scanned-switch" type = "checkbox" name = "scanned-switch" class="onoffswitch-checkbox">
@@ -401,11 +421,11 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                }
-                ?>
-                <?php
-                if (!$noSpawnPoints) {
-                    echo '<div class="form-control switch-container">
+            }
+            ?>
+            <?php
+            if (!$noSpawnPoints) {
+                echo '<div class="form-control switch-container">
                     <h3> Spawn Points </h3>
                     <div class="onoffswitch">
                         <input id="spawnpoints-switch" type="checkbox" name="spawnpoints-switch"
@@ -416,11 +436,11 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                }
-                ?>
-                <?php
-                if (!$noRanges) {
-                    echo '<div class="form-control switch-container">
+            }
+            ?>
+            <?php
+            if (!$noRanges) {
+                echo '<div class="form-control switch-container">
                     <h3>Ranges</h3>
                     <div class="onoffswitch">
                         <input id="ranges-switch" type="checkbox" name="ranges-switch" class="onoffswitch-checkbox">
@@ -430,15 +450,6 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                }
-                ?>
-
-            </div>
-
-            <?php
-            if (!$noSearchLocation || !$noStartMe || !$noStartLast || !$noFollowMe) {
-                echo '<h3>Location &amp; Search</h3>
-            <div>';
             }
             ?>
             <?php
@@ -532,7 +543,7 @@ if ($blockIframe) {
                         <div style="max-height:165px;overflow-y:auto;">
                             <input id="notify-pokemon" type="text" readonly="true"/>
                             <?php
-                                pokemonFilterImages($pathToImages); ?>
+                                pokemonFilterImages($noPokemonNumbers); ?>
                         </div>
                     </label>
                 </div>
@@ -803,6 +814,7 @@ if ($blockIframe) {
     var spriteFile = '<?php echo $copyrightSafe ? 'static/icons-safe-1.png' : 'static/icons-im-1.png' ?>';
     var spriteFileLarge = '<?php echo $copyrightSafe ? 'static/icons-safe-1-bigger.png' : 'static/icons-im-1-bigger.png' ?>';
     var icons = '<?php echo $copyrightSafe ? 'static/icons-safe/' : 'static/icons-pokemon/' ?>';
+    var mapType = '<?php echo $map; ?>';
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="static/dist/js/map.common.min.js"></script>

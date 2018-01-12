@@ -4,6 +4,12 @@ namespace Scanner;
 
 class RocketMap extends Scanner
 {
+    private $cp_multiplier;
+    public function __construct()
+    {
+        $this->set_cp_multiplier();
+    }
+
     public function get_active($eids, $miniv, $minlevel, $exminiv, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
         global $db;
@@ -57,6 +63,13 @@ class RocketMap extends Scanner
                 $conds[] = '(((individual_attack + individual_defense + individual_stamina)' . $float . ' / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
+        if (!empty($minlevel) && !is_nan((float)$minlevel) && $minlevel != 0) {
+            if (empty($exminiv)) {
+                $conds[] = '(cp_multiplier >= ' . $this->cp_multiplier[$minlevel];
+            } else {
+                $conds[] = '(cp_multiplier >= ' . $this->cp_multiplier[$minlevel] . ' OR pokemon_id IN(' . $exminiv . ') )';
+            }
+        }
         return $this->query_active($select, $conds, $params);
     }
 
@@ -100,7 +113,13 @@ class RocketMap extends Scanner
                 $conds[] = '(((individual_attack + individual_defense + individual_stamina)' . $float . ' / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
-
+        if (!empty($minlevel) && !is_nan((float)$minlevel) && $minlevel != 0) {
+            if (empty($exminiv)) {
+                $conds[] = '(cp_multiplier >= ' . $this->cp_multiplier[$minlevel];
+            } else {
+                $conds[] = '(cp_multiplier >= ' . $this->cp_multiplier[$minlevel] . ' OR pokemon_id IN(' . $exminiv . ') )';
+            }
+        }
         return $this->query_active($select, $conds, $params);
     }
 
@@ -600,5 +619,45 @@ class RocketMap extends Scanner
             $i++;
         }
         return $data;
+    }
+    private function set_cp_multiplier()
+    {
+        $this->cp_multiplier = array(
+            1 =>0.094,
+            2 =>0.16639787,
+            3 =>0.21573247,
+            4 =>0.25572005,
+            5 =>0.29024988,
+            6 =>0.3210876,
+            7 =>0.34921268,
+            8 =>0.37523559,
+            9 =>0.39956728,
+            10 =>0.42250001,
+            11 =>0.44310755,
+            12 =>0.46279839,
+            13 =>0.48168495,
+            14 =>0.49985844,
+            15 =>0.51739395,
+            16 =>0.53435433,
+            17 =>0.55079269,
+            18 =>0.56675452,
+            19 =>0.58227891,
+            20 =>0.59740001,
+            21 =>0.61215729,
+            22 =>0.62656713,
+            23 =>0.64065295,
+            24 =>0.65443563,
+            25 =>0.667934,
+            26 =>0.68116492,
+            27 =>0.69414365,
+            28 =>0.70688421,
+            29 =>0.71939909,
+            30 =>0.7317,
+            31 =>0.73776948,
+            32 =>0.74378943,
+            33 =>0.74976104,
+            34 =>0.75568551,
+            35 =>0.76156384
+        );
     }
 }

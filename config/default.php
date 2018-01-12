@@ -82,6 +82,7 @@ $pathToImages = '/static/icons-safe/';                              // Path to i
 
 $noPokemon = false;                                                 // true/false
 $enablePokemon = 'true';                                            // true/false
+$noPokemonNumbers = false;                                          // true/false
 $noHighLevelData = false;                                           // true/false
 $noHidePokemon = false;                                             // true/false
 $hidePokemon = '[10, 13, 16, 19, 21, 29, 32, 41, 46, 48, 50, 52, 56, 74, 77, 96, 111, 133,

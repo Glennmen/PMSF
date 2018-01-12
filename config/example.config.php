@@ -67,10 +67,9 @@ $motdContent = "This is an example MOTD<br>Do whatever you like with it.";
 
 /* Marker Settings */
 
-$pathToImages = '/static/icons-safe/';                              // Path to images. Images must not contain 0s
-
 $noPokemon = false;                                                 // true/false
 $enablePokemon = 'true';                                            // true/false
+$noPokemonNumbers = false;                                          // true/false
 $noHighLevelData = false;                                           // true/false
 $noHidePokemon = false;                                             // true/false
 $hidePokemon = '[10, 13, 16, 19, 21, 29, 32, 41, 46, 48, 50, 52, 56, 74, 77, 96, 111, 133,
