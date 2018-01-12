@@ -7,6 +7,7 @@ class RocketMap extends Scanner
     private $cp_multiplier;
     public function __construct()
     {
+        parent::__construct();
         $this->set_cp_multiplier();
     }
 
