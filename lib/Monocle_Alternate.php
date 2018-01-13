@@ -2,7 +2,7 @@
 
 namespace Scanner;
 
-class Monocle_Monkey extends Monocle
+class Monocle_Alternate extends Monocle
 {
     public function get_active($eids, $miniv, $minlevel, $exminiv, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {

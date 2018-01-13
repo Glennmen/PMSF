@@ -14,7 +14,7 @@ require_once(__DIR__ . '/../utils.php');
 $libs[] = "Scanner.php";
 $libs[] = "Monocle.php";
 $libs[] = "Monocle_Asner.php";
-$libs[] = "Monocle_Monkey.php";
+$libs[] = "Monocle_Alternate.php";
 $libs[] = "RocketMap.php";
 $libs[] = "RocketMap_Sloppy.php";
 
