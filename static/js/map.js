@@ -76,6 +76,7 @@ var assetsPath = 'static/sounds/'
 var iconpath = null
 
 var gymTypes = ['Uncontested', 'Mystic', 'Valor', 'Instinct']
+var triggerGyms = Store.get('triggerGyms')
 
 
 createjs.Sound.registerSound('static/sounds/ding.mp3', 'ding')
@@ -882,7 +883,7 @@ function getGymMarkerIcon(item) {
         teamStr = gymTypes[item['team_id']] + '_' + level
     }
     var exIcon = ''
-    if (park !== 'None' && park !== undefined) {
+    if ((park !== 'None' && park !== undefined) || triggerGyms.includes(item['gym_id'])) {
         exIcon = '<img src="static/images/ex.png" style="position:absolute;right:25px;bottom:2px;"/>'
     }
     if (item['raid_pokemon_id'] != null && item.raid_end > Date.now()) {
@@ -913,12 +914,17 @@ function getGymMarkerIcon(item) {
 }
 
 function setupGymMarker(item) {
+    var zValue = 1
+    if (triggerGyms.includes(item['gym_id'])) {
+        zValue += 1
+    }
     var marker = new RichMarker({
         position: new google.maps.LatLng(item['latitude'], item['longitude']),
         map: map,
         content: getGymMarkerIcon(item),
         flat: true,
-        anchor: RichMarkerPosition.MIDDLE
+        anchor: RichMarkerPosition.MIDDLE,
+        zIndex: zValue
     })
 
     if (!marker.rangeCircle && isRangeActive(map)) {
