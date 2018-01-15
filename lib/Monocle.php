@@ -184,8 +184,8 @@ class Monocle extends Scanner
             $params[':oneLng'] = $oNeLng;
         }
         if ($tstamp > 0) {
-            $conds[] = "updated > :updated";
-            $params[':updated'] = $tstamp;
+            $conds[] = "updated > :lastUpdated";
+            $params[':lastUpdated'] = $tstamp;
         }
 
         return $this->query_spawnpoints($conds, $params);
