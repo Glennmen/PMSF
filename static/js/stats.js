@@ -1,7 +1,3 @@
-var language = document.documentElement.lang === '' ? 'en' : document.documentElement.lang
-var i8lnDictionary = {}
-var languageLookups = 0
-var languageLookupThreshold = 3
 
 function countMarkers(map) { // eslint-disable-line no-unused-vars
     document.getElementById('stats-ldg-label').innerHTML = ''
@@ -153,28 +149,3 @@ function countMarkers(map) { // eslint-disable-line no-unused-vars
         document.getElementById('pokestopList').innerHTML = i8ln('PokéStops markers are disabled')
     }
 }
-
-
-function i8ln(word) {
-    if ($.isEmptyObject(i8lnDictionary) && language !== 'en' && languageLookups < languageLookupThreshold) {
-        $.ajax({
-            url: 'static/dist/locales/' + language + '.min.json',
-            dataType: 'json',
-            async: false,
-            success: function success(data) {
-                i8lnDictionary = data
-            },
-            error: function error(jqXHR, status, _error) {
-                console.log('Error loading i8ln dictionary: ' + _error)
-                languageLookups++
-            }
-        })
-    }
-    if (word in i8lnDictionary) {
-        return i8lnDictionary[word]
-    } else {
-        // Word doesn't exist in dictionary return it as is
-        return word
-    }
-}
-
