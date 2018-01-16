@@ -550,7 +550,7 @@ function gymLabel(item) {
 
     var park = ''
     if (item['park'] !== 'None' && item['park'] !== undefined) {
-        park = 'Park: ' + item['park']
+        park = i8ln('Park') + ': ' + item['park']
     }
 
     var memberStr = ''
@@ -2042,7 +2042,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
 
         var park = ''
         if (result['park'] !== 'None' && result['park'] !== undefined) {
-            park = 'Park: ' + result['park']
+            park = i8ln('Park') + ': ' + result['park']
         }
 
         var raidSpawned = result['raid_level'] != null
