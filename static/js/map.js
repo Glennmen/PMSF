@@ -591,6 +591,9 @@ function gymLabel(item) {
             nameStr +
             raidStr +
             '<div>' +
+            park +
+            '</div>' +
+            '<div>' +
             i8ln('Location') + '<a href="javascript:void(0);" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ');" title="' + i8ln('View in Maps') + '">' + latitude.toFixed(6) + ' , ' + longitude.toFixed(7) + '</a>' +
             '</div>' +
             '<div>' +
@@ -599,9 +602,6 @@ function gymLabel(item) {
             '</div>' +
             '<div>' +
             lastScannedStr +
-            '</div>' +
-            '<div>' +
-            park +
             '</div>' +
             '</center>' +
             '</div>'
@@ -626,6 +626,9 @@ function gymLabel(item) {
             nameStr +
             raidStr +
             '<div><b>' + freeSlots + ' ' + i8ln('Free Slots') + '</b></div>' +
+            '<div>' +
+            park +
+            '</div>' +
             gymCp +
             '<div>' +
             memberStr +
@@ -639,9 +642,6 @@ function gymLabel(item) {
             '</div>' +
             '<div>' +
             lastScannedStr +
-            '</div>' +
-            '<div>' +
-            park +
             '</div>' +
             '</center>' +
             '</div>'
