@@ -453,7 +453,7 @@ function pokemonLabel(item) {
     if (gender != null) {
         details +=
             '<div>' +
-            'Gender: ' + genderType[gender - 1]
+            i8ln('Gender') + ': ' + genderType[gender - 1]
         if (weight != null) {
             details += ' | ' + i8ln('Weight') + ': ' + weight.toFixed(2) + 'kg'
         }
