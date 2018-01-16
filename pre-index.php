@@ -474,6 +474,20 @@ if ($blockIframe) {
             }
             ?>
             <?php
+            if (!$noNotifyIvZero) {
+                echo '<div class="form-control switch-container">
+                <h3>Notify on 0 iv</h3>
+                <div class="onoffswitch">
+                    <input id="notifyivzero-switch" type="checkbox" name="notifyivzero-switch" class="onoffswitch-checkbox"
+                           checked>
+                    <label class="onoffswitch-label" for="notifyivzero-switch">
+                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                        <span class="switch-handle"></span>
+                    </label>
+                </div></div>';
+            }
+            ?>
+            <?php
             if (!$noNotifyLevel) {
                 echo '<div class="form-control">
                 <label for="notify-level">
@@ -686,6 +700,7 @@ if ($blockIframe) {
     var notifyPokemon = <?php echo $noNotifyPokemon ? '[]' : $notifyPokemon ?>;
     var notifyRarity = <?php echo $noNotifyRarity ? '[]' : $notifyRarity ?>;
     var notifyIv = <?php echo $noNotifyIv ? '""' : $notifyIv ?>;
+    var notifyIvZero = <?php echo $noNotifyIvZero ? 'false' : $notifyIvZero ?>;
     var notifyLevel = <?php echo $noNotifyLevel ? '""' : $notifyLevel ?>;
     var notifyRaid = <?php echo $noNotifyRaid ? 0 : $notifyRaid ?>;
     var enableRaids = <?php echo $noRaids ? 'false' : $enableRaids ?>;

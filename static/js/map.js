@@ -7,6 +7,7 @@ var $selectPokemonNotify
 var $selectRarityNotify
 var $textPerfectionNotify
 var $textLevelNotify
+var $selectNotifyIvZero
 var $raidNotify
 var $selectStyle
 var $selectIconSize
@@ -322,6 +323,7 @@ function initSidebar() {
     $('#spawnpoints-switch').prop('checked', Store.get('showSpawnpoints'))
     $('#ranges-switch').prop('checked', Store.get('showRanges'))
     $('#sound-switch').prop('checked', Store.get('playSound'))
+    $('#notifyivzero-switch').prop('checked', Store.get('remember_show_ivzero'))
     $('#cries-switch').prop('checked', Store.get('playCries'))
     $('#cries-switch-wrapper').toggle(Store.get('playSound'))
     $('#cries-type-filter-wrapper').toggle(Store.get('playCries'))
@@ -837,6 +839,15 @@ function customizePokemonMarker(marker, item, skipNotification) {
     if (item['individual_attack'] != null) {
         var perfection = getIv(item['individual_attack'], item['individual_defense'], item['individual_stamina'])
         if (notifiedMinPerfection > 0 && perfection >= notifiedMinPerfection) {
+            if (!skipNotification) {
+                checkAndCreateSound(item['pokemon_id'])
+                sendNotification(getNotifyText(item).fav_title, getNotifyText(item).fav_text, iconpath + item['pokemon_id'] + '.png', item['latitude'], item['longitude'])
+            }
+            if (marker.animationDisabled !== true) {
+                marker.setAnimation(google.maps.Animation.BOUNCE)
+            }
+        }
+        if ($selectNotifyIvZero && perfection === 0) {
             if (!skipNotification) {
                 checkAndCreateSound(item['pokemon_id'])
                 sendNotification(getNotifyText(item).fav_title, getNotifyText(item).fav_text, iconpath + item['pokemon_id'] + '.png', item['latitude'], item['longitude'])
@@ -2512,6 +2523,7 @@ $(function () {
     $selectRarityNotify = $('#notify-rarity')
     $textPerfectionNotify = $('#notify-perfection')
     $textLevelNotify = $('#notify-level')
+    $selectNotifyIvZero = $('#notifyivzero-switch')
     $raidNotify = $('#notify-raid')
     var numberOfPokemon = 386
 
@@ -2613,6 +2625,7 @@ $(function () {
         $selectPokemonNotify.val(Store.get('remember_select_notify')).trigger('change')
         $selectRarityNotify.val(Store.get('remember_select_rarity_notify')).trigger('change')
         $textPerfectionNotify.val(Store.get('remember_text_perfection_notify')).trigger('change')
+        $selectNotifyIvZero.val(Store.get('remember_show_ivzero')).trigger('change')
         $textLevelNotify.val(Store.get('remember_text_level_notify')).trigger('change')
         $raidNotify.val(Store.get('remember_raid_notify')).trigger('change')
 
@@ -2731,6 +2744,9 @@ $(function () {
             wrapper.hide(options)
         }
         return buildSwitchChangeListener(mapData, ['pokestops'], 'showPokestops').bind(this)()
+    })
+    $('#notifyivzero-switch').change(function () {
+        Store.set('remember_show_ivzero', this.checked)
     })
 
     $('#sound-switch').change(function () {
