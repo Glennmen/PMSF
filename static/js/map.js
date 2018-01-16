@@ -595,8 +595,8 @@ function gymLabel(item) {
             '<div>' +
             lastScannedStr +
             '</div>' +
-            '<div>' + 
-            park + 
+            '<div>' +
+            park +
             '</div>' +
             '</center>' +
             '</div>'
@@ -633,8 +633,8 @@ function gymLabel(item) {
             '<div>' +
             lastScannedStr +
             '</div>' +
-            '<div>' + 
-            park + 
+            '<div>' +
+            park +
             '</div>' +
             '</center>' +
             '</div>'
@@ -2039,6 +2039,11 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
                 '</center>'
         }
 
+        var park = ''
+        if (result['park'] !== 'None' && result['park'] !== undefined) {
+            park = 'Park: ' + result['park']
+        }
+
         var raidSpawned = result['raid_level'] != null
         var raidStarted = result['raid_pokemon_id'] != null
 
@@ -2097,6 +2102,9 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             '</div>' +
             raidStr +
             gymLevelStr +
+            '<div>' +
+            park +
+            '</div>' +
             '<div style="font-size: .7em">' +
             'Last Modified: ' + lastModifiedStr +
             '</div>' +
