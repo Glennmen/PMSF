@@ -914,17 +914,12 @@ function getGymMarkerIcon(item) {
 }
 
 function setupGymMarker(item) {
-    var zValue = 1
-    if (triggerGyms.includes(item['gym_id'])) {
-        zValue += 1
-    }
     var marker = new RichMarker({
         position: new google.maps.LatLng(item['latitude'], item['longitude']),
         map: map,
         content: getGymMarkerIcon(item),
         flat: true,
-        anchor: RichMarkerPosition.MIDDLE,
-        zIndex: zValue
+        anchor: RichMarkerPosition.MIDDLE
     })
 
     if (!marker.rangeCircle && isRangeActive(map)) {
