@@ -78,6 +78,9 @@ var iconpath = null
 var gymTypes = ['Uncontested', 'Mystic', 'Valor', 'Instinct']
 var triggerGyms = Store.get('triggerGyms')
 
+var noExGyms
+var noParkInfo
+
 
 createjs.Sound.registerSound('static/sounds/ding.mp3', 'ding')
 
@@ -552,7 +555,7 @@ function gymLabel(item) {
     }
 
     var park = ''
-    if (item['park'] !== 'None' && item['park'] !== undefined) {
+    if ((item['park'] !== 'None' && item['park'] !== undefined) && (noParkInfo === false)) {
         park = i8ln('Park') + ': ' + item['park']
     }
 
@@ -889,7 +892,8 @@ function getGymMarkerIcon(item) {
         teamStr = gymTypes[item['team_id']] + '_' + level
     }
     var exIcon = ''
-    if ((park !== 'None' && park !== undefined) || triggerGyms.includes(item['gym_id'])) {
+
+    if ((((park !== 'None' && park !== undefined) || triggerGyms.includes(item['gym_id'])) && (noExGyms === false))) {
         exIcon = '<img src="static/images/ex.png" style="position:absolute;right:25px;bottom:2px;"/>'
     }
     if (item['raid_pokemon_id'] != null && item.raid_end > Date.now()) {
@@ -2047,7 +2051,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         }
 
         var park = ''
-        if (result['park'] !== 'None' && result['park'] !== undefined) {
+        if (((result['park'] !== 'None' && result['park'] !== undefined) && (noParkInfo === false))) {
             park = i8ln('Park') + ': ' + result['park']
         }
 
