@@ -89,6 +89,7 @@ $noGyms = false;                                                    // true/fals
 $enableGyms = 'false';                                              // true/false
 $noGymSidebar = false;                                              // true/false
 $gymSidebar = 'true';                                               // true/false
+$noTrainerName = false;                                             // true/false
 
 $noRaids = false;                                                   // true/false
 $enableRaids = 'false';                                             // true/false
@@ -159,7 +160,7 @@ $noIconSize = false;                                                // true/fals
 $iconSize = 0;                                                      // -8, 0, 10, 20
 
 $noIconNotifySizeModifier = false;                                  // true/false
-$IconNotifySizeModifier = 45;                                       // 0, 15, 30, 45
+$iconNotifySizeModifier = 45;                                       // 0, 15, 30, 45
 
 $noGymStyle = false;                                                // true/false
 $gymStyle = 'ingame';                                               // ingame, shield
@@ -168,6 +169,10 @@ $noLocationStyle = false;                                           // true/fals
 $locationStyle = 'none';                                            // none, google, red, red_animated, blue, blue_animated, yellow, yellow_animated, pokesition, pokeball
 
 $osmTileServer = 'tile.openstreetmap.org';                          // osm tile server (no trailing slash)
+
+$triggerGyms = '[]';                                                // Add Gyms that the OSM-Query doesn't take care of like '["gym_id", "gym_id"]'
+$noExGyms = false;                                                  // Do not display EX-Gyms on the map
+$noParkInfo = false;                                                // Do not display Park info on the map
 
 //-----------------------------------------------------
 // Raid API

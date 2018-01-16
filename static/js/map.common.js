@@ -1031,7 +1031,7 @@ var StoreOptions = {
         },
     'iconNotifySizeModifier':
         {
-            default: 45,
+            default: iconNotifySizeModifier,
             type: StoreTypes.Number
         },
     'searchMarkerStyle':
@@ -1068,6 +1068,11 @@ var StoreOptions = {
         {
             default: icons,
             type: StoreTypes.String
+        },
+    'triggerGyms':
+        {
+            default: triggerGyms,
+            type: StoreTypes.JSON
         }
 }
 
