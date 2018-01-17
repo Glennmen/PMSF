@@ -249,8 +249,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                    }
-                    ?>
+                    } ?>
                     <div id="raids-filter-wrapper" style="display:none">
                         <div class="form-control switch-container" id="active-raids-wrapper">
                             <h3><?php echo i8ln('Only Active Raids') ?></h3>
