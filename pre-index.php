@@ -371,12 +371,10 @@ if ($blockIframe) {
                 <?php
             }
             ?>
-
             <?php
             if (!$noSearchLocation || !$noStartMe || !$noStartLast || !$noFollowMe) {
                 echo '<h3>'.i8ln('Location &amp; Search').'</h3>
             <div>';
-            }
             ?>
             <?php
             if (!$noPokestops) {
@@ -515,13 +513,9 @@ if ($blockIframe) {
                 </div>
             </div>';
             }
-            ?>
-            <?php
-            if (!$noSearchLocation || !$noStartMe || !$noStartLast || !$noFollowMe) {
-                echo '</div>';
+            echo '</div>';
             }
             ?>
-
             <?php
             if (!$noNotifyPokemon || !$noNotifyRarity || !$noNotifyIv || !$noNotifySound || !$noNotifyRaid) {
                 echo '<h3>'.i8ln('Notification').'</h3>
