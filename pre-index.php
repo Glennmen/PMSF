@@ -296,8 +296,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                    }
-                    ?>
+                    } ?>
                     <?php
                     if (!$noGyms) {
                         echo '<div class="form-control switch-container">
@@ -310,8 +309,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                    }
-                    ?>
+                    } ?>
                     <div id="gyms-filter-wrapper" style="display:none">
                         <div class="form-control switch-container" id="team-gyms-only-wrapper">
                             <h3><?php echo i8ln('Team') ?></h3>
@@ -537,9 +535,8 @@ if ($blockIframe) {
                         <h3>'.i8ln('Notify of Pokemon').'</h3><a href="#" class="select-all">All</a>/<a href="#" class="hide-all">None</a>
                         <div style="max-height:165px;overflow-y:auto;">
                             <input id="notify-pokemon" type="text" readonly="true"/>';
-                           
-                                pokemonFilterImages($noPokemonNumbers);
-                       echo '</div>
+                pokemonFilterImages($noPokemonNumbers);
+                echo '</div>
                     </label>
                 </div>';
             }
