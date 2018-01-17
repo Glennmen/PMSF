@@ -101,7 +101,7 @@
     "spriteFile": true,
     "spriteFileLarge": true,
     "icons": true,
-    "mapType": true
+    "mapType": true,
     "triggerGyms": true,
     "i8ln": false
   }
