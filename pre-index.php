@@ -374,8 +374,7 @@ if ($blockIframe) {
             <?php
             if (!$noSearchLocation || !$noStartMe || !$noStartLast || !$noFollowMe) {
                 echo '<h3>'.i8ln('Location &amp; Search').'</h3>
-            <div>';
-            ?>
+            <div>'; ?>
             <?php
             if (!$noPokestops) {
                 echo '<div class="form-control switch-container">
@@ -389,8 +388,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-            }
-            ?>
+            } ?>
             <?php
             if ($map != "monocle") {
                 echo '<div class="form-control switch-container" id = "lured-pokestops-only-wrapper" style = "display:none">
@@ -399,8 +397,7 @@ if ($blockIframe) {
                         <option value = "1"> '.i8ln('Only Lured').' </option>
                     </select>
                 </div>';
-            }
-            ?>
+            } ?>
             <?php
             if ($map != "monocle" && !$noScannedLocations) {
                 echo '<div class="form-control switch-container">
@@ -413,8 +410,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-            }
-            ?>
+            } ?>
             <?php
             if (!$noSpawnPoints) {
                 echo '<div class="form-control switch-container">
@@ -428,8 +424,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-            }
-            ?>
+            } ?>
             <?php
             if (!$noRanges) {
                 echo '<div class="form-control switch-container">
@@ -442,8 +437,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-            }
-            ?>
+            } ?>
             <?php
             if (!$noSearchLocation) {
                 echo '<div class="form-control switch-container" style="display:{{is_fixed}}">
@@ -452,8 +446,7 @@ if ($blockIframe) {
                     <input id="next-location" type="text" name="next-location" placeholder="'.i8ln('Change search location').'">
                 </label>
             </div>';
-            }
-            ?>
+            } ?>
             <?php
             if (!$noStartMe) {
                 echo '<div class="form-control switch-container">
@@ -467,8 +460,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-            }
-            ?>
+            } ?>
             <?php
             if (!$noStartLast) {
                 echo '<div class="form-control switch-container">
@@ -482,8 +474,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-            }
-            ?>
+            } ?>
             <?php
             if (!$noFollowMe) {
                 echo '<div class="form-control switch-container">
@@ -497,12 +488,11 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-            }
-            ?>
+            } ?>
             <?php
             if (!$noSpawnArea) {
                 echo '<div id="spawn-area-wrapper" class="form-control switch-container">
-                <h3> '.i8ln('Spawn area').' </h3>
+                <h3> ' . i8ln('Spawn area') . ' </h3>
                 <div class="onoffswitch">
                     <input id = "spawn-area-switch" type = "checkbox" name = "spawn-area-switch"
                            class="onoffswitch-checkbox"/>
@@ -513,7 +503,7 @@ if ($blockIframe) {
                 </div>
             </div>';
             }
-            echo '</div>';
+                echo '</div>';
             }
             ?>
             <?php
