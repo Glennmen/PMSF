@@ -556,7 +556,7 @@ function gymLabel(item) {
     }
 
     var park = ''
-    if ((item['park'] !== 'None' && item['park'] !== undefined && park) && (noParkInfo === false)) {
+    if ((item['park'] !== 'None' && item['park'] !== undefined && item['park']) && (noParkInfo === false)) {
         park = i8ln('Park') + ': ' + item['park']
     }
 
@@ -2052,7 +2052,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         }
 
         var park = ''
-        if (((result['park'] !== 'None' && result['park'] !== undefined && park) && (noParkInfo === false))) {
+        if (((result['park'] !== 'None' && result['park'] !== undefined && result['park']) && (noParkInfo === false))) {
             park = i8ln('Park') + ': ' + result['park']
         }
 
