@@ -65,6 +65,7 @@ module.exports = function (grunt) {
                     'static/dist/data/moves.min.json': 'static/data/moves.json',
                     'static/dist/data/mapstyle.min.json': 'static/data/mapstyle.json',
                     'static/dist/data/searchmarkerstyle.min.json': 'static/data/searchmarkerstyle.json',
+                    'static/dist/data/weather.min.json': 'static/data/weather.json',
                     'static/dist/locales/de.min.json': 'static/locales/de.json',
                     'static/dist/locales/fr.min.json': 'static/locales/fr.json',
                     'static/dist/locales/it.min.json': 'static/locales/it.json',
@@ -121,6 +122,11 @@ module.exports = function (grunt) {
         phplint: {
             files: ['**.php', '**/*.php', '!node_modules/**']
         },
+        shell: {
+            php: {
+                command: 'php -f scripts/generate_static_icons.php'
+            }
+        },
         htmlmin: {
             dist: {
                 options: {
@@ -150,9 +156,12 @@ module.exports = function (grunt) {
     grunt.registerTask('json', ['newer:minjson']);
     grunt.registerTask('php-lint', ['newer:phplint']);
     grunt.registerTask('html-build', ['htmlmin', 'cacheBust']);
+    grunt.registerTask('icons-build', ['shell:php']);
 
-    grunt.registerTask('build', ['clean', 'js-build', 'css-build', 'json', 'html-build']);
+    grunt.registerTask('build', ['clean', 'js-build', 'css-build', 'json', 'html-build', 'icons-build']);
     grunt.registerTask('lint', ['js-lint', 'php-lint']);
+
+
     grunt.registerTask('default', ['build', 'watch']);
 
 };
