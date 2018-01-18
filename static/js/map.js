@@ -2394,6 +2394,11 @@ $(function () {
         updateMap()
     })
 
+    // clear excluded pokemon button
+    $('#clear-exclude-pokemon').on('click', function () {
+        $selectExclude.val(null).trigger('change')
+    })
+
     $selectLocationIconMarker = $('#locationmarker-style')
 
     $.getJSON('static/dist/data/searchmarkerstyle.min.json').done(function (data) {
