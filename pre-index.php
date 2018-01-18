@@ -169,20 +169,20 @@ if ($blockIframe) {
                         <ul>
                             <?php
                             if (!$noHidePokemon) {
-                            ?>
+                                ?>
                             <li><a href="#tabs-1"><?php echo i8ln('Hide Pokemon') ?></a></li>
                             <?php
                             } ?>
                             <?php
                             if (!$noExcludeMinIV) {
-                            ?>
+                                ?>
                             <li><a href="#tabs-2"><?php echo i8ln('Excl. Min IV/Lvl') ?></a></li>
                             <?php
                             } ?>
                         </ul>
                         <?php
                         if (!$noHidePokemon) {
-                        ?>
+                            ?>
                         <div id="tabs-1">
                             <div class="form-control hide-select-2">
                                 <label for="exclude-pokemon">
@@ -199,7 +199,7 @@ if ($blockIframe) {
                         } ?>
                         <?php
                         if (!$noExcludeMinIV) {
-                        ?>
+                            ?>
                         <div id="tabs-2">
                             <div class="form-control hide-select-2">
                                 <label for="exclude-min-iv">
