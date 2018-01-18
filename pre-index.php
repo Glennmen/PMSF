@@ -338,6 +338,7 @@ if (!empty($_GET['lat']) && !empty($_GET['lon'])) {
                         <div style="max-height:165px;overflow-y:auto">
                             <select id="exclude-pokemon" multiple="multiple"></select>
                         </div>
+                        <a id="clear-exclude-pokemon">Clear</a>
                     </label>
                 </div>';
                 }
