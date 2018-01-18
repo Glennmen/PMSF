@@ -1362,10 +1362,10 @@ function loadRawData() {
             'lastslocs': lastslocs,
             'spawnpoints': loadSpawnpoints,
             'lastspawns': lastspawns,
-            'miniv': loadMinIV,
-            'prevminiv': prevMinIV,
-            'minlevel': loadMinLevel,
-            'prevminlevel': prevMinLevel,
+            'minIV': loadMinIV,
+            'prevMinIV': prevMinIV,
+            'minLevel': loadMinLevel,
+            'prevMinLevel': prevMinLevel,
             'swLat': swLat,
             'swLng': swLng,
             'neLat': neLat,
@@ -1376,7 +1376,7 @@ function loadRawData() {
             'oNeLng': oNeLng,
             'reids': String(reincludedPokemon),
             'eids': String(excludedPokemon),
-            'exminiv': String(excludedMinIV),
+            'exMinIV': String(excludedMinIV),
             'token': token
         },
         dataType: 'json',
@@ -1750,8 +1750,8 @@ function updateMap() {
         lastslocs = result.lastslocs
         lastspawns = result.lastspawns
 
-        prevMinIV = result.preminiv
-        prevMinLevel = result.preminlevel
+        prevMinIV = result.preMinIV
+        prevMinLevel = result.preMinLevel
         reids = result.reids
         if (reids instanceof Array) {
             reincludedPokemon = reids.filter(function (e) {

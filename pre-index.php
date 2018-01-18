@@ -150,11 +150,11 @@ if ($blockIframe) {
             <?php
             if (!$noPokemon) {
                 ?>
-            <h3><?php echo i8ln('Marker Settings') ?></h3>
+            <h3><?php echo i8ln('Pokemon') ?></h3>
             <div>
                 <?php
                 echo '<div class=" form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
-                    <h3>Pokemon</h3>
+                    <h3>' . i8ln('Pokemon') . '</h3>
                     <div class="onoffswitch">
                         <input id="pokemon-switch" type="checkbox" name="pokemon-switch" class="onoffswitch-checkbox"
                                checked>
@@ -167,43 +167,53 @@ if ($blockIframe) {
                 <div id="pokemon-filter-wrapper" style="display:none">
                     <div id="tabs">
                         <ul>
-                            <li><a href="#tabs-1">Hide Pokemon</a></li>
-                            <li><a href="#tabs-2">Excl. Min IV/Lvl</a></li>
-                        </ul>
-                        <div id="tabs-1">
                             <?php
                             if (!$noHidePokemon) {
-                                ?>
-                                <div class="form-control hide-select-2">
-                                    <label for="exclude-pokemon">
-                                        <div class="pokemon-container">
-                                            <input id="exclude-pokemon" type="text" readonly="true">
-                                            <?php
-                                            pokemonFilterImages($noPokemonNumbers); ?>
-                                        </div>
-                                        <a href="#" class="select-all">All</a><a href="#" class="hide-all">None</a>
-                                    </label>
-                                </div>
-                                <?php
+                            ?>
+                            <li><a href="#tabs-1"><?php echo i8ln('Hide Pokemon') ?></a></li>
+                            <?php
                             } ?>
-                        </div>
-                        <div id="tabs-2">
                             <?php
                             if (!$noExcludeMinIV) {
-                                ?>
-                                <div class="form-control hide-select-2">
-                                    <label for="exclude-min-iv">
-                                        <div class="pokemon-container">
-                                            <input id="exclude-min-iv" type="text" readonly="true">
-                                            <?php
-                                            pokemonFilterImages($noPokemonNumbers); ?>
-                                        </div>
-                                        <a href="#" class="select-all">All</a><a href="#" class="hide-all">None</a>
-                                    </label>
-                                </div>
-                                <?php
+                            ?>
+                            <li><a href="#tabs-2"><?php echo i8ln('Excl. Min IV/Lvl') ?></a></li>
+                            <?php
                             } ?>
+                        </ul>
+                        <?php
+                        if (!$noHidePokemon) {
+                        ?>
+                        <div id="tabs-1">
+                            <div class="form-control hide-select-2">
+                                <label for="exclude-pokemon">
+                                    <div class="pokemon-container">
+                                        <input id="exclude-pokemon" type="text" readonly="true">
+                                        <?php
+                                        pokemonFilterImages($noPokemonNumbers); ?>
+                                    </div>
+                                    <a href="#" class="select-all"><?php echo i8ln('All') ?><div></a><a href="#" class="hide-all"><?php echo i8ln('None') ?></a>
+                                </label>
+                            </div>
                         </div>
+                            <?php
+                        } ?>
+                        <?php
+                        if (!$noExcludeMinIV) {
+                        ?>
+                        <div id="tabs-2">
+                            <div class="form-control hide-select-2">
+                                <label for="exclude-min-iv">
+                                    <div class="pokemon-container">
+                                        <input id="exclude-min-iv" type="text" readonly="true">
+                                        <?php
+                                        pokemonFilterImages($noPokemonNumbers); ?>
+                                    </div>
+                                    <a href="#" class="select-all"><?php echo i8ln('All') ?><div></a><a href="#" class="hide-all"><?php echo i8ln('None') ?></a>
+                                </label>
+                            </div>
+                        </div>
+                            <?php
+                        } ?>
                     </div>
 
                     <div class="form-row min-stats-row">
@@ -211,8 +221,8 @@ if ($blockIframe) {
                         if (!$noMinIV) {
                             echo '<div class="form-control" >
                             <label for="min-iv">
-                                <h3 style="">Min IV</h3>
-                                <input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="Minimum IV"/>
+                                <h3>'.i8ln('Min IV').'</h3>
+                                <input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="'.i8ln('Min IV').'"/>
                             </label>
                         </div>';
                         } ?>
@@ -220,8 +230,8 @@ if ($blockIframe) {
                         if (!$noMinLevel) {
                             echo '<div class="form-control">
                             <label for="min-level">
-                                <h3>Min Lvl</h3>
-                                <input id="min-level" type="number" min="0" max="100" name="min-level" placeholder="Minimum Level"/>
+                                <h3>'.i8ln('Min Lvl').'</h3>
+                                <input id="min-level" type="number" min="0" max="100" name="min-level" placeholder="'.i8ln('Min Lvl').'"/>
                             </label>
                         </div>';
                         } ?>
@@ -234,12 +244,12 @@ if ($blockIframe) {
             <?php
             if (!$noRaids || !$noGyms) {
                 ?>
-                <h3>Gym/Raid</h3>
+                <h3><?php echo i8ln('Gym/Raid'); ?></h3>
                 <div>
                     <?php
                     if (!$noRaids) {
                         echo '<div class="form-control switch-container" id="raids-wrapper">
-                    <h3>Raids</h3>
+                    <h3>' . i8ln('Raids') . '</h3>
                     <div class="onoffswitch">
                         <input id="raids-switch" type="checkbox" name="raids-switch"
                                class="onoffswitch-checkbox" checked>
@@ -543,7 +553,7 @@ if ($blockIframe) {
                 <label for="notify-perfection">
                     <h3>'.i8ln('Notify of Perfection').'</h3>
                     <input id="notify-perfection" type="text" name="notify-perfection"
-                           placeholder="'.i8ln('Minimum perfection').' %"/>
+                           placeholder="'.i8ln('Minimum perfection').' %" style="float: right;width: 75px;text-align:center"/>
                 </label>
             </div>';
             }
@@ -564,7 +574,7 @@ if ($blockIframe) {
                 echo '<div class="form-control switch-container" id="notify-raid-wrapper">
                         <h3>'.i8ln('Notify of Minimum Raid Level').'</h3>
                         <select name="notify-raid" id="notify-raid">
-                            <option value="0">Disable</option>
+                            <option value="0">' . i8ln('Disable') . '</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>

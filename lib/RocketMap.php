@@ -4,11 +4,11 @@ namespace Scanner;
 
 class RocketMap extends Scanner
 {
-    private $cp_multiplier;
+    private $cpMultiplier;
     public function __construct()
     {
         parent::__construct();
-        $this->set_cp_multiplier();
+        $this->setCpMultiplier();
     }
 
     public function get_active($eids, $miniv, $minlevel, $exminiv, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
@@ -619,9 +619,9 @@ class RocketMap extends Scanner
         }
         return $data;
     }
-    private function set_cp_multiplier()
+    private function setCpMultiplier()
     {
-        $this->cp_multiplier = array(
+        $this->cpMultiplier = array(
             1 =>0.094,
             2 =>0.16639787,
             3 =>0.21573247,

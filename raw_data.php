@@ -22,11 +22,11 @@ $oSwLng = !empty($_POST['oSwLng']) ? $_POST['oSwLng'] : 0;
 $oNeLat = !empty($_POST['oNeLat']) ? $_POST['oNeLat'] : 0;
 $oNeLng = !empty($_POST['oNeLng']) ? $_POST['oNeLng'] : 0;
 $luredonly = !empty($_POST['luredonly']) ? $_POST['luredonly'] : false;
-$miniv = !empty($_POST['miniv']) ? $_POST['miniv'] : false;
-$prevminiv = !empty($_POST['prevminiv']) ? $_POST['prevminiv'] : false;
-$minlevel = !empty($_POST['minlevel']) ? $_POST['minlevel'] : false;
-$prevminlevel = !empty($_POST['prevminlevel']) ? $_POST['prevminlevel'] : false;
-$exminiv = !empty($_POST['exminiv']) ? $_POST['exminiv'] : '';
+$minIV = !empty($_POST['miniv']) ? $_POST['miniv'] : false;
+$prevMinIV = !empty($_POST['prevMinIV']) ? $_POST['prevMinIV'] : false;
+$minLevel = !empty($_POST['minLevel']) ? $_POST['minLevel'] : false;
+$prevMinLevel = !empty($_POST['prevMinLevel']) ? $_POST['prevMinLevel'] : false;
+$exMinIV = !empty($_POST['exMinIV']) ? $_POST['exMinIV'] : '';
 $lastpokemon = !empty($_POST['lastpokemon']) ? $_POST['lastpokemon'] : false;
 $lastgyms = !empty($_POST['lastgyms']) ? $_POST['lastgyms'] : false;
 $lastpokestops = !empty($_POST['lastpokestops']) ? $_POST['lastpokestops'] : false;
@@ -37,7 +37,7 @@ $d["lastgyms"] = !empty($_POST['gyms']) ? $_POST['gyms'] : false;
 $d["lastslocs"] = !empty($_POST['scanned']) ? $_POST['scanned'] : false;
 $d["lastspawns"] = !empty($_POST['spawnpoints']) ? $_POST['spawnpoints'] : false;
 $d["lastpokemon"] = !empty($_POST['pokemon']) ? $_POST['pokemon'] : false;
-if ($miniv < $prevminiv || $minlevel < $prevminlevel) {
+if ($minIV < $prevMinIV || $minLevel < $prevMinLevel) {
     $lastpokemon = false;
 }
 
@@ -99,21 +99,21 @@ if (!$noPokemon) {
     if ($d["lastpokemon"] == "true") {
         $eids = !empty($_POST['eids']) ? explode(",", $_POST['eids']) : array();
         if ($lastpokemon != 'true') {
-            $d["pokemons"] = $scanner->get_active($eids, $miniv, $minlevel, $exminiv, $swLat, $swLng, $neLat, $neLng);
+            $d["pokemons"] = $scanner->get_active($eids, $minIV, $minLevel, $exMinIV, $swLat, $swLng, $neLat, $neLng);
         } else {
             if ($newarea) {
-                $d["pokemons"] = $scanner->get_active($eids, $miniv, $minlevel, $exminiv, $swLat, $swLng, $neLat, $neLng, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng);
+                $d["pokemons"] = $scanner->get_active($eids, $minIV, $minLevel, $exMinIV, $swLat, $swLng, $neLat, $neLng, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng);
             } else {
-                $d["pokemons"] = $scanner->get_active($eids, $miniv, $minlevel, $exminiv, $swLat, $swLng, $neLat, $neLng, $timestamp);
+                $d["pokemons"] = $scanner->get_active($eids, $minIV, $minLevel, $exMinIV, $swLat, $swLng, $neLat, $neLng, $timestamp);
             }
         }
-        $d["preminiv"] = $miniv;
-        $d["preminlevel"] = $minlevel;
+        $d["preMinIV"] = $minIV;
+        $d["preMinLevel"] = $minLevel;
 
         if (!empty($_POST['reids'])) {
             $reids = !empty($_POST['reids']) ? explode(",", $_POST['reids']) : array();
 
-            $d["pokemons"] = array_merge($d["pokemons"], $scanner->get_active_by_id($reids, $miniv, $minlevel, $exminiv, $swLat, $swLng, $neLat, $neLng));
+            $d["pokemons"] = array_merge($d["pokemons"], $scanner->get_active_by_id($reids, $minIV, $minLevel, $exMinIV, $swLat, $swLng, $neLat, $neLng));
 
             $d["reids"] = $reids;
         }
