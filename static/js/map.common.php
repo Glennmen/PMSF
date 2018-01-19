@@ -1033,6 +1033,10 @@ type: StoreTypes.String
 'icons': {
 default: '<?php echo $copyrightSafe ? 'static/icons-safe/' : 'static/icons-pokemon/' ?>',
 type: StoreTypes.String
+},
+'alwaysShowPerfects': {
+default: false,
+type: StoreTypes.Boolean
 }
 };
 

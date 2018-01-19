@@ -340,6 +340,17 @@ if (!empty($_GET['lat']) && !empty($_GET['lon'])) {
                         </div>
                     </label>
                 </div>';
+                    echo '<div class="form-control switch-container">
+                    <h3>Always Show<br>Perfect Monsters</h3>
+                    <div class="onoffswitch">
+                        <input id="perfect-switch" type="checkbox" name="perfect-switch"
+                               class="onoffswitch-checkbox" checked>
+                        <label class="onoffswitch-label" for="perfect-switch">
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>';
                 }
                 ?>
             </div>

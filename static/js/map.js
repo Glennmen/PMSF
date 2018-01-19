@@ -21,6 +21,7 @@ var $selectLuredPokestopsOnly
 var $selectGymMarkerStyle
 var $selectLocationIconMarker
 var $switchGymSidebar
+var $switchPerfects
 
 var language = document.documentElement.lang === '' ? 'en' : document.documentElement.lang
 var idToPokemon = {}
@@ -36,6 +37,7 @@ var notifiedPokemon = []
 var notifiedRarity = []
 var notifiedMinPerfection = null
 var onlyPokemon = 0
+var alwaysShowPerfects = 0
 
 var buffer = []
 var reincludedPokemon = []
@@ -102,6 +104,14 @@ var notifyText = 'disappears at <dist> (<udist>)'
 //
 // Functions
 //
+
+function isPerfect(p) {
+    var iv = getIv(p['individual_attack'], p['individual_defense'], p['individual_stamina'])
+    if (!alwaysShowPerfects || iv < 100) {
+        return false
+    }
+    return true
+}
 
 function excludePokemon(id) { // eslint-disable-line no-unused-vars
     $selectExclude.val(
@@ -325,6 +335,8 @@ function initSidebar() {
     }
 
     $('#pokemon-icon-size').val(Store.get('iconSizeModifier'))
+
+    $('#perfects-switch').prop('checked', Store.get('alwaysShowPerfects'))
 
     var port = ''
     if (window.location.port.length > 0) {
@@ -1175,7 +1187,7 @@ function addListeners(marker) {
 
 function clearStaleMarkers() {
     $.each(mapData.pokemons, function (key, value) {
-        if (mapData.pokemons[key]['disappear_time'] < new Date().getTime() || excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id'])) {
+        if (mapData.pokemons[key]['disappear_time'] < new Date().getTime() || (!isPerfect(mapData.pokemons[key]) && (excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id'])))) {
             if (mapData.pokemons[key].marker.rangeCircle) {
                 mapData.pokemons[key].marker.rangeCircle.setMap(null)
                 delete mapData.pokemons[key].marker.rangeCircle
@@ -1360,7 +1372,7 @@ function processPokemons(i, item) {
         return false // in case the checkbox was unchecked in the meantime.
     }
 
-    if (!(item['encounter_id'] in mapData.pokemons) && excludedPokemon.indexOf(item['pokemon_id']) < 0 && item['disappear_time'] > Date.now() && !isTemporaryHidden(item['pokemon_id'])) {
+    if (!(item['encounter_id'] in mapData.pokemons) && (isPerfect(item) || excludedPokemon.indexOf(item['pokemon_id']) < 0 && item['disappear_time'] > Date.now() && !isTemporaryHidden(item['pokemon_id']))) {
         // add marker to map and item to dict
         if (item.marker) {
             item.marker.setMap(null)
@@ -2450,6 +2462,13 @@ $(function () {
     })
 
     $selectGymMarkerStyle.val(Store.get('gymMarkerStyle')).trigger('change')
+
+    $switchPerfects = $('#perfects-switch')
+
+    $switchPerfects.on('change', function () {
+        Store.set('alwaysShowPerfects', this.checked)
+        updateMap()
+    })
 })
 
 $(function () {
