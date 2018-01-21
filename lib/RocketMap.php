@@ -74,7 +74,7 @@ class RocketMap extends Scanner
         return $this->query_active($select, $conds, $params);
     }
 
-    public function get_active_by_id($miniv, $minlevel, $exminiv, $ids, $swLat, $swLng, $neLat, $neLng)
+    public function get_active_by_id($ids, $miniv, $minlevel, $exminiv, $swLat, $swLng, $neLat, $neLng)
     {
         global $db;
         $conds = array();

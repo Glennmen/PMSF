@@ -13,7 +13,7 @@ class Monocle extends Scanner
         $select = "pokemon_id, expire_timestamp AS disappear_time, encounter_id, lat AS latitude, lon AS longitude";
         global $noHighLevelData;
         if (!$noHighLevelData) {
-            $select .= ", atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp, level";
+            $select .= ", atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp";
         }
 
         $conds[] = "lat > :swLat AND lon > :swLng AND lat < :neLat AND lon < :neLng AND expire_timestamp > :time";
@@ -46,14 +46,7 @@ class Monocle extends Scanner
             if (empty($exminiv)) {
                 $conds[] = '((atk_iv + def_iv + sta_iv)' . $float . ' / 45) * 100 >= ' . $miniv;
             } else {
-                $conds[] = '(((atk_iv + def_iv + sta_iv) / 45)' . $db->info()['driver'] == 'pgsql' ? "::float" : "" . ' * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
-            }
-        }
-        if (!empty($minlevel) && !is_nan((float)$minlevel) && $minlevel != 0) {
-            if (empty($exminiv)) {
-                $conds[] = '(level >= ' . $minlevel;
-            } else {
-                $conds[] = '(level >= ' . $minlevel . ' OR pokemon_id IN(' . $exminiv . ') )';
+                $conds[] = '((atk_iv + def_iv + sta_iv)' . $float . ' / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
         return $this->query_active($select, $conds, $params);
@@ -68,7 +61,7 @@ class Monocle extends Scanner
         $select = "pokemon_id, expire_timestamp AS disappear_time, encounter_id, lat AS latitude, lon AS longitude, gender, form";
         global $noHighLevelData;
         if (!$noHighLevelData) {
-            $select .= ", atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp, level";
+            $select .= ", atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp";
         }
 
         $conds[] = "lat > :swLat AND lon > :swLng AND lat < :neLat AND lon < :neLng AND expire_timestamp > :time";
@@ -94,13 +87,6 @@ class Monocle extends Scanner
                 $conds[] = '((atk_iv + def_iv + sta_iv)' . $float . ' / 45) * 100 >= ' . $miniv;
             } else {
                 $conds[] = '(((atk_iv + def_iv + sta_iv)' . $float . ' / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
-            }
-        }
-        if (!empty($minlevel) && !is_nan((float)$minlevel) && $minlevel != 0) {
-            if (empty($exminiv)) {
-                $conds[] = '(level >= ' . $minlevel;
-            } else {
-                $conds[] = '(level >= ' . $minlevel . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
         return $this->query_active($select, $conds, $params);

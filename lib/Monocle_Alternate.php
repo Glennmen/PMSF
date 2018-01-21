@@ -64,6 +64,53 @@ class Monocle_Alternate extends Monocle
         return $this->query_active($select, $conds, $params);
     }
 
+    public function get_active_by_id($ids, $miniv, $minlevel, $exminiv, $swLat, $swLng, $neLat, $neLng)
+    {
+        global $db;
+        $conds = array();
+        $params = array();
+
+        $select = "pokemon_id, expire_timestamp AS disappear_time, encounter_id, lat AS latitude, lon AS longitude, gender, form";
+        global $noHighLevelData;
+        if (!$noHighLevelData) {
+            $select .= ", atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp, level";
+        }
+
+        $conds[] = "lat > :swLat AND lon > :swLng AND lat < :neLat AND lon < :neLng AND expire_timestamp > :time";
+        $params[':swLat'] = $swLat;
+        $params[':swLng'] = $swLng;
+        $params[':neLat'] = $neLat;
+        $params[':neLng'] = $neLng;
+        $params[':time'] = time();
+        if (count($ids)) {
+            $pkmn_in = '';
+            $i = 1;
+            foreach ($ids as $id) {
+                $params[':qry_' . $i . "_"] = $id;
+                $pkmn_in .= ':qry_' . $i . "_,";
+                $i++;
+            }
+            $pkmn_in = substr($pkmn_in, 0, -1);
+            $conds[] = "pokemon_id IN ( $pkmn_in )";
+        }
+        $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
+        if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
+            if (empty($exminiv)) {
+                $conds[] = '((atk_iv + def_iv + sta_iv)' . $float . ' / 45) * 100 >= ' . $miniv;
+            } else {
+                $conds[] = '(((atk_iv + def_iv + sta_iv)' . $float . ' / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+            }
+        }
+        if (!empty($minlevel) && !is_nan((float)$minlevel) && $minlevel != 0) {
+            if (empty($exminiv)) {
+                $conds[] = '(level >= ' . $minlevel;
+            } else {
+                $conds[] = '(level >= ' . $minlevel . ' OR pokemon_id IN(' . $exminiv . ') )';
+            }
+        }
+        return $this->query_active($select, $conds, $params);
+    }
+
     public function get_stops($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0, $lured = false)
     {
         $conds = array();
