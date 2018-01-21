@@ -27,6 +27,7 @@ var $selectLocationIconMarker
 var $switchGymSidebar
 
 var language = document.documentElement.lang === '' ? 'en' : document.documentElement.lang
+var languageSite = 'en'
 var idToPokemon = {}
 var i8lnDictionary = {}
 var languageLookups = 0
@@ -83,8 +84,9 @@ var assetsPath = 'static/sounds/'
 var iconpath = null
 
 var gymTypes = ['Uncontested', 'Mystic', 'Valor', 'Instinct']
-var triggerGyms = Store.get('triggerGyms')
 
+var triggerGyms = Store.get('triggerGyms')
+var onlyTriggerGyms
 var noExGyms
 var noParkInfo
 
@@ -260,6 +262,16 @@ function initMap() { // eslint-disable-line no-unused-vars
 
     var locale = window.navigator.userLanguage || window.navigator.language
     moment.locale(locale)
+
+    if (language === 'jp') {
+        languageSite = 'ja'
+    } else if (language === 'pt_br') {
+        languageSite = 'pt-br'
+    } else if (language === 'zh_tw') {
+        languageSite = 'zh-tw'
+    } else {
+        languageSite = language
+    }
 }
 
 function updateLocationMarker(style) {
@@ -486,7 +498,7 @@ function pokemonLabel(item) {
     }
     contentstring += '<span> - </span>' +
         '<small>' +
-        '<a href="https://pokemon.gameinfo.io/' + language + '/pokemon/' + id + '" target="_blank" title="' + i8ln('View in Pokedex') + '">#' + id + '</a>' +
+        '<a href="https://pokemon.gameinfo.io/' + languageSite + '/pokemon/' + id + '" target="_blank" title="' + i8ln('View in Pokedex') + '">#' + id + '</a>' +
         '</small>' +
         '<span> ' + rarityDisplay + '</span>' +
         '<span> - </span>' +
@@ -566,7 +578,7 @@ function gymLabel(item) {
     }
 
     var park = ''
-    if ((item['park'] !== 'None' && item['park'] !== undefined) && (noParkInfo === false)) {
+    if ((item['park'] !== 'None' && item['park'] !== undefined && item['park']) && (noParkInfo === false)) {
         park = i8ln('Park') + ': ' + item['park']
     }
 
@@ -903,8 +915,7 @@ function getGymMarkerIcon(item) {
         teamStr = gymTypes[item['team_id']] + '_' + level
     }
     var exIcon = ''
-
-    if ((((park !== 'None' && park !== undefined) || triggerGyms.includes(item['gym_id'])) && (noExGyms === false))) {
+    if ((((park !== 'None' && park !== undefined && onlyTriggerGyms === false && park) || (item['sponsor'] !== undefined && item['sponsor'] > 0) || triggerGyms.includes(item['gym_id'])) && (noExGyms === false))) {
         exIcon = '<img src="static/images/ex.png" style="position:absolute;right:25px;bottom:2px;"/>'
     }
     if (item['raid_pokemon_id'] != null && item.raid_end > Date.now()) {
@@ -930,6 +941,7 @@ function getGymMarkerIcon(item) {
     } else {
         return '<div>' +
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + gymTypes[item['team_id']] + '.png" style="width:48px;height: auto;"/>' +
+            exIcon +
             '</div>'
     }
 }
@@ -2071,7 +2083,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         }
 
         var park = ''
-        if (((result['park'] !== 'None' && result['park'] !== undefined) && (noParkInfo === false))) {
+        if (((result['park'] !== 'None' && result['park'] !== undefined && result['park']) && (noParkInfo === false))) {
             park = i8ln('Park') + ': ' + result['park']
         }
 
