@@ -66,6 +66,9 @@ $paypalUrl = "";                                                    // PayPal do
 
 $discordUrl = "";                                                    // Discord URL, leave "" for empty
 
+/* Worldopole */
+$worldopoleUrl = "";                                                // Link to Worldopole, leave "" for empty
+
 /* MOTD */
 
 $motdTitle = "";
