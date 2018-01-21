@@ -602,9 +602,9 @@ if (!empty($_GET['lat']) && !empty($_GET['lon'])) {
     </nav>
     <nav id="stats">
         <div class="switch-container">
-            <?php if ($worldopoleURL != "") { ?>
+            <?php if ($worldopoleUrl != "") { ?>
                 <div class="switch-container">
-                    <div><center><a href="<?= $worldopoleURL ?>">Full Stats</a></center></div>
+                    <div><center><a href="<?= $worldopoleUrl ?>">Full Stats</a></center></div>
                 </div>
             <?php } ?>
             <div class="switch-container">
