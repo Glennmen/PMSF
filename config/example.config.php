@@ -82,7 +82,7 @@ $noMinIV = false;                                                   // true/fals
 $minIV = '0';                                                       // "0" for empty or a number
 
 $noMinLevel = false;                                                // true/false
-$minLevel = '0';                                                   // "0" for empty or a number
+$minLevel = '0';                                                    // "0" for empty or a number
 
 $noGyms = false;                                                    // true/false
 $enableGyms = 'false';                                              // true/false

@@ -4,7 +4,7 @@ namespace Scanner;
 
 class Monocle extends Scanner
 {
-    public function get_active($eids, $miniv, $minlevel, $exminiv, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    public function get_active($eids, $minIv, $minLevel, $exMinIv, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
         global $db;
         $conds = array();
@@ -13,7 +13,7 @@ class Monocle extends Scanner
         $select = "pokemon_id, expire_timestamp AS disappear_time, encounter_id, lat AS latitude, lon AS longitude";
         global $noHighLevelData;
         if (!$noHighLevelData) {
-            $select .= ", atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp";
+            $select .= ", atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2";
         }
 
         $conds[] = "lat > :swLat AND lon > :swLng AND lat < :neLat AND lon < :neLng AND expire_timestamp > :time";
@@ -42,26 +42,26 @@ class Monocle extends Scanner
             $conds[] = "pokemon_id NOT IN ( $pkmn_in )";
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
-        if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
-            if (empty($exminiv)) {
-                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $miniv;
+        if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
+            if (empty($exMinIv)) {
+                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv;
             } else {
-                $conds[] = '(((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+                $conds[] = '(((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
         return $this->query_active($select, $conds, $params);
     }
 
-    public function get_active_by_id($ids, $miniv, $minlevel, $exminiv, $swLat, $swLng, $neLat, $neLng)
+    public function get_active_by_id($ids, $minIv, $minLevel, $exMinIv, $swLat, $swLng, $neLat, $neLng)
     {
         global $db;
         $conds = array();
         $params = array();
 
-        $select = "pokemon_id, expire_timestamp AS disappear_time, encounter_id, lat AS latitude, lon AS longitude, gender, form";
+        $select = "pokemon_id, expire_timestamp AS disappear_time, encounter_id, lat AS latitude, lon AS longitude";
         global $noHighLevelData;
         if (!$noHighLevelData) {
-            $select .= ", atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2, cp";
+            $select .= ", atk_iv AS individual_attack, def_iv AS individual_defense, sta_iv AS individual_stamina, move_1, move_2";
         }
 
         $conds[] = "lat > :swLat AND lon > :swLng AND lat < :neLat AND lon < :neLng AND expire_timestamp > :time";
@@ -82,11 +82,11 @@ class Monocle extends Scanner
             $conds[] = "pokemon_id IN ( $pkmn_in )";
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
-        if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
-            if (empty($exminiv)) {
-                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $miniv;
+        if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
+            if (empty($exMinIv)) {
+                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv;
             } else {
-                $conds[] = '(((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+                $conds[] = '(((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
         return $this->query_active($select, $conds, $params);
