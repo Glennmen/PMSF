@@ -59,9 +59,9 @@ class RocketMap extends Scanner
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
             if (empty($exminiv)) {
-                $conds[] = '((individual_attack + individual_defense + individual_stamina)' . $float . ' / 45) * 100 >= ' . $miniv;
+                $conds[] = '((individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ')' . $float . ' / 45.00) * 100.00 >= ' . $miniv;
             } else {
-                $conds[] = '(((individual_attack + individual_defense + individual_stamina)' . $float . ' / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+                $conds[] = '(((individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ')' . $float . ' / 45.00) * 100.00 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
         if (!empty($minlevel) && !is_nan((float)$minlevel) && $minlevel != 0) {
@@ -109,9 +109,9 @@ class RocketMap extends Scanner
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($miniv) && !is_nan((float)$miniv) && $miniv != 0) {
             if (empty($exminiv)) {
-                $conds[] = '((individual_attack + individual_defense + individual_stamina)' . $float . ' / 45) * 100 >= ' . $miniv;
+                $conds[] = '((individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ')' . $float . ' / 45.00) * 100.00 >= ' . $miniv;
             } else {
-                $conds[] = '(((individual_attack + individual_defense + individual_stamina)' . $float . ' / 45) * 100 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
+                $conds[] = '(((individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ')' . $float . ' / 45.00) * 100.00 >= ' . $miniv . ' OR pokemon_id IN(' . $exminiv . ') )';
             }
         }
         if (!empty($minlevel) && !is_nan((float)$minlevel) && $minlevel != 0) {
