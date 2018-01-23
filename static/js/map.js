@@ -58,6 +58,7 @@ var rangeMarkers = ['pokemon', 'pokestop', 'gym']
 var storeZoom = true
 var scanPath
 var moves
+var weather
 var osmTileServer
 
 var oSwLat
@@ -445,6 +446,7 @@ function pokemonLabel(item) {
     var form = item['form']
     var cp = item['cp']
     var cpMultiplier = item['cp_multiplier']
+    var weatherBoostedCondition = item['weather_boosted_condition']
     var level = item['level']
 
     $.each(types, function (index, type) {
@@ -476,6 +478,13 @@ function pokemonLabel(item) {
             '<div>' +
             i8ln('Moves') + ' : ' + pMove1 + ' / ' + pMove2 +
             '</div>'
+
+        if (weatherBoostedCondition !== 0) {
+            details +=
+                '<div>' +
+                i8ln('Weather') +': ' + i8ln(weather[weatherBoostedCondition]) +
+                '</div>'
+        }
     }
     if (gender != null) {
         details +=
@@ -2613,6 +2622,10 @@ $(function () {
 
     $.getJSON('static/dist/data/moves.min.json').done(function (data) {
         moves = data
+    })
+
+    $.getJSON('static/dist/data/weather.min.json').done(function (data) {
+        weather = data
     })
 
     $selectExclude = $('#exclude-pokemon')
