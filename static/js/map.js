@@ -1832,7 +1832,7 @@ function updateMap() {
         lastUpdateTime = Date.now()
         token = result.token
     })
-    if (showWeatherHeader == true) {
+    if (showWeatherHeader === true) {
         loadWeather().done(function (result) {
             weatherCells = result.weather
             /*
