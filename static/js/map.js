@@ -76,6 +76,7 @@ var selectedStyle = 'light'
 
 var updateWorker
 var lastUpdateTime
+var lastWeatherUpdateTime
 
 var token
 
@@ -100,9 +101,12 @@ var cpMultiplier = [0.094, 0.16639787, 0.21573247, 0.25572005, 0.29024988, 0.321
 
 var weatherArray = []
 var weatherPolys = []
+var weatherMarkers = []
 var weatherCells = []
+var weatherColors = ['grey', 'yellow', 'darkblue', 'grey', 'darkgrey', 'purple', 'white', 'black']
+
 var S2
-var showWeatherHeader
+// var showWeatherHeader
 
 /*
  text place holders:
@@ -261,6 +265,21 @@ function initMap() { // eslint-disable-line no-unused-vars
 
         redrawPokemon(mapData.pokemons)
         redrawPokemon(mapData.lurePokemons)
+        if (this.getZoom() > 13) {
+            // hide weather markers
+            $.each(weatherMarkers, function (index, marker) {
+                marker.setVisible(false)
+            })
+            // show header weather
+            $('#currentWeather').css('visibility', 'visible')
+        } else {
+            // show weather markers
+            $.each(weatherMarkers, function (index, marker) {
+                marker.setVisible(true)
+            })
+            // hide header weather
+            $('#currentWeather').css('visibility', 'hidden')
+        }
     })
 
     createMyLocationButton()
@@ -278,6 +297,8 @@ function initMap() { // eslint-disable-line no-unused-vars
     } else {
         languageSite = language
     }
+
+    updateWeather()
 }
 
 function updateLocationMarker(style) {
@@ -1833,58 +1854,78 @@ function updateMap() {
         lastUpdateTime = Date.now()
         token = result.token
     })
-    if (showWeatherHeader === true) {
-        loadWeather().done(function (result) {
-            weatherCells = result.weather
+}
 
-            // todo: layer stuff
-            // do weather stuff plz
-            if (weatherPolys.length === 0) {
-                // still need to create weather array
-                var colorArray = []
-                colorArray[0] = 'FFFF00'
-                colorArray[1] = 'FFFF00'
-                colorArray[2] = '009DFF'
-                colorArray[3] = 'DDDDDD'
-                colorArray[4] = 'BBBBBB'
-                colorArray[5] = 'CCCCCC'
-                colorArray[6] = 'FFFFFF'
-                colorArray[7] = '999999'
+function updateWeather() {
+    loadWeather().done(function (result) {
+        weatherCells = result.weather
 
-                // result.weather.forEach(function(item) {
-                $.each(result.weather, function (idx, item) {
-                    weatherArray.push(S2.idToCornerLatLngs(item.s2_cell_id))
-                    var poly = new google.maps.Polygon({
-                        id: item.id,
-                        paths: weatherArray,
-                        strokeColor: '#' + colorArray[item.condition],
-                        strokeOpacity: 0.8,
-                        strokeWeight: 3,
-                        fillColor: '#' + colorArray[item.condition],
-                        fillOpacity: 0.35
-                    })
-                    var bounds = new google.maps.LatLngBounds()
-                    var i, center
+        if (weatherPolys.length === 0) {
+            drawWeatherOverlay(result.weather)
+        } else {
+            // update layers
+            destroyWeatherOverlay()
+            drawWeatherOverlay(result.weather)
+        }
+    })
+    console.log('weather updated')
+    lastWeatherUpdateTime = Date.now()
+}
 
-                    for (i = 0; i < weatherArray[0].length; i++) {
-                        bounds.extend(weatherArray[0][i])
-                    }
-                    center = bounds.getNorthEast()
-                    var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
-                    var beachMarker = new google.maps.Marker({
-                        position: { lat: center.lat(), lng: center.lng() },
-                        map: map,
-                        icon: image
-                    })
-                    weatherPolys.push(poly)
-                    poly.setMap(map)
-                    weatherArray = []
-                })
-            } else {
-                // update layers
+function drawWeatherOverlay(weather) {
+    if (weather) {
+        $.each(weather, function (idx, item) {
+            weatherArray.push(S2.idToCornerLatLngs(item.s2_cell_id))
+            var poly = new google.maps.Polygon({
+                id: item.id,
+                paths: weatherArray,
+                strokeColor: weatherColors[item.condition],
+                strokeOpacity: 0.8,
+                strokeWeight: 3,
+                fillColor: weatherColors[item.condition],
+                fillOpacity: 0.35
+            })
+            var bounds = new google.maps.LatLngBounds()
+            var i, center
+
+            for (i = 0; i < weatherArray[0].length; i++) {
+                bounds.extend(weatherArray[0][i])
             }
+            center = bounds.getCenter()
+
+            var overlayIconSize = new google.maps.Size(30, 30)
+            var scaledIconCenterOffset = new google.maps.Point(15, 15)
+            var image = 'static/weather/i-' + item.condition + '.png'
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: center.lat(),
+                    lng: center.lng()
+                },
+                map: map,
+                icon: {
+                    url: image,
+                    size: overlayIconSize,
+                    scaledSize: overlayIconSize,
+                    origin: new google.maps.Point(0, 0),
+                    anchor: scaledIconCenterOffset
+                }
+            })
+            weatherPolys.push(poly)
+            weatherMarkers.push(marker)
+            poly.setMap(map)
+            weatherArray = []
         })
     }
+}
+
+function destroyWeatherOverlay() {
+    $.each(weatherPolys, function (idx, poly) {
+        poly.setMap(null)
+    })
+    $.each(weatherMarkers, function (idx, marker) {
+        marker.setMap(null)
+    })
+    weatherPolys = weatherMarkers = []
 }
 
 function drawScanPath(points) { // eslint-disable-line no-unused-vars
@@ -2144,6 +2185,9 @@ function createUpdateWorker() {
                 if (document.hidden && data.name === 'backgroundUpdate' && Date.now() - lastUpdateTime > 2500) {
                     updateMap()
                     updateGeoLocation()
+                }
+                if (document.hidden && data.name === 'backgroundUpdate' && Date.now() - lastWeatherUpdateTime > 60000) {
+                    updateWeather()
                 }
             }
 
@@ -2911,6 +2955,7 @@ $(function () {
     // run interval timers to regularly update map and timediffs
     window.setInterval(updateLabelDiffTime, 1000)
     window.setInterval(updateMap, 5000)
+    window.setInterval(updateWeather, 60000)
     window.setInterval(updateGeoLocation, 1000)
 
     createUpdateWorker()
