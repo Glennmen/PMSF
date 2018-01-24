@@ -195,8 +195,6 @@ $sendRaidData = false;                                              // Send Raid
 // Weather Config
 //-----------------------------------------------------
 
-$showWeatherHeader = false;                                        // Show current weather at current position in header
-
 $weather = [
     0 => null,
     1 => 'clear',

@@ -432,8 +432,20 @@ class Monocle extends Scanner
         }
         return $data;
     }
-
-    public function get_weather($updated)
+    public function get_weather_by_cell_id($cell_id)
+    {
+        // monocle weather is pretty straightforward, cell id and weather info, no need to split this into a query function too (will render all weather cells at once)
+        global $db;
+        $query = "SELECT * FROM weather WHERE `s2_cell_id` = :cell_id";
+        $params = [':cell_id' => $cell_id];
+        $weather_info = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
+        if ($weather_info) {
+            return $weather_info[0];
+        } else {
+            return null;
+        }
+    }
+    public function get_weather($updated=null)
     {
         // monocle weather is pretty straightforward, cell id and weather info, no need to split this into a query function too (will render all weather cells at once)
         global $db;

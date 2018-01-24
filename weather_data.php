@@ -18,9 +18,13 @@ if (strtolower($map) == "monocle") {
         $scanner = new \Scanner\RocketMap();
     }
 }
-$timestamp = (isset($_POST['ts']) ? $_POST['ts'] : null);
-$weather = $scanner->get_weather($timestamp);
-$d['weather'] = $weather;
+if (isset($_POST['cell_id'])) {
+    $return_weather = $scanner->get_weather_by_cell_id($_POST['cell_id']);
+} else {
+// $timestamp = (isset($_POST['ts']) ? $_POST['ts'] : null);
+    $return_weather  = $scanner->get_weather();
+}
+$d['weather'] = $return_weather;
 $d['timestamp'] = time();
 $jaysson = json_encode($d);
 echo $jaysson;
