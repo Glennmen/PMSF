@@ -478,12 +478,10 @@ function pokemonLabel(item) {
                 i8ln('CP') + ' : ' + cp + ' | ' + i8ln('Level') + ' : ' + pokemonLevel +
                 '</div>'
         }
-
         details +=
             '<div>' +
             i8ln('Moves') + ' : ' + pMove1 + ' / ' + pMove2 +
             '</div>'
-
     }
     if (weatherBoostedCondition !== 0) {
         details +=
@@ -1783,6 +1781,9 @@ function updateMap() {
     if ((currentWeather) && (currentCell !== currentWeather.s2_cell_id)) {
         $('#currentWeather').data('current-cell', currentWeather.s2_cell_id)
         $('#currentWeather').html('<img src="static/weather/' + currentWeather.condition + '.png" alt="">')
+    } else if (!currentWeather) {
+        $('#currentWeather').data('current-cell', '')
+        $('#currentWeather').html('')
     }
 
     loadRawData().done(function (result) {
