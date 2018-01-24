@@ -484,12 +484,12 @@ function pokemonLabel(item) {
             i8ln('Moves') + ' : ' + pMove1 + ' / ' + pMove2 +
             '</div>'
 
-        if (weatherBoostedCondition !== 0) {
-            details +=
-                '<div>' +
-                i8ln('Weather') + ': ' + i8ln(weather[weatherBoostedCondition]) +
-                '</div>'
-        }
+    }
+    if (weatherBoostedCondition !== 0) {
+        details +=
+            '<div>' +
+            i8ln('Weather') + ': ' + i8ln(weather[weatherBoostedCondition]) +
+            '</div>'
     }
     if (gender != null) {
         details +=
