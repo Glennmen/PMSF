@@ -449,7 +449,7 @@ class Monocle extends Scanner
     {
         // monocle weather is pretty straightforward, cell id and weather info, no need to split this into a query function too (will render all weather cells at once)
         global $db;
-        $query = "SELECT * FROM weather WHERE :conditions";
+        $query = "SELECT * FROM weather WHERE :conditions ORDER BY id ASC";
         $conds[] = "updated > :time";
         if ($updated) {
             $params[':time'] = $updated;
