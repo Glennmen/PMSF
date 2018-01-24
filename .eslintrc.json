@@ -100,6 +100,7 @@
     "gymStyle": true,
     "spriteFile": true,
     "spriteFileLarge": true,
+    "weatherSpritesSrc": true,
     "icons": true,
     "mapType": true,
     "triggerGyms": true,
