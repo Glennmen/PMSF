@@ -1921,7 +1921,7 @@ function drawWeatherOverlay(weather) {
                 paths: weatherArray,
                 strokeColor: weatherColors[item.condition],
                 strokeOpacity: 0.8,
-                strokeWeight: 3,
+                strokeWeight: 1,
                 fillColor: weatherColors[item.condition],
                 fillOpacity: 0.35
             })
