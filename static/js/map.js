@@ -1835,10 +1835,8 @@ function updateMap() {
     if ((s2CellCenter) && (String(s2CellCenter) !== $('#currentWeather').data('current-cell')) && (map.getZoom() > 13)) {
         loadWeatherCellData(s2CellCenter).done(function (cellWeather) {
             var currentWeather = cellWeather.weather
-            console.log(currentWeather)
             var currentCell = $('#currentWeather').data('current-cell')
             if ((currentWeather) && (currentCell !== currentWeather.s2_cell_id)) {
-                console.log(currentWeather.condition)
                 $('#currentWeather').data('current-cell', currentWeather.s2_cell_id)
                 $('#currentWeather').html('<img src="static/weather/' + currentWeather.condition + '.png" alt="">')
             } else if (!currentWeather) {
