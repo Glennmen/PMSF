@@ -3,10 +3,13 @@
 //
 
 var $selectExclude
+var $selectExcludeMinIV
 var $selectPokemonNotify
 var $selectRarityNotify
 var $textPerfectionNotify
 var $textLevelNotify
+var $textMinIV
+var $textMinLevel
 var $raidNotify
 var $selectStyle
 var $selectIconSize
@@ -25,6 +28,7 @@ var $selectLocationIconMarker
 var $switchGymSidebar
 
 var language = document.documentElement.lang === '' ? 'en' : document.documentElement.lang
+var languageSite = 'en'
 var idToPokemon = {}
 var i8lnDictionary = {}
 var languageLookups = 0
@@ -34,10 +38,14 @@ var searchMarkerStyles
 
 var timestamp
 var excludedPokemon = []
+var excludedMinIV = []
 var notifiedPokemon = []
 var notifiedRarity = []
 var notifiedMinPerfection = null
 var notifiedMinLevel = null
+var minIV = null
+var prevMinIV = null
+var prevMinLevel = null
 var onlyPokemon = 0
 
 var buffer = []
@@ -77,8 +85,9 @@ var assetsPath = 'static/sounds/'
 var iconpath = null
 
 var gymTypes = ['Uncontested', 'Mystic', 'Valor', 'Instinct']
-var triggerGyms = Store.get('triggerGyms')
 
+var triggerGyms = Store.get('triggerGyms')
+var onlyTriggerGyms
 var noExGyms
 var noParkInfo
 
@@ -88,6 +97,7 @@ createjs.Sound.registerSound('static/sounds/ding.mp3', 'ding')
 
 var genderType = ['♂', '♀', '⚲']
 var unownForm = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?']
+var cpMultiplier = [0.094, 0.16639787, 0.21573247, 0.25572005, 0.29024988, 0.3210876, 0.34921268, 0.37523559, 0.39956728, 0.42250001, 0.44310755, 0.46279839, 0.48168495, 0.49985844, 0.51739395, 0.53435433, 0.55079269, 0.56675452, 0.58227891, 0.59740001, 0.61215729, 0.62656713, 0.64065295, 0.65443563, 0.667934, 0.68116492, 0.69414365, 0.70688421, 0.71939909, 0.7317, 0.73776948, 0.74378943, 0.74976104, 0.75568551, 0.76156384, 0.76739717, 0.7731865, 0.77893275, 0.7846369, 0.79030001]
 
 /*
  text place holders:
@@ -113,15 +123,17 @@ var notifyText = 'disappears at <dist> (<udist>)'
 
 function excludePokemon(id) { // eslint-disable-line no-unused-vars
     $selectExclude.val(
-        $selectExclude.val().concat(id)
+        $selectExclude.val().split(',').concat(id).join(',')
     ).trigger('change')
+    $('label[for="exclude-pokemon"] .pokemon-list .pokemon-icon-sprite[data-value="' + id + '"]').addClass('active')
     clearStaleMarkers()
 }
 
 function notifyAboutPokemon(id) { // eslint-disable-line no-unused-vars
     $selectPokemonNotify.val(
-        $selectPokemonNotify.val().concat(id)
+        $selectPokemonNotify.val().split(',').concat(id).join(',')
     ).trigger('change')
+    $('label[for="notify-pokemon"] .pokemon-list .pokemon-icon-sprite[data-value="' + id + '"]').addClass('active')
 }
 
 function removePokemonMarker(encounterId) { // eslint-disable-line no-unused-vars
@@ -251,6 +263,16 @@ function initMap() { // eslint-disable-line no-unused-vars
 
     var locale = window.navigator.userLanguage || window.navigator.language
     moment.locale(locale)
+
+    if (language === 'jp') {
+        languageSite = 'ja'
+    } else if (language === 'pt_br') {
+        languageSite = 'pt-br'
+    } else if (language === 'zh_tw') {
+        languageSite = 'zh-tw'
+    } else {
+        languageSite = language
+    }
 }
 
 function updateLocationMarker(style) {
@@ -315,6 +337,7 @@ function initSidebar() {
     $('#max-level-raids-filter-switch').val(Store.get('maxRaidLevel'))
     $('#last-update-gyms-switch').val(Store.get('showLastUpdatedGymsOnly'))
     $('#pokemon-switch').prop('checked', Store.get('showPokemon'))
+    $('#pokemon-filter-wrapper').toggle(Store.get('showPokemon'))
     $('#pokestops-switch').prop('checked', Store.get('showPokestops'))
     $('#lured-pokestops-only-switch').val(Store.get('showLuredPokestopsOnly'))
     $('#lured-pokestops-only-wrapper').toggle(Store.get('showPokestops'))
@@ -477,7 +500,7 @@ function pokemonLabel(item) {
     }
     contentstring += '<span> - </span>' +
         '<small>' +
-        '<a href="https://pokemon.gameinfo.io/' + language + '/pokemon/' + id + '" target="_blank" title="' + i8ln('View in Pokedex') + '">#' + id + '</a>' +
+        '<a href="https://pokemon.gameinfo.io/' + languageSite + '/pokemon/' + id + '" target="_blank" title="' + i8ln('View in Pokedex') + '">#' + id + '</a>' +
         '</small>' +
         '<span> ' + rarityDisplay + '</span>' +
         '<span> - </span>' +
@@ -557,7 +580,7 @@ function gymLabel(item) {
     }
 
     var park = ''
-    if ((item['park'] !== 'None' && item['park'] !== undefined) && (noParkInfo === false)) {
+    if ((item['park'] !== 'None' && item['park'] !== undefined && item['park']) && (noParkInfo === false)) {
         park = i8ln('Park') + ': ' + item['park']
     }
 
@@ -894,8 +917,7 @@ function getGymMarkerIcon(item) {
         teamStr = gymTypes[item['team_id']] + '_' + level
     }
     var exIcon = ''
-
-    if ((((park !== 'None' && park !== undefined) || triggerGyms.includes(item['gym_id'])) && (noExGyms === false))) {
+    if ((((park !== 'None' && park !== undefined && onlyTriggerGyms === false && park) || (item['sponsor'] !== undefined && item['sponsor'] > 0) || triggerGyms.includes(item['gym_id'])) && (noExGyms === false))) {
         exIcon = '<img src="static/images/ex.png" style="position:absolute;right:25px;bottom:2px;"/>'
     }
     if (item['raid_pokemon_id'] != null && item.raid_end > Date.now()) {
@@ -921,6 +943,7 @@ function getGymMarkerIcon(item) {
     } else {
         return '<div>' +
             '<img src="static/forts/' + Store.get('gymMarkerStyle') + '/' + gymTypes[item['team_id']] + '.png" style="width:48px;height: auto;"/>' +
+            exIcon +
             '</div>'
     }
 }
@@ -1240,7 +1263,7 @@ function addListeners(marker) {
 
 function clearStaleMarkers() {
     $.each(mapData.pokemons, function (key, value) {
-        if (mapData.pokemons[key]['disappear_time'] < new Date().getTime() || excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id'])) {
+        if (mapData.pokemons[key]['disappear_time'] < new Date().getTime() || excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id']) || ((((mapData.pokemons[key]['individual_attack'] + mapData.pokemons[key]['individual_defense'] + mapData.pokemons[key]['individual_stamina']) / 45 * 100 < minIV) || ((mapType === 'monocle' && mapData.pokemons[key]['level'] < minLevel) || (mapType === 'rm' && !isNaN(minLevel) && (mapData.pokemons[key]['cp_multiplier'] < cpMultiplier[minLevel - 1])))) && !excludedMinIV.includes(mapData.pokemons[key]['pokemon_id']))) {
             if (mapData.pokemons[key].marker.rangeCircle) {
                 mapData.pokemons[key].marker.rangeCircle.setMap(null)
                 delete mapData.pokemons[key].marker.rangeCircle
@@ -1325,6 +1348,8 @@ function loadRawData() {
     var loadScanned = Store.get('showScanned')
     var loadSpawnpoints = Store.get('showSpawnpoints')
     var loadLuredOnly = Boolean(Store.get('showLuredPokestopsOnly'))
+    var loadMinIV = Store.get('remember_text_min_iv')
+    var loadMinLevel = Store.get('remember_text_min_level')
 
     var bounds = map.getBounds()
     var swPoint = bounds.getSouthWest()
@@ -1351,6 +1376,10 @@ function loadRawData() {
             'lastslocs': lastslocs,
             'spawnpoints': loadSpawnpoints,
             'lastspawns': lastspawns,
+            'minIV': loadMinIV,
+            'prevMinIV': prevMinIV,
+            'minLevel': loadMinLevel,
+            'prevMinLevel': prevMinLevel,
             'swLat': swLat,
             'swLng': swLng,
             'neLat': neLat,
@@ -1361,6 +1390,7 @@ function loadRawData() {
             'oNeLng': oNeLng,
             'reids': String(reincludedPokemon),
             'eids': String(excludedPokemon),
+            'exMinIV': String(excludedMinIV),
             'token': token
         },
         dataType: 'json',
@@ -1734,6 +1764,8 @@ function updateMap() {
         lastslocs = result.lastslocs
         lastspawns = result.lastspawns
 
+        prevMinIV = result.preMinIV
+        prevMinLevel = result.preMinLevel
         reids = result.reids
         if (reids instanceof Array) {
             reincludedPokemon = reids.filter(function (e) {
@@ -2053,7 +2085,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
         }
 
         var park = ''
-        if (((result['park'] !== 'None' && result['park'] !== undefined) && (noParkInfo === false))) {
+        if (((result['park'] !== 'None' && result['park'] !== undefined && result['park']) && (noParkInfo === false))) {
             park = i8ln('Park') + ': ' + result['park']
         }
 
@@ -2264,6 +2296,47 @@ function fetchCriesJson() {
             cries = data
             createjs.Sound.alternateExtensions = ['mp3']
             createjs.Sound.registerSounds(cries, assetsPath)
+        }
+    })
+}
+
+function pokemonSpritesFilter() {
+    jQuery('.pokemon-list').parent().find('.select2').hide()
+    loadDefaultImages()
+    jQuery('.pokemon-list .pokemon-icon-sprite').on('click', function () {
+        var img = jQuery(this)
+        var select = jQuery(this).parent().parent().find('input')
+        var value = select.val().split(',')
+        var id = img.data('value').toString()
+        if (img.hasClass('active')) {
+            select.val(value.filter(function (elem) {
+                return elem !== id
+            }).join(',')).trigger('change')
+            img.removeClass('active')
+        } else {
+            select.val((value.concat(id).join(','))).trigger('change')
+            img.addClass('active')
+        }
+    })
+}
+
+function loadDefaultImages() {
+    var ep = Store.get('remember_select_exclude')
+    var eminiv = Store.get('remember_select_exclude_min_iv')
+    var en = Store.get('remember_select_notify')
+    $('label[for="exclude-pokemon"] .pokemon-icon-sprite').each(function () {
+        if (ep.indexOf($(this).data('value')) !== -1) {
+            $(this).addClass('active')
+        }
+    })
+    $('label[for="exclude-min-iv"] .pokemon-icon-sprite').each(function () {
+        if (eminiv.indexOf($(this).data('value')) !== -1) {
+            $(this).addClass('active')
+        }
+    })
+    $('label[for="notify-pokemon"] .pokemon-icon-sprite').each(function () {
+        if (en.indexOf($(this).data('value')) !== -1) {
+            $(this).addClass('active')
         }
     })
 }
@@ -2541,6 +2614,7 @@ $(function () {
     })
 
     $selectGymMarkerStyle.val(Store.get('gymMarkerStyle')).trigger('change')
+    pokemonSpritesFilter()
 })
 
 $(function () {
@@ -2557,12 +2631,29 @@ $(function () {
     })
 
     $selectExclude = $('#exclude-pokemon')
+    $selectExcludeMinIV = $('#exclude-min-iv')
     $selectPokemonNotify = $('#notify-pokemon')
     $selectRarityNotify = $('#notify-rarity')
     $textPerfectionNotify = $('#notify-perfection')
+    $textMinIV = $('#min-iv')
+    $textMinLevel = $('#min-level')
     $textLevelNotify = $('#notify-level')
     $raidNotify = $('#notify-raid')
     var numberOfPokemon = 386
+
+    $('.select-all').on('click', function (e) {
+        e.preventDefault()
+        var parent = $(this).parent()
+        parent.find('.pokemon-list .pokemon-icon-sprite').addClass('active')
+        parent.find('input').val(Array.from(Array(numberOfPokemon + 1).keys()).slice(1).join(',')).trigger('change')
+    })
+
+    $('.hide-all').on('click', function (e) {
+        e.preventDefault()
+        var parent = $(this).parent()
+        parent.find('.pokemon-list .pokemon-icon-sprite').removeClass('active')
+        parent.find('input').val('').trigger('change')
+    })
 
     $raidNotify.select2({
         placeholder: 'Minimum raid level',
@@ -2602,23 +2693,33 @@ $(function () {
         $selectExclude.select2({
             placeholder: i8ln('Select Pokémon'),
             data: pokeList,
-            templateResult: formatState
+            templateResult: formatState,
+            multiple: true,
+            maximumSelectionSize: 1
         })
         $selectPokemonNotify.select2({
             placeholder: i8ln('Select Pokémon'),
             data: pokeList,
-            templateResult: formatState
+            templateResult: formatState,
+            multiple: true,
+            maximumSelectionSize: 1
         })
+
         $selectRarityNotify.select2({
             placeholder: i8ln('Select Rarity'),
             data: [i8ln('Common'), i8ln('Uncommon'), i8ln('Rare'), i8ln('Very Rare'), i8ln('Ultra Rare')],
+            templateResult: formatState
+        })
+        $selectExcludeMinIV.select2({
+            placeholder: i8ln('Select Pokémon'),
+            data: pokeList,
             templateResult: formatState
         })
 
         // setup list change behavior now that we have the list to work from
         $selectExclude.on('change', function (e) {
             buffer = excludedPokemon
-            excludedPokemon = $selectExclude.val().map(Number)
+            excludedPokemon = $selectExclude.val().split(',').map(Number).sort(function (a, b) { return parseInt(a) - parseInt(b) })
             buffer = buffer.filter(function (e) {
                 return this.indexOf(e) < 0
             }, excludedPokemon)
@@ -2626,8 +2727,41 @@ $(function () {
             clearStaleMarkers()
             Store.set('remember_select_exclude', excludedPokemon)
         })
+        $selectExcludeMinIV.on('change', function (e) {
+            buffer = excludedMinIV
+            excludedMinIV = $selectExcludeMinIV.val().split(',').map(Number).sort(function (a, b) { return parseInt(a) - parseInt(b) })
+            buffer = buffer.filter(function (e) {
+                return this.indexOf(e) < 0
+            }, excludedMinIV)
+            reincludedPokemon = reincludedPokemon.concat(buffer)
+            clearStaleMarkers()
+            Store.set('remember_select_exclude_min_iv', excludedMinIV)
+        })
+        $textMinIV.on('change', function (e) {
+            minIV = parseInt($textMinIV.val(), 10)
+            if (isNaN(minIV) || minIV < 0) {
+                minIV = ''
+            }
+            if (minIV > 100) {
+                minIV = 100
+            }
+            $textMinIV.val(minIV)
+            Store.set('remember_text_min_iv', minIV)
+        })
+        $textMinLevel.on('change', function (e) {
+            minLevel = parseInt($textMinLevel.val(), 10)
+            if (isNaN(minLevel) || minLevel < 0) {
+                minLevel = ''
+            }
+            if (minLevel > 35) {
+                minLevel = 35
+            }
+            $textMinLevel.val(minLevel)
+            Store.set('remember_text_min_level', minLevel)
+        })
+
         $selectPokemonNotify.on('change', function (e) {
-            notifiedPokemon = $selectPokemonNotify.val().map(Number)
+            notifiedPokemon = $selectPokemonNotify.val().split(',').map(Number).sort(function (a, b) { return parseInt(a) - parseInt(b) })
             Store.set('remember_select_notify', notifiedPokemon)
         })
         $selectRarityNotify.on('change', function (e) {
@@ -2659,15 +2793,19 @@ $(function () {
 
         // recall saved lists
         $selectExclude.val(Store.get('remember_select_exclude')).trigger('change')
+        $selectExcludeMinIV.val(Store.get('remember_select_exclude_min_iv')).trigger('change')
         $selectPokemonNotify.val(Store.get('remember_select_notify')).trigger('change')
         $selectRarityNotify.val(Store.get('remember_select_rarity_notify')).trigger('change')
         $textPerfectionNotify.val(Store.get('remember_text_perfection_notify')).trigger('change')
         $textLevelNotify.val(Store.get('remember_text_level_notify')).trigger('change')
+        $textMinIV.val(Store.get('remember_text_min_iv')).trigger('change')
+        $textMinLevel.val(Store.get('remember_text_min_level')).trigger('change')
         $raidNotify.val(Store.get('remember_raid_notify')).trigger('change')
 
         if (isTouchDevice() && isMobileDevice()) {
             $('.select2-search input').prop('readonly', true)
         }
+        $('#tabs').tabs()
     })
 
     // run interval timers to regularly update map and timediffs
@@ -2757,6 +2895,15 @@ $(function () {
         buildSwitchChangeListener(mapData, ['gyms'], 'showGyms').bind(this)()
     })
     $('#pokemon-switch').change(function () {
+        var options = {
+            'duration': 500
+        }
+        var wrapper = $('#pokemon-filter-wrapper')
+        if (this.checked) {
+            wrapper.show(options)
+        } else {
+            wrapper.hide(options)
+        }
         buildSwitchChangeListener(mapData, ['pokemons'], 'showPokemon').bind(this)()
     })
     $('#scanned-switch').change(function () {
