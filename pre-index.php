@@ -142,6 +142,9 @@ if ($blockIframe) {
         </a>';
         }
         ?>
+        <?php if ($showWeatherHeader) { ?>
+        <span id="currentWeather" style="float:right;"></span>
+        <?php } ?>
         <a href="#stats" id="statsToggle" class="statsNav" style="float: right;"><span class="label"><?php echo i8ln('Stats') ?></span></a>
     </header>
     <!-- NAV -->
@@ -755,6 +758,8 @@ if ($blockIframe) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
 <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
 <script src="node_modules/push.js/bin/push.min.js"></script>
+<script src="node_modules/long/src/long.js"></script>
+<script src="static/js/vendor/s2geometry.js"></script>
 <script src="static/dist/js/app.min.js"></script>
 <script src="static/js/vendor/classie.js"></script>
 <script>
@@ -804,6 +809,7 @@ if ($blockIframe) {
     var noExGyms = <?php echo $noExGyms === true ? 'true' : 'false' ?>;
     var noParkInfo = <?php echo $noParkInfo === true ? 'true' : 'false' ?>;
     var onlyTriggerGyms = <?php echo $onlyTriggerGyms === true ? 'true' : 'false' ?>;
+    var showWeatherHeader = <?php echo $showWeatherHeader === true ? 'true' : 'false' ?>;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="static/dist/js/map.common.min.js"></script>

@@ -188,18 +188,12 @@ $noParkInfo = false;                                                // Do not di
 $raidApiKey = '';                                                   // Raid API Key, '' to deny access
 $sendRaidData = false;                                              // Send Raid data, false to only send gym data
 
-
 //-----------------------------------------------------
-// DEBUGGING
+// Weather Config
 //-----------------------------------------------------
 
-// Do not enable unless requested
+$showWeatherHeader = false;                                        // Show current weather at current position in header
 
-$enableDebug = false;
-
-//-----------------------------------------------------
-// WEATHER CONFIG
-//-----------------------------------------------------
 $weather = [
     0 => null,
     1 => 'clear',
@@ -210,6 +204,14 @@ $weather = [
     6 => 'snow',
     7 => 'fog'
 ];
+
+//-----------------------------------------------------
+// DEBUGGING
+//-----------------------------------------------------
+
+// Do not enable unless requested
+
+$enableDebug = false;
 
 //-----------------------------------------------------
 // DATABASE CONFIG
