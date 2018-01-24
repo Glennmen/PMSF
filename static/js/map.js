@@ -102,11 +102,9 @@ var cpMultiplier = [0.094, 0.16639787, 0.21573247, 0.25572005, 0.29024988, 0.321
 var weatherArray = []
 var weatherPolys = []
 var weatherMarkers = []
-var weatherCells = []
 var weatherColors = ['grey', 'yellow', 'darkblue', 'grey', 'darkgrey', 'purple', 'white', 'black']
 
 var S2
-// var showWeatherHeader
 
 /*
  text place holders:
@@ -298,7 +296,7 @@ function initMap() { // eslint-disable-line no-unused-vars
         languageSite = language
     }
 
-    updateWeather()
+    updateWeatherOverlay()
 }
 
 function updateLocationMarker(style) {
@@ -1484,11 +1482,48 @@ function loadRawData() {
 
 function loadWeather() {
     return $.ajax({
-        url: 'weather_data',
-        type: 'GET',
+        url: 'weather_data?all',
+        type: 'POST',
         timeout: 300000,
         dataType: 'json',
         cache: false,
+        error: function error() {
+            // Display error toast
+            toastr['error']('Please check connectivity or reduce marker settings.', 'Error getting weather')
+            toastr.options = {
+                'closeButton': true,
+                'debug': false,
+                'newestOnTop': true,
+                'progressBar': false,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': true,
+                'onclick': null,
+                'showDuration': '300',
+                'hideDuration': '1000',
+                'timeOut': '25000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut'
+            }
+        },
+        complete: function complete() {
+
+        }
+    })
+}
+
+function loadWeatherCellData(cell) {
+    return $.ajax({
+        url: 'weather_data?cell',
+        type: 'POST',
+        timeout: 300000,
+        dataType: 'json',
+        cache: false,
+        data: {
+            'cell_id': cell
+        },
         error: function error() {
             // Display error toast
             toastr['error']('Please check connectivity or reduce marker settings.', 'Error getting weather')
@@ -1797,15 +1832,20 @@ function updateMap() {
 
     // lets try and get the s2 cell id in the middle
     var s2CellCenter = S2.keyToId(S2.latLngToKey(position.lat(), position.lng(), 10))
-
-    var currentWeather = weatherCells['weather_' + s2CellCenter]
-    var currentCell = $('#currentWeather').data('current-cell')
-    if ((currentWeather) && (currentCell !== currentWeather.s2_cell_id)) {
-        $('#currentWeather').data('current-cell', currentWeather.s2_cell_id)
-        $('#currentWeather').html('<img src="static/weather/' + currentWeather.condition + '.png" alt="">')
-    } else if (!currentWeather) {
-        $('#currentWeather').data('current-cell', '')
-        $('#currentWeather').html('')
+    if ((s2CellCenter) && (String(s2CellCenter) !== $('#currentWeather').data('current-cell')) && (map.getZoom() > 13)) {
+        loadWeatherCellData(s2CellCenter).done(function (cellWeather) {
+            var currentWeather = cellWeather.weather
+            console.log(currentWeather)
+            var currentCell = $('#currentWeather').data('current-cell')
+            if ((currentWeather) && (currentCell !== currentWeather.s2_cell_id)) {
+                console.log(currentWeather.condition)
+                $('#currentWeather').data('current-cell', currentWeather.s2_cell_id)
+                $('#currentWeather').html('<img src="static/weather/' + currentWeather.condition + '.png" alt="">')
+            } else if (!currentWeather) {
+                $('#currentWeather').data('current-cell', '')
+                $('#currentWeather').html('')
+            }
+        })
     }
 
     loadRawData().done(function (result) {
@@ -1857,11 +1897,9 @@ function updateMap() {
     })
 }
 
-function updateWeather() {
+function updateWeatherOverlay() {
     if (Store.get('showWeather')) {
         loadWeather().done(function (result) {
-            weatherCells = result.weather
-
             if (weatherPolys.length === 0) {
                 drawWeatherOverlay(result.weather)
             } else {
@@ -1870,7 +1908,6 @@ function updateWeather() {
                 drawWeatherOverlay(result.weather)
             }
         })
-        console.log('weather updated')
         lastWeatherUpdateTime = Date.now()
     }
 }
@@ -2190,7 +2227,7 @@ function createUpdateWorker() {
                     updateGeoLocation()
                 }
                 if (document.hidden && data.name === 'backgroundUpdate' && Date.now() - lastWeatherUpdateTime > 60000) {
-                    updateWeather()
+                    updateWeatherOverlay()
                 }
             }
 
@@ -2958,7 +2995,7 @@ $(function () {
     // run interval timers to regularly update map and timediffs
     window.setInterval(updateLabelDiffTime, 1000)
     window.setInterval(updateMap, 5000)
-    window.setInterval(updateWeather, 60000)
+    window.setInterval(updateWeatherOverlay, 60000)
     window.setInterval(updateGeoLocation, 1000)
 
     createUpdateWorker()
@@ -3061,7 +3098,7 @@ $(function () {
     $('#weather-switch').change(function () {
         Store.set('showWeather', this.checked)
         if (this.checked) {
-            updateWeather()
+            updateWeatherOverlay()
         } else {
             destroyWeatherOverlay()
         }
