@@ -86,6 +86,8 @@
     "enablePokemon": true,
     "enablePokestops": true,
     "enableLured": true,
+    "showWeather": true,
+    "enableWeatherOverlay": true,
     "enableScannedLocations": true,
     "enableSpawnpoints": true,
     "enableRanges": true,

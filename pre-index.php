@@ -424,8 +424,22 @@ if ($blockIframe) {
                     </div>
                 </div>';
             } ?>
+                <?php
+                if (!$noSpawnPoints) {
+                    echo '<div class="form-control switch-container">
+                    <h3> '.i8ln('Weather Conditions').' </h3>
+                    <div class="onoffswitch">
+                        <input id="weather-switch" type="checkbox" name="weather-switch"
+                               class="onoffswitch-checkbox">
+                        <label class="onoffswitch-label" for="weather-switch">
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>';
+                } ?>
             <?php
-            if (!$noSpawnPoints) {
+            if (!$noWeatherOverlay) {
                 echo '<div class="form-control switch-container">
                     <h3> '.i8ln('Spawn Points').' </h3>
                     <div class="onoffswitch">
@@ -789,6 +803,7 @@ if ($blockIframe) {
     var enablePokemon = <?php echo $noPokemon ? 'false' : $enablePokemon ?>;
     var enablePokestops = <?php echo $noPokestops ? 'false' : $enablePokestops ?>;
     var enableLured = <?php echo $map != "monocle" ? $enableLured : 0 ?>;
+    var enableWeatherOverlay = <?php echo !$noWeatherOverlay ? $enableWeatherOverlay : 'false' ?>;
     var enableScannedLocations = <?php echo $map != "monocle" && !$noScannedLocations ? $enableScannedLocations : 'false' ?>;
     var enableSpawnpoints = <?php echo $noSpawnPoints ? 'false' : $enableSpawnPoints ?>;
     var enableRanges = <?php echo $noRanges ? 'false' : $enableRanges ?>;

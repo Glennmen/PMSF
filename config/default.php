@@ -113,6 +113,9 @@ $enableLured = 1;                                                   // O: all, 1
 $noScannedLocations = false;                                        // true/false
 $enableScannedLocations = 'false';                                  // true/false
 
+$noWeatherOverlay = false;                                          // true/false
+$enableWeatherOverlay = 'false';                                    // true/false
+
 $noSpawnPoints = false;                                             // true/false
 $enableSpawnPoints = 'false';                                       // true/false
 

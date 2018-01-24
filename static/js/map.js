@@ -373,6 +373,7 @@ function initSidebar() {
     $('#spawn-area-switch').prop('checked', Store.get('spawnArea'))
     $('#spawn-area-wrapper').toggle(Store.get('followMyLocation'))
     $('#scanned-switch').prop('checked', Store.get('showScanned'))
+    $('#weather-switch').prop('checked', Store.get('showWeather'))
     $('#spawnpoints-switch').prop('checked', Store.get('showSpawnpoints'))
     $('#ranges-switch').prop('checked', Store.get('showRanges'))
     $('#sound-switch').prop('checked', Store.get('playSound'))
@@ -1857,19 +1858,21 @@ function updateMap() {
 }
 
 function updateWeather() {
-    loadWeather().done(function (result) {
-        weatherCells = result.weather
+    if (Store.get('showWeather')) {
+        loadWeather().done(function (result) {
+            weatherCells = result.weather
 
-        if (weatherPolys.length === 0) {
-            drawWeatherOverlay(result.weather)
-        } else {
-            // update layers
-            destroyWeatherOverlay()
-            drawWeatherOverlay(result.weather)
-        }
-    })
-    console.log('weather updated')
-    lastWeatherUpdateTime = Date.now()
+            if (weatherPolys.length === 0) {
+                drawWeatherOverlay(result.weather)
+            } else {
+                // update layers
+                destroyWeatherOverlay()
+                drawWeatherOverlay(result.weather)
+            }
+        })
+        console.log('weather updated')
+        lastWeatherUpdateTime = Date.now()
+    }
 }
 
 function drawWeatherOverlay(weather) {
@@ -3054,6 +3057,16 @@ $(function () {
     $('#scanned-switch').change(function () {
         buildSwitchChangeListener(mapData, ['scanned'], 'showScanned').bind(this)()
     })
+
+    $('#weather-switch').change(function () {
+        Store.set('showWeather', this.checked)
+        if (this.checked) {
+            updateWeather()
+        } else {
+            destroyWeatherOverlay()
+        }
+    })
+
     $('#spawnpoints-switch').change(function () {
         buildSwitchChangeListener(mapData, ['spawnpoints'], 'showSpawnpoints').bind(this)()
     })

@@ -964,6 +964,11 @@ var StoreOptions = {
             default: enableLured,
             type: StoreTypes.Number
         },
+    'showWeather':
+        {
+            default: enableWeatherOverlay,
+            type: StoreTypes.Boolean
+        },
     'showScanned':
         {
             default: enableScannedLocations,
