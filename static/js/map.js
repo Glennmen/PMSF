@@ -1841,7 +1841,6 @@ function updateMap() {
             // do weather stuff plz
             if (weatherPolys.length === 0) {
                 // still need to create weather array
-                console.log(result.weather)
                 var colorArray = []
                 colorArray[0] = 'FFFF00'
                 colorArray[1] = 'FFFF00'
@@ -1853,8 +1852,7 @@ function updateMap() {
                 colorArray[7] = '999999'
 
                 // result.weather.forEach(function(item) {
-                $.each(result.weather, function(idx, item) {
-                    console.log(item)
+                $.each(result.weather, function (idx, item) {
                     weatherArray.push(S2.idToCornerLatLngs(item.s2_cell_id))
                     var poly = new google.maps.Polygon({
                         id: item.id,
@@ -1864,6 +1862,19 @@ function updateMap() {
                         strokeWeight: 3,
                         fillColor: '#' + colorArray[item.condition],
                         fillOpacity: 0.35
+                    })
+                    var bounds = new google.maps.LatLngBounds()
+                    var i, center
+
+                    for (i = 0; i < weatherArray[0].length; i++) {
+                        bounds.extend(weatherArray[0][i])
+                    }
+                    center = bounds.getNorthEast()
+                    var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+                    var beachMarker = new google.maps.Marker({
+                        position: { lat: center.lat(), lng: center.lng() },
+                        map: map,
+                        icon: image
                     })
                     weatherPolys.push(poly)
                     poly.setMap(map)
