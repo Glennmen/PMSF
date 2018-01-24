@@ -492,7 +492,6 @@
         = S2.fromId = S2.fromCellId
         = S2.S2Cell.toHilbertQuadkey  = S2.toHilbertQuadkey
         = function (idS) {
-        var Long = exports.dcodeIO && exports.dcodeIO.Long || require('long');
         var bin = Long.fromString(idS, true, 10).toString(2);
 
         while (bin.length < (S2.FACE_BITS + S2.POS_BITS)) {
@@ -518,6 +517,11 @@
         return faceS + '/' + posS;
     };
 
+    S2.keyToCornerLatLngs = S2.S2Cell.keyToCornerLatLngs = function (key) {
+        var cell2 = S2.S2Cell.FromHilbertQuadKey(key);
+        return cell2.getCornerLatLngs();
+    }
+
     S2.keyToLatLng = S2.S2Cell.keyToLatLng = function (key) {
         var cell2 = S2.S2Cell.FromHilbertQuadKey(key);
         return cell2.getLatLng();
@@ -528,7 +532,12 @@
         return S2.keyToLatLng(key);
     };
 
-    S2.S2Cell.latLngToKey = S2.latLngToKey
+    S2.idToCornerLatLngs = S2.S2Cell.idToCornerLatLngs = function (id) {
+        var key = S2.idToKey(id);
+        return S2.keyToCornerLatLngs(key);
+    }
+
+        S2.S2Cell.latLngToKey = S2.latLngToKey
         = S2.latLngToQuadkey = function (lat, lng, level) {
         if (isNaN(level) || level < 1 || level > 30) {
             throw new Error("'level' is not a number between 1 and 30 (but it should be)");
@@ -552,7 +561,6 @@
     };
 
     S2.stepKey = function (key, num) {
-        var Long = exports.dcodeIO && exports.dcodeIO.Long || require('long');
         var parts = key.split('/');
 
         var faceS = parts[0];

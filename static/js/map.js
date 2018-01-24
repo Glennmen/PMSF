@@ -98,8 +98,8 @@ var genderType = ['♂', '♀', '⚲']
 var unownForm = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?']
 var cpMultiplier = [0.094, 0.16639787, 0.21573247, 0.25572005, 0.29024988, 0.3210876, 0.34921268, 0.37523559, 0.39956728, 0.42250001, 0.44310755, 0.46279839, 0.48168495, 0.49985844, 0.51739395, 0.53435433, 0.55079269, 0.56675452, 0.58227891, 0.59740001, 0.61215729, 0.62656713, 0.64065295, 0.65443563, 0.667934, 0.68116492, 0.69414365, 0.70688421, 0.71939909, 0.7317, 0.73776948, 0.74378943, 0.74976104, 0.75568551, 0.76156384, 0.76739717, 0.7731865, 0.77893275, 0.7846369, 0.79030001]
 
-// var weatherArray = []
-// var weatherPolys = []
+var weatherArray = []
+var weatherPolys = []
 var weatherCells = []
 var S2
 var showWeatherHeader
@@ -1836,23 +1836,35 @@ function updateMap() {
     if (showWeatherHeader === true) {
         loadWeather().done(function (result) {
             weatherCells = result.weather
-            /*
-            todo: layer stuff
+
+            // todo: layer stuff
             // do weather stuff plz
             if (weatherPolys.length === 0) {
                 // still need to create weather array
-                result.forEach(function(item) {
-                    item.coords.forEach(function (item) {
-                        weatherArray.push({'lat': item[0], 'lng': item[1]})
-                    })
+                console.log(result.weather)
+                var colorArray = []
+                colorArray[0] = 'FFFF00'
+                colorArray[1] = 'FFFF00'
+                colorArray[2] = '009DFF'
+                colorArray[3] = 'DDDDDD'
+                colorArray[4] = 'BBBBBB'
+                colorArray[5] = 'CCCCCC'
+                colorArray[6] = 'FFFFFF'
+                colorArray[7] = '999999'
+
+                // result.weather.forEach(function(item) {
+                $.each(result.weather, function(idx, item) {
+                    console.log(item)
+                    weatherArray.push(S2.idToCornerLatLngs(item.s2_cell_id))
                     var poly = new google.maps.Polygon({
                         id: item.id,
                         paths: weatherArray,
-                        strokeColor: '#FF0000',
+                        strokeColor: '#' + colorArray[item.condition],
                         strokeOpacity: 0.8,
                         strokeWeight: 3,
-                        fillColor: '#FF0000',
-                        fillOpacity: 0.35})
+                        fillColor: '#' + colorArray[item.condition],
+                        fillOpacity: 0.35
+                    })
                     weatherPolys.push(poly)
                     poly.setMap(map)
                     weatherArray = []
@@ -1860,7 +1872,6 @@ function updateMap() {
             } else {
                 // update layers
             }
-            */
         })
     }
 }
