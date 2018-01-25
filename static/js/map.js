@@ -269,14 +269,14 @@ function initMap() { // eslint-disable-line no-unused-vars
                 marker.setVisible(false)
             })
             // show header weather
-            $('#currentWeather').css('visibility', 'visible')
+            $('#currentWeather').fadeIn()
         } else {
             // show weather markers
             $.each(weatherMarkers, function (index, marker) {
                 marker.setVisible(true)
             })
             // hide header weather
-            $('#currentWeather').css('visibility', 'hidden')
+            $('#currentWeather').fadeOut()
         }
     })
 
