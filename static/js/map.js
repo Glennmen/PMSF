@@ -1905,8 +1905,8 @@ function updateWeatherOverlay() {
                 destroyWeatherOverlay()
                 drawWeatherOverlay(result.weather)
             }
+            lastWeatherUpdateTime = Date.now()
         })
-        lastWeatherUpdateTime = Date.now()
     }
 }
 
@@ -1963,7 +1963,8 @@ function destroyWeatherOverlay() {
     $.each(weatherMarkers, function (idx, marker) {
         marker.setMap(null)
     })
-    weatherPolys = weatherMarkers = []
+    weatherPolys = []
+    weatherMarkers = []
 }
 
 function drawScanPath(points) { // eslint-disable-line no-unused-vars
