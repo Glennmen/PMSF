@@ -434,7 +434,6 @@ class Monocle extends Scanner
     }
     public function get_weather_by_cell_id($cell_id)
     {
-        // monocle weather is pretty straightforward, cell id and weather info, no need to split this into a query function too (will render all weather cells at once)
         global $db;
         $query = "SELECT * FROM weather WHERE `s2_cell_id` = :cell_id";
         $params = [':cell_id' => $cell_id];
@@ -447,7 +446,6 @@ class Monocle extends Scanner
     }
     public function get_weather($updated=null)
     {
-        // monocle weather is pretty straightforward, cell id and weather info, no need to split this into a query function too (will render all weather cells at once)
         global $db;
         $query = "SELECT * FROM weather WHERE :conditions ORDER BY id ASC";
         $conds[] = "updated > :time";
