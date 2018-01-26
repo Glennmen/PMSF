@@ -393,13 +393,13 @@ function openMapDirections(lat, lng) { // eslint-disable-line no-unused-vars
     var url = 'https://www.google.com/maps/dir/?api=1&destination=' + lat + ',' + lng
     switch (directionProvider) {
         case 'apple':
-            url = 'http://maps.apple.com/?ll=' + lat + ',' + lng
+            url = 'https://maps.apple.com/?daddr=' + lat + ',' + lng
             break
         case 'waze':
             url = 'https://waze.com/ul?ll=' + lat + ',' + lng
             break
         case 'bing':
-            url = 'https://www.bing.com/maps?cp=' + lat + '~' + lng
+            url = 'https://www.bing.com/maps/?v=2&where1=' + lat + '~' + lng
             break
     }
     window.open(url, '_blank')

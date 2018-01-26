@@ -650,6 +650,7 @@ if ($blockIframe) {
                     <option value="apple">'.i8ln('Apple').'</option>
                     <option value="google">'.i8ln('Google').'</option>
                     <option value="waze">'.i8ln('Waze').'</option>
+                    <option value="bing">'.i8ln('Bing').'</option>
                 </select>
             </div>';
             }
