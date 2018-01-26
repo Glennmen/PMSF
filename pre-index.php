@@ -441,7 +441,7 @@ if ($blockIframe) {
                 </div>';
                 } ?>
             <?php
-            if (!$noWeatherOverlay) {
+            if (!$noSpawnPoints) {
                 echo '<div class="form-control switch-container">
                     <h3> '.i8ln('Spawn Points').' </h3>
                     <div class="onoffswitch">
