@@ -68,7 +68,6 @@
     "pGoStyleNight": true,
     "moment": false,
     "mapStyle": true,
-    "directionProvider" : true,
     "hidePokemon": true,
     "excludeMinIV": true,
     "minIV": true,
