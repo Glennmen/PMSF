@@ -37,7 +37,7 @@ $locale = "en";                                                     // Display l
 
 /* Google Maps Key */
 
-$gmapsKey = "";                                                     // Google Maps API Key
+$gmapsKey = [""];                                                     // Google Maps API Key ["KEY1","KEY2"]
 
 /* Google Analytics */
 
