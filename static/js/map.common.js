@@ -954,6 +954,16 @@ var StoreOptions = {
             default: enablePokemon,
             type: StoreTypes.Boolean
         },
+    'showBigKarp':
+        {
+            default: showBigKarp,
+            type: StoreTypes.Boolean
+        },
+    'showTinyRat':
+        {
+            default: showTinyRat,
+            type: StoreTypes.Boolean
+        },
     'showPokestops':
         {
             default: enablePokestops,
@@ -1052,6 +1062,11 @@ var StoreOptions = {
     'locationMarkerStyle':
         {
             default: locationStyle,
+            type: StoreTypes.String
+        },
+    'directionProvider':
+        {
+            default: '',
             type: StoreTypes.String
         },
     'gymMarkerStyle':

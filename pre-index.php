@@ -169,6 +169,58 @@ if ($blockIframe) {
                     </div>
                 </div>'; ?>
                 <div id="pokemon-filter-wrapper" style="display:none">
+                    <?php
+                    if (!$noTinyRat) {
+                        ?>
+                        <div class="form-control switch-container">
+                            <h3><?php echo i8ln('Tiny Rats') ?></h3>
+                            <div class="onoffswitch">
+                                <input id="tiny-rat-switch" type="checkbox" name="tiny-rat-switch"
+                                       class="onoffswitch-checkbox" checked>
+                                <label class="onoffswitch-label" for="tiny-rat-switch">
+                                    <span class="switch-label" data-on="On" data-off="Off"></span>
+                                    <span class="switch-handle"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <?php
+                    } ?>
+                    <?php
+                    if (!$noBigKarp) {
+                        ?>
+                        <div class="form-control switch-container">
+                            <h3><?php echo i8ln('Big Karp') ?></h3>
+                            <div class="onoffswitch">
+                                <input id="big-karp-switch" type="checkbox" name="big-karp-switch"
+                                       class="onoffswitch-checkbox" checked>
+                                <label class="onoffswitch-label" for="big-karp-switch">
+                                    <span class="switch-label" data-on="On" data-off="Off"></span>
+                                    <span class="switch-handle"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <?php
+                    } ?>
+                    <div class="form-row min-stats-row">
+                        <?php
+                        if (!$noMinIV) {
+                            echo '<div class="form-control" >
+                            <label for="min-iv">
+                                <h3>'.i8ln('Min IV').'</h3>
+                                <input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="'.i8ln('Min IV').'"/>
+                            </label>
+                        </div>';
+                        } ?>
+                        <?php
+                        if (!$noMinLevel) {
+                            echo '<div class="form-control">
+                            <label for="min-level">
+                                <h3>'.i8ln('Min Lvl').'</h3>
+                                <input id="min-level" type="number" min="0" max="100" name="min-level" placeholder="'.i8ln('Min Lvl').'"/>
+                            </label>
+                        </div>';
+                        } ?>
+                    </div>
                     <div id="tabs">
                         <ul>
                             <?php
@@ -220,26 +272,7 @@ if ($blockIframe) {
                         } ?>
                     </div>
 
-                    <div class="form-row min-stats-row">
-                        <?php
-                        if (!$noMinIV) {
-                            echo '<div class="form-control" >
-                            <label for="min-iv">
-                                <h3>'.i8ln('Min IV').'</h3>
-                                <input id="min-iv" type="number" min="0" max="100" name="min-iv" placeholder="'.i8ln('Min IV').'"/>
-                            </label>
-                        </div>';
-                        } ?>
-                        <?php
-                        if (!$noMinLevel) {
-                            echo '<div class="form-control">
-                            <label for="min-level">
-                                <h3>'.i8ln('Min Lvl').'</h3>
-                                <input id="min-level" type="number" min="0" max="100" name="min-level" placeholder="'.i8ln('Min Lvl').'"/>
-                            </label>
-                        </div>';
-                        } ?>
-                    </div>
+
                 </div>
             </div>
             <?php
@@ -808,6 +841,8 @@ if ($blockIframe) {
     var noExGyms = <?php echo $noExGyms === true ? 'true' : 'false' ?>;
     var noParkInfo = <?php echo $noParkInfo === true ? 'true' : 'false' ?>;
     var onlyTriggerGyms = <?php echo $onlyTriggerGyms === true ? 'true' : 'false' ?>;
+    var showBigKarp = '<?php echo $noBigKarp === true ? 'true' : 'false' ?>';
+    var showTinyRat = '<?php echo $noTinyRat === true ? 'true' : 'false' ?>';
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="static/dist/js/map.common.min.js"></script>
