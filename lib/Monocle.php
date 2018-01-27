@@ -32,11 +32,11 @@ class Monocle extends Scanner
         }
         if (count($eids)) {
             $tmpSQL = '';
-            if(!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $eids)) === false){
+            if (!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $eids)) === false) {
                 $tmpSQL .= ' || (pokemon_id = 19 && weight < 2.41)';
                 $eids[] = "19";
             }
-            if(!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $eids)) === false){
+            if (!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $eids)) === false) {
                 $tmpSQL .= ' || (pokemon_id = 129 && weight > 12.49)';
                 $eids[] = "129";
             }
@@ -81,11 +81,11 @@ class Monocle extends Scanner
         $params[':time'] = time();
         if (count($ids)) {
             $tmpSQL = '';
-            if(!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $ids)) === false){
+            if (!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $ids)) === false) {
                 $tmpSQL .= ' || (pokemon_id = 19 && weight < 2.41)';
                 $eids[] = "19";
             }
-            if(!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $ids)) === false){
+            if (!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $ids)) === false) {
                 $tmpSQL .= ' || (pokemon_id = 129 && weight > 12.49)';
                 $eids[] = "129";
             }

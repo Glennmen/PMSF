@@ -5,6 +5,7 @@ namespace Scanner;
 class RocketMap extends Scanner
 {
     private $cpMultiplier;
+
     public function __construct()
     {
         parent::__construct();
@@ -47,11 +48,11 @@ class RocketMap extends Scanner
         }
         if (count($eids)) {
             $tmpSQL = '';
-            if(!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $eids)) === false){
+            if (!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $eids)) === false) {
                 $tmpSQL .= ' || (pokemon_id = 19 && weight < 2.41)';
                 $eids[] = "19";
             }
-            if(!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $eids)) === false){
+            if (!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $eids)) === false) {
                 $tmpSQL .= ' || (pokemon_id = 129 && weight > 12.49)';
                 $eids[] = "129";
             }
@@ -106,11 +107,11 @@ class RocketMap extends Scanner
         $params[':time'] = date_format($date, 'Y-m-d H:i:s');
         if (count($ids)) {
             $tmpSQL = '';
-            if(!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $ids)) === false){
+            if (!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $ids)) === false) {
                 $tmpSQL .= ' || (pokemon_id = 19 && weight < 2.41)';
                 $eids[] = "19";
             }
-            if(!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $ids)) === false){
+            if (!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $ids)) === false) {
                 $tmpSQL .= ' || (pokemon_id = 129 && weight > 12.49)';
                 $eids[] = "129";
             }
@@ -640,44 +641,45 @@ class RocketMap extends Scanner
         }
         return $data;
     }
+
     private function setCpMultiplier()
     {
         $this->cpMultiplier = array(
-            1 =>0.094,
-            2 =>0.16639787,
-            3 =>0.21573247,
-            4 =>0.25572005,
-            5 =>0.29024988,
-            6 =>0.3210876,
-            7 =>0.34921268,
-            8 =>0.37523559,
-            9 =>0.39956728,
-            10 =>0.42250001,
-            11 =>0.44310755,
-            12 =>0.46279839,
-            13 =>0.48168495,
-            14 =>0.49985844,
-            15 =>0.51739395,
-            16 =>0.53435433,
-            17 =>0.55079269,
-            18 =>0.56675452,
-            19 =>0.58227891,
-            20 =>0.59740001,
-            21 =>0.61215729,
-            22 =>0.62656713,
-            23 =>0.64065295,
-            24 =>0.65443563,
-            25 =>0.667934,
-            26 =>0.68116492,
-            27 =>0.69414365,
-            28 =>0.70688421,
-            29 =>0.71939909,
-            30 =>0.7317,
-            31 =>0.73776948,
-            32 =>0.74378943,
-            33 =>0.74976104,
-            34 =>0.75568551,
-            35 =>0.76156384
+            1 => 0.094,
+            2 => 0.16639787,
+            3 => 0.21573247,
+            4 => 0.25572005,
+            5 => 0.29024988,
+            6 => 0.3210876,
+            7 => 0.34921268,
+            8 => 0.37523559,
+            9 => 0.39956728,
+            10 => 0.42250001,
+            11 => 0.44310755,
+            12 => 0.46279839,
+            13 => 0.48168495,
+            14 => 0.49985844,
+            15 => 0.51739395,
+            16 => 0.53435433,
+            17 => 0.55079269,
+            18 => 0.56675452,
+            19 => 0.58227891,
+            20 => 0.59740001,
+            21 => 0.61215729,
+            22 => 0.62656713,
+            23 => 0.64065295,
+            24 => 0.65443563,
+            25 => 0.667934,
+            26 => 0.68116492,
+            27 => 0.69414365,
+            28 => 0.70688421,
+            29 => 0.71939909,
+            30 => 0.7317,
+            31 => 0.73776948,
+            32 => 0.74378943,
+            33 => 0.74976104,
+            34 => 0.75568551,
+            35 => 0.76156384
         );
     }
 }
