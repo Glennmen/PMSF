@@ -679,6 +679,21 @@ if ($blockIframe) {
                 echo '</div>';
             }
             ?>
+            <?php
+            if (!$noAreas) {
+                echo '<h3>' . i8ln('Areas') . '</h3>';
+                $count = sizeof($areas);
+                if($count > 0){
+                    echo '<div class="form-control switch-container"><ul>';
+                    for($i = 0; $i<= $count - 1; $i++){
+                        echo '<li><a href="" data-lat="'.$areas[$i][0].'" data-lng="'.$areas[$i][1].'" data-zoom="'.$areas[$i][2].'" class="area-go-to">'.$areas[$i][3].'</a></li>';
+                    }
+                    echo '</ul></div>';
+                }
+            }
+            ?>
+
+
         </div>
         <div>
             <center>
