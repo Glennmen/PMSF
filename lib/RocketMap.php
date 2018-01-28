@@ -628,7 +628,7 @@ class RocketMap extends Scanner
     public function get_weather_by_cell_id($cell_id)
     {
         global $db;
-        $query = "SELECT * FROM weather WHERE `s2_cell_id` = :cell_id";
+        $query = "SELECT * FROM weather WHERE s2_cell_id = :cell_id";
         $params = [':cell_id' => $cell_id];
         $weather_info = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
         if ($weather_info) {
