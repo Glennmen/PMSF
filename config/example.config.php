@@ -185,6 +185,17 @@ $sendRaidData = false;                                              // Send Raid
 $noWeatherOverlay = false;                                          // true/false
 $enableWeatherOverlay = 'false';                                    // true/false
 
+$weatherColors = [
+    'grey',                                                         // no weather
+    '#fdfd96',                                                      // clear
+    'darkblue',                                                     // rain
+    'grey',                                                         // partly cloudy
+    'darkgrey',                                                     // cloudy
+    'purple',                                                       // windy
+    'white',                                                        // snow
+    'black'                                                         // fog
+];
+
 //-----------------------------------------------------
 // DATA MANAGEMENT
 //-----------------------------------------------------

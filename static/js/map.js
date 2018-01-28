@@ -103,7 +103,7 @@ var cpMultiplier = [0.094, 0.16639787, 0.21573247, 0.25572005, 0.29024988, 0.321
 var weatherArray = []
 var weatherPolys = []
 var weatherMarkers = []
-var weatherColors = ['grey', '#fdfd96', 'darkblue', 'grey', 'darkgrey', 'purple', 'white', 'black']
+var weatherColors
 
 var S2
 
