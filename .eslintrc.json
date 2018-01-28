@@ -72,6 +72,7 @@
     "excludeMinIV": true,
     "minIV": true,
     "minLevel": true,
+    "hidePokemonCoords": true,
     "notifyPokemon": true,
     "notifyRarity": true,
     "notifyIv": true,
