@@ -59,6 +59,7 @@ var storeZoom = true
 var scanPath
 var moves
 var weather
+var boostedMons // eslint-disable-line no-unused-vars
 var osmTileServer
 
 var oSwLat
@@ -2810,7 +2811,8 @@ $(function () {
     })
 
     $.getJSON('static/dist/data/weather.min.json').done(function (data) {
-        weather = data
+        weather = data.weather
+        boostedMons = data.boosted_mons
     })
 
     $selectExclude = $('#exclude-pokemon')

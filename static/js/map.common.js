@@ -1141,7 +1141,10 @@ function getGoogleSprite(index, sprite, displayHeight, weather = 0) {
     var scaledSpriteSize = new google.maps.Size(scale * sprite.spriteWidth, scale * sprite.spriteHeight)
     var scaledIconCenterOffset = new google.maps.Point(scale * sprite.iconWidth / 2, scale * sprite.iconHeight / 2)
     var monSpriteUrl
+    var pokemonId = index + 1
     if (weather === 0) {
+        monSpriteUrl = Store.get('spritefileLarge')
+    } else if (boostedMons[weather].indexOf(pokemonId) === -1) {
         monSpriteUrl = Store.get('spritefileLarge')
     } else {
         monSpriteUrl = Store.get('weatherSpritesSrc') + weather + '.png'
