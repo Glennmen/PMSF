@@ -37,7 +37,7 @@ $startingLng = -122.4194155;                                        // Starting 
 
 $maxLatLng = 1;                                                     // Max latitude and longitude size (1 = ~110km, 0 to disable)
 $maxZoomOut = 0;                                                    // Max zoom out level (11 ~= $maxLatLng = 1, 0 to disable, lower = the further you can zoom out)
-$enableCsrf = false;                                                // Don't disable this unless you know why you need to :)
+$enableCsrf = true;                                                 // Don't disable this unless you know why you need to :)
 $sessionLifetime = 43200;                                           // Session lifetime, in seconds
 $blockIframe = true;                                                // Block your map being loaded in an iframe
 
@@ -168,6 +168,9 @@ $mapStyle = 'style_pgo_dynamic';                                    // roadmap, 
 $noIconSize = false;                                                // true/false
 $iconSize = 0;                                                      // -8, 0, 10, 20
 
+$noIconNotifySizeModifier = false;                                  // true/false | Increase size of notified Pokemon
+$iconNotifySizeModifier = 15;                                       // 0, 15, 30, 45
+
 $noGymStyle = false;                                                // true/false
 $gymStyle = 'ingame';                                               // ingame, shield
 
@@ -194,6 +197,35 @@ $sendRaidData = false;                                              // Send Raid
 
 $noAreas = false;
 $areas = [];                                                   // [[latitude,longitude,zoom,name],[latitude,longitude,zoom,name]]
+
+//-----------------------------------------------------
+// Weather Config
+//-----------------------------------------------------
+
+$noWeatherOverlay = false;                                          // true/false
+$enableWeatherOverlay = 'false';                                    // true/false
+
+$weather = [
+    0 => null,
+    1 => 'clear',
+    2 => 'rain',
+    3 => 'partly_cloudy',
+    4 => 'cloudy',
+    5 => 'windy',
+    6 => 'snow',
+    7 => 'fog'
+];
+
+$weatherColors = [
+    'grey',
+    '#fdfd96',
+    'darkblue',
+    'grey',
+    'darkgrey',
+    'purple',
+    'white',
+    'black'
+];
 
 //-----------------------------------------------------
 // DEBUGGING
