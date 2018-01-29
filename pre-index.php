@@ -629,7 +629,7 @@ if ($blockIframe) {
             ?>
 
             <?php
-            if (!$noMapStyle || !$noIconSize || !$noGymStyle || !$noLocationStyle) {
+            if (!$noMapStyle || !$noDirectionProvider || !$noIconSize || !$noGymStyle || !$noLocationStyle) {
                 echo '<h3>'.i8ln('Style').'</h3>
             <div>';
             }
@@ -688,7 +688,7 @@ if ($blockIframe) {
             }
             ?>
             <?php
-            if (!$noMapStyle || !$noIconSize || !$noGymStyle || !$noLocationStyle) {
+            if (!$noMapStyle || !$noDirectionProvider || !$noIconSize || !$noGymStyle || !$noLocationStyle) {
                 echo '</div>';
             }
             ?>
