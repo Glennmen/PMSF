@@ -1066,7 +1066,7 @@ var StoreOptions = {
         },
     'directionProvider':
         {
-            default: '',
+            default: directionProvider,
             type: StoreTypes.String
         },
     'gymMarkerStyle':
