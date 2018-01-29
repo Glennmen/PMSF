@@ -1,9 +1,7 @@
 <?php
 include('config/config.php');
-
-// set content type
+global $map, $fork;
 header('Content-Type: application/json');
-
 // init map
 if (strtolower($map) === "monocle") {
     if (strtolower($fork) === "asner") {
@@ -20,21 +18,13 @@ if (strtolower($map) === "monocle") {
         $scanner = new \Scanner\RocketMap();
     }
 }
-
-if (empty($_POST['id'])) {
-    http_response_code(400);
-    die();
+if (isset($_POST['cell_id'])) {
+    $return_weather = $scanner->get_weather_by_cell_id($_POST['cell_id']);
+} else {
+    // $timestamp = (isset($_POST['ts']) ? $_POST['ts'] : null);
+    $return_weather  = $scanner->get_weather();
 }
-if (!validateToken($_POST['token'])) {
-    http_response_code(400);
-    die();
-}
-
-
-$id = $_POST['id'];
-
-$p = $scanner->get_gym($id);
-
-$p['token'] = refreshCsrfToken();
-
-echo json_encode($p);
+$d['weather'] = $return_weather;
+$d['timestamp'] = time();
+$jaysson = json_encode($d);
+echo $jaysson;

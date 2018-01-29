@@ -13,6 +13,7 @@ var $textMinLevel
 var $raidNotify
 var $selectStyle
 var $selectIconSize
+var $selectIconNotifySizeModifier
 var $switchOpenGymsOnly
 var $selectTeamGymsOnly
 var $selectLastUpdateGymsOnly
@@ -25,6 +26,8 @@ var $selectLuredPokestopsOnly
 var $selectGymMarkerStyle
 var $selectLocationIconMarker
 var $switchGymSidebar
+var $selectDirectionProvider
+
 
 var language = document.documentElement.lang === '' ? 'en' : document.documentElement.lang
 var languageSite = 'en'
@@ -46,6 +49,7 @@ var minIV = null
 var prevMinIV = null
 var prevMinLevel = null
 var onlyPokemon = 0
+var directionProvider
 
 var buffer = []
 var reincludedPokemon = []
@@ -58,6 +62,8 @@ var rangeMarkers = ['pokemon', 'pokestop', 'gym']
 var storeZoom = true
 var scanPath
 var moves
+var weather
+var boostedMons // eslint-disable-line no-unused-vars
 var osmTileServer
 
 var oSwLat
@@ -75,6 +81,7 @@ var selectedStyle = 'light'
 
 var updateWorker
 var lastUpdateTime
+var lastWeatherUpdateTime
 
 var token
 
@@ -90,13 +97,19 @@ var onlyTriggerGyms
 var noExGyms
 var noParkInfo
 
-
 createjs.Sound.registerSound('static/sounds/ding.mp3', 'ding')
 
 
 var genderType = ['♂', '♀', '⚲']
 var unownForm = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?']
 var cpMultiplier = [0.094, 0.16639787, 0.21573247, 0.25572005, 0.29024988, 0.3210876, 0.34921268, 0.37523559, 0.39956728, 0.42250001, 0.44310755, 0.46279839, 0.48168495, 0.49985844, 0.51739395, 0.53435433, 0.55079269, 0.56675452, 0.58227891, 0.59740001, 0.61215729, 0.62656713, 0.64065295, 0.65443563, 0.667934, 0.68116492, 0.69414365, 0.70688421, 0.71939909, 0.7317, 0.73776948, 0.74378943, 0.74976104, 0.75568551, 0.76156384, 0.76739717, 0.7731865, 0.77893275, 0.7846369, 0.79030001]
+
+var weatherArray = []
+var weatherPolys = []
+var weatherMarkers = []
+var weatherColors
+
+var S2
 
 /*
  text place holders:
@@ -255,6 +268,21 @@ function initMap() { // eslint-disable-line no-unused-vars
 
         redrawPokemon(mapData.pokemons)
         redrawPokemon(mapData.lurePokemons)
+        if (this.getZoom() > 13) {
+            // hide weather markers
+            $.each(weatherMarkers, function (index, marker) {
+                marker.setVisible(false)
+            })
+            // show header weather
+            $('#currentWeather').fadeIn()
+        } else {
+            // show weather markers
+            $.each(weatherMarkers, function (index, marker) {
+                marker.setVisible(true)
+            })
+            // hide header weather
+            $('#currentWeather').fadeOut()
+        }
     })
 
     createMyLocationButton()
@@ -272,6 +300,8 @@ function initMap() { // eslint-disable-line no-unused-vars
     } else {
         languageSite = language
     }
+
+    updateWeatherOverlay()
 }
 
 function updateLocationMarker(style) {
@@ -346,7 +376,9 @@ function initSidebar() {
     $('#spawn-area-switch').prop('checked', Store.get('spawnArea'))
     $('#spawn-area-wrapper').toggle(Store.get('followMyLocation'))
     $('#scanned-switch').prop('checked', Store.get('showScanned'))
+    $('#weather-switch').prop('checked', Store.get('showWeather'))
     $('#spawnpoints-switch').prop('checked', Store.get('showSpawnpoints'))
+    $('#direction-provider').val(Store.get('directionProvider'))
     $('#ranges-switch').prop('checked', Store.get('showRanges'))
     $('#sound-switch').prop('checked', Store.get('playSound'))
     $('#cries-switch').prop('checked', Store.get('playCries'))
@@ -367,6 +399,7 @@ function initSidebar() {
     }
 
     $('#pokemon-icon-size').val(Store.get('iconSizeModifier'))
+    $('#pokemon-icon-notify-size').val(Store.get('iconNotifySizeModifier'))
 
     var port = ''
     if (window.location.port.length > 0) {
@@ -385,6 +418,17 @@ function getTypeSpan(type) {
 
 function openMapDirections(lat, lng) { // eslint-disable-line no-unused-vars
     var url = 'https://www.google.com/maps/dir/?api=1&destination=' + lat + ',' + lng
+    switch (directionProvider) {
+        case 'apple':
+            url = 'https://maps.apple.com/?daddr=' + lat + ',' + lng
+            break
+        case 'waze':
+            url = 'https://waze.com/ul?ll=' + lat + ',' + lng
+            break
+        case 'bing':
+            url = 'https://www.bing.com/maps/?v=2&where1=' + lat + ',' + lng
+            break
+    }
     window.open(url, '_blank')
 }
 
@@ -443,6 +487,7 @@ function pokemonLabel(item) {
     var form = item['form']
     var cp = item['cp']
     var cpMultiplier = item['cp_multiplier']
+    var weatherBoostedCondition = item['weather_boosted_condition']
     var level = item['level']
 
     $.each(types, function (index, type) {
@@ -469,10 +514,15 @@ function pokemonLabel(item) {
                 i8ln('CP') + ' : ' + cp + ' | ' + i8ln('Level') + ' : ' + pokemonLevel +
                 '</div>'
         }
-
         details +=
             '<div>' +
             i8ln('Moves') + ' : ' + pMove1 + ' / ' + pMove2 +
+            '</div>'
+    }
+    if (weatherBoostedCondition !== 0) {
+        details +=
+            '<div>' +
+            i8ln('Weather') + ': ' + i8ln(weather[weatherBoostedCondition]) +
             '</div>'
     }
     if (gender != null) {
@@ -1450,6 +1500,77 @@ function loadRawData() {
     })
 }
 
+function loadWeather() {
+    return $.ajax({
+        url: 'weather_data?all',
+        type: 'POST',
+        timeout: 300000,
+        dataType: 'json',
+        cache: false,
+        error: function error() {
+            // Display error toast
+            toastr['error']('Please check connectivity or reduce marker settings.', 'Error getting weather')
+            toastr.options = {
+                'closeButton': true,
+                'debug': false,
+                'newestOnTop': true,
+                'progressBar': false,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': true,
+                'onclick': null,
+                'showDuration': '300',
+                'hideDuration': '1000',
+                'timeOut': '25000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut'
+            }
+        },
+        complete: function complete() {
+
+        }
+    })
+}
+
+function loadWeatherCellData(cell) {
+    return $.ajax({
+        url: 'weather_data?cell',
+        type: 'POST',
+        timeout: 300000,
+        dataType: 'json',
+        cache: false,
+        data: {
+            'cell_id': cell
+        },
+        error: function error() {
+            // Display error toast
+            toastr['error']('Please check connectivity or reduce marker settings.', 'Error getting weather')
+            toastr.options = {
+                'closeButton': true,
+                'debug': false,
+                'newestOnTop': true,
+                'progressBar': false,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': true,
+                'onclick': null,
+                'showDuration': '300',
+                'hideDuration': '1000',
+                'timeOut': '25000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut'
+            }
+        },
+        complete: function complete() {
+
+        }
+    })
+}
+
 function processPokemons(i, item) {
     if (!Store.get('showPokemon')) {
         return false // in case the checkbox was unchecked in the meantime.
@@ -1729,6 +1850,22 @@ function updateMap() {
         lng: position.lng()
     })
 
+    // lets try and get the s2 cell id in the middle
+    var s2CellCenter = S2.keyToId(S2.latLngToKey(position.lat(), position.lng(), 10))
+    if ((s2CellCenter) && (String(s2CellCenter) !== $('#currentWeather').data('current-cell')) && (map.getZoom() > 13)) {
+        loadWeatherCellData(s2CellCenter).done(function (cellWeather) {
+            var currentWeather = cellWeather.weather
+            var currentCell = $('#currentWeather').data('current-cell')
+            if ((currentWeather) && (currentCell !== currentWeather.s2_cell_id)) {
+                $('#currentWeather').data('current-cell', currentWeather.s2_cell_id)
+                $('#currentWeather').html('<img src="static/weather/' + currentWeather.condition + '.png" alt="">')
+            } else if (!currentWeather) {
+                $('#currentWeather').data('current-cell', '')
+                $('#currentWeather').html('')
+            }
+        })
+    }
+
     loadRawData().done(function (result) {
         $.each(result.pokemons, processPokemons)
         $.each(result.pokestops, processPokestops)
@@ -1776,6 +1913,78 @@ function updateMap() {
         lastUpdateTime = Date.now()
         token = result.token
     })
+}
+
+function updateWeatherOverlay() {
+    if (Store.get('showWeather')) {
+        loadWeather().done(function (result) {
+            if (weatherPolys.length === 0) {
+                drawWeatherOverlay(result.weather)
+            } else {
+                // update layers
+                destroyWeatherOverlay()
+                drawWeatherOverlay(result.weather)
+            }
+            lastWeatherUpdateTime = Date.now()
+        })
+    }
+}
+
+function drawWeatherOverlay(weather) {
+    if (weather) {
+        $.each(weather, function (idx, item) {
+            weatherArray.push(S2.idToCornerLatLngs(item.s2_cell_id))
+            var poly = new google.maps.Polygon({
+                id: item.id,
+                paths: weatherArray,
+                strokeColor: weatherColors[item.condition],
+                strokeOpacity: 0.8,
+                strokeWeight: 1,
+                fillColor: weatherColors[item.condition],
+                fillOpacity: 0.35
+            })
+            var bounds = new google.maps.LatLngBounds()
+            var i, center
+
+            for (i = 0; i < weatherArray[0].length; i++) {
+                bounds.extend(weatherArray[0][i])
+            }
+            center = bounds.getCenter()
+
+            var overlayIconSize = new google.maps.Size(30, 30)
+            var scaledIconCenterOffset = new google.maps.Point(15, 15)
+            var image = 'static/weather/i-' + item.condition + '.png'
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: center.lat(),
+                    lng: center.lng()
+                },
+                map: map,
+                icon: {
+                    url: image,
+                    size: overlayIconSize,
+                    scaledSize: overlayIconSize,
+                    origin: new google.maps.Point(0, 0),
+                    anchor: scaledIconCenterOffset
+                }
+            })
+            weatherPolys.push(poly)
+            weatherMarkers.push(marker)
+            poly.setMap(map)
+            weatherArray = []
+        })
+    }
+}
+
+function destroyWeatherOverlay() {
+    $.each(weatherPolys, function (idx, poly) {
+        poly.setMap(null)
+    })
+    $.each(weatherMarkers, function (idx, marker) {
+        marker.setMap(null)
+    })
+    weatherPolys = []
+    weatherMarkers = []
 }
 
 function drawScanPath(points) { // eslint-disable-line no-unused-vars
@@ -2035,6 +2244,9 @@ function createUpdateWorker() {
                 if (document.hidden && data.name === 'backgroundUpdate' && Date.now() - lastUpdateTime > 2500) {
                     updateMap()
                     updateGeoLocation()
+                }
+                if (document.hidden && data.name === 'backgroundUpdate' && Date.now() - lastWeatherUpdateTime > 60000) {
+                    updateWeatherOverlay()
                 }
             }
 
@@ -2377,6 +2589,7 @@ $(function () {
 $(function () {
     // populate Navbar Style menu
     $selectStyle = $('#map-style')
+    $selectDirectionProvider = $('#direction-provider')
 
     // Load Stylenames, translate entries, and populate lists
     $.getJSON('static/dist/data/mapstyle.min.json').done(function (data) {
@@ -2406,6 +2619,17 @@ $(function () {
         // recall saved mapstyle
         $selectStyle.val(Store.get('map_style')).trigger('change')
     })
+    $selectDirectionProvider.select2({
+        placeholder: 'Select Provider',
+        minimumResultsForSearch: Infinity
+    })
+
+    $selectDirectionProvider.on('change', function () {
+        directionProvider = $selectDirectionProvider.val()
+        Store.set('directionProvider', directionProvider)
+    })
+
+    $selectDirectionProvider.val(Store.get('directionProvider')).trigger('change')
 
     $selectIconSize = $('#pokemon-icon-size')
 
@@ -2416,6 +2640,19 @@ $(function () {
 
     $selectIconSize.on('change', function () {
         Store.set('iconSizeModifier', this.value)
+        redrawPokemon(mapData.pokemons)
+        redrawPokemon(mapData.lurePokemons)
+    })
+
+    $selectIconNotifySizeModifier = $('#pokemon-icon-notify-size')
+
+    $selectIconNotifySizeModifier.select2({
+        placeholder: 'Increase Size Of Notified',
+        minimumResultsForSearch: Infinity
+    })
+
+    $selectIconNotifySizeModifier.on('change', function () {
+        Store.set('iconNotifySizeModifier', this.value)
         redrawPokemon(mapData.pokemons)
         redrawPokemon(mapData.lurePokemons)
     })
@@ -2617,6 +2854,11 @@ $(function () {
         moves = data
     })
 
+    $.getJSON('static/dist/data/weather.min.json').done(function (data) {
+        weather = data.weather
+        boostedMons = data.boosted_mons
+    })
+
     $selectExclude = $('#exclude-pokemon')
     $selectExcludeMinIV = $('#exclude-min-iv')
     $selectPokemonNotify = $('#notify-pokemon')
@@ -2804,6 +3046,7 @@ $(function () {
     // run interval timers to regularly update map and timediffs
     window.setInterval(updateLabelDiffTime, 1000)
     window.setInterval(updateMap, 5000)
+    window.setInterval(updateWeatherOverlay, 60000)
     window.setInterval(updateGeoLocation, 1000)
 
     createUpdateWorker()
@@ -2902,6 +3145,16 @@ $(function () {
     $('#scanned-switch').change(function () {
         buildSwitchChangeListener(mapData, ['scanned'], 'showScanned').bind(this)()
     })
+
+    $('#weather-switch').change(function () {
+        Store.set('showWeather', this.checked)
+        if (this.checked) {
+            updateWeatherOverlay()
+        } else {
+            destroyWeatherOverlay()
+        }
+    })
+
     $('#spawnpoints-switch').change(function () {
         buildSwitchChangeListener(mapData, ['spawnpoints'], 'showSpawnpoints').bind(this)()
     })

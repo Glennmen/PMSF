@@ -68,6 +68,7 @@
     "pGoStyleNight": true,
     "moment": false,
     "mapStyle": true,
+    "directionProvider" : true,
     "hidePokemon": true,
     "excludeMinIV": true,
     "minIV": true,
@@ -87,6 +88,8 @@
     "enablePokemon": true,
     "enablePokestops": true,
     "enableLured": true,
+    "showWeather": true,
+    "enableWeatherOverlay": true,
     "enableScannedLocations": true,
     "enableSpawnpoints": true,
     "enableRanges": true,
@@ -97,13 +100,17 @@
     "enableFollowMe": true,
     "enableSpawnArea": true,
     "iconSize": true,
+    "iconNotifySizeModifier": true,
     "locationStyle": true,
     "gymStyle": true,
     "spriteFileLarge": true,
+    "weatherSpritesSrc": true,
     "icons": true,
+    "getIv": true,
     "mapType": true,
     "triggerGyms": true,
     "i8ln": false,
-    "languageSite": true
+    "languageSite": true,
+    "boostedMons": true
   }
 }
