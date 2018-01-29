@@ -426,7 +426,7 @@ function openMapDirections(lat, lng) { // eslint-disable-line no-unused-vars
             url = 'https://waze.com/ul?ll=' + lat + ',' + lng
             break
         case 'bing':
-            url = 'https://www.bing.com/maps/?v=2&where1=' + lat + '~' + lng
+            url = 'https://www.bing.com/maps/?v=2&where1=' + lat + ',' + lng
             break
     }
     window.open(url, '_blank')
