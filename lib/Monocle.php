@@ -37,7 +37,7 @@ class Monocle extends Scanner
                 $eids[] = "19";
             }
             if (!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $eids)) === false) {
-                $tmpSQL .= ' || (pokemon_id = 129 && weight > 12.49)';
+                $tmpSQL .= ' || (pokemon_id = 129 && weight > 13.13)';
                 $eids[] = "129";
             }
             $pkmn_in = '';
@@ -86,7 +86,7 @@ class Monocle extends Scanner
                 $eids[] = "19";
             }
             if (!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $ids)) === false) {
-                $tmpSQL .= ' || (pokemon_id = 129 && weight > 12.49)';
+                $tmpSQL .= ' || (pokemon_id = 129 && weight > 13.13)';
                 $eids[] = "129";
             }
             $pkmn_in = '';
