@@ -147,8 +147,12 @@ if ($blockIframe) {
         </a>';
         }
         ?>
-        <a href="#stats" id="statsToggle" class="statsNav" style="float: right;"><span
-                class="label"><?php echo i8ln('Stats') ?></span></a>
+        <?php if (!$noWeatherOverlay) {
+            ?>
+        <div id="currentWeather"></div>
+        <?php
+        } ?>
+        <a href="#stats" id="statsToggle" class="statsNav" style="float: right;"><span class="label"><?php echo i8ln('Stats') ?></span></a>
     </header>
     <!-- NAV -->
     <nav id="nav">
@@ -463,11 +467,25 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                } ?>
+            } ?>
                 <?php
-                if (!$noSpawnPoints) {
+                if (!$noWeatherOverlay) {
                     echo '<div class="form-control switch-container">
-                    <h3> ' . i8ln('Spawn Points') . ' </h3>
+                    <h3> '.i8ln('Weather Conditions').' </h3>
+                    <div class="onoffswitch">
+                        <input id="weather-switch" type="checkbox" name="weather-switch"
+                               class="onoffswitch-checkbox">
+                        <label class="onoffswitch-label" for="weather-switch">
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>';
+                } ?>
+            <?php
+            if (!$noSpawnPoints) {
+                echo '<div class="form-control switch-container">
+                    <h3> '.i8ln('Spawn Points').' </h3>
                     <div class="onoffswitch">
                         <input id="spawnpoints-switch" type="checkbox" name="spawnpoints-switch"
                                class="onoffswitch-checkbox">
@@ -668,8 +686,8 @@ if ($blockIframe) {
             ?>
 
             <?php
-            if (!$noMapStyle || !$noIconSize || !$noGymStyle || !$noLocationStyle) {
-                echo '<h3>' . i8ln('Style') . '</h3>
+            if (!$noMapStyle || !$noDirectionProvider || !$noIconSize || !$noIconNotifySizeModifier || !$noGymStyle || !$noLocationStyle) {
+                echo '<h3>'.i8ln('Style').'</h3>
             <div>';
             }
             ?>
@@ -682,6 +700,19 @@ if ($blockIframe) {
             }
             ?>
             <?php
+            if (!$noDirectionProvider) {
+                echo '<div class="form-control switch-container">
+                <h3>'.i8ln('Direction Provider').'</h3>
+                <select name="direction-provider" id="direction-provider">
+                    <option value="apple">'.i8ln('Apple').'</option>
+                    <option value="google">'.i8ln('Google').'</option>
+                    <option value="waze">'.i8ln('Waze').'</option>
+                    <option value="bing">'.i8ln('Bing').'</option>
+                </select>
+            </div>';
+            }
+            ?>
+            <?php
             if (!$noIconSize) {
                 echo '<div class="form-control switch-container">
                 <h3>' . i8ln('Icon Size') . '</h3>
@@ -690,6 +721,19 @@ if ($blockIframe) {
                     <option value="0">' . i8ln('Normal') . '</option>
                     <option value="10">' . i8ln('Large') . '</option>
                     <option value="20">' . i8ln('X-Large') . '</option>
+                </select>
+            </div>';
+            }
+            ?>
+            <?php
+            if (!$noIconNotifySizeModifier) {
+                echo '<div class="form-control switch-container">
+                <h3>'.i8ln('Increase Notified Icon Size').'</h3>
+                <select name="pokemon-icon-notify-size" id="pokemon-icon-notify-size">
+                    <option value="0">'.i8ln('Disable').'</option>
+                    <option value="15">'.i8ln('Large').'</option>
+                    <option value="30">'.i8ln('X-Large').'</option>
+                    <option value="45">'.i8ln('XX-Large').'</option>
                 </select>
             </div>';
             }
@@ -714,7 +758,7 @@ if ($blockIframe) {
             }
             ?>
             <?php
-            if (!$noMapStyle || !$noIconSize || !$noGymStyle || !$noLocationStyle) {
+            if (!$noMapStyle || !$noDirectionProvider || !$noIconSize || !$noIconNotifySizeModifier || !$noGymStyle || !$noLocationStyle) {
                 echo '</div>';
             }
             ?>
@@ -798,6 +842,8 @@ if ($blockIframe) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
 <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
 <script src="node_modules/push.js/bin/push.min.js"></script>
+<script src="node_modules/long/src/long.js"></script>
+<script src="static/js/vendor/s2geometry.js"></script>
 <script src="static/dist/js/app.min.js"></script>
 <script src="static/js/vendor/classie.js"></script>
 <script>
@@ -827,6 +873,7 @@ if ($blockIframe) {
     var enablePokemon = <?php echo $noPokemon ? 'false' : $enablePokemon ?>;
     var enablePokestops = <?php echo $noPokestops ? 'false' : $enablePokestops ?>;
     var enableLured = <?php echo $map != "monocle" ? $enableLured : 0 ?>;
+    var enableWeatherOverlay = <?php echo !$noWeatherOverlay ? $enableWeatherOverlay : 'false' ?>;
     var enableScannedLocations = <?php echo $map != "monocle" && !$noScannedLocations ? $enableScannedLocations : 'false' ?>;
     var enableSpawnpoints = <?php echo $noSpawnPoints ? 'false' : $enableSpawnPoints ?>;
     var enableRanges = <?php echo $noRanges ? 'false' : $enableRanges ?>;
@@ -837,11 +884,13 @@ if ($blockIframe) {
     var enableFollowMe = <?php echo $noFollowMe ? 'false' : $enableFollowMe ?>;
     var enableSpawnArea = <?php echo $noSpawnArea ? 'false' : $enableSpawnArea ?>;
     var iconSize = <?php echo $iconSize ?>;
+    var iconNotifySizeModifier = <?php echo $iconNotifySizeModifier ?>;
     var locationStyle = '<?php echo $locationStyle ?>';
     var gymStyle = '<?php echo $gymStyle ?>';
-    var spriteFile = '<?php echo $copyrightSafe ? 'static/icons-safe-1.png' : 'static/icons-im-1.png' ?>';
     var spriteFileLarge = '<?php echo $copyrightSafe ? 'static/icons-safe-1-bigger.png' : 'static/icons-im-1-bigger.png' ?>';
+    var weatherSpritesSrc = '<?php echo $copyrightSafe ? 'static/sprites-safe/' : 'static/sprites-pokemon/' ?>';
     var icons = '<?php echo $copyrightSafe ? 'static/icons-safe/' : 'static/icons-pokemon/' ?>';
+    var weatherColors = <?php echo json_encode($weatherColors); ?>;
     var mapType = '<?php echo $map; ?>';
     var triggerGyms = <?php echo $triggerGyms ?>;
     var noExGyms = <?php echo $noExGyms === true ? 'true' : 'false' ?>;
@@ -849,6 +898,8 @@ if ($blockIframe) {
     var onlyTriggerGyms = <?php echo $onlyTriggerGyms === true ? 'true' : 'false' ?>;
     var showBigKarp = '<?php echo $noBigKarp === true ? 'true' : 'false' ?>';
     var showTinyRat = '<?php echo $noTinyRat === true ? 'true' : 'false' ?>';
+    var hidePokemonCoords = <?php echo $hidePokemonCoords === true ? 'true' : 'false' ?>;
+    var directionProvider = '<?php echo $noDirectionProvider === true ? $directionProvider : 'google' ?>';
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="static/dist/js/map.common.min.js"></script>
