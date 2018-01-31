@@ -31,15 +31,6 @@ class Monocle extends Scanner
             $params[':oneLng'] = $oNeLng;
         }
         if (count($eids)) {
-            $tmpSQL = '';
-            if (!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $eids)) === false) {
-                $tmpSQL .= ' || (pokemon_id = 19 && weight < 2.41)';
-                $eids[] = "19";
-            }
-            if (!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $eids)) === false) {
-                $tmpSQL .= ' || (pokemon_id = 129 && weight > 13.13)';
-                $eids[] = "129";
-            }
             $pkmn_in = '';
             $i = 1;
             foreach ($eids as $id) {
@@ -48,7 +39,7 @@ class Monocle extends Scanner
                 $i++;
             }
             $pkmn_in = substr($pkmn_in, 0, -1);
-            $conds[] = "pokemon_id NOT IN ( $pkmn_in )" . $tmpSQL;
+            $conds[] = "pokemon_id NOT IN ( $pkmn_in )";
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
