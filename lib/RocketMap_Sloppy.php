@@ -60,9 +60,9 @@ class RocketMap_Sloppy extends RocketMap
         }
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {
             if (empty($exMinIv)) {
-                $conds[] = 'cp_multiplier >= ' . $this->cp_multiplier[$minLevel];
+                $conds[] = 'cp_multiplier >= ' . $this->cpMultiplier[$minLevel];
             } else {
-                $conds[] = '(cp_multiplier >= ' . $this->cp_multiplier[$minLevel] . ' OR pokemon_id IN(' . $exMinIv . ') )';
+                $conds[] = '(cp_multiplier >= ' . $this->cpMultiplier[$minLevel] . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
         return $this->query_active($select, $conds, $params);
@@ -110,9 +110,9 @@ class RocketMap_Sloppy extends RocketMap
         }
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {
             if (empty($exMinIv)) {
-                $conds[] = 'cp_multiplier >= ' . $this->cp_multiplier[$minLevel];
+                $conds[] = 'cp_multiplier >= ' . $this->cpMultiplier[$minLevel];
             } else {
-                $conds[] = '(cp_multiplier >= ' . $this->cp_multiplier[$minLevel] . ' OR pokemon_id IN(' . $exMinIv . ') )';
+                $conds[] = '(cp_multiplier >= ' . $this->cpMultiplier[$minLevel] . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
         return $this->query_active($select, $conds, $params);

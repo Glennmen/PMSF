@@ -4,7 +4,7 @@ namespace Scanner;
 
 class RocketMap extends Scanner
 {
-    private $cpMultiplier;
+    public $cpMultiplier;
 
     public function __construct()
     {
