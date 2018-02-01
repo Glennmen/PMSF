@@ -41,7 +41,6 @@ $d["lastspawns"] = !empty($_POST['spawnpoints']) ? $_POST['spawnpoints'] : false
 $d["lastpokemon"] = !empty($_POST['pokemon']) ? $_POST['pokemon'] : false;
 if ($minIv < $prevMinIv || $minLevel < $prevMinLevel) {
     $lastpokemon = false;
-
 }
 $enc_id = !empty($_POST['encId']) ? $_POST['encId'] : null;
 
