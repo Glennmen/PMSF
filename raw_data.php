@@ -102,7 +102,7 @@ if (!$noPokemon) {
     if ($d["lastpokemon"] == "true") {
         $eids = !empty($_POST['eids']) ? explode(",", $_POST['eids']) : array();
         if ($lastpokemon != 'true') {
-            $d["pokemons"] = $scanner->get_active($eids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng);
+            $d["pokemons"] = $scanner->get_active($eids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, 0, 0, 0, 0, 0, $enc_id);
         } else {
             if ($newarea) {
                 $d["pokemons"] = $scanner->get_active($eids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, 0, $oSwLat, $oSwLng, $oNeLat, $oNeLng, $enc_id);
@@ -112,25 +112,6 @@ if (!$noPokemon) {
         }
         $d["preMinIV"] = $minIv;
         $d["preMinLevel"] = $minLevel;
-
-        if (!empty($_POST['eids'])) {
-            $eids = explode(",", $_POST['eids']);
-
-            foreach ($d['pokemons'] as $elementKey => $element) {
-                $ignoreExclusion = false;
-                foreach ($element as $valueKey => $value) {
-                    if ($valueKey == 'encounter_id') {
-                        $ignoreExclusion = $value == $enc_id;
-                    } elseif ($valueKey == 'pokemon_id') {
-                        if (!$ignoreExclusion && in_array($value, $eids)) {
-                            //delete this particular object from the $array
-                            unset($d['pokemons'][$elementKey]);
-                        }
-                    }
-                }
-            }
-        }
-
         if (!empty($_POST['reids'])) {
             $reids = !empty($_POST['reids']) ? explode(",", $_POST['reids']) : array();
 

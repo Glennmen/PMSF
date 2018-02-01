@@ -54,7 +54,7 @@ class Monocle_Alternate extends Monocle
             $pkmn_in = substr($pkmn_in, 0, -1);
             if ($encId != 0) {
                 $params[':qry_enc_id'] = $encId;
-                $conds[] = "(pokemon_id NOT IN ( $pkmn_in ) OR encounter_id = :qry_enc_id" . $tmpSQL . ")";
+                $conds[] = "(pokemon_id NOT IN ( $pkmn_in ) " . $tmpSQL . ") OR encounter_id = :qry_enc_id";
             } else {
                 $conds[] = "(pokemon_id NOT IN ( $pkmn_in )" . $tmpSQL . ")";
             }
