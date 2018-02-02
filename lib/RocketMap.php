@@ -94,7 +94,7 @@ class RocketMap extends Scanner
         global $db;
         $conds = array();
         $params = array();
-		$float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
+        $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
 
         $select = "pokemon_id, Unix_timestamp(Convert_tz(disappear_time, '+00:00', @@global.time_zone)) AS disappear_time, encounter_id, latitude, longitude, gender, form, weight, height";
         global $noHighLevelData;

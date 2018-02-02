@@ -39,7 +39,7 @@ class Monocle_Asner extends Monocle
                 $i++;
             }
             $pkmn_in = substr($pkmn_in, 0, -1);
-			if ($encId != 0) {
+            if ($encId != 0) {
                 $params[':qry_enc_id'] = $encId;
                 $conds[] = "(pokemon_id NOT IN ( $pkmn_in )) OR encounter_id = :qry_enc_id";
             } else {
