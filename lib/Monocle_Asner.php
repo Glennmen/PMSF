@@ -43,11 +43,12 @@ class Monocle_Asner extends Monocle
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
-            if (empty($exMinIv)) {
-                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv;
-            } else {
-                $conds[] = '(((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
+            $convIv = $minIv * .45;
+            $excIvSql = '';
+            if (!empty($exMinIv)) {
+                $excIvSql = ' OR pokemon_id IN(' . $exMinIv . ')';
             }
+            $conds[] = '(atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ' >= ' . $convIv . $excIvSql . ')';
         }
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {
             if (empty($exMinIv)) {
@@ -91,11 +92,12 @@ class Monocle_Asner extends Monocle
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
-            if (empty($exMinIv)) {
-                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv;
-            } else {
-                $conds[] = '(((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
+            $convIv = $minIv * .45;
+            $excIvSql = '';
+            if (!empty($exMinIv)) {
+                $excIvSql = ' OR pokemon_id IN(' . $exMinIv . ')';
             }
+            $conds[] = '(atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ' >= ' . $convIv . $excIvSql . ')';
         }
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {
             if (empty($exMinIv)) {

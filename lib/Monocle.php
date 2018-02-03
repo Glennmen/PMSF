@@ -43,11 +43,12 @@ class Monocle extends Scanner
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
-            if (empty($exMinIv)) {
-                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv;
-            } else {
-                $conds[] = '(((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
+            $convIv = $minIv * .45;
+            $excIvSql = '';
+            if (!empty($exMinIv)) {
+                $excIvSql = ' OR pokemon_id IN(' . $exMinIv . ')';
             }
+            $conds[] = '(atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ' >= ' . $convIv . $excIvSql . ')';
         }
         return $this->query_active($select, $conds, $params);
     }
@@ -83,11 +84,12 @@ class Monocle extends Scanner
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
-            if (empty($exMinIv)) {
-                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv;
-            } else {
-                $conds[] = '(((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
+            $convIv = $minIv * .45;
+            $excIvSql = '';
+            if (!empty($exMinIv)) {
+                $excIvSql = ' OR pokemon_id IN(' . $exMinIv . ')';
             }
+            $conds[] = '(atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ' >= ' . $convIv . $excIvSql . ')';
         }
         return $this->query_active($select, $conds, $params);
     }
@@ -432,6 +434,7 @@ class Monocle extends Scanner
         }
         return $data;
     }
+
     public function get_weather_by_cell_id($cell_id)
     {
         global $db;
@@ -444,7 +447,8 @@ class Monocle extends Scanner
             return null;
         }
     }
-    public function get_weather($updated=null)
+
+    public function get_weather($updated = null)
     {
         global $db;
         $query = "SELECT * FROM weather WHERE :conditions ORDER BY id ASC";
@@ -458,7 +462,7 @@ class Monocle extends Scanner
         $query = str_replace(":conditions", join(" AND ", $conds), $query);
         $weathers = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
         foreach ($weathers as $weather) {
-            $data["weather_".$weather['s2_cell_id']] = $weather;
+            $data["weather_" . $weather['s2_cell_id']] = $weather;
         }
         return $data;
     }

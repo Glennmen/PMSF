@@ -62,11 +62,12 @@ class RocketMap_Sloppy extends RocketMap
         }
 
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
-            if (empty($exMinIv)) {
-                $conds[] = '((individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ')' . $float . ' / 45.00) * 100.00 >= ' . $minIv;
-            } else {
-                $conds[] = '(((individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ')' . $float . ' / 45.00) * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
+            $convIv = $minIv * .45;
+            $excIvSql = '';
+            if (!empty($exMinIv)) {
+                $excIvSql = ' OR pokemon_id IN(' . $exMinIv . ')';
             }
+            $conds[] = '(individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ' >= ' . $convIv . $excIvSql . ')';
         }
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {
             if (empty($exMinIv)) {
@@ -121,11 +122,12 @@ class RocketMap_Sloppy extends RocketMap
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
-            if (empty($exMinIv)) {
-                $conds[] = '((individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ')' . $float . ' / 45.00) * 100.00 >= ' . $minIv;
-            } else {
-                $conds[] = '(((individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ')' . $float . ' / 45.00) * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
+            $convIv = $minIv * .45;
+            $excIvSql = '';
+            if (!empty($exMinIv)) {
+                $excIvSql = ' OR pokemon_id IN(' . $exMinIv . ')';
             }
+            $conds[] = '(individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ' >= ' . $convIv . $excIvSql . ')';
         }
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {
             if (empty($exMinIv)) {
