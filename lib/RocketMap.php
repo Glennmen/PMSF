@@ -70,7 +70,7 @@ class RocketMap extends Scanner
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
             $convIv = $minIv * .45;
             $excIvSql = '';
-            if(!empty($exMinIv)){
+            if (!empty($exMinIv)) {
                 $excIvSql = ' OR pokemon_id IN(' . $exMinIv . ')';
             }
             $conds[] = '(individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ' >= ' . $convIv . $excIvSql . ')';
@@ -669,7 +669,7 @@ class RocketMap extends Scanner
         $weathers = $db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
         foreach ($weathers as $weather) {
             $weather['s2_cell_id'] = sprintf("%u", $weather['s2_cell_id']);
-            $data["weather_".$weather['s2_cell_id']] = $weather;
+            $data["weather_" . $weather['s2_cell_id']] = $weather;
             $data["weather_" . $weather['s2_cell_id']]['condition'] = $data["weather_" . $weather['s2_cell_id']]['gameplay_weather'];
             unset($data["weather_" . $weather['s2_cell_id']]['gameplay_weather']);
         }

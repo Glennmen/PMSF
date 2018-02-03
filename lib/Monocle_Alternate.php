@@ -118,7 +118,7 @@ class Monocle_Alternate extends Monocle
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
             $convIv = $minIv * .45;
             $excIvSql = '';
-            if(!empty($exMinIv)){
+            if (!empty($exMinIv)) {
                 $excIvSql = ' OR pokemon_id IN(' . $exMinIv . ')';
             }
             $conds[] = '(atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ' >= ' . $convIv . $excIvSql . ')';
