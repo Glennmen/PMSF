@@ -197,10 +197,15 @@ class Monocle_Alternate extends Monocle
         $gym = $gyms[0];
 
         $select = "gd.pokemon_id, gd.cp AS pokemon_cp, gd.move_1, gd.move_2, gd.nickname, gd.atk_iv AS iv_attack, gd.def_iv AS iv_defense, gd.sta_iv AS iv_stamina, gd.cp AS pokemon_cp";
+        global $noPokemonBattleInfo;
+        if (!$noPokemonBattleInfo) {
+            $select .= ", gd.battles_attacked as attacked, gd.battles_defended as defended";
+        }
         global $noTrainerName;
         if (!$noTrainerName) {
             $select .= ", gd.owner_name AS trainer_name";
         }
+
         $gym["pokemon"] = $this->query_gym_defenders($gymId, $select);
         return $gym;
     }
