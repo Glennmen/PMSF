@@ -65,12 +65,7 @@ class RocketMap extends Scanner
                 $i++;
             }
             $pkmn_in = substr($pkmn_in, 0, -1);
-            if ($encId != 0) {
-                $params[':qry_enc_id'] = $encId;
-                $conds[] = "(pokemon_id NOT IN ( $pkmn_in ) " . $tmpSQL . ") OR encounter_id = :qry_enc_id";
-            } else {
-                $conds[] = "(pokemon_id NOT IN ( $pkmn_in )" . $tmpSQL . ")";
-            }
+            $conds[] = "(pokemon_id NOT IN ( $pkmn_in )" . $tmpSQL . ")";
         }
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
             if (empty($exMinIv)) {
@@ -86,7 +81,7 @@ class RocketMap extends Scanner
                 $conds[] = '(cp_multiplier >= ' . $this->cpMultiplier[$minLevel] . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
-        return $this->query_active($select, $conds, $params);
+        return $this->query_active($select, $conds, $params, $encId);
     }
 
     public function get_active_by_id($ids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng)
@@ -149,7 +144,7 @@ class RocketMap extends Scanner
         return $this->query_active($select, $conds, $params);
     }
 
-    public function query_active($select, $conds, $params)
+    public function query_active($select, $conds, $params, $encId = 0)
     {
         global $db;
 
@@ -157,8 +152,12 @@ class RocketMap extends Scanner
         FROM pokemon 
         WHERE :conditions";
 
+        $tmpSQL = '';
+        if ($encId != 0) {
+            $tmpSQL = " OR encounter_id = " . $encId;
+        }
         $query = str_replace(":select", $select, $query);
-        $query = str_replace(":conditions", join(" AND ", $conds), $query);
+        $query = str_replace(":conditions", '(' . join(" AND ", $conds) . ')' . $tmpSQL, $query);
         $pokemons = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
 
         $data = array();
@@ -673,7 +672,7 @@ class RocketMap extends Scanner
         $weathers = $db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
         foreach ($weathers as $weather) {
             $weather['s2_cell_id'] = sprintf("%u", $weather['s2_cell_id']);
-            $data["weather_".$weather['s2_cell_id']] = $weather;
+            $data["weather_" . $weather['s2_cell_id']] = $weather;
             $data["weather_" . $weather['s2_cell_id']]['condition'] = $data["weather_" . $weather['s2_cell_id']]['gameplay_weather'];
             unset($data["weather_" . $weather['s2_cell_id']]['gameplay_weather']);
         }

@@ -58,12 +58,7 @@ class RocketMap_Sloppy extends RocketMap
                 $i++;
             }
             $pkmn_in = substr($pkmn_in, 0, -1);
-            if ($encId != 0) {
-                $params[':qry_enc_id'] = $encId;
-                $conds[] = "(pokemon_id NOT IN ( $pkmn_in ) " . $tmpSQL . ") OR encounter_id = :qry_enc_id";
-            } else {
-                $conds[] = "(pokemon_id NOT IN ( $pkmn_in )" . $tmpSQL . ")";
-            }
+            $conds[] = "(pokemon_id NOT IN ( $pkmn_in )" . $tmpSQL . ")";
         }
 
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
@@ -80,7 +75,7 @@ class RocketMap_Sloppy extends RocketMap
                 $conds[] = '(cp_multiplier >= ' . $this->cpMultiplier[$minLevel] . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
-        return $this->query_active($select, $conds, $params);
+        return $this->query_active($select, $conds, $params, $encId);
     }
 
     public function get_active_by_id($ids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng)
