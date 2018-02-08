@@ -75,6 +75,10 @@ class RocketMap_Sloppy extends RocketMap
                 $conds[] = '(cp_multiplier >= ' . $this->cpMultiplier[$minLevel] . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
+        $encSql = '';
+        if ($encId != 0) {
+            $encSql = " OR (encounter_id = " . $encId . " AND latitude > '" . $swLat . "' AND longitude > '" . $swLng . "' AND latitude < '" . $neLat . "' AND longitude < '" . $neLng . "' AND disappear_time > '" . $params[':time'] . "')";
+        }
         return $this->query_active($select, $conds, $params, $encId);
     }
 
