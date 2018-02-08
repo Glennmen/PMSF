@@ -79,7 +79,7 @@ class RocketMap_Sloppy extends RocketMap
         if ($encId != 0) {
             $encSql = " OR (encounter_id = " . $encId . " AND latitude > '" . $swLat . "' AND longitude > '" . $swLng . "' AND latitude < '" . $neLat . "' AND longitude < '" . $neLng . "' AND disappear_time > '" . $params[':time'] . "')";
         }
-        return $this->query_active($select, $conds, $params, $encId);
+        return $this->query_active($select, $conds, $params, $encSql);
     }
 
     public function get_active_by_id($ids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng)
