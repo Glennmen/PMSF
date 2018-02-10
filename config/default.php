@@ -68,7 +68,7 @@ $paypalUrl = "";                                                    // PayPal do
 $discordUrl = "";                                                    // Discord URL, leave "" for empty
 
 /* MOTD */
-
+$motd = true;
 $motdTitle = "";
 $motdContent = "";
 
