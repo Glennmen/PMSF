@@ -29,6 +29,7 @@ var $switchGymSidebar
 var $switchTinyRat
 var $switchBigKarp
 var $selectDirectionProvider
+var $switchExEligibleOnly
 
 var language = document.documentElement.lang === '' ? 'en' : document.documentElement.lang
 var languageSite = 'en'
@@ -354,6 +355,7 @@ function createLocationMarker() {
 function initSidebar() {
     $('#gyms-switch').prop('checked', Store.get('showGyms'))
     $('#gym-sidebar-switch').prop('checked', Store.get('useGymSidebar'))
+    $('#ex-eligible-only-switch').prop('checked', Store.get('exEligibleOnly'))
     $('#gym-sidebar-wrapper').toggle(Store.get('showGyms') || Store.get('showRaids'))
     $('#gyms-filter-wrapper').toggle(Store.get('showGyms'))
     $('#team-gyms-only-switch').val(Store.get('showTeamGymsOnly'))
@@ -1408,6 +1410,7 @@ function loadRawData() {
     var loadMinLevel = Store.get('remember_text_min_level')
     var bigKarp = Boolean(Store.get('showBigKarp'))
     var tinyRat = Boolean(Store.get('showTinyRat'))
+    var exEligibleOnly = Boolean(Store.get('exEligibleOnly'))
 
     var bounds = map.getBounds()
     var swPoint = bounds.getSouthWest()
@@ -1430,6 +1433,7 @@ function loadRawData() {
             'luredonly': loadLuredOnly,
             'gyms': loadGyms,
             'lastgyms': lastgyms,
+            'exEligibleOnly': exEligibleOnly,
             'scanned': loadScanned,
             'lastslocs': lastslocs,
             'spawnpoints': loadSpawnpoints,
@@ -2805,6 +2809,24 @@ $(function () {
 
     $switchGymSidebar.on('change', function () {
         Store.set('useGymSidebar', this.checked)
+        lastgyms = false
+        $.each(['gyms'], function (d, dType) {
+            $.each(mapData[dType], function (key, value) {
+                // for any marker you're turning off, you'll want to wipe off the range
+                if (mapData[dType][key].marker.rangeCircle) {
+                    mapData[dType][key].marker.rangeCircle.setMap(null)
+                    delete mapData[dType][key].marker.rangeCircle
+                }
+                mapData[dType][key].marker.setMap(null)
+            })
+            mapData[dType] = {}
+        })
+        updateMap()
+    })
+    $switchExEligibleOnly = $('#ex-eligible-only-switch')
+
+    $switchExEligibleOnly.on('change', function () {
+        Store.set('exEligibleOnly', this.checked)
         lastgyms = false
         $.each(['gyms'], function (d, dType) {
             $.each(mapData[dType], function (key, value) {

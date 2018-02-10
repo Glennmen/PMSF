@@ -149,10 +149,11 @@ if ($blockIframe) {
         ?>
         <?php if (!$noWeatherOverlay) {
             ?>
-        <div id="currentWeather"></div>
-        <?php
+            <div id="currentWeather"></div>
+            <?php
         } ?>
-        <a href="#stats" id="statsToggle" class="statsNav" style="float: right;"><span class="label"><?php echo i8ln('Stats') ?></span></a>
+        <a href="#stats" id="statsToggle" class="statsNav" style="float: right;"><span
+                class="label"><?php echo i8ln('Stats') ?></span></a>
     </header>
     <!-- NAV -->
     <nav id="nav">
@@ -377,6 +378,19 @@ if ($blockIframe) {
                                 <option value="3"><?php echo i8ln('Instinct') ?></option>
                             </select>
                         </div>
+                        <?php if ($map === "monocle") { ?>
+                            <div class="form-control switch-container" id="ex-eligible-only-wrapper">
+                                <h3><?php echo i8ln('EX Eligible Only') ?></h3>
+                                <div class="onoffswitch">
+                                    <input id="ex-eligible-only-switch" type="checkbox" name="ex-eligible-only-switch"
+                                           class="onoffswitch-checkbox">
+                                    <label class="onoffswitch-label" for="ex-eligible-only-switch">
+                                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                                        <span class="switch-handle"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        <?php } ?>
                         <div class="form-control switch-container" id="open-gyms-only-wrapper">
                             <h3><?php echo i8ln('Open Spot') ?></h3>
                             <div class="onoffswitch">
@@ -471,7 +485,7 @@ if ($blockIframe) {
                 <?php
                 if (!$noWeatherOverlay) {
                     echo '<div class="form-control switch-container">
-                    <h3> '.i8ln('Weather Conditions').' </h3>
+                    <h3> ' . i8ln('Weather Conditions') . ' </h3>
                     <div class="onoffswitch">
                         <input id="weather-switch" type="checkbox" name="weather-switch"
                                class="onoffswitch-checkbox">
@@ -482,10 +496,10 @@ if ($blockIframe) {
                     </div>
                 </div>';
                 } ?>
-            <?php
-            if (!$noSpawnPoints) {
-                echo '<div class="form-control switch-container">
-                    <h3> '.i8ln('Spawn Points').' </h3>
+                <?php
+                if (!$noSpawnPoints) {
+                    echo '<div class="form-control switch-container">
+                    <h3> ' . i8ln('Spawn Points') . ' </h3>
                     <div class="onoffswitch">
                         <input id="spawnpoints-switch" type="checkbox" name="spawnpoints-switch"
                                class="onoffswitch-checkbox">
@@ -495,7 +509,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-            } ?>
+                } ?>
                 <?php
                 if (!$noRanges) {
                     echo '<div class="form-control switch-container">
@@ -687,7 +701,7 @@ if ($blockIframe) {
 
             <?php
             if (!$noMapStyle || !$noDirectionProvider || !$noIconSize || !$noIconNotifySizeModifier || !$noGymStyle || !$noLocationStyle) {
-                echo '<h3>'.i8ln('Style').'</h3>
+                echo '<h3>' . i8ln('Style') . '</h3>
             <div>';
             }
             ?>
@@ -702,12 +716,12 @@ if ($blockIframe) {
             <?php
             if (!$noDirectionProvider) {
                 echo '<div class="form-control switch-container">
-                <h3>'.i8ln('Direction Provider').'</h3>
+                <h3>' . i8ln('Direction Provider') . '</h3>
                 <select name="direction-provider" id="direction-provider">
-                    <option value="apple">'.i8ln('Apple').'</option>
-                    <option value="google">'.i8ln('Google').'</option>
-                    <option value="waze">'.i8ln('Waze').'</option>
-                    <option value="bing">'.i8ln('Bing').'</option>
+                    <option value="apple">' . i8ln('Apple') . '</option>
+                    <option value="google">' . i8ln('Google') . '</option>
+                    <option value="waze">' . i8ln('Waze') . '</option>
+                    <option value="bing">' . i8ln('Bing') . '</option>
                 </select>
             </div>';
             }
@@ -728,12 +742,12 @@ if ($blockIframe) {
             <?php
             if (!$noIconNotifySizeModifier) {
                 echo '<div class="form-control switch-container">
-                <h3>'.i8ln('Increase Notified Icon Size').'</h3>
+                <h3>' . i8ln('Increase Notified Icon Size') . '</h3>
                 <select name="pokemon-icon-notify-size" id="pokemon-icon-notify-size">
-                    <option value="0">'.i8ln('Disable').'</option>
-                    <option value="15">'.i8ln('Large').'</option>
-                    <option value="30">'.i8ln('X-Large').'</option>
-                    <option value="45">'.i8ln('XX-Large').'</option>
+                    <option value="0">' . i8ln('Disable') . '</option>
+                    <option value="15">' . i8ln('Large') . '</option>
+                    <option value="30">' . i8ln('X-Large') . '</option>
+                    <option value="45">' . i8ln('XX-Large') . '</option>
                 </select>
             </div>';
             }
@@ -900,6 +914,7 @@ if ($blockIframe) {
     var showTinyRat = '<?php echo $noTinyRat === true ? 'true' : 'false' ?>';
     var hidePokemonCoords = <?php echo $hidePokemonCoords === true ? 'true' : 'false' ?>;
     var directionProvider = '<?php echo $noDirectionProvider === true ? $directionProvider : 'google' ?>';
+    var exEligibleOnly = '<?php echo $noExEligibleOnly === true ? 'true' : 'false'  ?>';
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="static/dist/js/map.common.min.js"></script>

@@ -1108,6 +1108,11 @@ var StoreOptions = {
         {
             default: triggerGyms,
             type: StoreTypes.JSON
+        },
+    'exEligibleOnly':
+        {
+            default: exEligibleOnly,
+            type: StoreTypes.Boolean
         }
 }
 
