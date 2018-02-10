@@ -379,7 +379,7 @@ if ($blockIframe) {
                             </select>
                         </div>
                         <?php if ($map === "monocle") {
-                            ?>
+                        ?>
                             <div class="form-control switch-container" id="ex-eligible-only-wrapper">
                                 <h3><?php echo i8ln('EX Eligible Only') ?></h3>
                                 <div class="onoffswitch">
@@ -392,7 +392,7 @@ if ($blockIframe) {
                                 </div>
                             </div>
                             <?php
-                        } ?>
+                    } ?>
                         <div class="form-control switch-container" id="open-gyms-only-wrapper">
                             <h3><?php echo i8ln('Open Spot') ?></h3>
                             <div class="onoffswitch">
