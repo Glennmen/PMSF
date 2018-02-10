@@ -64,7 +64,6 @@ class Monocle_Alternate extends Monocle
             $convIv = $minIv * .45;
             $tmpCond .= 'atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ' >= ' . $convIv;
         }
-
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {
             if ($minIv > 0) {
                 $tmpCond .= " AND ";
@@ -72,7 +71,7 @@ class Monocle_Alternate extends Monocle
             $tmpCond .= 'level >= ' . $minLevel;
         }
         if (!empty($tmpCond)) {
-            $cond[] = '(' . $tmpCond . ')' . $excIvSql;
+            $conds[] = '(' . $tmpCond . ')' . $excIvSql;
         }
         $encSql = '';
         if ($encId != 0) {
@@ -138,7 +137,7 @@ class Monocle_Alternate extends Monocle
             $tmpCond .= 'level >= ' . $minLevel;
         }
         if (!empty($tmpCond)) {
-            $cond[] = '(' . $tmpCond . ')' . $excIvSql;
+            $conds[] = '(' . $tmpCond . ')' . $excIvSql;
         }
         return $this->query_active($select, $conds, $params);
     }

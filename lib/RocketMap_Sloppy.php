@@ -78,7 +78,7 @@ class RocketMap_Sloppy extends RocketMap
             $tmpCond .= 'level >= ' . $minLevel;
         }
         if (!empty($tmpCond)) {
-            $cond[] = '(' . $tmpCond . ')' . $excIvSql;
+            $conds[] = '(' . $tmpCond . ')' . $excIvSql;
         }
         $encSql = '';
         if ($encId != 0) {
@@ -146,7 +146,7 @@ class RocketMap_Sloppy extends RocketMap
             $tmpCond .= 'level >= ' . $minLevel;
         }
         if (!empty($tmpCond)) {
-            $cond[] = '(' . $tmpCond . ')' . $excIvSql;
+            $conds[] = '(' . $tmpCond . ')' . $excIvSql;
         }
         return $this->query_active($select, $conds, $params);
     }

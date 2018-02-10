@@ -115,7 +115,7 @@ class Monocle_Asner extends Monocle
             $tmpCond .= 'level >= ' . $minLevel;
         }
         if (!empty($tmpCond)) {
-            $cond[] = '(' . $tmpCond . ')' . $excIvSql;
+            $conds[] = '(' . $tmpCond . ')' . $excIvSql;
         }
 
         return $this->query_active($select, $conds, $params);
