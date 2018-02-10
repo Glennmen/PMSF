@@ -230,7 +230,7 @@ class Monocle_Alternate extends Monocle
             $params[':lastUpdated'] = $tstamp;
         }
         if ($exEligibleOnly === "true") {
-            $conds[] = "parkid IS NOT NULL";
+            $conds[] = "(parkid IS NOT NULL OR sponsor > 0)";
         }
 
         return $this->query_gyms($conds, $params);
