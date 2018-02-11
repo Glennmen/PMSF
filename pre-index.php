@@ -378,21 +378,6 @@ if ($blockIframe) {
                                 <option value="3"><?php echo i8ln('Instinct') ?></option>
                             </select>
                         </div>
-                        <?php if ($map === "monocle") {
-                        ?>
-                            <div class="form-control switch-container" id="ex-eligible-only-wrapper">
-                                <h3><?php echo i8ln('EX Eligible Only') ?></h3>
-                                <div class="onoffswitch">
-                                    <input id="ex-eligible-only-switch" type="checkbox" name="ex-eligible-only-switch"
-                                           class="onoffswitch-checkbox">
-                                    <label class="onoffswitch-label" for="ex-eligible-only-switch">
-                                        <span class="switch-label" data-on="On" data-off="Off"></span>
-                                        <span class="switch-handle"></span>
-                                    </label>
-                                </div>
-                            </div>
-                            <?php
-                    } ?>
                         <div class="form-control switch-container" id="open-gyms-only-wrapper">
                             <h3><?php echo i8ln('Open Spot') ?></h3>
                             <div class="onoffswitch">
@@ -439,6 +424,23 @@ if ($blockIframe) {
                                 <option value="168"><?php echo i8ln('Last Week') ?></option>
                             </select>
                         </div>
+                    </div>
+                    <div id="gyms-raid-filter-wrapper" style="display:none">
+                        <?php if ($map === "monocle" && !$noExEligible) {
+                            ?>
+                            <div class="form-control switch-container" id="ex-eligible-wrapper">
+                                <h3><?php echo i8ln('EX Eligible Only') ?></h3>
+                                <div class="onoffswitch">
+                                    <input id="ex-eligible-switch" type="checkbox" name="ex-eligible-switch"
+                                           class="onoffswitch-checkbox">
+                                    <label class="onoffswitch-label" for="ex-eligible-switch">
+                                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                                        <span class="switch-handle"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <?php
+                        } ?>
                     </div>
                 </div>
                 <?php
@@ -916,7 +918,7 @@ if ($blockIframe) {
     var showTinyRat = '<?php echo $noTinyRat === true ? 'true' : 'false' ?>';
     var hidePokemonCoords = <?php echo $hidePokemonCoords === true ? 'true' : 'false' ?>;
     var directionProvider = '<?php echo $noDirectionProvider === true ? $directionProvider : 'google' ?>';
-    var exEligibleOnly = '<?php echo $noExEligibleOnly === true ? 'true' : 'false'  ?>';
+    var exEligible= '<?php echo $noExEligible === true ? $exEligible : 'false'  ?>';
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="static/dist/js/map.common.min.js"></script>

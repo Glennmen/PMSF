@@ -111,7 +111,7 @@ class Monocle_Asner extends Monocle
         return $this->query_active($select, $conds, $params);
     }
 
-    public function get_gyms($swLat, $swLng, $neLat, $neLng, $exEligibleGyms = false, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    public function get_gyms($swLat, $swLng, $neLat, $neLng, $exEligible = false, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
         $conds = array();
         $params = array();

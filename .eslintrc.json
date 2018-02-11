@@ -114,6 +114,6 @@
     "i8ln": false,
     "languageSite": true,
     "boostedMons": true,
-    "exEligibleOnly": true
+    "exEligible": true
   }
 }

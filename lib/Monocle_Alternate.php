@@ -207,7 +207,7 @@ class Monocle_Alternate extends Monocle
         return $gym;
     }
 
-    public function get_gyms($swLat, $swLng, $neLat, $neLng, $exEligibleOnly = false, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    public function get_gyms($swLat, $swLng, $neLat, $neLng, $exEligible = false, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
         $conds = array();
         $params = array();
@@ -229,7 +229,7 @@ class Monocle_Alternate extends Monocle
             $conds[] = "updated > :lastUpdated";
             $params[':lastUpdated'] = $tstamp;
         }
-        if ($exEligibleOnly === "true") {
+        if ($exEligible === "true") {
             $conds[] = "(parkid IS NOT NULL OR sponsor > 0)";
         }
 
