@@ -23,6 +23,9 @@ var $selectMaxGymLevel
 var $selectMinRaidLevel
 var $selectMaxRaidLevel
 var $selectLuredPokestopsOnly
+var $showTimers
+var $enableTimers
+var $hideTimersAtZoomLevel
 var $selectGymMarkerStyle
 var $selectLocationIconMarker
 var $switchGymSidebar
@@ -373,6 +376,8 @@ function initSidebar() {
     $('#pokestops-switch').prop('checked', Store.get('showPokestops'))
     $('#lured-pokestops-only-switch').val(Store.get('showLuredPokestopsOnly'))
     $('#lured-pokestops-only-wrapper').toggle(Store.get('showPokestops'))
+    $('#timer-switch').prop('checked', Store.get('showTimers'))
+    $('#hide-timers-at-zoom-level').val(Store.get('hideTimersAtZoomLevel'))
     $('#start-at-user-location-switch').prop('checked', Store.get('startAtUserLocation'))
     $('#start-at-last-location-switch').prop('checked', Store.get('startAtLastLocation'))
     $('#follow-my-location-switch').prop('checked', Store.get('followMyLocation'))
@@ -2820,6 +2825,13 @@ $(function () {
             mapData[dType] = {}
         })
         updateMap()
+    })
+	$showTimers = $('#timer-switch')
+
+    $showTimers.on('change', function () {
+		Store.set('showTimers', this.checked)
+		redrawPokemon(mapData.pokemons)
+		redrawPokemon(mapData.lurePokemons)
     })
 
     $selectLocationIconMarker = $('#locationmarker-style')

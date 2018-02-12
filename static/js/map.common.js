@@ -974,6 +974,14 @@ var StoreOptions = {
             default: enableLured,
             type: StoreTypes.Number
         },
+	'showTimers': {
+			default: enableTimers,
+			type: StoreTypes.Boolean
+		},
+	'hideTimersAtZoomLevel': {
+			default: hideTimersAtZoomLevel,
+			type: StoreTypes.Number
+		},
     'showWeather':
         {
             default: enableWeatherOverlay,
@@ -1181,22 +1189,42 @@ function setupPokemonMarker(item, map, isBounceDisabled) {
     }
     var pokemonIndex = item['pokemon_id'] - 1
     var icon = getGoogleSprite(pokemonIndex, pokemonSprites, iconSize, item['weather_boosted_condition'])
+	var hideTimersAtZoomLevel = Store.get('hideTimersAtZoomLevel');
+	var showTimers = Store.get('showTimers');
 
     var animationDisabled = false
     if (isBounceDisabled === true) {
         animationDisabled = true
     }
 
-    return new google.maps.Marker({
-        position: {
-            lat: item['latitude'],
-            lng: item['longitude']
-        },
-        zIndex: 9999,
-        map: map,
-        icon: icon,
-        animationDisabled: animationDisabled
-    })
+	var marker
+	if (showTimers && (map.getZoom() >= hideTimersAtZoomLevel)) {
+		marker = new MarkerWithLabel({ // eslint-disable-line no-undef
+			position: {
+				lat: item['latitude'],
+				lng: item['longitude']
+			},
+			zIndex: 9999,
+			map: map,
+			icon: icon,
+			labelAnchor: new google.maps.Point(iconSize / 1.5, -iconSize / 2.4),
+			labelContent: '<span class=\'label-countdown\' disappears-at=\'' + item['disappear_time'] + '\'> </span>',
+			labelClass: 'pokemonlabel',
+			animationDisabled: animationDisabled
+		})
+	} else {
+		marker = new google.maps.Marker({
+			position: {
+				lat: item['latitude'],
+				lng: item['longitude']
+			},
+			zIndex: 9999,
+			map: map,
+			icon: icon,
+			animationDisabled: animationDisabled
+		})
+	}
+	return marker;
 }
 
 function isNotifiedPokemon(item) {
