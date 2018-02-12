@@ -2276,7 +2276,7 @@ function updateGeoLocation() {
 function createUpdateWorker() {
     try {
         if (isMobileDevice() && window.Worker) {
-            var updateBlob = new Blob(["onmessage = function(e) {\n                var data = e.data\n                if (data.name === 'backgroundUpdate') {\n                    self.setInterval(function () {self.postMessage({name: 'backgroundUpdate'})}, 5000)\n                }\n            }"])
+            var updateBlob = new Blob(["onmessage = function (e) {\n                var data = e.data\n                if (data.name === 'backgroundUpdate') {\n                    self.setInterval(function () {self.postMessage({name: 'backgroundUpdate'})}, 5000)\n                }\n            }"])
 
             var updateBlobURL = window.URL.createObjectURL(updateBlob)
 
@@ -2826,12 +2826,12 @@ $(function () {
         })
         updateMap()
     })
-	$showTimers = $('#timer-switch')
+    $showTimers = $('#timer-switch')
 
     $showTimers.on('change', function () {
-		Store.set('showTimers', this.checked)
-		redrawPokemon(mapData.pokemons)
-		redrawPokemon(mapData.lurePokemons)
+        Store.set('showTimers', this.checked)
+        redrawPokemon(mapData.pokemons)
+        redrawPokemon(mapData.lurePokemons)
     })
 
     $selectLocationIconMarker = $('#locationmarker-style')
@@ -3330,7 +3330,9 @@ $(function () {
         'language': {
             'emptyTable': ''
         },
-        'columns': [{'orderable': false}, null, null, null]
+        'columns': [{
+            'orderable': false
+        }, null, null, null]
     }).order([1, 'asc'])
 })
 
