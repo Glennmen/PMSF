@@ -93,7 +93,7 @@ $hidePokemonCoords = true;                                          // true/fals
 
 $noTimers = true;                                                   // true/false
 $enableTimers = 'false';                                            // true/false
-$hideTimersAtZoomLevel = 16;                                        // recommended level with common pokemon hidden 
+$hideTimersAtZoomLevel = 16;                                        // recommended level with common pokemon hidden
 
 $noExcludeMinIV = false;                                            // true/false
 $excludeMinIV = '[131, 143, 147, 148, 149, 248]';                   // [] for empty

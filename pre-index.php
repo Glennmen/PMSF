@@ -290,7 +290,7 @@ if ($blockIframe) {
             }
             ?>
             <?php
-			if (!$noTimers) {
+			 if (!$noTimers) {
                 ?>
                 <h3><?php echo i8ln('Timers') ?></h3>
                     <?php
@@ -305,7 +305,7 @@ if ($blockIframe) {
 									</label>
 								</div>
 							</div> 
-						</div>'; 
+						</div>';
 			}?>
             <?php
             if (!$noRaids || !$noGyms) {
