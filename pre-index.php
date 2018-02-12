@@ -306,7 +306,7 @@ if ($blockIframe) {
 								</div>
 							</div> 
 						</div>';
-			 }?>
+			  }?>
             <?php
             if (!$noRaids || !$noGyms) {
                 ?>
