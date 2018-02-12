@@ -2824,12 +2824,12 @@ $(function () {
         })
         updateMap()
     })
-	$showTimers = $('#timer-switch')
+    $showTimers = $('#timer-switch')
 
     $showTimers.on('change', function () {
-		Store.set('showTimers', this.checked)
-		redrawPokemon(mapData.pokemons)
-		redrawPokemon(mapData.lurePokemons)
+        Store.set('showTimers', this.checked)
+        redrawPokemon(mapData.pokemons)
+        redrawPokemon(mapData.lurePokemons)
     })
 
     $selectLocationIconMarker = $('#locationmarker-style')
