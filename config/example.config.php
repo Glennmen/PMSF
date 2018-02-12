@@ -81,9 +81,9 @@ $hidePokemon = '[10, 13, 16, 19, 21, 29, 32, 41, 46, 48, 50, 52, 56, 74, 77, 96,
 
 $hidePokemonCoords = false;                                         // true/false
 
-$noTimers = true;                                                  // true/false
+$noTimers = true;                                                   // true/false
 $enableTimers = 'false';                                            // true/false
-$hideTimersAtZoomLevel = 16;                                        // 
+$hideTimersAtZoomLevel = 16;                                        // recommended level with common pokemon hidden
 
 $noExcludeMinIV = false;                                            // true/false
 $excludeMinIV = '[131, 143, 147, 148, 149, 248]';                   // [] for empty
@@ -130,7 +130,7 @@ $noStartMe = false;                                                 // true/fals
 $enableStartMe = 'false';                                           // true/false
 
 $noStartLast = false;                                               // true/false
-$enableStartLast = 'false';                                         // true/false
+$enableStartLast = 'true';                                         // true/false
 
 $noFollowMe = false;                                                // true/false
 $enableFollowMe = 'false';                                          // true/false
