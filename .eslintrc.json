@@ -114,6 +114,7 @@
     "i8ln": false,
     "languageSite": true,
     "boostedMons": true,
-    "motd": true
+    "motd": true,
+    "enableTimers": false
   }
 }

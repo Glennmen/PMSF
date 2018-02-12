@@ -290,6 +290,24 @@ if ($blockIframe) {
             }
             ?>
             <?php
+			if (!$noTimers) {
+                ?>
+                <h3><?php echo i8ln('Timers') ?></h3>
+                    <?php
+                    echo '<div>
+							<div class=" form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
+								<h3>' . i8ln('Show Pokemon Timers') . '</h3>
+								<div class="onoffswitch">
+									<input id="timer-switch" type="checkbox" name="imer-switch" class="onoffswitch-checkbox" checked>
+									<label class="onoffswitch-label" for="timer-switch">
+										<span class="switch-label" data-on="On" data-off="Off"></span>
+										<span class="switch-handle"></span>
+									</label>
+								</div>
+							</div> 
+						</div>'; 
+			}?>
+            <?php
             if (!$noRaids || !$noGyms) {
                 ?>
                 <h3><?php echo i8ln('Gym/Raid'); ?></h3>
@@ -908,6 +926,8 @@ if ($blockIframe) {
     var showTinyRat = '<?php echo $noTinyRat === true ? 'true' : 'false' ?>';
     var hidePokemonCoords = <?php echo $hidePokemonCoords === true ? 'true' : 'false' ?>;
     var directionProvider = '<?php echo $noDirectionProvider === true ? $directionProvider : 'google' ?>';
+	var enableTimers = <?php echo $enableTimers ?>;
+	var hideTimersAtZoomLevel = <?php echo $hideTimersAtZoomLevel ?>;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="static/dist/js/map.common.min.js"></script>
@@ -915,6 +935,7 @@ if ($blockIframe) {
 <script src="static/dist/js/stats.min.js"></script>
 <script defer
         src="https://maps.googleapis.com/maps/api/js?key=<?= $gmapsKey ?>&amp;callback=initMap&amp;libraries=places,geometry"></script>
+<script defer src="static/js/label.js"></script>
 <script defer src="static/js/vendor/richmarker-compiled.js"></script>
 </body>
 </html>
