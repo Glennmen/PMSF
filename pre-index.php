@@ -123,6 +123,27 @@ if ($blockIframe) {
     <link rel="stylesheet" href="static/dist/css/app.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+	<style>
+		.dropdown {
+		position: relative;
+		display: inline-block;
+		}
+
+		.dropdown-content {
+			line-height: 2em; 
+			display: none;
+			position: absolute;
+			background-color: #3b3b3b;
+			min-width: 160px;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			padding: 0px 12px;
+			z-index: 1
+		}
+
+		.dropdown:hover .dropdown-content {
+			display: block;
+		}
+	</style>
     <script src="static/js/vendor/modernizr.custom.js"></script>
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -132,8 +153,15 @@ if ($blockIframe) {
     <!-- Header -->
     <header id="header">
         <a href="#nav"><span class="label"><?php echo i8ln('Options') ?></span></a>
-
-        <h1><a href="#"><?= $title ?></a></h1>
+		<div class="dropdown">
+			<span class="label" style="font-weight:bold;">Change Location</span>
+			<div class="dropdown-content">
+				<div onClick="changeLocation(-32.2476512,148.6013635)">Dubbo</div>
+				<div onClick="changeLocation(-32.3611564,149.5309703)">Gulgong</div>
+				<div onClick="changeLocation(-32.5986035, 149.5800913)">Mudgee</div>
+				<div onClick="changeLocation(-31.7010184, 147.8325603)">Warren</div>
+			</div>
+		</div>
         <?php
         if ($discordUrl != "") {
             echo '<a href="' . $discordUrl . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle;padding:0 5px;">
