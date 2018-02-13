@@ -153,7 +153,7 @@ if ($blockIframe) {
             <?php
         } ?>
         <a href="#stats" id="statsToggle" class="statsNav" style="float: right;"><span
-                class="label"><?php echo i8ln('Stats') ?></span></a>
+                    class="label"><?php echo i8ln('Stats') ?></span></a>
     </header>
     <!-- NAV -->
     <nav id="nav">
@@ -290,11 +290,11 @@ if ($blockIframe) {
             }
             ?>
             <?php
-              if (!$noTimers) {
-                  ?>
+            if (!$noTimers) {
+                ?>
                 <h3><?php echo i8ln('Timers') ?></h3>
-                    <?php
-                    echo '<div>
+                <?php
+                echo '<div>
 							<div class=" form-control switch-container" style="float:none;height:35px;margin-bottom:0px;">
 								<h3>' . i8ln('Show Pokemon Timers') . '</h3>
 								<div class="onoffswitch">
@@ -306,9 +306,9 @@ if ($blockIframe) {
 								</div>
 							</div> 
 						</div>';
-              }?>
-             <?php
-             if (!$noRaids || !$noGyms) {
+            } ?>
+            <?php
+            if (!$noRaids || !$noGyms) {
                 ?>
                 <h3><?php echo i8ln('Gym/Raid'); ?></h3>
                 <div>
@@ -487,8 +487,8 @@ if ($blockIframe) {
                     </div>
                 </div>';
                 } ?>
-                 <?php
-                 if (!$noWeatherOverlay) {
+                <?php
+                if (!$noWeatherOverlay) {
                     echo '<div class="form-control switch-container">
                     <h3> ' . i8ln('Weather Conditions') . ' </h3>
                     <div class="onoffswitch">
@@ -810,11 +810,13 @@ if ($blockIframe) {
     </nav>
     <nav id="stats">
         <div class="switch-container">
-            <?php 
+            <?php
             if ($worldopoleUrl !== "") {
                 ?>
                 <div class="switch-container">
-                    <div><center><a href="<?= $worldopoleUrl ?>">Full Stats</a></center></div>
+                    <div>
+                        <center><a href="<?= $worldopoleUrl ?>">Full Stats</a></center>
+                    </div>
                 </div>
                 <?php
             }
@@ -926,8 +928,8 @@ if ($blockIframe) {
     var showTinyRat = '<?php echo $noTinyRat === true ? 'true' : 'false' ?>';
     var hidePokemonCoords = <?php echo $hidePokemonCoords === true ? 'true' : 'false' ?>;
     var directionProvider = '<?php echo $noDirectionProvider === true ? $directionProvider : 'google' ?>';
-	var enableTimers = <?php echo $enableTimers ?>;
-	var hideTimersAtZoomLevel = <?php echo $hideTimersAtZoomLevel ?>;
+    var enableTimers = <?php echo $enableTimers ?>;
+    var hideTimersAtZoomLevel = <?php echo $hideTimersAtZoomLevel ?>;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="static/dist/js/map.common.min.js"></script>
