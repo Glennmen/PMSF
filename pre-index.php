@@ -486,7 +486,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                } ?>
+            } ?>
                 <?php
                 if (!$noWeatherOverlay) {
                     echo '<div class="form-control switch-container">

@@ -1138,8 +1138,8 @@ function setupPokemonMarker(item, map, isBounceDisabled) {
     }
     var pokemonIndex = item['pokemon_id'] - 1
     var icon = getGoogleSprite(pokemonIndex, pokemonSprites, iconSize, item['weather_boosted_condition'])
-    var hideTimersAtZoomLevel = Store.get('hideTimersAtZoomLevel');
-    var showTimers = Store.get('showTimers');
+    var hideTimersAtZoomLevel = Store.get('hideTimersAtZoomLevel')
+    var showTimers = Store.get('showTimers')
 
     var animationDisabled = false
     if (isBounceDisabled === true) {
@@ -1173,7 +1173,7 @@ function setupPokemonMarker(item, map, isBounceDisabled) {
             animationDisabled: animationDisabled
         })
     }
-    return marker;
+    return marker
 }
 
 function isNotifiedPokemon(item) {
