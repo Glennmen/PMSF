@@ -492,7 +492,7 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-                } ?>
+            } ?>
                 <?php
                 if ($map != "monocle") {
                     echo '<div class="form-control switch-container" id = "lured-pokestops-only-wrapper" style = "display:none">
