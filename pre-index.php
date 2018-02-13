@@ -306,9 +306,9 @@ if ($blockIframe) {
 								</div>
 							</div> 
 						</div>';
-				}?>
-            <?php
-            if (!$noRaids || !$noGyms) {
+              }?>
+             <?php
+             if (!$noRaids || !$noGyms) {
                 ?>
                 <h3><?php echo i8ln('Gym/Raid'); ?></h3>
                 <div>
@@ -486,9 +486,9 @@ if ($blockIframe) {
                         </label>
                     </div>
                 </div>';
-				} ?>
-                <?php
-                if (!$noWeatherOverlay) {
+                } ?>
+                 <?php
+                 if (!$noWeatherOverlay) {
                     echo '<div class="form-control switch-container">
                     <h3> ' . i8ln('Weather Conditions') . ' </h3>
                     <div class="onoffswitch">
