@@ -39,7 +39,7 @@ class Monocle_Asner extends Monocle
                 $i++;
             }
             $pkmn_in = substr($pkmn_in, 0, -1);
-            $conds[] = "(pokemon_id NOT IN ( $pkmn_in ))";
+            $conds[] = "(pokemon_id IN ( $pkmn_in ))";
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {

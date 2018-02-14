@@ -106,13 +106,11 @@ class RocketMap_Sloppy extends RocketMap
         $params[':time'] = date_format($date, 'Y-m-d H:i:s');
         if (count($ids)) {
             $tmpSQL = '';
-            if (!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $ids)) === false) {
+            if (!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $ids)) !== false) {
                 $tmpSQL .= ' OR (pokemon_id = 19 AND weight' . $float . ' < 2.41)';
-                $eids[] = "19";
             }
-            if (!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $ids)) === false) {
+            if (!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $ids)) !== false) {
                 $tmpSQL .= ' OR (pokemon_id = 129 AND weight' . $float . ' > 13.13)';
-                $eids[] = "129";
             }
             $pkmn_in = '';
             $i = 1;
@@ -122,7 +120,7 @@ class RocketMap_Sloppy extends RocketMap
                 $i++;
             }
             $pkmn_in = substr($pkmn_in, 0, -1);
-            $conds[] = "(pokemon_id NOT IN ( $pkmn_in )" . $tmpSQL . ")";
+            $conds[] = "(pokemon_id IN ( $pkmn_in )" . $tmpSQL . ")";
         }
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
             $minIv = $minIv * .45;
