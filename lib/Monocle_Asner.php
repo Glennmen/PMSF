@@ -39,14 +39,15 @@ class Monocle_Asner extends Monocle
                 $i++;
             }
             $pkmn_in = substr($pkmn_in, 0, -1);
-            $conds[] = "(pokemon_id NOT IN ( $pkmn_in ))";
+            $conds[] = "(pokemon_id IN ( $pkmn_in ))";
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
+            $minIv = $minIv * .45;
             if (empty($exMinIv)) {
-                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv;
+                $conds[] = '(atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') >= ' . $minIv;
             } else {
-                $conds[] = '(((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
+                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {
@@ -94,10 +95,11 @@ class Monocle_Asner extends Monocle
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
+            $minIv = $minIv * .45;
             if (empty($exMinIv)) {
-                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv;
+                $conds[] = '(atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') >= ' . $minIv;
             } else {
-                $conds[] = '(((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
+                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {

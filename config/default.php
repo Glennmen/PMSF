@@ -65,10 +65,14 @@ $paypalUrl = "";                                                    // PayPal do
 
 /* Discord */
 
-$discordUrl = "";                                                    // Discord URL, leave "" for empty
+$discordUrl = "";                                                   // Discord URL, leave "" for empty
+
+/* Worldopole */
+
+$worldopoleUrl = "";                                                // Link to Worldopole, leave "" for empty
 
 /* MOTD */
-
+$noMotd = true;
 $motdTitle = "";
 $motdContent = "";
 
@@ -96,7 +100,7 @@ $minIV = '0';                                                       // "0" for e
 $noMinLevel = false;                                                // true/false
 $minLevel = '0';                                                    // "0" for empty or a number
 
-$noBigKarp = false;                                               // true/false
+$noBigKarp = false;                                                 // true/false
 $noTinyRat = false;                                                 // true/false
 
 $noGyms = false;                                                    // true/false
@@ -153,8 +157,8 @@ $notifyRarity = '[]';                                               // "Common",
 $noNotifyIv = false;                                                // true/false
 $notifyIv = '""';                                                   // "" for empty or a number
 
-$noNotifyLevel = false;                                                // true/false
-$notifyLevel = '""';                                                   // "" for empty or a number
+$noNotifyLevel = false;                                             // true/false
+$notifyLevel = '""';                                                // "" for empty or a number
 
 $noNotifyRaid = false;                                              // true/false
 $notifyRaid = 5;                                                    // O to disable
