@@ -428,7 +428,7 @@ if ($blockIframe) {
                     </div>
                     <div id="gyms-raid-filter-wrapper" style="display:none">
                         <?php if ($map === "monocle" && !$noExEligible) {
-                            ?>
+                        ?>
                             <div class="form-control switch-container" id="ex-eligible-wrapper">
                                 <h3><?php echo i8ln('EX Eligible Only') ?></h3>
                                 <div class="onoffswitch">
@@ -441,7 +441,7 @@ if ($blockIframe) {
                                 </div>
                             </div>
                             <?php
-                        } ?>
+                    } ?>
                     </div>
                 </div>
                 <?php
