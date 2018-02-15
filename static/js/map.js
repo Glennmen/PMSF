@@ -2420,6 +2420,10 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
                     pokemonHtml +=
                         '<div style="line-height: 1em">' + pokemon.trainer_name + '</div>'
                 }
+                if (pokemon.attacked && pokemon.defended) {
+                    pokemonHtml +=
+                        '<div style="line-height: 1em">' + i8ln('A') + ': ' + pokemon.attacked + ' | ' + i8ln('D') + ': ' + pokemon.defended + '</div>'
+                }
                 pokemonHtml +=
                     '</td>' +
                     '<td width="10">' +
