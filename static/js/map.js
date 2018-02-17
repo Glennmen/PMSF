@@ -1749,6 +1749,11 @@ function processGyms(i, item) {
         return true
     }
 
+    if (Store.get('exEligible') && item.park === null) {
+        removeGymFromMap(item['gym_id'])
+        return true
+    }
+
     if (Store.get('showOpenGymsOnly')) {
         if (item.slots_available === 0 && (item.raid_end === undefined || item.raid_end < Date.now())) {
             removeGymFromMap(item['gym_id'])
