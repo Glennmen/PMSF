@@ -4,7 +4,7 @@ namespace Scanner;
 
 class Monocle extends Scanner
 {
-    public function get_active($eids, $minIv, $minLevel, $exMinIv, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    public function get_active($eids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0, $encId = 0)
     {
         global $db;
         $conds = array();
@@ -39,20 +39,25 @@ class Monocle extends Scanner
                 $i++;
             }
             $pkmn_in = substr($pkmn_in, 0, -1);
-            $conds[] = "pokemon_id NOT IN ( $pkmn_in )";
+            $conds[] = "(pokemon_id NOT IN ( $pkmn_in ))";
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
+            $minIv = $minIv * .45;
             if (empty($exMinIv)) {
-                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv;
+                $conds[] = '(atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') >= ' . $minIv;
             } else {
-                $conds[] = '(((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
+                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
-        return $this->query_active($select, $conds, $params);
+        $encSql = '';
+        if ($encId != 0) {
+            $encSql = " OR (encounter_id = " . $encId . " AND lat > '" . $swLat . "' AND lon > '" . $swLng . "' AND lat < '" . $neLat . "' AND lon < '" . $neLng . "' AND expire_timestamp > '" . $params[':time'] . "')";
+        }
+        return $this->query_active($select, $conds, $params, $encSql);
     }
 
-    public function get_active_by_id($ids, $minIv, $minLevel, $exMinIv, $swLat, $swLng, $neLat, $neLng)
+    public function get_active_by_id($ids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng)
     {
         global $db;
         $conds = array();
@@ -83,16 +88,17 @@ class Monocle extends Scanner
         }
         $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
+            $minIv = $minIv * .45;
             if (empty($exMinIv)) {
-                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv;
+                $conds[] = '(atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') >= ' . $minIv;
             } else {
-                $conds[] = '(((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') / 45.00)' . $float . ' * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
+                $conds[] = '((atk_iv' . $float . ' + def_iv' . $float . ' + sta_iv' . $float . ') >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
         return $this->query_active($select, $conds, $params);
     }
 
-    public function query_active($select, $conds, $params)
+    public function query_active($select, $conds, $params, $encSql = '')
     {
         global $db;
 
@@ -101,7 +107,7 @@ class Monocle extends Scanner
         WHERE :conditions";
 
         $query = str_replace(":select", $select, $query);
-        $query = str_replace(":conditions", join(" AND ", $conds), $query);
+        $query = str_replace(":conditions", '(' . join(" AND ", $conds) . ')' . $encSql, $query);
         $pokemons = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
         $data = array();
         $i = 0;
@@ -217,7 +223,8 @@ class Monocle extends Scanner
         $query = "SELECT lat AS latitude, 
         lon AS longitude, 
         spawn_id AS spawnpoint_id, 
-        despawn_time AS time 
+        despawn_time,
+        duration
         FROM   spawnpoints 
         WHERE :conditions";
 
@@ -230,6 +237,8 @@ class Monocle extends Scanner
         foreach ($spawnpoints as $spawnpoint) {
             $spawnpoint["latitude"] = floatval($spawnpoint["latitude"]);
             $spawnpoint["longitude"] = floatval($spawnpoint["longitude"]);
+            $spawnpoint["time"] = intval($spawnpoint["despawn_time"]);
+            $spawnpoint["duration"] = intval($spawnpoint["duration"]);
             $data[] = $spawnpoint;
 
             unset($spawnpoints[$i]);
@@ -246,7 +255,7 @@ class Monocle extends Scanner
         return $recent;
     }
 
-    public function get_gyms($swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    public function get_gyms($swLat, $swLng, $neLat, $neLng, $exEligible = false, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
     {
         $conds = array();
         $params = array();
@@ -335,6 +344,7 @@ class Monocle extends Scanner
             $gym["raid_pokemon_name"] = empty($raid_pid) ? null : i8ln($this->data[$raid_pid]["name"]);
             $gym["latitude"] = floatval($gym["latitude"]);
             $gym["longitude"] = floatval($gym["longitude"]);
+            $gym["slots_available"] = intval($gym["slots_available"]);
             $gym["last_modified"] = $gym["last_modified"] * 1000;
             $gym["raid_start"] = $gym["raid_start"] * 1000;
             $gym["raid_end"] = $gym["raid_end"] * 1000;
@@ -432,6 +442,7 @@ class Monocle extends Scanner
         }
         return $data;
     }
+
     public function get_weather_by_cell_id($cell_id)
     {
         global $db;
@@ -444,7 +455,8 @@ class Monocle extends Scanner
             return null;
         }
     }
-    public function get_weather($updated=null)
+
+    public function get_weather($updated = null)
     {
         global $db;
         $query = "SELECT * FROM weather WHERE :conditions ORDER BY id ASC";
@@ -458,7 +470,7 @@ class Monocle extends Scanner
         $query = str_replace(":conditions", join(" AND ", $conds), $query);
         $weathers = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
         foreach ($weathers as $weather) {
-            $data["weather_".$weather['s2_cell_id']] = $weather;
+            $data["weather_" . $weather['s2_cell_id']] = $weather;
         }
         return $data;
     }

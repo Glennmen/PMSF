@@ -26,6 +26,10 @@ var $selectLuredPokestopsOnly
 var $selectGymMarkerStyle
 var $selectLocationIconMarker
 var $switchGymSidebar
+var $switchTinyRat
+var $switchBigKarp
+var $selectDirectionProvider
+var $switchExEligible
 
 var language = document.documentElement.lang === '' ? 'en' : document.documentElement.lang
 var languageSite = 'en'
@@ -47,6 +51,7 @@ var minIV = null
 var prevMinIV = null
 var prevMinLevel = null
 var onlyPokemon = 0
+var directionProvider
 
 var buffer = []
 var reincludedPokemon = []
@@ -98,7 +103,7 @@ createjs.Sound.registerSound('static/sounds/ding.mp3', 'ding')
 
 
 var genderType = ['♂', '♀', '⚲']
-var unownForm = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?']
+var forms = ['unset', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?', i8ln('Normal'), i8ln('Sunny'), i8ln('Rainy'), i8ln('Snowy'), i8ln('Normal'), i8ln('Attack'), i8ln('Defense'), i8ln('Speed')]
 var cpMultiplier = [0.094, 0.16639787, 0.21573247, 0.25572005, 0.29024988, 0.3210876, 0.34921268, 0.37523559, 0.39956728, 0.42250001, 0.44310755, 0.46279839, 0.48168495, 0.49985844, 0.51739395, 0.53435433, 0.55079269, 0.56675452, 0.58227891, 0.59740001, 0.61215729, 0.62656713, 0.64065295, 0.65443563, 0.667934, 0.68116492, 0.69414365, 0.70688421, 0.71939909, 0.7317, 0.73776948, 0.74378943, 0.74976104, 0.75568551, 0.76156384, 0.76739717, 0.7731865, 0.77893275, 0.7846369, 0.79030001]
 
 var weatherArray = []
@@ -253,6 +258,8 @@ function initMap() { // eslint-disable-line no-unused-vars
         Store.set('map_style', this.mapTypeId)
     })
 
+    excludedPokemon = Store.get('remember_select_exclude')
+
     map.setMapTypeId(Store.get('map_style'))
     map.addListener('idle', updateMap)
 
@@ -350,8 +357,10 @@ function createLocationMarker() {
 function initSidebar() {
     $('#gyms-switch').prop('checked', Store.get('showGyms'))
     $('#gym-sidebar-switch').prop('checked', Store.get('useGymSidebar'))
+    $('#ex-eligible-switch').prop('checked', Store.get('exEligible'))
     $('#gym-sidebar-wrapper').toggle(Store.get('showGyms') || Store.get('showRaids'))
     $('#gyms-filter-wrapper').toggle(Store.get('showGyms'))
+
     $('#team-gyms-only-switch').val(Store.get('showTeamGymsOnly'))
     $('#open-gyms-only-switch').prop('checked', Store.get('showOpenGymsOnly'))
     $('#raids-switch').prop('checked', Store.get('showRaids'))
@@ -364,6 +373,8 @@ function initSidebar() {
     $('#last-update-gyms-switch').val(Store.get('showLastUpdatedGymsOnly'))
     $('#pokemon-switch').prop('checked', Store.get('showPokemon'))
     $('#pokemon-filter-wrapper').toggle(Store.get('showPokemon'))
+    $('#big-karp-switch').prop('checked', Store.get('showBigKarp'))
+    $('#tiny-rat-switch').prop('checked', Store.get('showTinyRat'))
     $('#pokestops-switch').prop('checked', Store.get('showPokestops'))
     $('#lured-pokestops-only-switch').val(Store.get('showLuredPokestopsOnly'))
     $('#lured-pokestops-only-wrapper').toggle(Store.get('showPokestops'))
@@ -375,11 +386,16 @@ function initSidebar() {
     $('#scanned-switch').prop('checked', Store.get('showScanned'))
     $('#weather-switch').prop('checked', Store.get('showWeather'))
     $('#spawnpoints-switch').prop('checked', Store.get('showSpawnpoints'))
+    $('#direction-provider').val(Store.get('directionProvider'))
     $('#ranges-switch').prop('checked', Store.get('showRanges'))
     $('#sound-switch').prop('checked', Store.get('playSound'))
     $('#cries-switch').prop('checked', Store.get('playCries'))
     $('#cries-switch-wrapper').toggle(Store.get('playSound'))
     $('#cries-type-filter-wrapper').toggle(Store.get('playCries'))
+
+    if (Store.get('showGyms') === true || Store.get('showRaids') === true) {
+        $('#gyms-raid-filter-wrapper').toggle(true)
+    }
     if (document.getElementById('next-location')) {
         var searchBox = new google.maps.places.Autocomplete(document.getElementById('next-location'))
         $('#next-location').css('background-color', $('#geoloc-switch').prop('checked') ? '#e0e0e0' : '#ffffff')
@@ -414,6 +430,17 @@ function getTypeSpan(type) {
 
 function openMapDirections(lat, lng) { // eslint-disable-line no-unused-vars
     var url = 'https://www.google.com/maps/dir/?api=1&destination=' + lat + ',' + lng
+    switch (directionProvider) {
+        case 'apple':
+            url = 'https://maps.apple.com/?daddr=' + lat + ',' + lng
+            break
+        case 'waze':
+            url = 'https://waze.com/ul?ll=' + lat + ',' + lng
+            break
+        case 'bing':
+            url = 'https://www.bing.com/maps/?v=2&where1=' + lat + ',' + lng
+            break
+    }
     window.open(url, '_blank')
 }
 
@@ -526,8 +553,12 @@ function pokemonLabel(item) {
     var contentstring =
         '<div>' +
         '<b>' + name + '</b>'
-    if (id === 201 && form !== null && form > 0) {
-        contentstring += ' (' + unownForm[item['form']] + ')'
+    if (form !== null && form > 0 && forms.length > form) {
+        contentstring += ' (' + forms[item['form']] + ')'
+    }
+    var coordText = latitude.toFixed(6) + ', ' + longitude.toFixed(7)
+    if (hidePokemonCoords === true) {
+        coordText = i8ln('Directions')
     }
     contentstring += '<span> - </span>' +
         '<small>' +
@@ -542,7 +573,7 @@ function pokemonLabel(item) {
         ' <span class="label-countdown" disappears-at="' + disappearTime + '">(00m00s)</span>' +
         '</div>' +
         '<div>' +
-        i8ln('Location') + ': <a href="javascript:void(0)" onclick="javascript:openMapDirections(' + latitude + ', ' + longitude + ')" title="' + i8ln('View in Maps') + '">' + latitude.toFixed(6) + ', ' + longitude.toFixed(7) + '</a>' +
+        i8ln('Location') + ': <a href="javascript:void(0)" onclick="javascript:openMapDirections(' + latitude + ', ' + longitude + ')" title="' + i8ln('View in Maps') + '">' + coordText + '</a>' +
         '</div>' +
         details +
         '<div>' +
@@ -751,13 +782,15 @@ function spawnpointLabel(item) {
         '<b>' + i8ln('Spawn Point') + '</b>' +
         '</div>' +
         '<div>' +
-        i8ln('Every hour from') + ' ' + formatSpawnTime(item.time) + ' ' + i8ln('to') + ' ' + formatSpawnTime(item.time + 900) +
+        i8ln('Every hour from') + ' ' + formatSpawnTime(item.time + 1800) + ' ' + i8ln('to') + ' ' + formatSpawnTime(item.time) +
         '</div>'
-
-    if (item.special) {
-        str +=
+    if (item.duration === 60 || item.kind === 'ssss') {
+        str =
             '<div>' +
-            i8ln('May appear as early as') + ' ' + formatSpawnTime(item.time - 1800) +
+            '<b>Spawn Point</b>' +
+            '</div>' +
+            '<div>' +
+            i8ln('Every hour from') + ' ' + formatSpawnTime(item.time) +
             '</div>'
     }
     return str
@@ -1294,7 +1327,7 @@ function addListeners(marker) {
 
 function clearStaleMarkers() {
     $.each(mapData.pokemons, function (key, value) {
-        if (mapData.pokemons[key]['disappear_time'] < new Date().getTime() || excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id']) || ((((mapData.pokemons[key]['individual_attack'] + mapData.pokemons[key]['individual_defense'] + mapData.pokemons[key]['individual_stamina']) / 45 * 100 < minIV) || ((mapType === 'monocle' && mapData.pokemons[key]['level'] < minLevel) || (mapType === 'rm' && !isNaN(minLevel) && (mapData.pokemons[key]['cp_multiplier'] < cpMultiplier[minLevel - 1])))) && !excludedMinIV.includes(mapData.pokemons[key]['pokemon_id']))) {
+        if (((mapData.pokemons[key]['disappear_time'] < new Date().getTime() || ((excludedPokemon.indexOf(mapData.pokemons[key]['pokemon_id']) >= 0 || isTemporaryHidden(mapData.pokemons[key]['pokemon_id']) || ((((mapData.pokemons[key]['individual_attack'] + mapData.pokemons[key]['individual_defense'] + mapData.pokemons[key]['individual_stamina']) / 45 * 100 < minIV) || ((mapType === 'monocle' && mapData.pokemons[key]['level'] < minLevel) || (mapType === 'rm' && !isNaN(minLevel) && (mapData.pokemons[key]['cp_multiplier'] < cpMultiplier[minLevel - 1])))) && !excludedMinIV.includes(mapData.pokemons[key]['pokemon_id'])) || (Store.get('showBigKarp') === true && mapData.pokemons[key]['pokemon_id'] === 129 && (mapData.pokemons[key]['weight'] < 13.14 || mapData.pokemons[key]['weight'] === null)) || (Store.get('showTinyRat') === true && mapData.pokemons[key]['pokemon_id'] === 19 && (mapData.pokemons[key]['weight'] > 2.40 || mapData.pokemons[key]['weight'] === null))) && encounterId !== mapData.pokemons[key]['encounter_id'])) || (encounterId && encounterId === mapData.pokemons[key]['encounter_id'] && mapData.pokemons[key]['disappear_time'] < new Date().getTime()))) {
             if (mapData.pokemons[key].marker.rangeCircle) {
                 mapData.pokemons[key].marker.rangeCircle.setMap(null)
                 delete mapData.pokemons[key].marker.rangeCircle
@@ -1305,7 +1338,7 @@ function clearStaleMarkers() {
     })
 
     $.each(mapData.lurePokemons, function (key, value) {
-        if (mapData.lurePokemons[key]['lure_expiration'] < new Date().getTime() || excludedPokemon.indexOf(mapData.lurePokemons[key]['pokemon_id']) >= 0) {
+        if (mapData.lurePokemons[key]['lure_expiration'] < new Date().getTime() || (excludedPokemon.indexOf(mapData.lurePokemons[key]['pokemon_id']) >= 0 && ((encounterId && encounterId !== mapData.pokemons[key]['encounter_id']) || !encounterId))) {
             mapData.lurePokemons[key].marker.setMap(null)
             delete mapData.lurePokemons[key]
         }
@@ -1381,6 +1414,9 @@ function loadRawData() {
     var loadLuredOnly = Boolean(Store.get('showLuredPokestopsOnly'))
     var loadMinIV = Store.get('remember_text_min_iv')
     var loadMinLevel = Store.get('remember_text_min_level')
+    var bigKarp = Boolean(Store.get('showBigKarp'))
+    var tinyRat = Boolean(Store.get('showTinyRat'))
+    var exEligible = Boolean(Store.get('exEligible'))
 
     var bounds = map.getBounds()
     var swPoint = bounds.getSouthWest()
@@ -1403,6 +1439,7 @@ function loadRawData() {
             'luredonly': loadLuredOnly,
             'gyms': loadGyms,
             'lastgyms': lastgyms,
+            'exEligible': exEligible,
             'scanned': loadScanned,
             'lastslocs': lastslocs,
             'spawnpoints': loadSpawnpoints,
@@ -1411,6 +1448,8 @@ function loadRawData() {
             'prevMinIV': prevMinIV,
             'minLevel': loadMinLevel,
             'prevMinLevel': prevMinLevel,
+            'bigKarp': bigKarp,
+            'tinyRat': tinyRat,
             'swLat': swLat,
             'swLng': swLng,
             'neLat': neLat,
@@ -1422,7 +1461,8 @@ function loadRawData() {
             'reids': String(reincludedPokemon),
             'eids': String(excludedPokemon),
             'exMinIV': String(excludedMinIV),
-            'token': token
+            'token': token,
+            'encId': encounterId
         },
         dataType: 'json',
         cache: false,
@@ -1557,7 +1597,7 @@ function processPokemons(i, item) {
         return false // in case the checkbox was unchecked in the meantime.
     }
 
-    if (!(item['encounter_id'] in mapData.pokemons) && excludedPokemon.indexOf(item['pokemon_id']) < 0 && item['disappear_time'] > Date.now() && !isTemporaryHidden(item['pokemon_id'])) {
+    if (!(item['encounter_id'] in mapData.pokemons) && item['disappear_time'] > Date.now() && ((encounterId && encounterId === item['encounter_id']) || (excludedPokemon.indexOf(item['pokemon_id']) < 0 && !isTemporaryHidden(item['pokemon_id'])))) {
         // add marker to map and item to dict
         if (item.marker) {
             item.marker.setMap(null)
@@ -1566,6 +1606,20 @@ function processPokemons(i, item) {
             item.marker = setupPokemonMarker(item, map)
             customizePokemonMarker(item.marker, item)
             mapData.pokemons[item['encounter_id']] = item
+        }
+
+        if (encounterId && encounterId === item['encounter_id']) {
+            if (!item.marker.infoWindowIsOpen) {
+                item.marker.infoWindow.open(map, item.marker)
+                clearSelection()
+                updateLabelDiffTime()
+                item.marker.persist = true
+                item.marker.infoWindowIsOpen = true
+            } else {
+                item.marker.persist = null
+                item.marker.infoWindow.close()
+                item.marker.infoWindowIsOpen = false
+            }
         }
     }
 }
@@ -1691,6 +1745,11 @@ function processGyms(i, item) {
     }
 
     if (raidLevel > Store.get('maxRaidLevel') && item.raid_end > Date.now()) {
+        removeGymFromMap(item['gym_id'])
+        return true
+    }
+
+    if (Store.get('exEligible') && item.park === null) {
         removeGymFromMap(item['gym_id'])
         return true
     }
@@ -2552,24 +2611,27 @@ $(function () {
         fetchCriesJson()
     }
     // load MOTD, if set
-    $.ajax({
-        url: 'motd_data',
-        type: 'POST',
-        dataType: 'json',
-        cache: false,
-        success: function (data) {
-            // set content of motd banner
-            $('#motd').attr('title', data.title).html(data.content).dialog()
-        },
-        fail: function () {
-            return false
-        }
-    })
+    if (motd) {
+        $.ajax({
+            url: 'motd_data',
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                // set content of motd banner
+                $('#motd').attr('title', data.title).html(data.content).dialog()
+            },
+            fail: function () {
+                return false
+            }
+        })
+    }
 })
 
 $(function () {
     // populate Navbar Style menu
     $selectStyle = $('#map-style')
+    $selectDirectionProvider = $('#direction-provider')
 
     // Load Stylenames, translate entries, and populate lists
     $.getJSON('static/dist/data/mapstyle.min.json').done(function (data) {
@@ -2599,6 +2661,17 @@ $(function () {
         // recall saved mapstyle
         $selectStyle.val(Store.get('map_style')).trigger('change')
     })
+    $selectDirectionProvider.select2({
+        placeholder: 'Select Provider',
+        minimumResultsForSearch: Infinity
+    })
+
+    $selectDirectionProvider.on('change', function () {
+        directionProvider = $selectDirectionProvider.val()
+        Store.set('directionProvider', directionProvider)
+    })
+
+    $selectDirectionProvider.val(Store.get('directionProvider')).trigger('change')
 
     $selectIconSize = $('#pokemon-icon-size')
 
@@ -2750,6 +2823,24 @@ $(function () {
         })
         updateMap()
     })
+    $switchExEligible = $('#ex-eligible-switch')
+
+    $switchExEligible.on('change', function () {
+        Store.set('exEligible', this.checked)
+        lastgyms = false
+        $.each(['gyms'], function (d, dType) {
+            $.each(mapData[dType], function (key, value) {
+                // for any marker you're turning off, you'll want to wipe off the range
+                if (mapData[dType][key].marker.rangeCircle) {
+                    mapData[dType][key].marker.rangeCircle.setMap(null)
+                    delete mapData[dType][key].marker.rangeCircle
+                }
+                mapData[dType][key].marker.setMap(null)
+            })
+            mapData[dType] = {}
+        })
+        updateMap()
+    })
 
     $selectLocationIconMarker = $('#locationmarker-style')
 
@@ -2837,6 +2928,8 @@ $(function () {
     $textMinLevel = $('#min-level')
     $textLevelNotify = $('#notify-level')
     $raidNotify = $('#notify-raid')
+    $switchTinyRat = $('#tiny-rat-switch')
+    $switchBigKarp = $('#big-karp-switch')
     var numberOfPokemon = 386
 
     $('.select-all').on('click', function (e) {
@@ -2940,9 +3033,9 @@ $(function () {
             excludedMinIV = $selectExcludeMinIV.val().split(',').map(Number).sort(function (a, b) {
                 return parseInt(a) - parseInt(b)
             })
-            buffer = buffer.filter(function (e) {
+            buffer = excludedMinIV.filter(function (e) {
                 return this.indexOf(e) < 0
-            }, excludedMinIV)
+            }, buffer)
             reincludedPokemon = reincludedPokemon.concat(buffer)
             clearStaleMarkers()
             Store.set('remember_select_exclude_min_iv', excludedMinIV)
@@ -2969,7 +3062,16 @@ $(function () {
             $textMinLevel.val(minLevel)
             Store.set('remember_text_min_level', minLevel)
         })
-
+        $switchTinyRat.on('change', function (e) {
+            Store.set('showTinyRat', this.checked)
+            lastpokemon = false
+            updateMap()
+        })
+        $switchBigKarp.on('change', function (e) {
+            Store.set('showBigKarp', this.checked)
+            lastpokemon = false
+            updateMap()
+        })
         $selectPokemonNotify.on('change', function (e) {
             notifiedPokemon = $selectPokemonNotify.val().split(',').map(Number).sort(function (a, b) {
                 return parseInt(a) - parseInt(b)
@@ -3075,34 +3177,43 @@ $(function () {
         }
         var wrapper = $('#raids-filter-wrapper')
         var gymSidebarWrapper = $('#gym-sidebar-wrapper')
+        var gymRaidsFilterWrapper = $('#gyms-raid-filter-wrapper')
         if (this.checked) {
             lastgyms = false
             wrapper.show(options)
             gymSidebarWrapper.show(options)
+            gymRaidsFilterWrapper.show(options)
         } else {
             lastgyms = false
             wrapper.hide(options)
             if (!Store.get('showGyms')) {
                 gymSidebarWrapper.hide(options)
+                gymRaidsFilterWrapper.hide(options)
             }
         }
         buildSwitchChangeListener(mapData, ['gyms'], 'showRaids').bind(this)()
     })
+    if (Store.get('showGyms') === true || Store.get('showRaids') === true) {
+        $('#gyms-raid-filter-wrapper').toggle(true)
+    }
     $('#gyms-switch').change(function () {
         var options = {
             'duration': 500
         }
         var wrapper = $('#gyms-filter-wrapper')
         var gymSidebarWrapper = $('#gym-sidebar-wrapper')
+        var gymRaidsFilterWrapper = $('#gyms-raid-filter-wrapper')
         if (this.checked) {
             lastgyms = false
             wrapper.show(options)
             gymSidebarWrapper.show(options)
+            gymRaidsFilterWrapper.show(options)
         } else {
             lastgyms = false
             wrapper.hide(options)
             if (!Store.get('showRaids')) {
                 gymSidebarWrapper.hide(options)
+                gymRaidsFilterWrapper.hide(options)
             }
         }
         buildSwitchChangeListener(mapData, ['gyms'], 'showGyms').bind(this)()

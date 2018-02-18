@@ -5,11 +5,12 @@ namespace Scanner;
 class RocketMap_Sloppy extends RocketMap
 {
     // This is based on assumption from the last version I saw
-    public function get_active($eids, $minIv, $minLevel, $exMinIv, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0)
+    public function get_active($eids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng, $tstamp = 0, $oSwLat = 0, $oSwLng = 0, $oNeLat = 0, $oNeLng = 0, $encId = 0)
     {
         global $db;
         $conds = array();
         $params = array();
+        $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
 
         $select = "pokemon_id, Unix_timestamp(Convert_tz(disappear_time, '+00:00', @@global.time_zone)) AS disappear_time, encounter_id, latitude, longitude, gender, form, weight, height, weather_boosted_condition";
         global $noHighLevelData;
@@ -40,6 +41,15 @@ class RocketMap_Sloppy extends RocketMap
             $params[':lastUpdated'] = date_format($date, 'Y-m-d H:i:s');
         }
         if (count($eids)) {
+            $tmpSQL = '';
+            if (!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $eids)) === false) {
+                $tmpSQL .= ' OR (pokemon_id = 19 AND weight' . $float . ' < 2.41)';
+                $eids[] = "19";
+            }
+            if (!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $eids)) === false) {
+                $tmpSQL .= ' OR (pokemon_id = 129 AND weight' . $float . ' > 13.13)';
+                $eids[] = "129";
+            }
             $pkmn_in = '';
             $i = 1;
             foreach ($eids as $id) {
@@ -48,9 +58,9 @@ class RocketMap_Sloppy extends RocketMap
                 $i++;
             }
             $pkmn_in = substr($pkmn_in, 0, -1);
-            $conds[] = "pokemon_id NOT IN ( $pkmn_in )";
+            $conds[] = "(pokemon_id NOT IN ( $pkmn_in )" . $tmpSQL . ")";
         }
-        $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
+
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
             if (empty($exMinIv)) {
                 $conds[] = '((individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ')' . $float . ' / 45.00) * 100.00 >= ' . $minIv;
@@ -60,19 +70,24 @@ class RocketMap_Sloppy extends RocketMap
         }
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {
             if (empty($exMinIv)) {
-                $conds[] = 'cp_multiplier >= ' . $this->cp_multiplier[$minLevel];
+                $conds[] = 'cp_multiplier >= ' . $this->cpMultiplier[$minLevel];
             } else {
-                $conds[] = '(cp_multiplier >= ' . $this->cp_multiplier[$minLevel] . ' OR pokemon_id IN(' . $exMinIv . ') )';
+                $conds[] = '(cp_multiplier >= ' . $this->cpMultiplier[$minLevel] . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
-        return $this->query_active($select, $conds, $params);
+        $encSql = '';
+        if ($encId != 0) {
+            $encSql = " OR (encounter_id = " . $encId . " AND latitude > '" . $swLat . "' AND longitude > '" . $swLng . "' AND latitude < '" . $neLat . "' AND longitude < '" . $neLng . "' AND disappear_time > '" . $params[':time'] . "')";
+        }
+        return $this->query_active($select, $conds, $params, $encSql);
     }
 
-    public function get_active_by_id($ids, $minIv, $minLevel, $exMinIv, $swLat, $swLng, $neLat, $neLng)
+    public function get_active_by_id($ids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng)
     {
         global $db;
         $conds = array();
         $params = array();
+        $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
 
         $select = "pokemon_id, Unix_timestamp(Convert_tz(disappear_time, '+00:00', @@global.time_zone)) AS disappear_time, encounter_id, latitude, longitude, gender, form, weight, height, weather_boosted_condition";
         global $noHighLevelData;
@@ -90,6 +105,13 @@ class RocketMap_Sloppy extends RocketMap
         $date->setTimestamp(time());
         $params[':time'] = date_format($date, 'Y-m-d H:i:s');
         if (count($ids)) {
+            $tmpSQL = '';
+            if (!empty($tinyRat) && $tinyRat === 'true' && ($key = array_search("19", $ids)) !== false) {
+                $tmpSQL .= ' OR (pokemon_id = 19 AND weight' . $float . ' < 2.41)';
+            }
+            if (!empty($bigKarp) && $bigKarp === 'true' && ($key = array_search("129", $ids)) !== false) {
+                $tmpSQL .= ' OR (pokemon_id = 129 AND weight' . $float . ' > 13.13)';
+            }
             $pkmn_in = '';
             $i = 1;
             foreach ($ids as $id) {
@@ -98,21 +120,21 @@ class RocketMap_Sloppy extends RocketMap
                 $i++;
             }
             $pkmn_in = substr($pkmn_in, 0, -1);
-            $conds[] = "pokemon_id IN ( $pkmn_in )";
+            $conds[] = "(pokemon_id IN ( $pkmn_in )" . $tmpSQL . ")";
         }
-        $float = $db->info()['driver'] == 'pgsql' ? "::float" : "";
         if (!empty($minIv) && !is_nan((float)$minIv) && $minIv != 0) {
+            $minIv = $minIv * .45;
             if (empty($exMinIv)) {
-                $conds[] = '((individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ')' . $float . ' / 45.00) * 100.00 >= ' . $minIv;
+                $conds[] = '(individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ') >= ' . $minIv;
             } else {
-                $conds[] = '(((individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ')' . $float . ' / 45.00) * 100.00 >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
+                $conds[] = '((individual_attack' . $float . ' + individual_defense' . $float . ' + individual_stamina' . $float . ') >= ' . $minIv . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
         if (!empty($minLevel) && !is_nan((float)$minLevel) && $minLevel != 0) {
             if (empty($exMinIv)) {
-                $conds[] = 'cp_multiplier >= ' . $this->cp_multiplier[$minLevel];
+                $conds[] = 'cp_multiplier >= ' . $this->cpMultiplier[$minLevel];
             } else {
-                $conds[] = '(cp_multiplier >= ' . $this->cp_multiplier[$minLevel] . ' OR pokemon_id IN(' . $exMinIv . ') )';
+                $conds[] = '(cp_multiplier >= ' . $this->cpMultiplier[$minLevel] . ' OR pokemon_id IN(' . $exMinIv . ') )';
             }
         }
         return $this->query_active($select, $conds, $params);
