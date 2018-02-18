@@ -796,11 +796,8 @@ if ($blockIframe) {
                     <ul>
                 <?php
                 for ($i = 0; $i <= $count - 1; $i++) {
-                    echo '<li><a href="area-' . $i . '" class="area-go-to">' . $areas[$i][0] . '</a></li>';
-                }
-                /*for ($i = 0; $i <= $count - 1; $i++) {
                     echo '<li><a href="" data-lat="' . $areas[$i][0] . '" data-lng="' . $areas[$i][1] . '" data-zoom="' . $areas[$i][2] . '" class="area-go-to">' . $areas[$i][3] . '</a></li>';
-                }*/
+                }
                 ?>
                 </ul>
                 </div>
