@@ -40,7 +40,7 @@ $d["lastgyms"] = !empty($_POST['gyms']) ? $_POST['gyms'] : false;
 $d["lastslocs"] = !empty($_POST['scanned']) ? $_POST['scanned'] : false;
 $d["lastspawns"] = !empty($_POST['spawnpoints']) ? $_POST['spawnpoints'] : false;
 $d["lastpokemon"] = !empty($_POST['pokemon']) ? $_POST['pokemon'] : false;
-if ($minIv < $prevMinIv || $minLevel < $prevMinLevel) {
+if (intval($minIv) < intval($prevMinIv) || intval($minLevel) < intval($prevMinLevel)) {
     $lastpokemon = false;
 }
 $enc_id = !empty($_POST['encId']) ? $_POST['encId'] : null;
