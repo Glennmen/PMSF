@@ -781,30 +781,20 @@ if ($blockIframe) {
                 echo '</div>';
             }
             ?>
-        </div>
-        <?php
-        if (!$noAreas) {
-            $count = sizeof($areas);
-            if ($count > 0) {
-                ?>
-                <div>
-                    <center>
-                        <button class="settings" onclick="$( '.areas-dialog' ).dialog({height: 'auto', width: 400});"><i class="fa fa-refresh" aria-hidden="true"></i> <?php echo i8ln('Areas') ?></button>
-                    </center>
-                </div>
-                <div class="areas-dialog" style="display:none;" title="Mapping Areas">
-                    <ul>
-                <?php
-                for ($i = 0; $i <= $count - 1; $i++) {
-                    echo '<li><a href="" data-lat="' . $areas[$i][0] . '" data-lng="' . $areas[$i][1] . '" data-zoom="' . $areas[$i][2] . '" class="area-go-to">' . $areas[$i][3] . '</a></li>';
+            <?php
+            if (!$noAreas) {
+                echo '<h3>' . i8ln('Areas') . '</h3>';
+                $count = sizeof($areas);
+                if ($count > 0) {
+                    echo '<div class="form-control switch-container area-container"><ul>';
+                    for ($i = 0; $i <= $count - 1; $i++) {
+                        echo '<li><a href="" data-lat="' . $areas[$i][0] . '" data-lng="' . $areas[$i][1] . '" data-zoom="' . $areas[$i][2] . '" class="area-go-to">' . $areas[$i][3] . '</a></li>';
+                    }
+                    echo '</ul></div>';
                 }
-                ?>
-                </ul>
-                </div>
-                <?php
             }
-        }
-        ?>
+            ?>
+        </div>
         <div>
             <center>
                 <button class="settings"

@@ -333,27 +333,3 @@
     outline: none;
   }
 }
-
-.areas-dialog{
-  padding:0!important;
-  ul{
-    margin: 0;
-    padding: 0;
-    li{
-      width: 50%;
-      padding-left:0;
-      float: left;
-      text-align: center;
-      border-right:1px solid #FFF;
-      list-style:none;
-      a{
-        padding: 10px;
-        text-transform: uppercase;
-        text-decoration: none;
-        color: white;
-        background: #3b3b3b;
-        display:block;
-      }
-    }
-  }
-}
