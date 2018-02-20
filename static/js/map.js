@@ -1605,16 +1605,6 @@ function loadWeatherCellData(cell) {
     })
 }
 
-function getParameterByName(name, url) {
-    if (!url) url = window.location.href
-    name = name.replace(/[[\]]/g, '\\$&')
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
-    var results = regex.exec(url)
-    if (!results) return null
-    if (!results[2]) return ''
-    return decodeURIComponent(results[2].replace(/\+/g, ' '))
-}
-
 function processPokemons(i, item) {
     if (!Store.get('showPokemon')) {
         return false // in case the checkbox was unchecked in the meantime.
@@ -2185,7 +2175,7 @@ $(function () {
     /* If push.js is unsupported or disabled, fall back to toastr
      * notifications. */
     Push.config({
-        serviceWorker: 'node_modules/push.js/bin/serviceWorker.min.js',
+        serviceWorker: 'serviceWorker.min.js',
         fallback: function (notification) {
             sendToastrPokemonNotification(
                 notification.title,
