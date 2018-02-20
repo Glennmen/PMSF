@@ -115,6 +115,8 @@
     "i8ln": false,
     "languageSite": true,
     "boostedMons": true,
+	"hideTimersAtZoomLevel": 16,
+    "enableTimers": false,
     "exEligible": true,
     "motd": true
   }
