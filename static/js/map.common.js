@@ -846,226 +846,286 @@ var StoreTypes = {
     // set the default parameters for you map here
 }
 var StoreOptions = {
-    'map_style': {
+    'map_style':
+		{
         default: mapStyle, // roadmap, satellite, hybrid, nolabels_style, dark_style, style_light2, style_pgo, dark_style_nl, style_pgo_day, style_pgo_night, style_pgo_dynamic
         type: StoreTypes.String
-    },
-    'remember_select_exclude': {
+		},
+    'remember_select_exclude':
+		{
         default: hidePokemon,
         type: StoreTypes.JSON
-    },
-    'remember_select_exclude_min_iv': {
-        default: excludeMinIV,
-        type: StoreTypes.JSON
-    },
-    'remember_select_notify': {
-        default: notifyPokemon,
-        type: StoreTypes.JSON
-    },
-    'remember_select_rarity_notify': {
-        default: notifyRarity, // Common, Uncommon, Rare, Very Rare, Ultra Rare
-        type: StoreTypes.JSON
-    },
-    'remember_text_perfection_notify': {
-        default: notifyIv,
-        type: StoreTypes.Number
-    },
-    'remember_text_level_notify': {
-        default: notifyLevel,
-        type: StoreTypes.Number
-    },
-    'remember_text_min_iv': {
-        default: minIV,
-        type: StoreTypes.Number
-    },
-    'remember_text_min_level': {
-        default: minLevel,
-        type: StoreTypes.Number
-    },
-    'remember_raid_notify': {
-        default: notifyRaid,
-        type: StoreTypes.Number
-    },
-    'showRaids': {
-        default: enableRaids,
-        type: StoreTypes.Boolean
-    },
-    'activeRaids': {
-        default: activeRaids,
-        type: StoreTypes.Boolean
-    },
-    'minRaidLevel': {
-        default: minRaidLevel,
-        type: StoreTypes.Number
-    },
-    'maxRaidLevel': {
-        default: maxRaidLevel,
-        type: StoreTypes.Number
-    },
-    'showGyms': {
-        default: enableGyms,
-        type: StoreTypes.Boolean
-    },
-    'useGymSidebar': {
-        default: gymSidebar,
-        type: StoreTypes.Boolean
-    },
-    'showOpenGymsOnly': {
-        default: false,
-        type: StoreTypes.Boolean
-    },
-    'showTeamGymsOnly': {
-        default: 0,
-        type: StoreTypes.Number
-    },
-    'showLastUpdatedGymsOnly': {
-        default: 0,
-        type: StoreTypes.Number
-    },
-    'minGymLevel': {
-        default: 0,
-        type: StoreTypes.Number
-    },
-    'maxGymLevel': {
-        default: 6,
-        type: StoreTypes.Number
-    },
-    'showPokemon': {
-        default: enablePokemon,
-        type: StoreTypes.Boolean
-    },
-    'showBigKarp': {
-        default: showBigKarp,
-        type: StoreTypes.Boolean
-    },
-    'showTinyRat': {
-        default: showTinyRat,
-        type: StoreTypes.Boolean
-    },
-    'showPokestops': {
-        default: enablePokestops,
-        type: StoreTypes.Boolean
-    },
-    'showLuredPokestopsOnly': {
-        default: enableLured,
-        type: StoreTypes.Number
-    },
-    'showTimers': {
+		},
+    'remember_select_exclude_min_iv':
+        {
+            default: excludeMinIV,
+            type: StoreTypes.JSON
+        },
+    'remember_select_notify':
+        {
+            default: notifyPokemon,
+            type: StoreTypes.JSON
+        },
+    'remember_select_rarity_notify':
+        {
+            default: notifyRarity, // Common, Uncommon, Rare, Very Rare, Ultra Rare
+            type: StoreTypes.JSON
+        },
+    'remember_text_perfection_notify':
+        {
+            default: notifyIv,
+            type: StoreTypes.Number
+        },
+    'remember_text_level_notify':
+        {
+            default: notifyLevel,
+            type: StoreTypes.Number
+        },
+    'remember_text_min_iv':
+        {
+            default: minIV,
+            type: StoreTypes.Number
+        },
+    'remember_text_min_level':
+        {
+            default: minLevel,
+            type: StoreTypes.Number
+        },
+    'remember_raid_notify':
+        {
+            default: notifyRaid,
+            type: StoreTypes.Number
+        },
+    'showRaids':
+        {
+            default: enableRaids,
+            type: StoreTypes.Boolean
+        },
+    'activeRaids':
+        {
+            default: activeRaids,
+            type: StoreTypes.Boolean
+        },
+    'minRaidLevel':
+        {
+            default: minRaidLevel,
+            type: StoreTypes.Number
+        },
+    'maxRaidLevel':
+        {
+            default: maxRaidLevel,
+            type: StoreTypes.Number
+        },
+    'showGyms':
+        {
+            default: enableGyms,
+            type: StoreTypes.Boolean
+        },
+    'useGymSidebar':
+        {
+            default: gymSidebar,
+            type: StoreTypes.Boolean
+        },
+    'showOpenGymsOnly':
+        {
+            default: false,
+            type: StoreTypes.Boolean
+        },
+    'showTeamGymsOnly':
+        {
+            default: 0,
+            type: StoreTypes.Number
+        },
+    'showLastUpdatedGymsOnly':
+        {
+            default: 0,
+            type: StoreTypes.Number
+        },
+    'minGymLevel':
+        {
+            default: 0,
+            type: StoreTypes.Number
+        },
+    'maxGymLevel':
+        {
+            default: 6,
+            type: StoreTypes.Number
+        },
+    'showPokemon':
+        {
+            default: enablePokemon,
+            type: StoreTypes.Boolean
+        },
+    'showBigKarp':
+        {
+            default: showBigKarp,
+            type: StoreTypes.Boolean
+        },
+    'showTinyRat':
+        {
+            default: showTinyRat,
+            type: StoreTypes.Boolean
+        },
+    'showPokestops':
+        {
+            default: enablePokestops,
+            type: StoreTypes.Boolean
+        },
+    'showLuredPokestopsOnly':
+        {
+            default: enableLured,
+            type: StoreTypes.Number
+        },
+    'showWeather':
+        {
+            default: enableWeatherOverlay,
+            type: StoreTypes.Boolean
+        },
+    'showScanned':
+        {
+            default: enableScannedLocations,
+            type: StoreTypes.Boolean
+        },
+    'showSpawnpoints':
+        {
+            default: enableSpawnpoints,
+            type: StoreTypes.Boolean
+        },
+    'showRanges':
+        {
+            default: enableRanges,
+            type: StoreTypes.Boolean
+        },
+    'playSound':
+        {
+            default: notifySound,
+            type: StoreTypes.Boolean
+        },
+    'playCries':
+        {
+            default: criesSound,
+            type: StoreTypes.Boolean
+        },
+    'geoLocate':
+        {
+            default: false,
+            type: StoreTypes.Boolean
+        },
+    'lockMarker':
+        {
+            default: isTouchDevice(), // default to true if touch device
+            type: StoreTypes.Boolean
+        },
+    'startAtUserLocation':
+        {
+            default: enableStartMe,
+            type: StoreTypes.Boolean
+        },
+    'startAtLastLocation':
+        {
+            default: enableStartLast,
+            type: StoreTypes.Boolean
+        },
+    'startAtLastLocationPosition':
+        {
+            default: [],
+            type: StoreTypes.JSON
+        },
+    'followMyLocation':
+        {
+            default: enableFollowMe,
+            type: StoreTypes.Boolean
+        },
+    'followMyLocationPosition':
+        {
+            default: [],
+            type: StoreTypes.JSON
+        },
+    'spawnArea':
+        {
+            default: enableSpawnArea,
+            type: StoreTypes.Boolean
+        },
+    'scanHere':
+        {
+            default: false,
+            type: StoreTypes.Boolean
+        },
+    'scanHereAlerted':
+        {
+            default: false,
+            type: StoreTypes.Boolean
+        },
+    'iconSizeModifier':
+        {
+            default: iconSize,
+            type: StoreTypes.Number
+        },
+    'iconNotifySizeModifier':
+        {
+            default: iconNotifySizeModifier,
+            type: StoreTypes.Number
+        },
+    'searchMarkerStyle':
+        {
+            default: 'google',
+            type: StoreTypes.String
+        },
+    'locationMarkerStyle':
+        {
+            default: locationStyle,
+            type: StoreTypes.String
+        },
+    'directionProvider':
+        {
+            default: directionProvider,
+            type: StoreTypes.String
+        },
+    'gymMarkerStyle':
+        {
+            default: gymStyle,
+            type: StoreTypes.String
+        },
+    'zoomLevel':
+        {
+            default: 16,
+            type: StoreTypes.Number
+        },
+    'spritefileLarge':
+        {
+            default: spriteFileLarge,
+            type: StoreTypes.String
+        },
+    'weatherSpritesSrc':
+        {
+            default: weatherSpritesSrc,
+            type: StoreTypes.String
+        },
+    'icons':
+        {
+            default: icons,
+            type: StoreTypes.String
+        },
+    'triggerGyms':
+        {
+            default: triggerGyms,
+            type: StoreTypes.JSON
+        },
+    'exEligible':
+        {
+            default: exEligible,
+            type: StoreTypes.Boolean
+        },
+    'showTimers':
+		{
         default: enableTimers,
         type: StoreTypes.Boolean
-    },
-    'hideTimersAtZoomLevel': {
+		},
+    'hideTimersAtZoomLevel':
+		{
         default: hideTimersAtZoomLevel,
         type: StoreTypes.Number
-    },
-    'showWeather': {
-        default: enableWeatherOverlay,
-        type: StoreTypes.Boolean
-    },
-    'showScanned': {
-        default: enableScannedLocations,
-        type: StoreTypes.Boolean
-    },
-    'showSpawnpoints': {
-        default: enableSpawnpoints,
-        type: StoreTypes.Boolean
-    },
-    'showRanges': {
-        default: enableRanges,
-        type: StoreTypes.Boolean
-    },
-    'playSound': {
-        default: notifySound,
-        type: StoreTypes.Boolean
-    },
-    'playCries': {
-        default: criesSound,
-        type: StoreTypes.Boolean
-    },
-    'geoLocate': {
-        default: false,
-        type: StoreTypes.Boolean
-    },
-    'lockMarker': {
-        default: isTouchDevice(), // default to true if touch device
-        type: StoreTypes.Boolean
-    },
-    'startAtUserLocation': {
-        default: enableStartMe,
-        type: StoreTypes.Boolean
-    },
-    'startAtLastLocation': {
-        default: enableStartLast,
-        type: StoreTypes.Boolean
-    },
-    'startAtLastLocationPosition': {
-        default: [],
-        type: StoreTypes.JSON
-    },
-    'followMyLocation': {
-        default: enableFollowMe,
-        type: StoreTypes.Boolean
-    },
-    'followMyLocationPosition': {
-        default: [],
-        type: StoreTypes.JSON
-    },
-    'spawnArea': {
-        default: enableSpawnArea,
-        type: StoreTypes.Boolean
-    },
-    'scanHere': {
-        default: false,
-        type: StoreTypes.Boolean
-    },
-    'scanHereAlerted': {
-        default: false,
-        type: StoreTypes.Boolean
-    },
-    'iconSizeModifier': {
-        default: iconSize,
-        type: StoreTypes.Number
-    },
-    'iconNotifySizeModifier': {
-        default: iconNotifySizeModifier,
-        type: StoreTypes.Number
-    },
-    'searchMarkerStyle': {
-        default: 'google',
-        type: StoreTypes.String
-    },
-    'locationMarkerStyle': {
-        default: locationStyle,
-        type: StoreTypes.String
-    },
-    'directionProvider': {
-        default: directionProvider,
-        type: StoreTypes.String
-    },
-    'gymMarkerStyle': {
-        default: gymStyle,
-        type: StoreTypes.String
-    },
-    'zoomLevel': {
-        default: 16,
-        type: StoreTypes.Number
-    },
-    'spritefileLarge': {
-        default: spriteFileLarge,
-        type: StoreTypes.String
-    },
-    'weatherSpritesSrc': {
-        default: weatherSpritesSrc,
-        type: StoreTypes.String
-    },
-    'icons': {
-        default: icons,
-        type: StoreTypes.String
-    },
-    'triggerGyms': {
-        default: triggerGyms,
-        type: StoreTypes.JSON
-    }
+		},
 }
 
 var Store = {
