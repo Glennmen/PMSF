@@ -149,7 +149,7 @@ if ($blockIframe) {
         }
         if ($helplink != "") {
             echo '<a href="' . $helplink . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle; padding:0 5px;">
-            <img src="static/images/help.png" border="0" name="submit" width=35 height=35
+            <img src="static/images/help.png" border="0" name="submit"
                  title="Help for this map." alt="Help" style="float: right;">
         </a>';
         }
