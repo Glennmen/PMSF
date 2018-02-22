@@ -209,8 +209,8 @@ $sendRaidData = false;                                              // Send Raid
 // Areas
 //-----------------------------------------------------
 
-$noAreas = false;
-$areas = [];                                                   // [[latitude,longitude,zoom,name],[latitude,longitude,zoom,name]]
+$noAreas = true;
+$areas = [];                                                   // [[latitude,longitude,zoom,"name"],[latitude,longitude,zoom,"name"]]
 
 //-----------------------------------------------------
 // Weather Config
