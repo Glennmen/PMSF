@@ -56,6 +56,10 @@ $paypalUrl = "";                                                    // PayPal do
 
 $discordUrl = "https://discord.gg/INVITE_LINK";                     // Discord URL, leave "" for empty
 
+/* Help link */
+
+$helplink = "";                                 // URL for help page, leave "" for empty
+
 /* Worldopole */
 
 $worldopoleUrl = "";                                                // Link to Worldopole, leave "" for empty
