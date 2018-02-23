@@ -425,9 +425,10 @@ if ($blockIframe) {
                         </div>
                     </div>
                     <div id="gyms-raid-filter-wrapper" style="display:none">
-                        <?php if ($fork === "alternate" && !$noExEligible) { ?>
-                            <div class="form-control switch-container" id="ex-eligible-wrapper">
-                                <h3><?php echo i8ln('EX Eligible Only') ?></h3>
+                        <?php
+                        if ($fork === "alternate" && !$noExEligible) {
+                            echo '<div class="form-control switch-container" id="ex-eligible-wrapper">
+                                <h3>' . i8ln('EX Eligible Only') . '</h3>
                                 <div class="onoffswitch">
                                     <input id="ex-eligible-switch" type="checkbox" name="ex-eligible-switch"
                                            class="onoffswitch-checkbox" checked>
@@ -436,8 +437,8 @@ if ($blockIframe) {
                                         <span class="switch-handle"></span>
                                     </label>
                                 </div>
-                            </div>
-                        <?php } ?>
+                            </div>';
+                        } ?>
                     </div>
                 </div>
                 <?php
