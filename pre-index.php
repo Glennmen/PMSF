@@ -425,8 +425,7 @@ if ($blockIframe) {
                         </div>
                     </div>
                     <div id="gyms-raid-filter-wrapper" style="display:none">
-                        <?php if ($fork === "alternate" && !$noExEligible) {
-                            ?>
+                        <?php if ($fork === "alternate" && !$noExEligible) { ?>
                             <div class="form-control switch-container" id="ex-eligible-wrapper">
                                 <h3><?php echo i8ln('EX Eligible Only') ?></h3>
                                 <div class="onoffswitch">
@@ -438,8 +437,7 @@ if ($blockIframe) {
                                     </label>
                                 </div>
                             </div>
-                            <?php
-                        } ?>
+                        <?php } ?>
                     </div>
                 </div>
                 <?php
