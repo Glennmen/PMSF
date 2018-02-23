@@ -155,8 +155,6 @@ if ($blockIframe) {
             <div id="currentWeather"></div>
             <?php
         } ?>
-        <a href="#stats" id="statsToggle" class="statsNav" style="float: right;"><span
-                class="label"><?php echo i8ln('Stats') ?></span></a>
     </header>
     <!-- NAV -->
     <nav id="nav">
