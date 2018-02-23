@@ -148,13 +148,13 @@ if ($blockIframe) {
         </a>';
         }
         ?>
-        <a href="#stats" id="statsToggle" class="statsNav" style="float: right;"><span
-                class="label"><?php echo i8ln('Stats') ?></span></a>
         <?php if (!$noWeatherOverlay) {
             ?>
             <div id="currentWeather"></div>
             <?php
         } ?>
+        <a href="#stats" id="statsToggle" class="statsNav" style="float: right;"><span
+                class="label"><?php echo i8ln('Stats') ?></span></a>
     </header>
     <!-- NAV -->
     <nav id="nav">
@@ -426,7 +426,7 @@ if ($blockIframe) {
                     </div>
                     <div id="gyms-raid-filter-wrapper" style="display:none">
                         <?php if ($fork === "alternate" && !$noExEligible) {
-                        ?>
+                            ?>
                             <div class="form-control switch-container" id="ex-eligible-wrapper">
                                 <h3><?php echo i8ln('EX Eligible Only') ?></h3>
                                 <div class="onoffswitch">
@@ -439,7 +439,7 @@ if ($blockIframe) {
                                 </div>
                             </div>
                             <?php
-                    } ?>
+                        } ?>
                     </div>
                 </div>
                 <?php
