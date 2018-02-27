@@ -238,3 +238,4 @@ $enableDebug = false;
 //-----------------------------------------------------
 
 $fork = "default";                                                  // default/asner/sloppy
+$alternateKeepGymHistory = false;                                   // alternate - KEEP_GYM_HISTORY is on
