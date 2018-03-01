@@ -658,7 +658,12 @@ function gymLabel(item) {
 
     var park = ''
     if ((item['park'] !== 'None' && item['park'] !== undefined && item['park']) && (noParkInfo === false)) {
-        park = i8ln('Park') + ': ' + item['park']
+        if (item['park'] === 1) {
+            // RM only stores boolean, so just call it "Park Gym"
+            park = i8ln('Park Gym')
+        } else {
+            park = i8ln('Park') + ': ' + item['park']
+        }
     }
 
     var memberStr = ''
@@ -2413,7 +2418,12 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
 
         var park = ''
         if (((result['park'] !== 'None' && result['park'] !== undefined && result['park']) && (noParkInfo === false))) {
-            park = i8ln('Park') + ': ' + result['park']
+            if (result['park'] === 1) {
+                // RM only stores boolean, so just call it "Park Gym"
+                park = i8ln('Park Gym')
+            } else {
+                park = i8ln('Park') + ': ' + result['park']
+            }
         }
 
         var raidSpawned = result['raid_level'] != null
