@@ -495,6 +495,7 @@ class RocketMap extends Scanner
                 $raid_pid = null;
                 $gym["raid_pokemon_id"] = null;
             }
+            $gym["park"] = intval($gym["park"]);
             $gym["team_id"] = intval($gym["team_id"]);
             $gym["pokemon"] = [];
             $gym["guard_pokemon_name"] = empty($guard_pid) ? null : i8ln($this->data[$guard_pid]["name"]);
