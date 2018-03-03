@@ -116,7 +116,10 @@ if (!$noPokemon) {
         if (!empty($_POST['reids'])) {
             $reids = !empty($_POST['reids']) ? array_unique(explode(",", $_POST['reids'])) : array();
 
-            $d["pokemons"] = array_merge($d["pokemons"], $scanner->get_active_by_id($reids, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng));
+            $reidsDiff = array_diff($reids, $eids);
+            if (count($reidsDiff)) {
+                $d["pokemons"] = array_merge($d["pokemons"], $scanner->get_active_by_id($reidsDiff, $minIv, $minLevel, $exMinIv, $bigKarp, $tinyRat, $swLat, $swLng, $neLat, $neLng));
+            }
 
             $d["reids"] = $reids;
         }
