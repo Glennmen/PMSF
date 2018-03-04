@@ -165,6 +165,7 @@ class Monocle_Alternate extends Monocle
 
         $query = "SELECT external_id AS pokestop_id,
         name AS pokestop_name,
+        url AS pokestop_url,
         lat AS latitude,
         lon AS longitude
         FROM pokestops
@@ -246,6 +247,7 @@ class Monocle_Alternate extends Monocle
         f.lat AS latitude,
         f.lon AS longitude,
         f.name,
+        f.url,
         f.sponsor,
         f.park,
         fs.team AS team_id,
