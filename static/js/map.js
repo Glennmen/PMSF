@@ -2117,6 +2117,26 @@ var updateLabelDiffTime = function updateLabelDiffTime() {
     })
 }
 
+var updateIconDiffTime = function updateIconDiffTime() {
+    $('.label-countdown').each(function (index, element) {
+        var disappearsAt = getTimeUntil(parseInt(element.getAttribute('disappears-at')))
+
+        var hours = disappearsAt.hour
+        var minutes = disappearsAt.min
+        var seconds = disappearsAt.sec
+        var timestring = ''
+
+		if (hours > 0) {
+			timestring += hours + 'h'
+		}
+
+		timestring += lpad(minutes, 2, 0) + 'm'
+		timestring += lpad(seconds, 2, 0) + 's'
+
+        $(element).text(timestring)
+    })
+}
+
 function getPointDistance(pointA, pointB) {
     return google.maps.geometry.spherical.computeDistanceBetween(pointA, pointB)
 }
@@ -3220,6 +3240,7 @@ $(function () {
 
     // run interval timers to regularly update map and timediffs
     window.setInterval(updateLabelDiffTime, 1000)
+    window.setInterval(updateIconDiffTime, 1000)
     window.setInterval(updateMap, 5000)
     window.setInterval(updateWeatherOverlay, 60000)
     window.setInterval(updateGeoLocation, 1000)

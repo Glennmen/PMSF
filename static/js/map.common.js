@@ -896,16 +896,6 @@ var StoreOptions = {
             default: notifyRaid,
             type: StoreTypes.Number
         },
-    'remember_bounce_notify':
-        {
-            default: notifyBounce,
-            type: StoreTypes.Boolean
-        },
-    'remember_notification_notify':
-        {
-            default: notifyNotification,
-            type: StoreTypes.Boolean
-        },
     'showRaids':
         {
             default: enableRaids,
@@ -1227,7 +1217,7 @@ function setupPokemonMarker(item, map, isBounceDisabled) {
             map: map,
             icon: icon,
             labelAnchor: new google.maps.Point(iconSize / 1.5, -iconSize / 2.4),
-            labelContent: '<span class=\'label-countdown\' disappears-at=\'' + item['disappear_time'] + '\'> </span>',
+            labelContent: '<span class=\'icon-countdown\' disappears-at=\'' + item['disappear_time'] + '\'> </span>',
             labelClass: 'pokemonlabel',
             animationDisabled: animationDisabled
         })
