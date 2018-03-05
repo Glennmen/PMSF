@@ -979,10 +979,10 @@ if ($blockIframe) {
 <script src="static/dist/js/stats.min.js"></script>
 <?php
 if (!$noTimers) {
-    ?>
+                ?>
     <script defer src="static/js/label.js"></script>
     <?php
-} ?>
+            } ?>
 <script defer
         src="https://maps.googleapis.com/maps/api/js?v=3.31&amp;key=<?= $gmapsKey ?>&amp;callback=initMap&amp;libraries=places,geometry"></script>
 <script defer src="static/js/vendor/richmarker-compiled.js"></script>
