@@ -2126,12 +2126,12 @@ var updateIconDiffTime = function updateIconDiffTime() {
         var seconds = disappearsAt.sec
         var timestring = ''
 
-		if (hours > 0) {
-			timestring += hours + 'h'
-		}
+        if (hours > 0) {
+            timestring += hours + 'h'
+        }
 
-		timestring += lpad(minutes, 2, 0) + 'm'
-		timestring += lpad(seconds, 2, 0) + 's'
+        timestring += lpad(minutes, 2, 0) + 'm'
+        timestring += lpad(seconds, 2, 0) + 's'
 
         $(element).text(timestring)
     })
