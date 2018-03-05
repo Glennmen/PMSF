@@ -2118,7 +2118,7 @@ var updateLabelDiffTime = function updateLabelDiffTime() {
 }
 
 var updateIconDiffTime = function updateIconDiffTime() {
-    $('.label-countdown').each(function (index, element) {
+    $('.icon-countdown').each(function (index, element) {
         var disappearsAt = getTimeUntil(parseInt(element.getAttribute('disappears-at')))
 
         var hours = disappearsAt.hour

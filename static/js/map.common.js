@@ -1216,7 +1216,7 @@ function setupPokemonMarker(item, map, isBounceDisabled) {
             zIndex: 9999,
             map: map,
             icon: icon,
-            labelAnchor: new google.maps.Point(iconSize / 1.5, -iconSize / 2.4),
+            labelAnchor: new google.maps.Point(25, -iconSize / 2.4),
             labelContent: '<span class=\'icon-countdown\' disappears-at=\'' + item['disappear_time'] + '\'> </span>',
             labelClass: 'pokemonlabel',
             animationDisabled: animationDisabled
