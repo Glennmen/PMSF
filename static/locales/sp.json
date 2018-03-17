@@ -347,5 +347,10 @@
   "to":"hasta",
   "started":"inicio",
   "ended":"terminó",
-  "expired":"expiró"
+  "expired":"expiró",
+  "Gender":"Género",
+  "Weather":"Clima",
+  "Weight":"Peso",
+  "Height":"Altura",
+  "Moves":"Ataques"
 }
