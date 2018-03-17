@@ -332,5 +332,20 @@
   "Red (Animated)":"Rojo (Animado)",
   "Reset Settings":"Reiniciar Ajustes",
   "Export Settings":"Exportar Ajustes",
-  "Import Settings":"Importar Ajustes"
+  "Import Settings":"Importar Ajustes",
+  "Disappears at":"Desaparece a",
+  "View in Pokedex":"Ver en Pokedex",
+  "Exclude":"Excluir",
+  "Notify":"Notificar",
+  "Remove":"Eliminar",
+  "Toggle display of other Pokemon":"Ver otros Pokemon",
+  "Toggle Others":"Alternar Otros",
+  "Total Gym CP":"CP Total del Gym",
+  "Lure expires at":"Módulo cebo hasta las",
+  "Spawn Point":"Punto de Spawn",
+  "Every hour from":"Cada hora desde",
+  "to":"hasta",
+  "started":"inicio",
+  "ended":"terminó",
+  "expired":"expiró"
 }
