@@ -879,6 +879,36 @@ if ($blockIframe) {
                 </button>
             </center>
         </div>
+		<?php
+		if($enableLogin === true && $_SESSION['user']->email){
+		?>
+			<div>
+				<center>
+					<button class="settings"
+							onclick="document.location.href='logout.php'">
+						<i class="fa" aria-hidden="true"></i> Logout
+					</button>
+				</center>
+			</div><br>
+			<div>
+				<center>
+					<p>
+					<?php
+					$time = date("Y-m-d", $_SESSION['user']->expire_timestamp);
+					
+					echo $_SESSION['user']->email . "<br>";
+					if($_SESSION['user']->expire_timestamp > time()){
+						echo "<span style='color: green;'>Account expires on {$time}</span>";
+					} else {
+						echo "<span style='color: green;'>Account expired on {$time}</span>";
+					}
+					?>
+					</p>
+				</center>
+			</div>
+		<?php
+		}
+		?>
     </nav>
     <nav id="stats">
         <div class="switch-container">
