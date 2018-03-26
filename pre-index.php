@@ -79,7 +79,7 @@ if ($blockIframe) {
             echo "</span>";
             if ($i == 27) {
                 $i = -1;
-                $z = $z  48.25;
+                $z = $z + 48.25;
             }
             $i;
         }

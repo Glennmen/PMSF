@@ -46,7 +46,7 @@ if ($enableLogin === true) {
 
         if ($info['email']) {
             if ($info['expire_timestamp'] > time()) {
-                $new_expire_timestamp = $info['expire_timestamp']  $addMonths;
+                $new_expire_timestamp = $info['expire_timestamp'] + $addMonths;
             } else {
                 $new_expire_timestamp = time()  $addMonths;
             }
