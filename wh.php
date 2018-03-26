@@ -62,7 +62,7 @@ if ($enableLogin === true) {
             $message .= "Login with {$info['email']} and your old password on the website.<br><br>";
         } else {
             $randomPwd = generateRandomPwd();
-            $new_expire_timestamp = time()  $addMonths;
+            $new_expire_timestamp = time() + $addMonths;
             $time = date("Y-m-d H:i", $new_expire_timestamp);
             
             $db->insert("users", [
