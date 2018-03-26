@@ -2726,9 +2726,10 @@ $(function () {
 })
 
 $(function () {
-    $.ajax('/checklogin.php', {success: function(json){
+    $.ajax('/checklogin.php', {success: function (json) {
         donator = json
-    }, dataType: 'json'})
+    },
+	dataType: 'json'})
 })
 
 $(function () {
