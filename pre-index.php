@@ -81,7 +81,7 @@ if ($blockIframe) {
                 $i = -1;
                 $z = $z + 48.25;
             }
-            $i;
+            $i++;
         }
         echo '</div>';
     }
@@ -92,7 +92,7 @@ if ($blockIframe) {
     if ($gAnalyticsId != "") {
         echo '<!-- Google Analytics -->
             <script>
-                window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=new Date;
+                window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
                 ga("create", "' . $gAnalyticsId . '", "auto");
                 ga("send", "pageview");
             </script>
@@ -109,10 +109,10 @@ if ($blockIframe) {
               _paq.push(["enableLinkTracking"]);
               (function() {
                 var u="//' . $piwikUrl . '/";
-                _paq.push(["setTrackerUrl", u"piwik.php"]);
+                _paq.push(["setTrackerUrl", u+"piwik.php"]);
                 _paq.push(["setSiteId", "' . $piwikSiteId . '"]);
                 var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
-                g.type="text/javascript"; g.async=true; g.defer=true; g.src=u"piwik.js"; s.parentNode.insertBefore(g,s);
+                g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
               })();
             </script>
             <!-- End Piwik Code -->';
@@ -844,7 +844,7 @@ if ($blockIframe) {
                 $count = sizeof($areas);
                 if ($count > 0) {
                     echo '<div class="form-control switch-container area-container"><ul>';
-                    for ($i = 0; $i <= $count - 1; $i) {
+                    for ($i = 0; $i <= $count - 1; $i++) {
                         echo '<li><a href="" data-lat="' . $areas[$i][0] . '" data-lng="' . $areas[$i][1] . '" data-zoom="' . $areas[$i][2] . '" class="area-go-to">' . $areas[$i][3] . '</a></li>';
                     }
                     echo '</ul></div>';
