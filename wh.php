@@ -1,7 +1,6 @@
 <?php
 include('config/config.php');
 if($enableLogin === true){
-	$salt = "5up3r53cr3754l7";
 
 	function generateRandomPwd($length = 8) {
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

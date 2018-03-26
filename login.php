@@ -1,7 +1,6 @@
 <?php
 include('config/config.php');
 if($enableLogin === true){
-	$salt = "5up3r53cr3754l7";
 
 	if(isset($_POST['submit_updatePwd'])){
 
