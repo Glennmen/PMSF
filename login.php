@@ -109,7 +109,6 @@ if ($enableLogin === true) {
         }
     }
 
-	echo "<div class='example'>";
     if ($_SESSION['user']->updatePwd == 1) {
         ?>
 		<p><h2><?php echo i8ln('Please change your password.'); ?></h2></p>
@@ -165,7 +164,6 @@ if ($enableLogin === true) {
 		</form>
    <?php
     }
-	echo "</div>";
 } else {
     header("Location: .");
 }
