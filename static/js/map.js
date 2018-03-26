@@ -747,7 +747,7 @@ function gymLabel(item) {
             '</div>' +
             nameStr +
             raidStr +
-            '<div><b>' + freeSlots + ' ' + i8ln('Free Slots') + '</b></div>' + curTimestamp + ',' + timestamp +
+            '<div><b>' + freeSlots + ' ' + i8ln('Free Slots') + '</b></div>' +
             '<div>' +
             park +
             '</div>' +
