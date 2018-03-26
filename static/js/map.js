@@ -528,7 +528,7 @@ function pokemonLabel(item) {
 
     var details = ''
     if (atk != null && def != null && sta != null) {
-		if (donator.isLoggedIn === true && (donator.current_timestamp < donator.user.expire_timestamp)) {
+		if (donator.enableLogin === false || (donator.isLoggedIn === true && (donator.current_timestamp < donator.user.expire_timestamp))) {
 			var iv = getIv(atk, def, sta)
 			details =
 				'<div>' +
