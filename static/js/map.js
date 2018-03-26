@@ -2,6 +2,8 @@
 // Global map.js variables
 //
 
+var donator;
+
 var $selectExclude
 var $selectExcludeMinIV
 var $selectPokemonNotify
@@ -526,28 +528,35 @@ function pokemonLabel(item) {
 
     var details = ''
     if (atk != null && def != null && sta != null) {
-        var iv = getIv(atk, def, sta)
-        details =
-            '<div>' +
-            'IV: ' + iv.toFixed(1) + '% (' + atk + '/' + def + '/' + sta + ')' +
-            '</div>'
+		if (donator.isLoggedIn === true && (donator.current_timestamp < donator.user.expire_timpestamp)) {
+			var iv = getIv(atk, def, sta)
+			details =
+				'<div>' +
+				'IV: ' + iv.toFixed(1) + '% (' + atk + '/' + def + '/' + sta + ')' +
+				'</div>'
 
-        if (cp != null && (cpMultiplier != null || level != null)) {
-            var pokemonLevel
-            if (level != null) {
-                pokemonLevel = level
-            } else {
-                pokemonLevel = getPokemonLevel(cpMultiplier)
-            }
-            details +=
-                '<div>' +
-                i8ln('CP') + ' : ' + cp + ' | ' + i8ln('Level') + ' : ' + pokemonLevel +
-                '</div>'
-        }
-        details +=
-            '<div>' +
-            i8ln('Moves') + ' : ' + pMove1 + ' / ' + pMove2 +
-            '</div>'
+			if (cp != null && (cpMultiplier != null || level != null)) {
+				var pokemonLevel
+				if (level != null) {
+					pokemonLevel = level
+				} else {
+					pokemonLevel = getPokemonLevel(cpMultiplier)
+				}
+				details +=
+					'<div>' +
+					i8ln('CP') + ' : ' + cp + ' | ' + i8ln('Level') + ' : ' + pokemonLevel +
+					'</div>'
+			}
+			details +=
+				'<div>' +
+				i8ln('Moves') + ' : ' + pMove1 + ' / ' + pMove2 +
+				'</div>'
+		} else {
+			details +=
+				'<div>' +
+				'Sorry, IV stats is a donator only feature.' +
+				'</div>'
+		}
     }
     if (weatherBoostedCondition !== 0) {
         details +=
@@ -738,7 +747,7 @@ function gymLabel(item) {
             '</div>' +
             nameStr +
             raidStr +
-            '<div><b>' + freeSlots + ' ' + i8ln('Free Slots') + '</b></div>' +
+            '<div><b>' + freeSlots + ' ' + i8ln('Free Slots') + '</b></div>' + curTimestamp + ',' + timestamp +
             '<div>' +
             park +
             '</div>' +
@@ -2714,6 +2723,12 @@ $(function () {
             }
         })
     }
+})
+
+$(function () {
+    $.ajax("/checklogin.php", {success: function(json){
+        donator = json;
+    }, dataType: "json"})
 })
 
 $(function () {
