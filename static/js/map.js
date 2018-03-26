@@ -2,7 +2,7 @@
 // Global map.js variables
 //
 
-var donator;
+var donator
 
 var $selectExclude
 var $selectExcludeMinIV
@@ -528,35 +528,35 @@ function pokemonLabel(item) {
 
     var details = ''
     if (atk != null && def != null && sta != null) {
-		if (donator.enableLogin === false || (donator.isLoggedIn === true && (donator.current_timestamp < donator.user.expire_timestamp))) {
-			var iv = getIv(atk, def, sta)
-			details =
-				'<div>' +
-				'IV: ' + iv.toFixed(1) + '% (' + atk + '/' + def + '/' + sta + ')' +
-				'</div>'
+        if (donator.enableLogin === false || (donator.isLoggedIn === true && (donator.current_timestamp < donator.user.expire_timestamp))) {
+            var iv = getIv(atk, def, sta)
+            details =
+                '<div>' +
+                'IV: ' + iv.toFixed(1) + '% (' + atk + '/' + def + '/' + sta + ')' +
+                '</div>'
 
-			if (cp != null && (cpMultiplier != null || level != null)) {
-				var pokemonLevel
-				if (level != null) {
-					pokemonLevel = level
-				} else {
-					pokemonLevel = getPokemonLevel(cpMultiplier)
-				}
-				details +=
-					'<div>' +
-					i8ln('CP') + ' : ' + cp + ' | ' + i8ln('Level') + ' : ' + pokemonLevel +
-					'</div>'
-			}
-			details +=
-				'<div>' +
-				i8ln('Moves') + ' : ' + pMove1 + ' / ' + pMove2 +
-				'</div>'
-		} else {
-			details +=
-				'<div>' +
-				'Sorry, IV stats is a donator only feature.' +
-				'</div>'
-		}
+            if (cp != null && (cpMultiplier != null || level != null)) {
+                var pokemonLevel
+                if (level != null) {
+                    pokemonLevel = level
+                } else {
+                    pokemonLevel = getPokemonLevel(cpMultiplier)
+                }
+                details +=
+                    '<div>' +
+                    i8ln('CP') + ' : ' + cp + ' | ' + i8ln('Level') + ' : ' + pokemonLevel +
+                    '</div>'
+            }
+            details +=
+                '<div>' +
+                i8ln('Moves') + ' : ' + pMove1 + ' / ' + pMove2 +
+                '</div>'
+        } else {
+            details +=
+                '<div>' +
+                'Sorry, IV stats is a donator only feature.' +
+                '</div>'
+        }
     }
     if (weatherBoostedCondition !== 0) {
         details +=
@@ -2726,9 +2726,9 @@ $(function () {
 })
 
 $(function () {
-    $.ajax("/checklogin.php", {success: function(json){
-        donator = json;
-    }, dataType: "json"})
+    $.ajax('/checklogin.php', {success: function(json){
+        donator = json
+    }, dataType: 'json'})
 })
 
 $(function () {
