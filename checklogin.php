@@ -3,9 +3,9 @@ include('config/config.php');
 header('Content-Type: application/json');
 $info = array();
 
-if($enableLogin === true){
+if ($enableLogin === true) {
     $info['enableLogin'] = true;
-    if (isset($_SESSION['user'])){
+    if (isset($_SESSION['user'])) {
         $info['isLoggedIn'] = true;
         $info['current_timestamp'] = time();
         $info['user'] = $_SESSION['user'];

@@ -79,9 +79,9 @@ if ($blockIframe) {
             echo "</span>";
             if ($i == 27) {
                 $i = -1;
-                $z = $z + 48.25;
+                $z = $z  48.25;
             }
-            $i++;
+            $i;
         }
         echo '</div>';
     }
@@ -92,7 +92,7 @@ if ($blockIframe) {
     if ($gAnalyticsId != "") {
         echo '<!-- Google Analytics -->
             <script>
-                window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+                window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=new Date;
                 ga("create", "' . $gAnalyticsId . '", "auto");
                 ga("send", "pageview");
             </script>
@@ -109,10 +109,10 @@ if ($blockIframe) {
               _paq.push(["enableLinkTracking"]);
               (function() {
                 var u="//' . $piwikUrl . '/";
-                _paq.push(["setTrackerUrl", u+"piwik.php"]);
+                _paq.push(["setTrackerUrl", u"piwik.php"]);
                 _paq.push(["setSiteId", "' . $piwikSiteId . '"]);
                 var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
-                g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+                g.type="text/javascript"; g.async=true; g.defer=true; g.src=u"piwik.js"; s.parentNode.insertBefore(g,s);
               })();
             </script>
             <!-- End Piwik Code -->';
@@ -155,35 +155,33 @@ if ($blockIframe) {
         } ?>
 		
 		<?php
-		if($enableLogin === true){
-			if($_SESSION['user']->email){
-				
-				$info = $db->query(
-					"SELECT expire_timestamp, updatePwd FROM users WHERE email = :email", [
-						":email" => $_SESSION['user']->email,
-					]
-				)->fetch();
+        if ($enableLogin === true) {
+            if ($_SESSION['user']->email) {
+                $info = $db->query(
+                    "SELECT expire_timestamp, updatePwd FROM users WHERE email = :email", [
+                        ":email" => $_SESSION['user']->email,
+                    ]
+                )->fetch();
 
-				$_SESSION['user']->expire_timestamp = $info['expire_timestamp'];
-				$_SESSION['user']->updatePwd = $info['updatePwd'];
-				
-				if($info['updatePwd'] == 1){
-					header("Location: /login.php");
-				}
-				
-				$time = date("m-d", $_SESSION['user']->expire_timestamp);
-				
-				if($info['expire_timestamp'] > time()){
-					echo "<span style='color: green;'>{$time}</span>";
-				} else {
-					echo "<span style='color: red;'>{$time}</span>";
-				}
-				
-			} else {
-				echo "<a href='/login.php'>Login</a>";
-			}
-		}
-		?>
+                $_SESSION['user']->expire_timestamp = $info['expire_timestamp'];
+                $_SESSION['user']->updatePwd = $info['updatePwd'];
+                
+                if ($info['updatePwd'] == 1) {
+                    header("Location: /login.php");
+                }
+                
+                $time = date("m-d", $_SESSION['user']->expire_timestamp);
+                
+                if ($info['expire_timestamp'] > time()) {
+                    echo "<span style='color: green;'>{$time}</span>";
+                } else {
+                    echo "<span style='color: red;'>{$time}</span>";
+                }
+            } else {
+                echo "<a href='/login.php'>Login</a>";
+            }
+        }
+        ?>
         <a href="#stats" id="statsToggle" class="statsNav" style="float: right;"><span
                 class="label"><?php echo i8ln('Stats') ?></span></a>
     </header>
@@ -846,7 +844,7 @@ if ($blockIframe) {
                 $count = sizeof($areas);
                 if ($count > 0) {
                     echo '<div class="form-control switch-container area-container"><ul>';
-                    for ($i = 0; $i <= $count - 1; $i++) {
+                    for ($i = 0; $i <= $count - 1; $i) {
                         echo '<li><a href="" data-lat="' . $areas[$i][0] . '" data-lng="' . $areas[$i][1] . '" data-zoom="' . $areas[$i][2] . '" class="area-go-to">' . $areas[$i][3] . '</a></li>';
                     }
                     echo '</ul></div>';
@@ -880,8 +878,8 @@ if ($blockIframe) {
             </center>
         </div>
 		<?php
-		if($enableLogin === true && $_SESSION['user']->email){
-		?>
+        if ($enableLogin === true && $_SESSION['user']->email) {
+            ?>
 			<div>
 				<center>
 					<button class="settings"
@@ -890,25 +888,24 @@ if ($blockIframe) {
 					</button>
 				</center>
 			</div><br>
-			<div>
-				<center>
-					<p>
-					<?php
-					$time = date("Y-m-d", $_SESSION['user']->expire_timestamp);
-					
-					echo $_SESSION['user']->email . "<br>";
-					if($_SESSION['user']->expire_timestamp > time()){
-						echo "<span style='color: green;'>Account expires on {$time}</span>";
-					} else {
-						echo "<span style='color: green;'>Account expired on {$time}</span>";
-					}
-					?>
-					</p>
-				</center>
-			</div>
-		<?php
-		}
-		?>
+		    <div>
+                <center>
+                    <p>
+                    <?php
+                    $time = date("Y-m-d", $_SESSION['user']->expire_timestamp);
+                    
+                    echo $_SESSION['user']->email . "<br>";
+                    if ($_SESSION['user']->expire_timestamp > time()) {
+                        echo "<span style='color: green;'>Account expires on {$time}</span>";
+                    } else {
+                        echo "<span style='color: green;'>Account expired on {$time}</span>";
+                    } ?>
+                    </p>
+                </center>
+            </div>
+        <?php
+        }
+        ?>
     </nav>
     <nav id="stats">
         <div class="switch-container">
