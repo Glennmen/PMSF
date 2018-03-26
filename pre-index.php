@@ -884,7 +884,7 @@ if ($blockIframe) {
 				<center>
 					<button class="settings"
 							onclick="document.location.href='logout.php'">
-						<i class="fa" aria-hidden="true"></i> Logout
+						<i class="fa" aria-hidden="true"></i> <?php echo i8ln('Logout'); ?>
 					</button>
 				</center>
 			</div><br>
@@ -896,9 +896,9 @@ if ($blockIframe) {
                     
                     echo $_SESSION['user']->email . "<br>";
                     if ($_SESSION['user']->expire_timestamp > time()) {
-                        echo "<span style='color: green;'>Account expires on {$time}</span>";
+                        echo "<span style='color: green;'>" . i8ln('Membership expires on') . " {$time}</span>";
                     } else {
-                        echo "<span style='color: green;'>Account expired on {$time}</span>";
+                        echo "<span style='color: red;'>" . i8ln('Membership expired on') . " {$time}</span>";
                     } ?>
                     </p>
                 </center>

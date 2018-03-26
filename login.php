@@ -7,16 +7,16 @@ if ($enableLogin === true) {
             $password = $_POST["password"];
             
             if (strlen($_POST["password"]) <= '5') {
-                $passwordErr = "<b>Your password must contain at least 8 characters!</b><br>";
+                $passwordErr = "<b>" . i8ln('Your password must contain at least 6 characters!') . "</b><br>";
             } elseif (!preg_match("#[0-9]#", $password)) {
-                $passwordErr = "<b>Your password must contain at least 1 number!</b><br>";
+                $passwordErr = "<b>" . i8ln('Your password must contain at least 1 number!') . "</b><br>";
             } elseif (!preg_match("#[A-Z]#", $password)) {
-                $passwordErr = "<b>Your password must contain at least 1 capital letter!</b><br>";
+                $passwordErr = "<b>" . i8ln('Your password must contain at least 1 capital letter!') . "</b><br>";
             } elseif (!preg_match("#[a-z]#", $password)) {
-                $passwordErr = "<b>Your password must contain at least 1 lowercase letter!</b><br>";
+                $passwordErr = "<b>" . i8ln('Your password must contain at least 1 lowercase letter!') . "</b><br>";
             }
         } else {
-            $passwordErr = "<b>Your passwords didn't match!</b><br>";
+            $passwordErr = "<b>" . i8ln('Your passwords didn\'t match!') . "</b><br>";
         }
         
         if (empty($passwordErr)) {
@@ -54,20 +54,20 @@ if ($enableLogin === true) {
                 die();
             }
         } else {
-            echo "Incorrect username or password.";
+            echo i8ln('Incorrect username or password');
         }
     }
 
     if ($_SESSION['user']->updatePwd == 1) {
         ?>
-		Please change your password.
+		<?php echo i8ln('Please change your password.'); ?>
 		<form action='' method='POST'>
 			<table>
 				<tr>
-					<th>New password</th><td><input type="password" name="password" required></td>
+					<th><?php echo i8ln('New password'); ?></th><td><input type="password" name="password" required></td>
 				</tr>
 				<tr>
-					<th>Confirm password</th><td><input type="password" name="repassword" required></td>
+					<th><?php echo i8ln('Confirm password'); ?></th><td><input type="password" name="repassword" required></td>
 				</tr>
 				<tr>
 					<td><input type="submit" name="submit_updatePwd"></td><td></td>
@@ -80,10 +80,10 @@ if ($enableLogin === true) {
 		<form action='' method='POST'>
 			<table>
 				<tr>
-					<th>E-mail</th><td><input type="text" name="email" required></td>
+					<th><?php echo i8ln('E-mail'); ?></th><td><input type="text" name="email" required></td>
 				</tr>
 				<tr>
-					<th>Password</th><td><input type="password" name="password" required></td>
+					<th><?php echo i8ln('Password'); ?></th><td><input type="password" name="password" required></td>
 				</tr>
 				<tr>
 					<td><input type="submit" name="submit_login"></td><td></td>
