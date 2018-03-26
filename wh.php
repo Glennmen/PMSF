@@ -74,9 +74,9 @@ if ($enableLogin === true) {
             
             $message .= "Your expire date is set to {$time}.<br><br>";
             $message .= "<b>Credentials:</b><br>
-	*********************************************************<br>
-	<b>Email:</b> {$email}<br>
-	<b>Password:</b> {$randomPwd}<br>
+    *********************************************************<br>
+    <b>Email:</b> {$email}<br>
+    <b>Password:</b> {$randomPwd}<br>
    *********************************************************<br><br>";
         }
 

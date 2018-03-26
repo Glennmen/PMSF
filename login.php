@@ -111,57 +111,57 @@ if ($enableLogin === true) {
 
     if ($_SESSION['user']->updatePwd == 1) {
         ?>
-		<p><h2><?php echo i8ln('Please change your password.'); ?></h2></p>
-		<form action='' method='POST'>
-			<table>
-				<tr>
-					<th><?php echo i8ln('New password'); ?></th><td><input type="password" name="password" required></td>
-				</tr>
-				<tr>
-					<th><?php echo i8ln('Confirm password'); ?></th><td><input type="password" name="repassword" required></td>
-				</tr>
-				<?php
-				if (!empty($passwordErr)) {
-				?>
-				<tr>
-					<th><?php echo i8ln('Error message'); ?></th>
-					<td><input type="text" name="errMess" value="<?php echo $passwordErr; ?>" style="border: 2px solid red; border-radius: 4px;" disabled></td>
-				</tr>
-				<?php
-				}
-				?>
-				<tr>
-					<td><input type="submit" name="submit_updatePwd"></td><td></td>
-				</tr>
-			</table>
-		</form>
+        <p><h2><?php echo i8ln('Please change your password.'); ?></h2></p>
+        <form action='' method='POST'>
+            <table>
+                <tr>
+                    <th><?php echo i8ln('New password'); ?></th><td><input type="password" name="password" required></td>
+                </tr>
+                <tr>
+                    <th><?php echo i8ln('Confirm password'); ?></th><td><input type="password" name="repassword" required></td>
+                </tr>
+                <?php
+                if (!empty($passwordErr)) {
+                ?>
+                <tr>
+                    <th><?php echo i8ln('Error message'); ?></th>
+                    <td><input type="text" name="errMess" value="<?php echo $passwordErr; ?>" style="border: 2px solid red; border-radius: 4px;" disabled></td>
+                </tr>
+                <?php
+                }
+                ?>
+                <tr>
+                    <td><input type="submit" name="submit_updatePwd"></td><td></td>
+                </tr>
+            </table>
+        </form>
    <?php
     } else {
         ?>
-		<p><h2><?php echo i8ln('Login'); ?></h2></p>
-		<form action='' method='POST'>
-			<table>
-				<tr>
-					<th><?php echo i8ln('E-mail'); ?></th><td><input type="text" name="email" required <?php if(isset($_POST['submit_login'])) { echo "value='$_POST[email]'"; } ?> placeholder="E-mail"></td>
-				</tr>
-				<tr>
-					<th><?php echo i8ln('Password'); ?></th><td><input type="password" name="password" required placeholder="Password"></td>
-				</tr>
-				<?php
-				if (isset($_POST['submit_login']) && empty($info['email'])) {
-				?>
-				<tr>
-					<th><?php echo i8ln('Error message'); ?></th>
-					<td><input type="text" name="errMess" value="<?php echo i8ln('Wrong credentials'); ?>" style="border: 2px solid red; border-radius: 4px;" disabled></td>
-				</tr>
-				<?php
-				}
-				?>
-				<tr>
-					<td><input type="submit" name="submit_login"></td><td></td>
-				</tr>
-			</table>
-		</form>
+        <p><h2><?php echo i8ln('Login'); ?></h2></p>
+        <form action='' method='POST'>
+            <table>
+                <tr>
+                    <th><?php echo i8ln('E-mail'); ?></th><td><input type="text" name="email" required <?php if(isset($_POST['submit_login'])) { echo "value='$_POST[email]'"; } ?> placeholder="E-mail"></td>
+                </tr>
+                <tr>
+                    <th><?php echo i8ln('Password'); ?></th><td><input type="password" name="password" required placeholder="Password"></td>
+                </tr>
+                <?php
+                if (isset($_POST['submit_login']) && empty($info['email'])) {
+                ?>
+                <tr>
+                    <th><?php echo i8ln('Error message'); ?></th>
+                    <td><input type="text" name="errMess" value="<?php echo i8ln('Wrong credentials'); ?>" style="border: 2px solid red; border-radius: 4px;" disabled></td>
+                </tr>
+                <?php
+                }
+                ?>
+                <tr>
+                    <td><input type="submit" name="submit_login"></td><td></td>
+                </tr>
+            </table>
+        </form>
    <?php
     }
 } else {

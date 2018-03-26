@@ -153,8 +153,8 @@ if ($blockIframe) {
             <div id="currentWeather"></div>
             <?php
         } ?>
-		
-		<?php
+        
+        <?php
         if ($enableLogin === true) {
             if ($_SESSION['user']->email) {
                 $info = $db->query(
@@ -877,18 +877,18 @@ if ($blockIframe) {
                 </button>
             </center>
         </div>
-		<?php
+        <?php
         if ($enableLogin === true && $_SESSION['user']->email) {
             ?>
-			<div>
-				<center>
-					<button class="settings"
-							onclick="document.location.href='logout.php'">
-						<i class="fa" aria-hidden="true"></i> <?php echo i8ln('Logout'); ?>
-					</button>
-				</center>
-			</div><br>
-		    <div>
+            <div>
+                <center>
+                    <button class="settings"
+                            onclick="document.location.href='logout.php'">
+                        <i class="fa" aria-hidden="true"></i> <?php echo i8ln('Logout'); ?>
+                    </button>
+                </center>
+            </div><br>
+            <div>
                 <center>
                     <p>
                     <?php
