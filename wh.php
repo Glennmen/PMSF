@@ -48,7 +48,7 @@ if ($enableLogin === true) {
             if ($info['expire_timestamp'] > time()) {
                 $new_expire_timestamp = $info['expire_timestamp'] + $addMonths;
             } else {
-                $new_expire_timestamp = time()  $addMonths;
+                $new_expire_timestamp = time() + $addMonths;
             }
             $time = date("Y-m-d H:i", $new_expire_timestamp);
             
