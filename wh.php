@@ -6,7 +6,7 @@ if ($enableLogin === true) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomPwd = '';
-        for ($i = 0; $i < $length; $i) {
+        for ($i = 0; $i < $length; $i++) {
             $randomPwd .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomPwd;
