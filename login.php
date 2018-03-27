@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 include('config/config.php');
 ?>
 <!DOCTYPE html>
@@ -77,10 +79,12 @@ if ($enableLogin === true) {
         if (empty($passwordErr)) {
             $db->update("users", [
                 "password" => password_hash($_POST['password'], PASSWORD_DEFAULT),
-                "updatePwd" => 0
+				"temp_password" => null
             ], [
                 "email" => $_SESSION['user']->email
             ]);
+
+			unset($_SESSION['user']->updatePwd);
             
             header("Location: .");
             die();
@@ -89,80 +93,164 @@ if ($enableLogin === true) {
 
     if (isset($_POST['submit_login'])) {
         $info = $db->query(
-            "SELECT email, password, expire_timestamp, updatePwd FROM users WHERE email = :email", [
+            "SELECT email, password, expire_timestamp, temp_password FROM users WHERE email = :email", [
                 ":email" => $_POST['email']
             ]
         )->fetch();
 
-        if (password_verify($_POST['password'], $info['password']) == 1) {
-            $_SESSION['user']->email = $info['email'];
-            $_SESSION['user']->expire_timestamp = $info['expire_timestamp'];
-            $_SESSION['user']->updatePwd = $info['updatePwd'];
-            if ($info['updatePwd'] == 1) {
-                header("Location: /login.php");
-                die();
-            } else {
-                header("Location: .");
-                die();
-            }
+        if (password_verify($_POST['password'], $info['password']) == 1 || password_verify($_POST['password'], $info['temp_password']) == 1) {
+			
+			$_SESSION['user']->email = $info['email'];
+			$_SESSION['user']->expire_timestamp = $info['expire_timestamp'];
+
+			if (password_verify($_POST['password'], $info['password']) == 1) {
+			
+				if (!empty($info['temp_password'])) {
+					$db->update("users", [
+						"temp_password" => null
+					], [
+						"email" => $_POST['email']
+					]);
+				}
+
+				header("Location: .");
+				die();
+
+			} else {
+				
+				$_SESSION['user']->updatePwd = 1;
+				
+				header("Location: /login.php");
+				die();
+				
+			}
         }
     }
+	
+	if (isset($_POST['submit_forgotPwd'])) {
 
-    if ($_SESSION['user']->updatePwd == 1) {
-        ?>
-        <p><h2><?php echo i8ln('Please change your password.'); ?></h2></p>
-        <form action='' method='POST'>
-            <table>
-                <tr>
-                    <th><?php echo i8ln('New password'); ?></th><td><input type="password" name="password" required></td>
-                </tr>
-                <tr>
-                    <th><?php echo i8ln('Confirm password'); ?></th><td><input type="password" name="repassword" required></td>
-                </tr>
-                <?php
-                if (!empty($passwordErr)) {
-                ?>
-                <tr>
-                    <th><?php echo i8ln('Error message'); ?></th>
-                    <td><input type="text" name="errMess" value="<?php echo $passwordErr; ?>" style="border: 2px solid red; border-radius: 4px;" disabled></td>
-                </tr>
-                <?php
-                }
-                ?>
-                <tr>
-                    <td><input type="submit" name="submit_updatePwd"></td><td></td>
-                </tr>
-            </table>
-        </form>
-   <?php
-    } else {
-        ?>
-        <p><h2><?php echo i8ln('Login'); ?></h2></p>
-        <form action='' method='POST'>
-            <table>
-                <tr>
-                    <th><?php echo i8ln('E-mail'); ?></th><td><input type="text" name="email" required <?php if(isset($_POST['submit_login'])) { echo "value='$_POST[email]'"; } ?> placeholder="E-mail"></td>
-                </tr>
-                <tr>
-                    <th><?php echo i8ln('Password'); ?></th><td><input type="password" name="password" required placeholder="Password"></td>
-                </tr>
-                <?php
-                if (isset($_POST['submit_login']) && password_verify($_POST['password'], $info['password']) != 1) {
-                ?>
-                <tr>
-                    <th><?php echo i8ln('Error message'); ?></th>
-                    <td><input type="text" name="errMess" value="<?php echo i8ln('Wrong credentials'); ?>" style="border: 2px solid red; border-radius: 4px;" disabled></td>
-                </tr>
-                <?php
-                }
-                ?>
-                <tr>
-                    <td><input type="submit" name="submit_login"></td><td></td>
-                </tr>
-            </table>
-        </form>
-   <?php
+        $count = $db->count("users",[
+			"email" => $_POST['email']
+		]);
+		
+		if ($count == 1) {
+			
+			echo "Email found!";
+			$randomPwd = generateRandomString();
+			
+			$db->update("users", [
+                "temp_password" => password_hash($randomPwd, PASSWORD_DEFAULT)
+            ], [
+                "email" => $_POST['email']
+            ]);
+			
+			echo "Your new password is set to {$randomPwd}";
+			
+			$message = "";
+			$message .= "Dear {$_POST['email']},<br><br>";
+			$message .= "Your password has been reset.<br>";
+			$message .= "If you haven't requested a new password you can ignore this email.<br>";
+			$message .= "Your old password is still working.<br><br>";
+			$message .= "New password: {$randomPwd}<br><br>";
+			
+			if ($discordUrl) {
+				$message .= "For support, ask your questions in the <a href='{$discordUrl}'>discord guild</a>!<br><br>";
+			}
+			$message .= "Best Regards,<br>Admin";
+			if ($title) {
+				$message .= " @ {$title}";
+			}
+			
+			$subject = "[{$title}] - Password Reset";
+			$headers = "From: no-reply@{$_SERVER['SERVER_NAME']}" . "\r\n" .
+				"Reply-To: no-reply@{$_SERVER['SERVER_NAME']}" . "\r\n" .
+				'Content-Type: text/html; charset=ISO-8859-1' . "\r\n" .
+				'X-Mailer: PHP/' . phpversion();
+
+			mail($_POST['email'], $subject, $message, $headers);
+		}
+		
+		header("Location: ?sentPwd");
+		die();
     }
+	
+	if (isset($_GET['resetPwd'])) {
+	?>
+		<p><h2>[<?php echo "<a href='.'>{$title}</a>] - "; echo i8ln('Forgot password'); ?></h2></p>
+		<form action='' method='POST'>
+			<table>
+				<tr>
+					<th><?php echo i8ln('E-mail'); ?></th><td><input type="text" name="email" required></td>
+				</tr>
+				<tr>
+					<td id="one-third"><input id="margin" type="submit" name="submit_forgotPwd"><a class='button' href='/login.php'>Back</a></td><td></td>
+				</tr>
+			</table>
+		</form>
+	<?php
+	} elseif (!empty($_SESSION['user']->updatePwd)) {
+		?>
+		<p><h2>[<?php echo "<a href='.'>{$title}</a>] - "; echo i8ln('Change your password.'); ?></h2></p>
+		<form action='' method='POST'>
+			<table>
+				<tr>
+					<th><?php echo i8ln('New password'); ?></th><td><input type="password" name="password" required></td>
+				</tr>
+				<tr>
+					<th><?php echo i8ln('Confirm password'); ?></th><td><input type="password" name="repassword" required></td>
+				</tr>
+				<?php
+				if (!empty($passwordErr)) {
+				?>
+				<tr>
+					<th><?php echo i8ln('Message'); ?></th>
+					<td><input type="text" name="errMess" value="<?php echo $passwordErr; ?>" id="redBox" disabled></td>
+				</tr>
+				<?php
+				}
+				?>
+				<tr>
+					<td id="one-third"><input id="margin" type="submit" name="submit_updatePwd"><a class='button' href='/login.php'>Back</a></td><td></td>
+				</tr>
+			</table>
+		</form>
+   <?php
+	} else {
+	?>
+		<p><h2>[<?php echo "<a href='.'>{$title}</a>] - "; echo i8ln('Login'); ?></h2></p>
+		<form action='' method='POST'>
+			<table>
+				<tr>
+					<th><?php echo i8ln('E-mail'); ?></th><td><input type="text" name="email" required <?php if(isset($_POST['submit_login'])) { echo "value='$_POST[email]'"; } ?> placeholder="E-mail"></td>
+				</tr>
+				<tr>
+					<th><?php echo i8ln('Password'); ?></th><td><input type="password" name="password" required placeholder="Password"></td>
+				</tr>
+				<?php
+				if (isset($_POST['submit_login']) && password_verify($_POST['password'], $info['password']) != 1) {
+				?>
+				<tr>
+					<th><?php echo i8ln('Message'); ?></th>
+					<td><input type="text" name="errMess" value="<?php echo i8ln('Wrong credentials'); ?>" id="redBox" disabled></td>
+				</tr>
+				<?php
+				} elseif (isset($_GET['sentPwd'])) {
+				?>
+					<tr>
+						<th><?php echo i8ln('Message'); ?></th>
+						<td><input type="text" name="errMess" value="<?php echo i8ln('An email has been sent to the specified email.'); ?>" id="greenBox" disabled></td>
+					</tr>
+				<?php
+				}
+				?>
+				<tr>
+					<td id="one-third"><input id="margin" type="submit" name="submit_login"><a class='button' href='?resetPwd'>Reset Password</a></td><td></td>
+				</tr>
+			</table>
+		</form>
+   <?php
+	}
+
 } else {
     header("Location: .");
 }

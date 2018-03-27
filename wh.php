@@ -1,16 +1,6 @@
 <?php
 include('config/config.php');
 if ($enableLogin === true) {
-    function generateRandomPwd($length = 8)
-    {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomPwd = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomPwd .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomPwd;
-    }
 
     $json = json_decode(file_get_contents('php://input'), true);
 
@@ -61,14 +51,13 @@ if ($enableLogin === true) {
             $message .= "Your new expire date is set to {$time}.<br><br>";
             $message .= "Login with {$info['email']} and your old password on the website.<br><br>";
         } else {
-            $randomPwd = generateRandomPwd();
+            $randomPwd = generateRandomString();
             $new_expire_timestamp = time() + $addMonths;
             $time = date("Y-m-d H:i", $new_expire_timestamp);
             
             $db->insert("users", [
                 "email" => $email,
-                "password" => password_hash($randomPwd, PASSWORD_DEFAULT),
-                "updatePwd" => 1,
+                "temp_password" => password_hash($randomPwd, PASSWORD_DEFAULT)
                 "expire_timestamp" => $new_expire_timestamp
             ]);
             
@@ -90,7 +79,7 @@ if ($enableLogin === true) {
             $message .= " @ {$title}";
         }
         
-        $subject = "Membership [{$title}]";
+        $subject = "[{$title}] - Membership";
         $headers = "From: no-reply@{$_SERVER['SERVER_NAME']}" . "\r\n" .
             "Reply-To: no-reply@{$_SERVER['SERVER_NAME']}" . "\r\n" .
             'Content-Type: text/html; charset=ISO-8859-1' . "\r\n" .

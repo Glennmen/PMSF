@@ -158,25 +158,26 @@ if ($blockIframe) {
         if ($enableLogin === true) {
             if ($_SESSION['user']->email) {
                 $info = $db->query(
-                    "SELECT expire_timestamp, updatePwd FROM users WHERE email = :email", [
+                    "SELECT expire_timestamp FROM users WHERE email = :email", [
                         ":email" => $_SESSION['user']->email,
                     ]
                 )->fetch();
 
                 $_SESSION['user']->expire_timestamp = $info['expire_timestamp'];
-                $_SESSION['user']->updatePwd = $info['updatePwd'];
-                
-                if ($info['updatePwd'] == 1) {
+
+                if ($_SESSION['user']->updatePwd == 1) {
                     header("Location: /login.php");
+					die();
                 }
-                
-                $time = date("m-d", $_SESSION['user']->expire_timestamp);
                 
                 if ($info['expire_timestamp'] > time()) {
-                    echo "<span style='color: green;'>{$time}</span>";
+                    $color = "green";
                 } else {
-                    echo "<span style='color: red;'>{$time}</span>";
+                    $color = "red";
                 }
+
+				echo "<span style='color: {$color};'>" . substr($_SESSION['user']->email,0, 3) . "...</span>";
+
             } else {
                 echo "<a href='/login.php'>Login</a>";
             }
