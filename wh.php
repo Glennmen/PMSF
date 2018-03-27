@@ -57,7 +57,7 @@ if ($enableLogin === true) {
             
             $db->insert("users", [
                 "email" => $email,
-                "temp_password" => password_hash($randomPwd, PASSWORD_DEFAULT)
+                "temp_password" => password_hash($randomPwd, PASSWORD_DEFAULT),
                 "expire_timestamp" => $new_expire_timestamp
             ]);
             
