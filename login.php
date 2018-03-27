@@ -94,7 +94,7 @@ if ($enableLogin === true) {
             ]
         )->fetch();
 
-		if (password_verify($_POST['password'], $info['password']) == 1) {
+        if (password_verify($_POST['password'], $info['password']) == 1) {
             $_SESSION['user']->email = $info['email'];
             $_SESSION['user']->expire_timestamp = $info['expire_timestamp'];
             $_SESSION['user']->updatePwd = $info['updatePwd'];
