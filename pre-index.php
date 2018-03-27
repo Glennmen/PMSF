@@ -167,7 +167,7 @@ if ($blockIframe) {
 
                 if ($_SESSION['user']->updatePwd == 1) {
                     header("Location: /login.php");
-					die();
+                    die();
                 }
                 
                 if ($info['expire_timestamp'] > time()) {
@@ -176,7 +176,7 @@ if ($blockIframe) {
                     $color = "red";
                 }
 
-				echo "<span style='color: {$color};'>" . substr($_SESSION['user']->email,0, 3) . "...</span>";
+                echo "<span style='color: {$color};'>" . substr($_SESSION['user']->email,0, 3) . "...</span>";
 
             } else {
                 echo "<a href='/login.php'>Login</a>";
