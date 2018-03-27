@@ -70,7 +70,6 @@ $motdContent = "This is an example MOTD<br>Do whatever you like with it.";
 //-----------------------------------------------------
 
 $enableLogin = false;                                               // true/false
-$salt = "5up3r53cr3754l7";                                          // Type something super secret that will salt your passwords.
 
 //-----------------------------------------------------
 // FRONTEND SETTINGS

@@ -67,7 +67,7 @@ if ($enableLogin === true) {
             
             $db->insert("users", [
                 "email" => $email,
-                "password" => sha1($randomPwd . $salt),
+                "password" => password_hash($randomPwd, PASSWORD_DEFAULT),
                 "updatePwd" => 1,
                 "expire_timestamp" => $new_expire_timestamp
             ]);

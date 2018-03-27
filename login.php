@@ -76,7 +76,7 @@ if ($enableLogin === true) {
         
         if (empty($passwordErr)) {
             $db->update("users", [
-                "password" => sha1($_POST['password'] . $salt),
+                "password" => password_hash($_POST['password'], PASSWORD_DEFAULT),
                 "updatePwd" => 0
             ], [
                 "email" => $_SESSION['user']->email
@@ -89,13 +89,12 @@ if ($enableLogin === true) {
 
     if (isset($_POST['submit_login'])) {
         $info = $db->query(
-            "SELECT email, expire_timestamp, updatePwd FROM users WHERE email = :email AND password = :password", [
-                ":email" => $_POST['email'],
-                ":password" => sha1($_POST['password'] . $salt),
+            "SELECT email, password, expire_timestamp, updatePwd FROM users WHERE email = :email", [
+                ":email" => $_POST['email']
             ]
         )->fetch();
 
-        if ($info['email']) {
+		if (password_verify($_POST['password'], $info['password']) == 1) {
             $_SESSION['user']->email = $info['email'];
             $_SESSION['user']->expire_timestamp = $info['expire_timestamp'];
             $_SESSION['user']->updatePwd = $info['updatePwd'];
@@ -148,7 +147,7 @@ if ($enableLogin === true) {
                     <th><?php echo i8ln('Password'); ?></th><td><input type="password" name="password" required placeholder="Password"></td>
                 </tr>
                 <?php
-                if (isset($_POST['submit_login']) && empty($info['email'])) {
+                if (isset($_POST['submit_login']) && password_verify($_POST['password'], $info['password']) != 1) {
                 ?>
                 <tr>
                     <th><?php echo i8ln('Error message'); ?></th>
