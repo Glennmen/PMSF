@@ -75,11 +75,11 @@ function createUserAccount($email, $password, $months)
 {
     global $db;
 
-    $expire_timestamp = time() + $months;    
+    $new_expire_timestamp = time() + $months;
     $db->insert("users", [
         "email" => $email,
         "temp_password" => password_hash($password, PASSWORD_DEFAULT),
-        "expire_timestamp" => $expire_timestamp
+        "expire_timestamp" => $new_expire_timestamp
     ]);
     return true;
 }

@@ -31,10 +31,11 @@ if ($enableLogin === true) {
         //31 days. (60 * 60 * 24 * 31) * months
         $addMonths = 2678400 * $quantity;
         
-        $message = "Dear {$email},<br><br>";
-        $message .= "Thank you for your purchase.<br>";
+        $message = i8ln('Dear') . " {$email},<br><br>";
+        $message .= i8ln('Thank you for your purchase') . "<br>";
 
         if ($info['email']) {
+
             if ($info['expire_timestamp'] > time()) {
                 $new_expire_timestamp = $info['expire_timestamp'] + $addMonths;
             } else {
@@ -48,29 +49,31 @@ if ($enableLogin === true) {
                 "email" => $info['email']
             ]);
             
-            $message .= "Your new expire date is set to {$time}.<br><br>";
-            $message .= "Login with {$info['email']} and your old password on the website.<br><br>";
+            $message .= i8ln('Your new expire date is set to') . " {$time}.<br><br>";
+
         } else {
+
             $randomPwd = generateRandomString();
             createUserAccount($email, $randomPwd, $addMonths);
+
+			$new_expire_timestamp = time() + $addMonths;
+            $time = date("Y-m-d H:i", $new_expire_timestamp);
             
-            $message .= "Your expire date is set to {$time}.<br><br>";
-            $message .= "<b>Credentials:</b><br>
-    *********************************************************<br>
-    <b>Email:</b> {$email}<br>
-    <b>Password:</b> {$randomPwd}<br>
-   *********************************************************<br><br>";
+            $message .= i8ln('Your expire date is set to') . " {$time}.<br><br>";
+            $message .= "<b>" . i8ln('Credentials') . ":</b><br>
+*********************************************************<br>
+<b>" . i8ln('Email') . ":</b> {$email}<br>
+<b>" . i8ln('Password') . ":</b> {$randomPwd}<br>
+*********************************************************<br><br>";
         }
 
         if ($discordUrl) {
-            $message .= "For support, ask your questions in the <a href='{$discordUrl}'>discord guild</a>!<br><br>";
+            $message .= i8ln('For support, ask your questions in the ') . "<a href='{$discordUrl}'>discord guild</a>!<br><br>";
         }
-        
-        $message .= "Best Regards,<br>Admin";
-        
-        if ($title) {
-            $message .= " @ {$title}";
-        }
+        $message .= i8ln('Best Regards') . "<br>Admin";
+		if ($title) {
+			$message .= " @ {$title}";
+		}
         
         $subject = "[{$title}] - Membership";
         $headers = "From: no-reply@{$_SERVER['SERVER_NAME']}" . "\r\n" .
