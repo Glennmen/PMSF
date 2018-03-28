@@ -52,7 +52,7 @@ include('config/config.php');
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
-<body id="top">
+<body id="top" style="overflow: auto;">
 <div class="wrapper">
 <?php
 if ($enableLogin === true) {
@@ -75,13 +75,8 @@ if ($enableLogin === true) {
         }
         
         if (empty($passwordErr)) {
-            $db->update("users", [
-                "password" => password_hash($_POST['password'], PASSWORD_DEFAULT),
-                "temp_password" => null
-            ], [
-                "email" => $_SESSION['user']->email
-            ]);
 
+            resetUserPassword($_SESSION['user']->email, $_POST['password'], 2);
             unset($_SESSION['user']->updatePwd);
             
             header("Location: .");
@@ -111,7 +106,11 @@ if ($enableLogin === true) {
                     ]);
                 }
 
-                header("Location: .");
+                if (in_array($info['email'], $adminEmail)){
+                    header("Location: /login.php");
+                } else {
+                    header("Location: .");
+                }
                 die();
 
             } else {
@@ -120,7 +119,7 @@ if ($enableLogin === true) {
                 
                 header("Location: /login.php");
                 die();
-                
+
             }
         }
     }
@@ -136,11 +135,7 @@ if ($enableLogin === true) {
             $randomPwd = generateRandomString();
             
             if ($count == 1) {
-                $db->update("users", [
-                    "temp_password" => password_hash($randomPwd, PASSWORD_DEFAULT)
-                ], [
-                    "email" => $_POST['email']
-                ]);
+                resetUserPassword($_POST['email'], $randomPwd, 0);
             } else {
                 createUserAccount($_POST['email'], $randomPwd, 36);
             }
@@ -172,6 +167,44 @@ if ($enableLogin === true) {
         
         header("Location: ?sentPwd");
         die();
+    }
+
+    if (isset($_POST['submit_updateUser'])) {
+        $Err = '';
+        if ($_POST['email'] != i8ln('Select a user...')) {
+            if ($_POST['ResetPwd'] == "on" || $_POST['checkboxDate'] != 0) {
+                $info = $db->query(
+                    "SELECT email, expire_timestamp FROM users WHERE email = :email", [
+                        ":email" => $_POST['email']
+                    ]
+                )->fetch();
+
+                if ($_POST['ResetPwd'] == "on") {
+                    $randomPwd = generateRandomString();
+                    resetUserPassword($_POST['email'], $randomPwd, 1);
+                }
+
+                if ($_POST['checkboxDate'] != 0) {
+
+                    if ($_POST['checkboxDate'] >= 0 && $_POST['checkboxDate'] <= 13) {
+                        if ($info['expire_timestamp'] > time()) {
+                            $new_expire_timestamp = $info['expire_timestamp'] + 60 * 60 * 24 * 31 * $_POST['checkboxDate'];
+                        } else {
+                            $new_expire_timestamp = time() + 60 * 60 * 24 * 31;
+                        }
+                    } else {
+                        $new_expire_timestamp = strtotime($_POST['customDate']);
+                    }
+
+                    updateExpireTimestamp($info['email'], $new_expire_timestamp);
+
+                }
+            } else {
+                $Err = i8ln('No changes made.');
+            }
+        } else {
+            $Err = i8ln('No user selected.');
+        }
     }
 
     if (isset($_GET['resetPwd'])) {
@@ -215,8 +248,89 @@ if ($enableLogin === true) {
             </table>
         </form>
    <?php
-    } else {
+    } elseif (!empty($_SESSION['user']->email && in_array($_SESSION['user']->email, $adminEmail))) {
     ?>
+        <p><h2>[<?php echo "<a href='.'>{$title}</a>] - "; echo i8ln('Admin page'); ?></h2></p>
+        <form action='' method='POST'>
+            <table>
+                <tr>
+                    <th><?php echo i8ln('Select user'); ?></th>
+                    <td>
+                        <select name="email" class='select' required>
+                            <option><?php echo i8ln('Select a user...'); ?></option>
+                            <?php
+                            $users = $db->select("users", [
+                                "email"
+                            ]);
+
+                            foreach($users as $user)
+                            {
+                                echo "<option>{$user['email']}</option>";
+                            }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th><?php echo i8ln('Expire Date'); ?></th>
+                    <td>
+                        <label><input onclick="document.getElementById('customDate').disabled = true;" type="radio" name="checkboxDate" value="0" checked="checked"><?php echo i8ln('No change'); ?></label>
+                        <label><input onclick="document.getElementById('customDate').disabled = true;" type="radio" name="checkboxDate" value="1"><?php echo i8ln('1 Month'); ?></label>
+                        <label><input onclick="document.getElementById('customDate').disabled = true;" type="radio" name="checkboxDate" value="3"><?php echo i8ln('3 Months'); ?></label>
+                        <label><input onclick="document.getElementById('customDate').disabled = true;" type="radio" name="checkboxDate" value="6"><?php echo i8ln('6 Months'); ?></label>
+                        <label><input onclick="document.getElementById('customDate').disabled = true;" type="radio" name="checkboxDate" value="12"><?php echo i8ln('12 Months'); ?></label>
+                        <label><input onclick="document.getElementById('customDate').disabled = false;" type="radio" name="checkboxDate" value="custom"><?php echo i8ln('Custom'); ?></label>
+                        <input class="date" type="date" name="customDate" id="customDate" value="<?php echo date('Y-m-d', time()); ?>" disabled="disabled">
+                    </td>
+                </tr>
+                <tr>
+                    <th><?php echo i8ln('Reset Password'); ?></th><td><input type="checkbox" name="ResetPwd"></td>
+                </tr>
+
+                <?php
+                if (isset($_POST['submit_updateUser']) && !empty($Err)) {
+                ?>
+                    <tr>
+                        <th><?php echo i8ln('Message'); ?></th>
+                        <td><input type="text" name="infoMess" value="<?php echo i8ln($Err); ?>" id="redBox" disabled></td>
+                    </tr>
+                <?php
+                }
+                ?>
+                <tr>
+                    <td id="one-third"><input id="margin" type="submit" name="submit_updateUser"></td><td></td>
+                </tr>
+            </table>
+        </form>
+        
+        <?php
+        if (isset($_POST['submit_updateUser']) && empty($Err)) {
+        ?>
+            <p><h2><?php echo $_POST['email']; ?></h2></p>
+            <table>
+                <?php
+                if (isset($_POST['submit_updateUser']) && $_POST['checkboxDate'] != 0) {
+                ?>
+                <tr>
+                    <th><?php echo i8ln('Expire Date'); ?></th>
+                        <td><input type="text" name="infoMess" value="<?php echo date('Y-m-d', $new_expire_timestamp); ?>" id="greenBox" disabled></td>
+                    </tr>
+                <?php
+                }
+                if (isset($_POST['submit_updateUser']) && $_POST['ResetPwd'] == "on") {
+                ?>
+                <tr>
+                    <th><?php echo i8ln('Password'); ?></th>
+                    <td><input type="text" name="infoMess2" value="<?php echo $randomPwd;?>" id="greenBox"></td>
+                </tr>
+                <?php
+                }
+                ?>
+            </table>
+        <?php
+        }
+    } else {
+        ?>
         <p><h2>[<?php echo "<a href='.'>{$title}</a>] - "; echo i8ln('Login'); ?></h2></p>
         <form action='' method='POST'>
             <table>
@@ -231,14 +345,14 @@ if ($enableLogin === true) {
                 ?>
                 <tr>
                     <th><?php echo i8ln('Message'); ?></th>
-                    <td><input type="text" name="errMess" value="<?php echo i8ln('Wrong credentials'); ?>" id="redBox" disabled></td>
+                    <td><input type="text" name="infoMess" value="<?php echo i8ln('Wrong credentials'); ?>" id="redBox" disabled></td>
                 </tr>
                 <?php
                 } elseif (isset($_GET['sentPwd'])) {
                 ?>
                     <tr>
                         <th><?php echo i8ln('Message'); ?></th>
-                        <td><input type="text" name="errMess" value="<?php echo i8ln('An email has been sent to the specified email.'); ?>" id="greenBox" disabled></td>
+                        <td><input type="text" name="infoMess" value="<?php echo i8ln('An email has been sent to the specified email.'); ?>" id="greenBox" disabled></td>
                     </tr>
                 <?php
                 }

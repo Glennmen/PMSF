@@ -42,12 +42,7 @@ if ($enableLogin === true) {
                 $new_expire_timestamp = time() + $addMonths;
             }
             $time = date("Y-m-d H:i", $new_expire_timestamp);
-            
-            $db->update("users", [
-                "expire_timestamp" => $new_expire_timestamp
-            ], [
-                "email" => $info['email']
-            ]);
+            updateExpireTimestamp($info['email'], $new_expire_timestamp);
             
             $message .= i8ln('Your new expire date is set to') . " {$time}.<br><br>";
 
@@ -56,7 +51,7 @@ if ($enableLogin === true) {
             $randomPwd = generateRandomString();
             createUserAccount($email, $randomPwd, $addMonths);
 
-			$new_expire_timestamp = time() + $addMonths;
+            $new_expire_timestamp = time() + $addMonths;
             $time = date("Y-m-d H:i", $new_expire_timestamp);
             
             $message .= i8ln('Your expire date is set to') . " {$time}.<br><br>";
@@ -71,9 +66,9 @@ if ($enableLogin === true) {
             $message .= i8ln('For support, ask your questions in the ') . "<a href='{$discordUrl}'>discord guild</a>!<br><br>";
         }
         $message .= i8ln('Best Regards') . "<br>Admin";
-		if ($title) {
-			$message .= " @ {$title}";
-		}
+        if ($title) {
+            $message .= " @ {$title}";
+        }
         
         $subject = "[{$title}] - Membership";
         $headers = "From: no-reply@{$_SERVER['SERVER_NAME']}" . "\r\n" .

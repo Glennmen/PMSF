@@ -83,3 +83,43 @@ function createUserAccount($email, $password, $months)
     ]);
     return true;
 }
+
+function resetUserPassword($email, $password, $resetType)
+{
+    global $db;
+
+    if ($resetType == 0) {
+        $db->update("users", [
+            "temp_password" => password_hash($password, PASSWORD_DEFAULT)
+        ], [
+            "email" => $email
+        ]);
+    } elseif ($resetType == 1) {
+        $db->update("users", [
+            "password" => null,
+            "temp_password" => password_hash($password, PASSWORD_DEFAULT)
+        ], [
+            "email" => $email
+        ]);
+    } else {
+        $db->update("users", [
+            "password" => password_hash($password, PASSWORD_DEFAULT),
+            "temp_password" => null
+        ], [
+            "email" => $email
+        ]);
+    }
+    return true;
+}
+
+function updateExpireTimestamp($email, $new_expire_timestamp)
+{
+    global $db;
+
+    $db->update("users", [
+        "expire_timestamp" => $new_expire_timestamp
+    ], [
+        "email" => $email
+    ]);
+    return true;
+}
