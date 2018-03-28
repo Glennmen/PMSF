@@ -81,6 +81,7 @@ $motdContent = "";
 //-----------------------------------------------------
 
 $enableLogin = false;                                               // true/false
+$adminEmail = array();                                              // You can add multiple admins by adding them to the array.
 
 //-----------------------------------------------------
 // FRONTEND SETTINGS

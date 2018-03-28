@@ -52,14 +52,7 @@ if ($enableLogin === true) {
             $message .= "Login with {$info['email']} and your old password on the website.<br><br>";
         } else {
             $randomPwd = generateRandomString();
-            $new_expire_timestamp = time() + $addMonths;
-            $time = date("Y-m-d H:i", $new_expire_timestamp);
-            
-            $db->insert("users", [
-                "email" => $email,
-                "temp_password" => password_hash($randomPwd, PASSWORD_DEFAULT),
-                "expire_timestamp" => $new_expire_timestamp
-            ]);
+            createUserAccount($email, $randomPwd, $addMonths);
             
             $message .= "Your expire date is set to {$time}.<br><br>";
             $message .= "<b>Credentials:</b><br>

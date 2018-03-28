@@ -131,30 +131,31 @@ if ($enableLogin === true) {
             "email" => $_POST['email']
         ]);
         
-        if ($count == 1) {
-            
-            echo "Email found!";
+        if ($count == 1 || (in_array($_POST['email'], $adminEmail))) {
+
             $randomPwd = generateRandomString();
             
-            $db->update("users", [
-                "temp_password" => password_hash($randomPwd, PASSWORD_DEFAULT)
-            ], [
-                "email" => $_POST['email']
-            ]);
-            
-            echo "Your new password is set to {$randomPwd}";
+            if ($count == 1) {
+                $db->update("users", [
+                    "temp_password" => password_hash($randomPwd, PASSWORD_DEFAULT)
+                ], [
+                    "email" => $_POST['email']
+                ]);
+            } else {
+                createUserAccount($_POST['email'], $randomPwd, 36);
+            }
             
             $message = "";
-            $message .= "Dear {$_POST['email']},<br><br>";
-            $message .= "Your password has been reset.<br>";
-            $message .= "If you haven't requested a new password you can ignore this email.<br>";
-            $message .= "Your old password is still working.<br><br>";
-            $message .= "New password: {$randomPwd}<br><br>";
+            $message .= i8ln('Dear') . " {$_POST['email']},<br><br>";
+            $message .= i8ln('Your password has been reset') . "<br>";
+            $message .= i8ln('If you haven\'t requested a new password you can ignore this email.') . "<br>";
+            $message .= i8ln('Your old password is still working.') . "<br><br>";
+            $message .= i8ln('New password:') . " {$randomPwd}<br><br>";
             
             if ($discordUrl) {
-                $message .= "For support, ask your questions in the <a href='{$discordUrl}'>discord guild</a>!<br><br>";
+                $message .= i8ln('For support, ask your questions in the ') . "<a href='{$discordUrl}'>discord guild</a>!<br><br>";
             }
-            $message .= "Best Regards,<br>Admin";
+            $message .= i8ln('Best Regards') . "<br>Admin";
             if ($title) {
                 $message .= " @ {$title}";
             }
@@ -166,12 +167,13 @@ if ($enableLogin === true) {
                 'X-Mailer: PHP/' . phpversion();
 
             mail($_POST['email'], $subject, $message, $headers);
+
         }
         
         header("Location: ?sentPwd");
         die();
     }
-    
+
     if (isset($_GET['resetPwd'])) {
     ?>
         <p><h2>[<?php echo "<a href='.'>{$title}</a>] - "; echo i8ln('Forgot password'); ?></h2></p>
@@ -181,7 +183,7 @@ if ($enableLogin === true) {
                     <th><?php echo i8ln('E-mail'); ?></th><td><input type="text" name="email" required></td>
                 </tr>
                 <tr>
-                    <td id="one-third"><input id="margin" type="submit" name="submit_forgotPwd"><a class='button' href='/login.php'>Back</a></td><td></td>
+                    <td id="one-third"><input id="margin" type="submit" name="submit_forgotPwd"><a class='button' href='/login.php'><?php echo i8ln('Back'); ?></a></td><td></td>
                 </tr>
             </table>
         </form>
@@ -208,7 +210,7 @@ if ($enableLogin === true) {
                 }
                 ?>
                 <tr>
-                    <td id="one-third"><input id="margin" type="submit" name="submit_updatePwd"><a class='button' href='/login.php'>Back</a></td><td></td>
+                    <td id="one-third"><input id="margin" type="submit" name="submit_updatePwd"><a class='button' href='/login.php'><?php echo i8ln('Back'); ?></a></td><td></td>
                 </tr>
             </table>
         </form>
@@ -242,7 +244,7 @@ if ($enableLogin === true) {
                 }
                 ?>
                 <tr>
-                    <td id="one-third"><input id="margin" type="submit" name="submit_login"><a class='button' href='?resetPwd'>Reset Password</a></td><td></td>
+                    <td id="one-third"><input id="margin" type="submit" name="submit_login"><a class='button' href='?resetPwd'><?php echo i8ln('Reset Password'); ?></a></td><td></td>
                 </tr>
             </table>
         </form>
