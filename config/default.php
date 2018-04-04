@@ -82,6 +82,7 @@ $motdContent = "";
 
 $enableLogin = false;                                               // true/false
 $adminEmail = array();                                              // You can add multiple admins by adding them to the array.
+$logfile = '../members.log';                                        // Path to log file. Make sure this works as it will be your life saver if your db crashes.
 
 //-----------------------------------------------------
 // FRONTEND SETTINGS

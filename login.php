@@ -1,5 +1,11 @@
 <?php
 include('config/config.php');
+if (!file_exists($logfile)) {
+    if(file_put_contents($logfile, "-- This is a test to make sure the logging actually works.\r\n", FILE_APPEND) == false){
+        http_response_code(500);
+        die("<h1>Warning</h1><p>Your backup logging doesn't work. In case of database corruption all data may be lost.</p>");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="<?= $locale ?>">
