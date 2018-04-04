@@ -71,17 +71,25 @@ function generateRandomString($length = 8)
     return $randomString;
 }
 
-function createUserAccount($email, $password, $months)
+function createUserAccount($email, $password, $seconds)
 {
     global $db;
 
-    $new_expire_timestamp = time() + $months;
-    $db->insert("users", [
-        "email" => $email,
-        "temp_password" => password_hash($password, PASSWORD_DEFAULT),
-        "expire_timestamp" => $new_expire_timestamp
+	$count = $db->count("users",[
+        "email" => $email
     ]);
-    return true;
+
+    if ($count == 0) {
+        $new_expire_timestamp = time() + $seconds;
+        $db->insert("users", [
+            "email" => $email,
+            "temp_password" => password_hash($password, PASSWORD_DEFAULT),
+            "expire_timestamp" => $new_expire_timestamp
+        ]);
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function resetUserPassword($email, $password, $resetType)

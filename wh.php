@@ -28,8 +28,8 @@ if ($enableLogin === true) {
             ]
         )->fetch();
         
-        //31 days. (60 * 60 * 24 * 31) * months
-        $addMonths = 2678400 * $quantity;
+
+        $addSeconds = 60 * 60 * 24 * 31 * $quantity;
         
         $message = i8ln('Dear') . " {$email},<br><br>";
         $message .= i8ln('Thank you for your purchase') . "<br>";
@@ -37,9 +37,9 @@ if ($enableLogin === true) {
         if ($info['email']) {
 
             if ($info['expire_timestamp'] > time()) {
-                $new_expire_timestamp = $info['expire_timestamp'] + $addMonths;
+                $new_expire_timestamp = $info['expire_timestamp'] + $addSeconds;
             } else {
-                $new_expire_timestamp = time() + $addMonths;
+                $new_expire_timestamp = time() + $addSeconds;
             }
             $time = date("Y-m-d H:i", $new_expire_timestamp);
             updateExpireTimestamp($info['email'], $new_expire_timestamp);
@@ -49,9 +49,9 @@ if ($enableLogin === true) {
         } else {
 
             $randomPwd = generateRandomString();
-            createUserAccount($email, $randomPwd, $addMonths);
+            createUserAccount($email, $randomPwd, $addSeconds);
 
-            $new_expire_timestamp = time() + $addMonths;
+            $new_expire_timestamp = time() + $addSeconds;
             $time = date("Y-m-d H:i", $new_expire_timestamp);
             
             $message .= i8ln('Your expire date is set to') . " {$time}.<br><br>";

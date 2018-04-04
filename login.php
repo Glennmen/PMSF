@@ -171,8 +171,8 @@ if ($enableLogin === true) {
 
     if (isset($_POST['submit_updateUser'])) {
         $Err = '';
-        if ($_POST['email'] != i8ln('Select a user...')) {
-            if ($_POST['ResetPwd'] == "on" || $_POST['checkboxDate'] != 0) {
+        if ($_POST['email'] != i8ln('Select a user...') || !empty($_POST['createUserEmail'])) {
+            if (($_POST['ResetPwd'] == "on" || $_POST['checkboxDate'] != 0) && $_POST['email'] != i8ln('Select a user...')) {
                 $info = $db->query(
                     "SELECT email, expire_timestamp FROM users WHERE email = :email", [
                         ":email" => $_POST['email']
@@ -180,8 +180,8 @@ if ($enableLogin === true) {
                 )->fetch();
 
                 if ($_POST['ResetPwd'] == "on") {
-                    $randomPwd = generateRandomString();
-                    resetUserPassword($_POST['email'], $randomPwd, 1);
+                    $resetUserPwd = generateRandomString();
+                    resetUserPassword($_POST['email'], $resetUserPwd, 1);
                 }
 
                 if ($_POST['checkboxDate'] != 0) {
@@ -199,17 +199,29 @@ if ($enableLogin === true) {
                     updateExpireTimestamp($info['email'], $new_expire_timestamp);
 
                 }
-            } else {
+
+            }
+
+            if (!empty($_POST['createUserEmail'])) {
+                if (!empty($_POST['createUserEmail'])) {
+                    $createUserPwd = generateRandomString();
+                    if (createUserAccount($_POST['createUserEmail'], $createUserPwd, 0) == false) {
+                        $Err = i8ln('Email already in use.');
+                    }
+                }
+            }
+
+            if (($_POST['ResetPwd'] == "off" && $_POST['checkboxDate'] == 0 && $_POST['email'] == i8ln('Select a user...')) || empty($_POST['createUserEmail'])) {
                 $Err = i8ln('No changes made.');
             }
         } else {
-            $Err = i8ln('No user selected.');
+            $Err = i8ln('No changes made.');
         }
     }
 
     if (isset($_GET['resetPwd'])) {
     ?>
-        <p><h2>[<?php echo "<a href='.'>{$title}</a>] - "; echo i8ln('Forgot password'); ?></h2></p>
+        <p><h2><?php echo "[<a href='.'>{$title}</a>] - "; echo i8ln('Forgot password'); ?></h2></p>
         <form action='' method='POST'>
             <table>
                 <tr>
@@ -223,7 +235,7 @@ if ($enableLogin === true) {
     <?php
     } elseif (!empty($_SESSION['user']->updatePwd)) {
         ?>
-        <p><h2>[<?php echo "<a href='.'>{$title}</a>] - "; echo i8ln('Change your password.'); ?></h2></p>
+        <p><h2><?php echo "[<a href='.'>{$title}</a>] - "; echo i8ln('Change your password.'); ?></h2></p>
         <form action='' method='POST'>
             <table>
                 <tr>
@@ -250,7 +262,7 @@ if ($enableLogin === true) {
    <?php
     } elseif (!empty($_SESSION['user']->email && in_array($_SESSION['user']->email, $adminEmail))) {
     ?>
-        <p><h2>[<?php echo "<a href='.'>{$title}</a>] - "; echo i8ln('Admin page'); ?></h2></p>
+        <p><h2><?php echo "[<a href='.'>{$title}</a>] - "; echo i8ln('Admin page'); ?></h2></p>
         <form action='' method='POST'>
             <table>
                 <tr>
@@ -286,17 +298,9 @@ if ($enableLogin === true) {
                 <tr>
                     <th><?php echo i8ln('Reset Password'); ?></th><td><input type="checkbox" name="ResetPwd"></td>
                 </tr>
-
-                <?php
-                if (isset($_POST['submit_updateUser']) && !empty($Err)) {
-                ?>
-                    <tr>
-                        <th><?php echo i8ln('Message'); ?></th>
-                        <td><input type="text" name="infoMess" value="<?php echo i8ln($Err); ?>" id="redBox" disabled></td>
-                    </tr>
-                <?php
-                }
-                ?>
+                <tr>
+                    <th><?php echo i8ln('Create User'); ?></th><td><input type="text" name="createUserEmail" placeholder='E-mail'></td>
+                </tr>
                 <tr>
                     <td id="one-third"><input id="margin" type="submit" name="submit_updateUser"></td><td></td>
                 </tr>
@@ -304,26 +308,44 @@ if ($enableLogin === true) {
         </form>
         
         <?php
-        if (isset($_POST['submit_updateUser']) && empty($Err)) {
+        if (isset($_POST['submit_updateUser'])) {
         ?>
-            <p><h2><?php echo $_POST['email']; ?></h2></p>
+            <p><h2>CHANGES</h2></p>
             <table>
                 <?php
-                if (isset($_POST['submit_updateUser']) && $_POST['checkboxDate'] != 0) {
-                ?>
-                <tr>
-                    <th><?php echo i8ln('Expire Date'); ?></th>
+                if (empty($Err)) {
+                    if (isset($_POST['submit_updateUser']) && $_POST['checkboxDate'] != 0 && $_POST['email'] != i8ln('Select a user...')) {
+                    ?>
+                    <tr>
+                        <th id="one-third"><?php echo $_POST['email'] . " - " . i8ln('Expire Date'); ?></th>
                         <td><input type="text" name="infoMess" value="<?php echo date('Y-m-d', $new_expire_timestamp); ?>" id="greenBox" disabled></td>
                     </tr>
-                <?php
-                }
-                if (isset($_POST['submit_updateUser']) && $_POST['ResetPwd'] == "on") {
-                ?>
-                <tr>
-                    <th><?php echo i8ln('Password'); ?></th>
-                    <td><input type="text" name="infoMess2" value="<?php echo $randomPwd;?>" id="greenBox"></td>
-                </tr>
-                <?php
+                    <?php
+                    }
+                    if (isset($_POST['submit_updateUser']) && $_POST['ResetPwd'] == "on" && $_POST['email'] != i8ln('Select a user...')) {
+                    ?>
+                    <tr>
+                        <th id="one-third"><?php echo $_POST['email'] . " - " . i8ln('Password'); ?></th>
+                        <td><input type="text" name="infoMess2" value="<?php echo $resetUserPwd;?>" id="greenBox"></td>
+                    </tr>
+                    <?php
+                    }
+                    if (isset($_POST['submit_updateUser']) && !empty($_POST['createUserEmail'])) {
+                    ?>
+                    <tr>
+                        <th id="one-third"><?php echo $_POST['createUserEmail'] . " - " . i8ln('Created Account'); ?></th>
+                        <td><input type="text" name="infoMess2" value="<?php echo $createUserPwd;?>" id="greenBox"></td>
+                    </tr>
+                    <?php
+                    }
+
+                } else {
+                    ?>
+                    <tr>
+                        <th id="one-third"><?php echo i8ln('Message'); ?></th>
+                        <td><input type="text" name="infoMess" value="<?php echo i8ln($Err); ?>" id="redBox" disabled></td>
+                    </tr>
+                    <?php
                 }
                 ?>
             </table>
@@ -331,7 +353,7 @@ if ($enableLogin === true) {
         }
     } else {
         ?>
-        <p><h2>[<?php echo "<a href='.'>{$title}</a>] - "; echo i8ln('Login'); ?></h2></p>
+        <p><h2><?php echo "[<a href='.'>{$title}</a>] - "; echo i8ln('Login'); ?></h2></p>
         <form action='' method='POST'>
             <table>
                 <tr>
