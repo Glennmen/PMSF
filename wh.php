@@ -49,9 +49,10 @@ if ($enableLogin === true) {
         } else {
 
             $randomPwd = generateRandomString();
-            createUserAccount($email, $randomPwd, $addSeconds);
-
             $new_expire_timestamp = time() + $addSeconds;
+
+            createUserAccount($email, $randomPwd, $new_expire_timestamp);
+
             $time = date("Y-m-d H:i", $new_expire_timestamp);
             
             $message .= i8ln('Your expire date is set to') . " {$time}.<br><br>";

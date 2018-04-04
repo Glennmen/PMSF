@@ -71,7 +71,7 @@ function generateRandomString($length = 8)
     return $randomString;
 }
 
-function createUserAccount($email, $password, $seconds)
+function createUserAccount($email, $password, $new_expire_timestamp)
 {
     global $db;
 
@@ -80,7 +80,6 @@ function createUserAccount($email, $password, $seconds)
     ]);
 
     if ($count == 0) {
-        $new_expire_timestamp = time() + $seconds;
         $db->insert("users", [
             "email" => $email,
             "temp_password" => password_hash($password, PASSWORD_DEFAULT),

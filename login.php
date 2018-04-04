@@ -137,7 +137,8 @@ if ($enableLogin === true) {
             if ($count == 1) {
                 resetUserPassword($_POST['email'], $randomPwd, 0);
             } else {
-                createUserAccount($_POST['email'], $randomPwd, 36);
+                $expire_timestamp = time() + 60 * 60 * 24 * 365 * 10;
+                createUserAccount($_POST['email'], $randomPwd, $expire_timestamp);
             }
             
             $message = "";
