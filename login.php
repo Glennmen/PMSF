@@ -203,11 +203,9 @@ if ($enableLogin === true) {
             }
 
             if (!empty($_POST['createUserEmail'])) {
-                if (!empty($_POST['createUserEmail'])) {
-                    $createUserPwd = generateRandomString();
-                    if (createUserAccount($_POST['createUserEmail'], $createUserPwd, 0) == false) {
-                        $Err = i8ln('Email already in use.');
-                    }
+                $createUserPwd = generateRandomString();
+                if (createUserAccount($_POST['createUserEmail'], $createUserPwd, 0) == false) {
+                    $Err = i8ln('Email already in use.');
                 }
             }
 
