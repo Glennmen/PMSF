@@ -3,6 +3,7 @@ module.exports = function (grunt) {
     // load plugins as needed instead of up front
     require('jit-grunt')(grunt);
     require('phplint').gruntPlugin(grunt);
+    grunt.loadNpmTasks('grunt-contrib-obfuscator');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -59,6 +60,41 @@ module.exports = function (grunt) {
                 }
             }
         },
+        obfuscator: {
+            options: {
+                compact: true,
+                controlFlowFlattening: true,
+                controlFlowFlatteningThreshold: 1,
+                deadCodeInjection: true,
+                deadCodeInjectionThreshold: 1,
+                debugProtection: true,
+                debugProtectionInterval: true,
+                disableConsoleOutput: true,
+                identifierNamesGenerator: 'hexadecimal',
+                log: false,
+                renameGlobals: false,
+                rotateStringArray: true,
+                selfDefending: true,
+                stringArray: true,
+                stringArrayEncoding: 'rc4',
+                stringArrayThreshold: 1,
+                transformObjectKeys: true,
+                unicodeEscapeSequence: false
+            },
+            prod: {
+                files: {
+                    'static/dist/js/app.min.js' :'static/js/app.js',
+                    'static/dist/js/map.min.js':'static/js/map.js',
+                    'static/dist/js/map.common.min.js' : 'static/js/map.common.js',
+                    'static/dist/js/mobile.min.js':'static/js/mobile.js',
+                    'static/dist/js/stats.min.js':'static/js/stats.js',
+                    'static/dist/js/statistics.min.js':'static/js/statistics.js',
+                    'static/dist/js/status.min.js':'static/js/status.js',
+                    'static/dist/js/serviceWorker.min.js':'static/js/serviceWorker.js'
+                }
+            }
+
+        },
         minjson: {
             build: {
                 files: {
@@ -66,6 +102,7 @@ module.exports = function (grunt) {
                     'static/dist/data/pokemon.min.json': 'static/data/pokemon.json',
                     'static/dist/data/moves.min.json': 'static/data/moves.json',
                     'static/dist/data/mapstyle.min.json': 'static/data/mapstyle.json',
+                    'static/dist/data/raid-boss.min.json': 'static/data/raid-boss.json',
                     'static/dist/data/searchmarkerstyle.min.json': 'static/data/searchmarkerstyle.json',
                     'static/dist/data/weather.min.json': 'static/data/weather.json',
                     'static/dist/locales/de.min.json': 'static/locales/de.json',
@@ -147,7 +184,8 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('js-build', ['newer:babel', 'newer:uglify']);
+    grunt.registerTask('js-build', ['newer:obfuscator']);
+    grunt.registerTask('js-dev', ['newer:babel', 'newer:uglify']);
     grunt.registerTask('css-build', ['newer:sass', 'newer:cssmin']);
     grunt.registerTask('js-lint', ['newer:eslint']);
     grunt.registerTask('json', ['newer:minjson']);
@@ -155,6 +193,7 @@ module.exports = function (grunt) {
     grunt.registerTask('html-build', ['htmlmin', 'cacheBust']);
 
     grunt.registerTask('build', ['clean', 'js-build', 'css-build', 'json', 'html-build']);
+    grunt.registerTask('dev', ['clean', 'js-dev', 'css-build', 'json', 'html-build']);
     grunt.registerTask('lint', ['js-lint', 'php-lint']);
     grunt.registerTask('default', ['build', 'watch']);
 
