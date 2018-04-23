@@ -3,7 +3,6 @@ module.exports = function (grunt) {
     // load plugins as needed instead of up front
     require('jit-grunt')(grunt);
     require('phplint').gruntPlugin(grunt);
-    grunt.loadNpmTasks('grunt-contrib-obfuscator');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -102,7 +101,6 @@ module.exports = function (grunt) {
                     'static/dist/data/pokemon.min.json': 'static/data/pokemon.json',
                     'static/dist/data/moves.min.json': 'static/data/moves.json',
                     'static/dist/data/mapstyle.min.json': 'static/data/mapstyle.json',
-                    'static/dist/data/raid-boss.min.json': 'static/data/raid-boss.json',
                     'static/dist/data/searchmarkerstyle.min.json': 'static/data/searchmarkerstyle.json',
                     'static/dist/data/weather.min.json': 'static/data/weather.json',
                     'static/dist/locales/de.min.json': 'static/locales/de.json',
