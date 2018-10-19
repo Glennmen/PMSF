@@ -3018,7 +3018,7 @@ $(function () {
     $raidNotify = $('#notify-raid')
     $switchTinyRat = $('#tiny-rat-switch')
     $switchBigKarp = $('#big-karp-switch')
-    var numberOfPokemon = 386
+    var numberOfPokemon = 493
 
     $('.select-all').on('click', function (e) {
         e.preventDefault()

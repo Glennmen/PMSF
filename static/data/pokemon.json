@@ -2973,9 +2973,9 @@
       }
     ]
   },
-  "252":{
+  "252": {
     "name": "Treecko",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -2983,9 +2983,9 @@
       }
     ]
   },
-  "253":{
+  "253": {
     "name": "Grovyle",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -2993,9 +2993,9 @@
       }
     ]
   },
-  "254":{
+  "254": {
     "name": "Sceptile",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -3003,9 +3003,9 @@
       }
     ]
   },
-  "255":{
+  "255": {
     "name": "Torchic",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -3013,9 +3013,9 @@
       }
     ]
   },
-  "256":{
+  "256": {
     "name": "Combusken",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -3027,9 +3027,9 @@
       }
     ]
   },
-  "257":{
+  "257": {
     "name": "Blaziken",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -3041,9 +3041,9 @@
       }
     ]
   },
-  "258":{
+  "258": {
     "name": "Mudkip",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -3051,9 +3051,9 @@
       }
     ]
   },
-  "259":{
+  "259": {
     "name": "Marshtomp",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -3065,9 +3065,9 @@
       }
     ]
   },
-  "260":{
+  "260": {
     "name": "Swampert",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -3079,9 +3079,9 @@
       }
     ]
   },
-  "261":{
+  "261": {
     "name": "Poochyena",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -3089,9 +3089,9 @@
       }
     ]
   },
-  "262":{
+  "262": {
     "name": "Mightyena",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -3099,9 +3099,9 @@
       }
     ]
   },
-  "263":{
+  "263": {
     "name": "Zigzagoon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3109,9 +3109,9 @@
       }
     ]
   },
-  "264":{
+  "264": {
     "name": "Linoone",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3119,9 +3119,9 @@
       }
     ]
   },
-  "265":{
+  "265": {
     "name": "Wurmple",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -3129,9 +3129,9 @@
       }
     ]
   },
-  "266":{
+  "266": {
     "name": "Silcoon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -3139,9 +3139,9 @@
       }
     ]
   },
-  "267":{
+  "267": {
     "name": "Beautifly",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -3153,9 +3153,9 @@
       }
     ]
   },
-  "268":{
+  "268": {
     "name": "Cascoon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -3163,9 +3163,9 @@
       }
     ]
   },
-  "269":{
+  "269": {
     "name": "Dustox",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -3177,9 +3177,9 @@
       }
     ]
   },
-  "270":{
+  "270": {
     "name": "Lotad",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -3191,9 +3191,9 @@
       }
     ]
   },
-  "271":{
+  "271": {
     "name": "Lombre",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -3205,9 +3205,9 @@
       }
     ]
   },
-  "272":{
+  "272": {
     "name": "Ludicolo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -3219,9 +3219,9 @@
       }
     ]
   },
-  "273":{
+  "273": {
     "name": "Seedot",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -3229,9 +3229,9 @@
       }
     ]
   },
-  "274":{
+  "274": {
     "name": "Nuzleaf",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -3243,9 +3243,9 @@
       }
     ]
   },
-  "275":{
+  "275": {
     "name": "Shiftry",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -3257,9 +3257,9 @@
       }
     ]
   },
-  "276":{
+  "276": {
     "name": "Taillow",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3271,9 +3271,9 @@
       }
     ]
   },
-  "277":{
+  "277": {
     "name": "Swellow",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3285,9 +3285,9 @@
       }
     ]
   },
-  "278":{
+  "278": {
     "name": "Wingull",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -3299,9 +3299,9 @@
       }
     ]
   },
-  "279":{
+  "279": {
     "name": "Pelipper",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -3313,9 +3313,9 @@
       }
     ]
   },
-  "280":{
+  "280": {
     "name": "Ralts",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -3327,9 +3327,9 @@
       }
     ]
   },
-  "281":{
+  "281": {
     "name": "Kirlia",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -3341,9 +3341,9 @@
       }
     ]
   },
-  "282":{
+  "282": {
     "name": "Gardevoir",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -3355,9 +3355,9 @@
       }
     ]
   },
-  "283":{
+  "283": {
     "name": "Surskit",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -3369,9 +3369,9 @@
       }
     ]
   },
-  "284":{
+  "284": {
     "name": "Masquerain",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -3383,9 +3383,9 @@
       }
     ]
   },
-  "285":{
+  "285": {
     "name": "Shroomish",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -3393,9 +3393,9 @@
       }
     ]
   },
-  "286":{
+  "286": {
     "name": "Breloom",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -3407,9 +3407,9 @@
       }
     ]
   },
-  "287":{
+  "287": {
     "name": "Slakoth",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3417,9 +3417,9 @@
       }
     ]
   },
-  "288":{
+  "288": {
     "name": "Vigoroth",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3427,9 +3427,9 @@
       }
     ]
   },
-  "289":{
+  "289": {
     "name": "Slaking",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3437,9 +3437,9 @@
       }
     ]
   },
-  "290":{
+  "290": {
     "name": "Nincada",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -3451,9 +3451,9 @@
       }
     ]
   },
-  "291":{
+  "291": {
     "name": "Ninjask",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -3465,9 +3465,9 @@
       }
     ]
   },
-  "292":{
+  "292": {
     "name": "Shedinja",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -3479,9 +3479,9 @@
       }
     ]
   },
-  "293":{
+  "293": {
     "name": "Whismur",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3489,9 +3489,9 @@
       }
     ]
   },
-  "294":{
+  "294": {
     "name": "Loudred",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3499,9 +3499,9 @@
       }
     ]
   },
-  "295":{
+  "295": {
     "name": "Exploud",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3509,9 +3509,9 @@
       }
     ]
   },
-  "296":{
+  "296": {
     "name": "Makuhita",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -3519,9 +3519,9 @@
       }
     ]
   },
-  "297":{
+  "297": {
     "name": "Hariyama",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -3529,9 +3529,9 @@
       }
     ]
   },
-  "298":{
+  "298": {
     "name": "Azurill",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3543,9 +3543,9 @@
       }
     ]
   },
-  "299":{
+  "299": {
     "name": "Nosepass",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -3553,9 +3553,9 @@
       }
     ]
   },
-  "300":{
+  "300": {
     "name": "Skitty",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3563,9 +3563,9 @@
       }
     ]
   },
-  "301":{
+  "301": {
     "name": "Delcatty",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3573,9 +3573,9 @@
       }
     ]
   },
-  "302":{
+  "302": {
     "name": "Sableye",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -3587,9 +3587,9 @@
       }
     ]
   },
-  "303":{
+  "303": {
     "name": "Mawile",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -3601,9 +3601,9 @@
       }
     ]
   },
-  "304":{
+  "304": {
     "name": "Aron",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -3615,9 +3615,9 @@
       }
     ]
   },
-  "305":{
+  "305": {
     "name": "Lairon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -3629,9 +3629,9 @@
       }
     ]
   },
-  "306":{
+  "306": {
     "name": "Aggron",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -3643,9 +3643,9 @@
       }
     ]
   },
-  "307":{
+  "307": {
     "name": "Meditite",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -3657,9 +3657,9 @@
       }
     ]
   },
-  "308":{
+  "308": {
     "name": "Medicham",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -3671,9 +3671,9 @@
       }
     ]
   },
-  "309":{
+  "309": {
     "name": "Electrike",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -3681,9 +3681,9 @@
       }
     ]
   },
-  "310":{
+  "310": {
     "name": "Manectric",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -3691,9 +3691,9 @@
       }
     ]
   },
-  "311":{
+  "311": {
     "name": "Plusle",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -3701,9 +3701,9 @@
       }
     ]
   },
-  "312":{
+  "312": {
     "name": "Minun",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -3711,9 +3711,9 @@
       }
     ]
   },
-  "313":{
+  "313": {
     "name": "Volbeat",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -3721,9 +3721,9 @@
       }
     ]
   },
-  "314":{
+  "314": {
     "name": "Illumise",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -3731,9 +3731,9 @@
       }
     ]
   },
-  "315":{
+  "315": {
     "name": "Roselia",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -3745,9 +3745,9 @@
       }
     ]
   },
-  "316":{
+  "316": {
     "name": "Gulpin",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -3755,9 +3755,9 @@
       }
     ]
   },
-  "317":{
+  "317": {
     "name": "Swalot",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -3765,9 +3765,9 @@
       }
     ]
   },
-  "318":{
+  "318": {
     "name": "Carvanha",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -3779,9 +3779,9 @@
       }
     ]
   },
-  "319":{
+  "319": {
     "name": "Sharpedo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -3793,9 +3793,9 @@
       }
     ]
   },
-  "320":{
+  "320": {
     "name": "Wailmer",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -3803,9 +3803,9 @@
       }
     ]
   },
-  "321":{
+  "321": {
     "name": "Wailord",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -3813,9 +3813,9 @@
       }
     ]
   },
-  "322":{
+  "322": {
     "name": "Numel",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -3827,9 +3827,9 @@
       }
     ]
   },
-  "323":{
+  "323": {
     "name": "Camerupt",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -3841,9 +3841,9 @@
       }
     ]
   },
-  "324":{
+  "324": {
     "name": "Torkoal",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -3851,9 +3851,9 @@
       }
     ]
   },
-  "325":{
+  "325": {
     "name": "Spoink",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -3861,9 +3861,9 @@
       }
     ]
   },
-  "326":{
+  "326": {
     "name": "Grumpig",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -3871,9 +3871,9 @@
       }
     ]
   },
-  "327":{
+  "327": {
     "name": "Spinda",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3881,9 +3881,9 @@
       }
     ]
   },
-  "328":{
+  "328": {
     "name": "Trapinch",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -3891,9 +3891,9 @@
       }
     ]
   },
-  "329":{
+  "329": {
     "name": "Vibrava",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -3905,9 +3905,9 @@
       }
     ]
   },
-  "330":{
+  "330": {
     "name": "Flygon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -3919,9 +3919,9 @@
       }
     ]
   },
-  "331":{
+  "331": {
     "name": "Cacnea",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -3929,9 +3929,9 @@
       }
     ]
   },
-  "332":{
+  "332": {
     "name": "Cacturne",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -3943,9 +3943,9 @@
       }
     ]
   },
-  "333":{
+  "333": {
     "name": "Swablu",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3957,9 +3957,9 @@
       }
     ]
   },
-  "334":{
+  "334": {
     "name": "Altaria",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -3971,9 +3971,9 @@
       }
     ]
   },
-  "335":{
+  "335": {
     "name": "Zangoose",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -3981,9 +3981,9 @@
       }
     ]
   },
-  "336":{
+  "336": {
     "name": "Seviper",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -3991,9 +3991,9 @@
       }
     ]
   },
-  "337":{
+  "337": {
     "name": "Lunatone",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -4005,9 +4005,9 @@
       }
     ]
   },
-  "338":{
+  "338": {
     "name": "Solrock",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -4019,9 +4019,9 @@
       }
     ]
   },
-  "339":{
+  "339": {
     "name": "Barboach",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4033,9 +4033,9 @@
       }
     ]
   },
-  "340":{
+  "340": {
     "name": "Whiscash",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4047,9 +4047,9 @@
       }
     ]
   },
-  "341":{
+  "341": {
     "name": "Corphish",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4057,9 +4057,9 @@
       }
     ]
   },
-  "342":{
+  "342": {
     "name": "Crawdaunt",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4071,9 +4071,9 @@
       }
     ]
   },
-  "343":{
+  "343": {
     "name": "Baltoy",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -4085,9 +4085,9 @@
       }
     ]
   },
-  "344":{
+  "344": {
     "name": "Claydol",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -4099,9 +4099,9 @@
       }
     ]
   },
-  "345":{
+  "345": {
     "name": "Lileep",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -4113,9 +4113,9 @@
       }
     ]
   },
-  "346":{
+  "346": {
     "name": "Cradily",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -4127,9 +4127,9 @@
       }
     ]
   },
-  "347":{
+  "347": {
     "name": "Anorith",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -4141,9 +4141,9 @@
       }
     ]
   },
-  "348":{
+  "348": {
     "name": "Armaldo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -4155,9 +4155,9 @@
       }
     ]
   },
-  "349":{
+  "349": {
     "name": "Feebas",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4165,9 +4165,9 @@
       }
     ]
   },
-  "350":{
+  "350": {
     "name": "Milotic",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4175,9 +4175,9 @@
       }
     ]
   },
-  "351":{
+  "351": {
     "name": "Castform",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -4185,9 +4185,9 @@
       }
     ]
   },
-  "352":{
+  "352": {
     "name": "Kecleon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -4195,9 +4195,9 @@
       }
     ]
   },
-  "353":{
+  "353": {
     "name": "Shuppet",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -4205,9 +4205,9 @@
       }
     ]
   },
-  "354":{
+  "354": {
     "name": "Banette",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -4215,9 +4215,9 @@
       }
     ]
   },
-  "355":{
+  "355": {
     "name": "Duskull",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -4225,9 +4225,9 @@
       }
     ]
   },
-  "356":{
+  "356": {
     "name": "Dusclops",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -4235,9 +4235,9 @@
       }
     ]
   },
-  "357":{
+  "357": {
     "name": "Tropius",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -4249,9 +4249,9 @@
       }
     ]
   },
-  "358":{
+  "358": {
     "name": "Chimecho",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -4259,9 +4259,9 @@
       }
     ]
   },
-  "359":{
+  "359": {
     "name": "Absol",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -4269,9 +4269,9 @@
       }
     ]
   },
-  "360":{
+  "360": {
     "name": "Wynaut",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -4279,9 +4279,9 @@
       }
     ]
   },
-  "361":{
+  "361": {
     "name": "Snorunt",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -4289,9 +4289,9 @@
       }
     ]
   },
-  "362":{
+  "362": {
     "name": "Glalie",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -4299,9 +4299,9 @@
       }
     ]
   },
-  "363":{
+  "363": {
     "name": "Spheal",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -4313,9 +4313,9 @@
       }
     ]
   },
-  "364":{
+  "364": {
     "name": "Sealeo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -4327,9 +4327,9 @@
       }
     ]
   },
-  "365":{
+  "365": {
     "name": "Walrein",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -4341,9 +4341,9 @@
       }
     ]
   },
-  "366":{
+  "366": {
     "name": "Clamperl",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4351,9 +4351,9 @@
       }
     ]
   },
-  "367":{
+  "367": {
     "name": "Huntail",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4361,9 +4361,9 @@
       }
     ]
   },
-  "368":{
+  "368": {
     "name": "Gorebyss",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4371,9 +4371,9 @@
       }
     ]
   },
-  "369":{
+  "369": {
     "name": "Relicanth",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4385,9 +4385,9 @@
       }
     ]
   },
-  "370":{
+  "370": {
     "name": "Luvdisc",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4395,9 +4395,9 @@
       }
     ]
   },
-  "371":{
+  "371": {
     "name": "Bagon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -4405,9 +4405,9 @@
       }
     ]
   },
-  "372":{
+  "372": {
     "name": "Shelgon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -4415,9 +4415,9 @@
       }
     ]
   },
-  "373":{
+  "373": {
     "name": "Salamence",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -4429,9 +4429,9 @@
       }
     ]
   },
-  "374":{
+  "374": {
     "name": "Beldum",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -4443,9 +4443,9 @@
       }
     ]
   },
-  "375":{
+  "375": {
     "name": "Metang",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -4457,9 +4457,9 @@
       }
     ]
   },
-  "376":{
+  "376": {
     "name": "Metagross",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -4471,9 +4471,9 @@
       }
     ]
   },
-  "377":{
+  "377": {
     "name": "Regirock",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -4481,9 +4481,9 @@
       }
     ]
   },
-  "378":{
+  "378": {
     "name": "Regice",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -4491,9 +4491,9 @@
       }
     ]
   },
-  "379":{
+  "379": {
     "name": "Registeel",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -4501,9 +4501,9 @@
       }
     ]
   },
-  "380":{
+  "380": {
     "name": "Latias",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -4515,9 +4515,9 @@
       }
     ]
   },
-  "381":{
+  "381": {
     "name": "Latios",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -4529,9 +4529,9 @@
       }
     ]
   },
-  "382":{
+  "382": {
     "name": "Kyogre",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4539,9 +4539,9 @@
       }
     ]
   },
-  "383":{
+  "383": {
     "name": "Groudon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -4549,9 +4549,9 @@
       }
     ]
   },
-  "384":{
+  "384": {
     "name": "Rayquaza",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -4563,9 +4563,9 @@
       }
     ]
   },
-  "385":{
+  "385": {
     "name": "Jirachi",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -4577,9 +4577,9 @@
       }
     ]
   },
-  "386":{
+  "386": {
     "name": "Deoxys",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -4587,9 +4587,9 @@
       }
     ]
   },
-  "387":{
+  "387": {
     "name": "Turtwig",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -4597,9 +4597,9 @@
       }
     ]
   },
-  "388":{
+  "388": {
     "name": "Grotle",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -4607,9 +4607,9 @@
       }
     ]
   },
-  "389":{
+  "389": {
     "name": "Torterra",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -4621,9 +4621,9 @@
       }
     ]
   },
-  "390":{
+  "390": {
     "name": "Chimchar",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -4631,9 +4631,9 @@
       }
     ]
   },
-  "391":{
+  "391": {
     "name": "Monferno",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -4645,9 +4645,9 @@
       }
     ]
   },
-  "392":{
+  "392": {
     "name": "Infernape",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -4659,9 +4659,9 @@
       }
     ]
   },
-  "393":{
+  "393": {
     "name": "Piplup",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4669,9 +4669,9 @@
       }
     ]
   },
-  "394":{
+  "394": {
     "name": "Prinplup",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4679,9 +4679,9 @@
       }
     ]
   },
-  "395":{
+  "395": {
     "name": "Empoleon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4693,9 +4693,9 @@
       }
     ]
   },
-  "396":{
+  "396": {
     "name": "Starly",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -4707,9 +4707,9 @@
       }
     ]
   },
-  "397":{
+  "397": {
     "name": "Staravia",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -4721,9 +4721,9 @@
       }
     ]
   },
-  "398":{
+  "398": {
     "name": "Staraptor",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -4735,9 +4735,9 @@
       }
     ]
   },
-  "399":{
+  "399": {
     "name": "Bidoof",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -4745,9 +4745,9 @@
       }
     ]
   },
-  "400":{
+  "400": {
     "name": "Bibarel",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -4759,9 +4759,9 @@
       }
     ]
   },
-  "401":{
+  "401": {
     "name": "Kricketot",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -4769,9 +4769,9 @@
       }
     ]
   },
-  "402":{
+  "402": {
     "name": "Kricketune",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -4779,9 +4779,9 @@
       }
     ]
   },
-  "403":{
+  "403": {
     "name": "Shinx",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -4789,9 +4789,9 @@
       }
     ]
   },
-  "404":{
+  "404": {
     "name": "Luxio",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -4799,9 +4799,9 @@
       }
     ]
   },
-  "405":{
+  "405": {
     "name": "Luxray",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -4809,9 +4809,9 @@
       }
     ]
   },
-  "406":{
+  "406": {
     "name": "Budew",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -4823,9 +4823,9 @@
       }
     ]
   },
-  "407":{
+  "407": {
     "name": "Roserade",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -4837,9 +4837,9 @@
       }
     ]
   },
-  "408":{
+  "408": {
     "name": "Cranidos",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -4847,9 +4847,9 @@
       }
     ]
   },
-  "409":{
+  "409": {
     "name": "Rampardos",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -4857,9 +4857,9 @@
       }
     ]
   },
-  "410":{
+  "410": {
     "name": "Shieldon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -4871,9 +4871,9 @@
       }
     ]
   },
-  "411":{
+  "411": {
     "name": "Bastiodon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -4885,9 +4885,9 @@
       }
     ]
   },
-  "412":{
+  "412": {
     "name": "Burmy",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -4895,9 +4895,23 @@
       }
     ]
   },
-  "414":{
+  "413": {
+    "name": "Wormadam",
+    "rarity": "",
+    "types": [
+      {
+        "type": "Bug",
+        "color": "#a8b820"
+      },
+      {
+        "type": "Grass",
+        "color": "#78c850"
+      }
+    ]
+  },
+  "414": {
     "name": "Mothim",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -4909,9 +4923,9 @@
       }
     ]
   },
-  "415":{
+  "415": {
     "name": "Combee",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -4923,9 +4937,9 @@
       }
     ]
   },
-  "416":{
+  "416": {
     "name": "Vespiquen",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -4937,9 +4951,9 @@
       }
     ]
   },
-  "417":{
+  "417": {
     "name": "Pachirisu",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -4947,9 +4961,9 @@
       }
     ]
   },
-  "418":{
+  "418": {
     "name": "Buizel",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4957,9 +4971,9 @@
       }
     ]
   },
-  "419":{
+  "419": {
     "name": "Floatzel",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4967,9 +4981,9 @@
       }
     ]
   },
-  "420":{
+  "420": {
     "name": "Cherubi",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -4977,9 +4991,9 @@
       }
     ]
   },
-  "421":{
+  "421": {
     "name": "Cherrim",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -4987,9 +5001,9 @@
       }
     ]
   },
-  "422":{
+  "422": {
     "name": "Shellos",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -4997,9 +5011,9 @@
       }
     ]
   },
-  "423":{
+  "423": {
     "name": "Gastrodon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -5011,9 +5025,9 @@
       }
     ]
   },
-  "424":{
+  "424": {
     "name": "Ambipom",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5021,9 +5035,9 @@
       }
     ]
   },
-  "425":{
+  "425": {
     "name": "Drifloon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -5035,9 +5049,9 @@
       }
     ]
   },
-  "426":{
+  "426": {
     "name": "Drifblim",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -5049,9 +5063,9 @@
       }
     ]
   },
-  "427":{
+  "427": {
     "name": "Buneary",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5059,9 +5073,9 @@
       }
     ]
   },
-  "428":{
+  "428": {
     "name": "Lopunny",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5069,9 +5083,9 @@
       }
     ]
   },
-  "429":{
+  "429": {
     "name": "Mismagius",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -5079,9 +5093,9 @@
       }
     ]
   },
-  "430":{
+  "430": {
     "name": "Honchkrow",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -5093,9 +5107,9 @@
       }
     ]
   },
-  "431":{
+  "431": {
     "name": "Glameow",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5103,9 +5117,9 @@
       }
     ]
   },
-  "432":{
+  "432": {
     "name": "Purugly",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5113,9 +5127,9 @@
       }
     ]
   },
-  "433":{
+  "433": {
     "name": "Chingling",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -5123,9 +5137,9 @@
       }
     ]
   },
-  "434":{
+  "434": {
     "name": "Stunky",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -5137,9 +5151,9 @@
       }
     ]
   },
-  "435":{
+  "435": {
     "name": "Skuntank",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -5151,9 +5165,9 @@
       }
     ]
   },
-  "436":{
+  "436": {
     "name": "Bronzor",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -5165,9 +5179,9 @@
       }
     ]
   },
-  "437":{
+  "437": {
     "name": "Bronzong",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -5179,9 +5193,9 @@
       }
     ]
   },
-  "438":{
+  "438": {
     "name": "Bonsly",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -5189,9 +5203,9 @@
       }
     ]
   },
-  "439":{
+  "439": {
     "name": "Mime Jr.",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -5203,9 +5217,9 @@
       }
     ]
   },
-  "440":{
+  "440": {
     "name": "Happiny",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5213,9 +5227,9 @@
       }
     ]
   },
-  "441":{
+  "441": {
     "name": "Chatot",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5227,9 +5241,9 @@
       }
     ]
   },
-  "442":{
+  "442": {
     "name": "Spiritomb",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -5241,9 +5255,9 @@
       }
     ]
   },
-  "443":{
+  "443": {
     "name": "Gible",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -5255,9 +5269,9 @@
       }
     ]
   },
-  "444":{
+  "444": {
     "name": "Gabite",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -5269,9 +5283,9 @@
       }
     ]
   },
-  "445":{
+  "445": {
     "name": "Garchomp",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -5283,9 +5297,9 @@
       }
     ]
   },
-  "446":{
+  "446": {
     "name": "Munchlax",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5293,9 +5307,9 @@
       }
     ]
   },
-  "447":{
+  "447": {
     "name": "Riolu",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -5303,9 +5317,9 @@
       }
     ]
   },
-  "448":{
+  "448": {
     "name": "Lucario",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -5317,9 +5331,9 @@
       }
     ]
   },
-  "449":{
+  "449": {
     "name": "Hippopotas",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -5327,9 +5341,9 @@
       }
     ]
   },
-  "450":{
+  "450": {
     "name": "Hippowdon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -5337,9 +5351,9 @@
       }
     ]
   },
-  "451":{
+  "451": {
     "name": "Skorupi",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -5351,9 +5365,9 @@
       }
     ]
   },
-  "452":{
+  "452": {
     "name": "Drapion",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -5365,9 +5379,9 @@
       }
     ]
   },
-  "453":{
+  "453": {
     "name": "Croagunk",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -5379,9 +5393,9 @@
       }
     ]
   },
-  "454":{
+  "454": {
     "name": "Toxicroak",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -5393,9 +5407,9 @@
       }
     ]
   },
-  "455":{
+  "455": {
     "name": "Carnivine",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -5403,9 +5417,9 @@
       }
     ]
   },
-  "456":{
+  "456": {
     "name": "Finneon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -5413,9 +5427,9 @@
       }
     ]
   },
-  "457":{
+  "457": {
     "name": "Lumineon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -5423,9 +5437,9 @@
       }
     ]
   },
-  "458":{
+  "458": {
     "name": "Mantyke",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -5437,9 +5451,9 @@
       }
     ]
   },
-  "459":{
+  "459": {
     "name": "Snover",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -5451,9 +5465,9 @@
       }
     ]
   },
-  "460":{
+  "460": {
     "name": "Abomasnow",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -5465,9 +5479,9 @@
       }
     ]
   },
-  "461":{
+  "461": {
     "name": "Weavile",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -5479,9 +5493,9 @@
       }
     ]
   },
-  "462":{
+  "462": {
     "name": "Magnezone",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -5493,9 +5507,9 @@
       }
     ]
   },
-  "463":{
+  "463": {
     "name": "Lickilicky",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5503,9 +5517,9 @@
       }
     ]
   },
-  "464":{
+  "464": {
     "name": "Rhyperior",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -5517,9 +5531,9 @@
       }
     ]
   },
-  "465":{
+  "465": {
     "name": "Tangrowth",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -5527,9 +5541,9 @@
       }
     ]
   },
-  "466":{
+  "466": {
     "name": "Electivire",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -5537,9 +5551,9 @@
       }
     ]
   },
-  "467":{
+  "467": {
     "name": "Magmortar",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -5547,9 +5561,9 @@
       }
     ]
   },
-  "468":{
+  "468": {
     "name": "Togekiss",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fairy",
@@ -5561,9 +5575,9 @@
       }
     ]
   },
-  "469":{
+  "469": {
     "name": "Yanmega",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -5575,9 +5589,9 @@
       }
     ]
   },
-  "470":{
+  "470": {
     "name": "Leafeon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -5585,9 +5599,9 @@
       }
     ]
   },
-  "471":{
+  "471": {
     "name": "Glaceon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -5595,9 +5609,9 @@
       }
     ]
   },
-  "472":{
+  "472": {
     "name": "Gliscor",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -5609,9 +5623,9 @@
       }
     ]
   },
-  "473":{
+  "473": {
     "name": "Mamoswine",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -5623,9 +5637,9 @@
       }
     ]
   },
-  "474":{
+  "474": {
     "name": "Porygon-Z",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5633,9 +5647,9 @@
       }
     ]
   },
-  "475":{
+  "475": {
     "name": "Gallade",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -5647,9 +5661,9 @@
       }
     ]
   },
-  "476":{
+  "476": {
     "name": "Probopass",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -5661,9 +5675,9 @@
       }
     ]
   },
-  "477":{
+  "477": {
     "name": "Dusknoir",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -5671,9 +5685,9 @@
       }
     ]
   },
-  "478":{
+  "478": {
     "name": "Froslass",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -5685,9 +5699,9 @@
       }
     ]
   },
-  "479":{
+  "479": {
     "name": "Rotom",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -5699,9 +5713,9 @@
       }
     ]
   },
-  "480":{
+  "480": {
     "name": "Uxie",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -5709,9 +5723,9 @@
       }
     ]
   },
-  "481":{
+  "481": {
     "name": "Mesprit",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -5719,9 +5733,9 @@
       }
     ]
   },
-  "482":{
+  "482": {
     "name": "Azelf",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -5729,9 +5743,9 @@
       }
     ]
   },
-  "483":{
+  "483": {
     "name": "Dialga",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -5743,9 +5757,9 @@
       }
     ]
   },
-  "484":{
+  "484": {
     "name": "Palkia",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -5757,9 +5771,9 @@
       }
     ]
   },
-  "485":{
+  "485": {
     "name": "Heatran",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -5771,9 +5785,9 @@
       }
     ]
   },
-  "486":{
+  "486": {
     "name": "Regigigas",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5781,9 +5795,23 @@
       }
     ]
   },
-  "488":{
+  "487": {
+    "name": "Giratina",
+    "rarity": "",
+    "types": [
+      {
+        "type": "Ghost",
+        "color": "#705898"
+      },
+      {
+        "type": "Dragon",
+        "color": "#7038f8"
+      }
+    ]
+  },
+  "488": {
     "name": "Cresselia",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -5791,9 +5819,9 @@
       }
     ]
   },
-  "489":{
+  "489": {
     "name": "Phione",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -5801,9 +5829,9 @@
       }
     ]
   },
-  "490":{
+  "490": {
     "name": "Manaphy",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -5811,9 +5839,9 @@
       }
     ]
   },
-  "491":{
+  "491": {
     "name": "Darkrai",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -5821,9 +5849,19 @@
       }
     ]
   },
-  "493":{
+  "492": {
+    "name": "Shaymin",
+    "rarity": "",
+    "types": [
+      {
+        "type": "Grass",
+        "color": "#78c850"
+      }
+    ]
+  },
+  "493": {
     "name": "Arceus",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5831,9 +5869,9 @@
       }
     ]
   },
-  "494":{
+  "494": {
     "name": "Victini",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -5845,9 +5883,9 @@
       }
     ]
   },
-  "495":{
+  "495": {
     "name": "Snivy",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -5855,9 +5893,9 @@
       }
     ]
   },
-  "496":{
+  "496": {
     "name": "Servine",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -5865,9 +5903,9 @@
       }
     ]
   },
-  "497":{
+  "497": {
     "name": "Serperior",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -5875,9 +5913,9 @@
       }
     ]
   },
-  "498":{
+  "498": {
     "name": "Tepig",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -5885,9 +5923,9 @@
       }
     ]
   },
-  "499":{
+  "499": {
     "name": "Pignite",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -5899,9 +5937,9 @@
       }
     ]
   },
-  "500":{
+  "500": {
     "name": "Emboar",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -5913,9 +5951,9 @@
       }
     ]
   },
-  "501":{
+  "501": {
     "name": "Oshawott",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -5923,9 +5961,9 @@
       }
     ]
   },
-  "502":{
+  "502": {
     "name": "Dewott",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -5933,9 +5971,9 @@
       }
     ]
   },
-  "503":{
+  "503": {
     "name": "Samurott",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -5943,9 +5981,9 @@
       }
     ]
   },
-  "504":{
+  "504": {
     "name": "Patrat",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5953,9 +5991,9 @@
       }
     ]
   },
-  "505":{
+  "505": {
     "name": "Watchog",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5963,9 +6001,9 @@
       }
     ]
   },
-  "506":{
+  "506": {
     "name": "Lillipup",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5973,9 +6011,9 @@
       }
     ]
   },
-  "507":{
+  "507": {
     "name": "Herdier",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5983,9 +6021,9 @@
       }
     ]
   },
-  "508":{
+  "508": {
     "name": "Stoutland",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -5993,9 +6031,9 @@
       }
     ]
   },
-  "509":{
+  "509": {
     "name": "Purrloin",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -6003,9 +6041,9 @@
       }
     ]
   },
-  "510":{
+  "510": {
     "name": "Liepard",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -6013,9 +6051,9 @@
       }
     ]
   },
-  "511":{
+  "511": {
     "name": "Pansage",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -6023,9 +6061,9 @@
       }
     ]
   },
-  "512":{
+  "512": {
     "name": "Simisage",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -6033,9 +6071,9 @@
       }
     ]
   },
-  "513":{
+  "513": {
     "name": "Pansear",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -6043,9 +6081,9 @@
       }
     ]
   },
-  "514":{
+  "514": {
     "name": "Simisear",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -6053,9 +6091,9 @@
       }
     ]
   },
-  "515":{
+  "515": {
     "name": "Panpour",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -6063,9 +6101,9 @@
       }
     ]
   },
-  "516":{
+  "516": {
     "name": "Simipour",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -6073,9 +6111,9 @@
       }
     ]
   },
-  "517":{
+  "517": {
     "name": "Munna",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -6083,9 +6121,9 @@
       }
     ]
   },
-  "518":{
+  "518": {
     "name": "Musharna",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -6093,9 +6131,9 @@
       }
     ]
   },
-  "519":{
+  "519": {
     "name": "Pidove",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -6107,9 +6145,9 @@
       }
     ]
   },
-  "520":{
+  "520": {
     "name": "Tranquill",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -6121,9 +6159,9 @@
       }
     ]
   },
-  "521":{
+  "521": {
     "name": "Unfezant",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -6135,9 +6173,9 @@
       }
     ]
   },
-  "522":{
+  "522": {
     "name": "Blitzle",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -6145,9 +6183,9 @@
       }
     ]
   },
-  "523":{
+  "523": {
     "name": "Zebstrika",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -6155,9 +6193,9 @@
       }
     ]
   },
-  "524":{
+  "524": {
     "name": "Roggenrola",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -6165,9 +6203,9 @@
       }
     ]
   },
-  "525":{
+  "525": {
     "name": "Boldore",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -6175,9 +6213,9 @@
       }
     ]
   },
-  "526":{
+  "526": {
     "name": "Gigalith",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -6185,9 +6223,9 @@
       }
     ]
   },
-  "527":{
+  "527": {
     "name": "Woobat",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -6199,9 +6237,9 @@
       }
     ]
   },
-  "528":{
+  "528": {
     "name": "Swoobat",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -6213,9 +6251,9 @@
       }
     ]
   },
-  "529":{
+  "529": {
     "name": "Drilbur",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -6223,9 +6261,9 @@
       }
     ]
   },
-  "530":{
+  "530": {
     "name": "Excadrill",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -6237,9 +6275,9 @@
       }
     ]
   },
-  "531":{
+  "531": {
     "name": "Audino",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -6247,9 +6285,9 @@
       }
     ]
   },
-  "532":{
+  "532": {
     "name": "Timburr",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -6257,9 +6295,9 @@
       }
     ]
   },
-  "533":{
+  "533": {
     "name": "Gurdurr",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -6267,9 +6305,9 @@
       }
     ]
   },
-  "534":{
+  "534": {
     "name": "Conkeldurr",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -6277,9 +6315,9 @@
       }
     ]
   },
-  "535":{
+  "535": {
     "name": "Tympole",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -6287,9 +6325,9 @@
       }
     ]
   },
-  "536":{
+  "536": {
     "name": "Palpitoad",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -6301,9 +6339,9 @@
       }
     ]
   },
-  "537":{
+  "537": {
     "name": "Seismitoad",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -6315,9 +6353,9 @@
       }
     ]
   },
-  "538":{
+  "538": {
     "name": "Throh",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -6325,9 +6363,9 @@
       }
     ]
   },
-  "539":{
+  "539": {
     "name": "Sawk",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -6335,9 +6373,9 @@
       }
     ]
   },
-  "540":{
+  "540": {
     "name": "Sewaddle",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -6349,9 +6387,9 @@
       }
     ]
   },
-  "541":{
+  "541": {
     "name": "Swadloon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -6363,9 +6401,9 @@
       }
     ]
   },
-  "542":{
+  "542": {
     "name": "Leavanny",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -6377,9 +6415,9 @@
       }
     ]
   },
-  "543":{
+  "543": {
     "name": "Venipede",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -6391,9 +6429,9 @@
       }
     ]
   },
-  "544":{
+  "544": {
     "name": "Whirlipede",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -6405,9 +6443,9 @@
       }
     ]
   },
-  "545":{
+  "545": {
     "name": "Scolipede",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -6419,9 +6457,9 @@
       }
     ]
   },
-  "546":{
+  "546": {
     "name": "Cottonee",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -6433,9 +6471,9 @@
       }
     ]
   },
-  "547":{
+  "547": {
     "name": "Whimsicott",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -6447,9 +6485,9 @@
       }
     ]
   },
-  "548":{
+  "548": {
     "name": "Petilil",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -6457,9 +6495,9 @@
       }
     ]
   },
-  "549":{
+  "549": {
     "name": "Lilligant",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -6467,9 +6505,9 @@
       }
     ]
   },
-  "550":{
+  "550": {
     "name": "Basculin",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -6477,9 +6515,9 @@
       }
     ]
   },
-  "551":{
+  "551": {
     "name": "Sandile",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -6491,9 +6529,9 @@
       }
     ]
   },
-  "552":{
+  "552": {
     "name": "Krokorok",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -6505,9 +6543,9 @@
       }
     ]
   },
-  "553":{
+  "553": {
     "name": "Krookodile",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -6519,9 +6557,9 @@
       }
     ]
   },
-  "554":{
+  "554": {
     "name": "Darumaka",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -6529,9 +6567,9 @@
       }
     ]
   },
-  "555":{
+  "555": {
     "name": "Darmanitan",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -6539,9 +6577,9 @@
       }
     ]
   },
-  "556":{
+  "556": {
     "name": "Maractus",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -6549,9 +6587,9 @@
       }
     ]
   },
-  "557":{
+  "557": {
     "name": "Dwebble",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -6563,9 +6601,9 @@
       }
     ]
   },
-  "558":{
+  "558": {
     "name": "Crustle",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -6577,9 +6615,9 @@
       }
     ]
   },
-  "559":{
+  "559": {
     "name": "Scraggy",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -6591,9 +6629,9 @@
       }
     ]
   },
-  "560":{
+  "560": {
     "name": "Scrafty",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -6605,9 +6643,9 @@
       }
     ]
   },
-  "561":{
+  "561": {
     "name": "Sigilyph",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -6619,9 +6657,9 @@
       }
     ]
   },
-  "562":{
+  "562": {
     "name": "Yamask",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -6629,9 +6667,9 @@
       }
     ]
   },
-  "563":{
+  "563": {
     "name": "Cohagrigus",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -6639,9 +6677,9 @@
       }
     ]
   },
-  "564":{
+  "564": {
     "name": "Tirtouga",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -6653,9 +6691,9 @@
       }
     ]
   },
-  "565":{
+  "565": {
     "name": "Carracosta",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -6667,9 +6705,9 @@
       }
     ]
   },
-  "566":{
+  "566": {
     "name": "Archen",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -6681,9 +6719,9 @@
       }
     ]
   },
-  "567":{
+  "567": {
     "name": "Archeops",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -6695,9 +6733,9 @@
       }
     ]
   },
-  "568":{
+  "568": {
     "name": "Trubbish",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -6705,9 +6743,9 @@
       }
     ]
   },
-  "569":{
+  "569": {
     "name": "Garbodor",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -6715,9 +6753,9 @@
       }
     ]
   },
-  "570":{
+  "570": {
     "name": "Zorua",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -6725,9 +6763,9 @@
       }
     ]
   },
-  "571":{
+  "571": {
     "name": "Zoroark",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -6735,9 +6773,9 @@
       }
     ]
   },
-  "572":{
+  "572": {
     "name": "Minccino",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -6745,9 +6783,9 @@
       }
     ]
   },
-  "573":{
+  "573": {
     "name": "Cinccino",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -6755,9 +6793,9 @@
       }
     ]
   },
-  "574":{
+  "574": {
     "name": "Gothita",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -6765,9 +6803,9 @@
       }
     ]
   },
-  "575":{
+  "575": {
     "name": "Gothorita",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -6775,9 +6813,9 @@
       }
     ]
   },
-  "576":{
+  "576": {
     "name": "Gothitelle",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -6785,9 +6823,9 @@
       }
     ]
   },
-  "577":{
+  "577": {
     "name": "Solosis",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -6795,9 +6833,9 @@
       }
     ]
   },
-  "578":{
+  "578": {
     "name": "Duosion",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -6805,9 +6843,9 @@
       }
     ]
   },
-  "579":{
+  "579": {
     "name": "Reuniclus",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -6815,9 +6853,9 @@
       }
     ]
   },
-  "580":{
+  "580": {
     "name": "Ducklett",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -6829,9 +6867,9 @@
       }
     ]
   },
-  "581":{
+  "581": {
     "name": "Swanna",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -6843,9 +6881,9 @@
       }
     ]
   },
-  "582":{
+  "582": {
     "name": "Vanillite",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -6853,9 +6891,9 @@
       }
     ]
   },
-  "583":{
+  "583": {
     "name": "Vanillish",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -6863,9 +6901,9 @@
       }
     ]
   },
-  "584":{
+  "584": {
     "name": "Vanilluxe",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -6873,9 +6911,9 @@
       }
     ]
   },
-  "585":{
+  "585": {
     "name": "Deerling",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -6887,9 +6925,9 @@
       }
     ]
   },
-  "586":{
+  "586": {
     "name": "Sawsbuck",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -6901,9 +6939,9 @@
       }
     ]
   },
-  "587":{
+  "587": {
     "name": "Emolga",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -6915,9 +6953,9 @@
       }
     ]
   },
-  "588":{
+  "588": {
     "name": "Karrablast",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -6925,9 +6963,9 @@
       }
     ]
   },
-  "589":{
+  "589": {
     "name": "Escavalier",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -6939,9 +6977,9 @@
       }
     ]
   },
-  "590":{
+  "590": {
     "name": "Foongus",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -6953,9 +6991,9 @@
       }
     ]
   },
-  "591":{
+  "591": {
     "name": "Amoonguss",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -6967,9 +7005,9 @@
       }
     ]
   },
-  "592":{
+  "592": {
     "name": "Frillish",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -6981,9 +7019,9 @@
       }
     ]
   },
-  "593":{
+  "593": {
     "name": "Jellicent",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -6995,9 +7033,9 @@
       }
     ]
   },
-  "594":{
+  "594": {
     "name": "Alomomola",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -7005,9 +7043,9 @@
       }
     ]
   },
-  "595":{
+  "595": {
     "name": "Joltik",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -7019,9 +7057,9 @@
       }
     ]
   },
-  "596":{
+  "596": {
     "name": "Galvantula",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -7033,9 +7071,9 @@
       }
     ]
   },
-  "597":{
+  "597": {
     "name": "Ferroseed",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -7047,9 +7085,9 @@
       }
     ]
   },
-  "598":{
+  "598": {
     "name": "Ferrothorn",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -7061,9 +7099,9 @@
       }
     ]
   },
-  "599":{
+  "599": {
     "name": "Klink",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -7071,9 +7109,9 @@
       }
     ]
   },
-  "600":{
+  "600": {
     "name": "Klang",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -7081,9 +7119,9 @@
       }
     ]
   },
-  "601":{
+  "601": {
     "name": "Klinklang",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -7091,9 +7129,9 @@
       }
     ]
   },
-  "602":{
+  "602": {
     "name": "Tynamo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -7101,9 +7139,9 @@
       }
     ]
   },
-  "603":{
+  "603": {
     "name": "Eelektrik",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -7111,9 +7149,9 @@
       }
     ]
   },
-  "604":{
+  "604": {
     "name": "Eelektross",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -7121,9 +7159,9 @@
       }
     ]
   },
-  "605":{
+  "605": {
     "name": "Elgyem",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -7131,9 +7169,9 @@
       }
     ]
   },
-  "606":{
+  "606": {
     "name": "Beheeyem",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -7141,9 +7179,9 @@
       }
     ]
   },
-  "607":{
+  "607": {
     "name": "Litwick",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -7155,9 +7193,9 @@
       }
     ]
   },
-  "608":{
+  "608": {
     "name": "Lampent",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -7169,9 +7207,9 @@
       }
     ]
   },
-  "609":{
+  "609": {
     "name": "Chandelure",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -7183,9 +7221,9 @@
       }
     ]
   },
-  "610":{
+  "610": {
     "name": "Axew",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -7193,9 +7231,9 @@
       }
     ]
   },
-  "611":{
+  "611": {
     "name": "Fraxure",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -7203,9 +7241,9 @@
       }
     ]
   },
-  "612":{
+  "612": {
     "name": "Haxorus",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -7213,9 +7251,9 @@
       }
     ]
   },
-  "613":{
+  "613": {
     "name": "Cubchoo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -7223,9 +7261,9 @@
       }
     ]
   },
-  "614":{
+  "614": {
     "name": "Beartic",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -7233,9 +7271,9 @@
       }
     ]
   },
-  "615":{
+  "615": {
     "name": "Cryogonal",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -7243,9 +7281,9 @@
       }
     ]
   },
-  "616":{
+  "616": {
     "name": "Shelmet",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -7253,9 +7291,9 @@
       }
     ]
   },
-  "617":{
+  "617": {
     "name": "Accelgor",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -7263,9 +7301,9 @@
       }
     ]
   },
-  "618":{
+  "618": {
     "name": "Stunfisk",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -7277,9 +7315,9 @@
       }
     ]
   },
-  "619":{
+  "619": {
     "name": "Mienfoo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -7287,9 +7325,9 @@
       }
     ]
   },
-  "620":{
+  "620": {
     "name": "Mienshao",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -7297,9 +7335,9 @@
       }
     ]
   },
-  "621":{
+  "621": {
     "name": "Druddigon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -7307,9 +7345,9 @@
       }
     ]
   },
-  "622":{
+  "622": {
     "name": "Golett",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -7321,9 +7359,9 @@
       }
     ]
   },
-  "623":{
+  "623": {
     "name": "Golurk",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -7335,9 +7373,9 @@
       }
     ]
   },
-  "624":{
+  "624": {
     "name": "Pawniard",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -7349,9 +7387,9 @@
       }
     ]
   },
-  "625":{
+  "625": {
     "name": "Bisharp",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -7363,9 +7401,9 @@
       }
     ]
   },
-  "626":{
+  "626": {
     "name": "Bouffalant",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -7373,9 +7411,9 @@
       }
     ]
   },
-  "627":{
+  "627": {
     "name": "Rufflet",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -7387,9 +7425,9 @@
       }
     ]
   },
-  "628":{
+  "628": {
     "name": "Braviary",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -7401,9 +7439,9 @@
       }
     ]
   },
-  "629":{
+  "629": {
     "name": "Vullaby",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -7415,9 +7453,9 @@
       }
     ]
   },
-  "630":{
+  "630": {
     "name": "Mandibuzz",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -7429,9 +7467,9 @@
       }
     ]
   },
-  "631":{
+  "631": {
     "name": "Heatmor",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -7439,9 +7477,9 @@
       }
     ]
   },
-  "632":{
+  "632": {
     "name": "Durant",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -7453,9 +7491,9 @@
       }
     ]
   },
-  "633":{
+  "633": {
     "name": "Deino",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -7467,9 +7505,9 @@
       }
     ]
   },
-  "634":{
+  "634": {
     "name": "Zweilous",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -7481,9 +7519,9 @@
       }
     ]
   },
-  "635":{
+  "635": {
     "name": "Hydreigon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -7495,9 +7533,9 @@
       }
     ]
   },
-  "636":{
+  "636": {
     "name": "Larvesta",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -7509,9 +7547,9 @@
       }
     ]
   },
-  "637":{
+  "637": {
     "name": "Volcarona",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -7523,9 +7561,9 @@
       }
     ]
   },
-  "638":{
+  "638": {
     "name": "Cobalion",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -7537,9 +7575,9 @@
       }
     ]
   },
-  "639":{
+  "639": {
     "name": "Terrakion",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -7551,9 +7589,9 @@
       }
     ]
   },
-  "640":{
+  "640": {
     "name": "Virizion",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -7565,9 +7603,9 @@
       }
     ]
   },
-  "643":{
+  "643": {
     "name": "Reshiram",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -7579,9 +7617,9 @@
       }
     ]
   },
-  "644":{
+  "644": {
     "name": "Zekrom",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -7593,9 +7631,9 @@
       }
     ]
   },
-  "646":{
+  "646": {
     "name": "Kyurem",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -7607,9 +7645,9 @@
       }
     ]
   },
-  "647":{
+  "647": {
     "name": "Keldeo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -7621,9 +7659,9 @@
       }
     ]
   },
-  "649":{
+  "649": {
     "name": "Genesect",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -7635,9 +7673,9 @@
       }
     ]
   },
-  "650":{
+  "650": {
     "name": "Chespin",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -7645,9 +7683,9 @@
       }
     ]
   },
-  "651":{
+  "651": {
     "name": "Quilladin",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -7655,9 +7693,9 @@
       }
     ]
   },
-  "652":{
+  "652": {
     "name": "Chesnaught",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -7669,9 +7707,9 @@
       }
     ]
   },
-  "653":{
+  "653": {
     "name": "Fennekin",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -7679,9 +7717,9 @@
       }
     ]
   },
-  "654":{
+  "654": {
     "name": "Braixen",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -7689,9 +7727,9 @@
       }
     ]
   },
-  "655":{
+  "655": {
     "name": "Delphox",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -7703,9 +7741,9 @@
       }
     ]
   },
-  "656":{
+  "656": {
     "name": "Froakie",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -7713,9 +7751,9 @@
       }
     ]
   },
-  "657":{
+  "657": {
     "name": "Frogadier",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -7723,9 +7761,9 @@
       }
     ]
   },
-  "658":{
+  "658": {
     "name": "Greninja",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -7737,9 +7775,9 @@
       }
     ]
   },
-  "659":{
+  "659": {
     "name": "Bunnelby",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -7747,9 +7785,9 @@
       }
     ]
   },
-  "660":{
+  "660": {
     "name": "Diggersby",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -7761,9 +7799,9 @@
       }
     ]
   },
-  "661":{
+  "661": {
     "name": "Fletchling",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -7775,9 +7813,9 @@
       }
     ]
   },
-  "662":{
+  "662": {
     "name": "Fletchinder",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -7789,9 +7827,9 @@
       }
     ]
   },
-  "663":{
+  "663": {
     "name": "Talonflame",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -7803,9 +7841,9 @@
       }
     ]
   },
-  "664":{
+  "664": {
     "name": "Scatterbug",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -7813,9 +7851,9 @@
       }
     ]
   },
-  "665":{
+  "665": {
     "name": "Spewpa",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -7823,9 +7861,9 @@
       }
     ]
   },
-  "666":{
+  "666": {
     "name": "Vivillon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -7837,9 +7875,9 @@
       }
     ]
   },
-  "667":{
+  "667": {
     "name": "Litleo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -7851,9 +7889,9 @@
       }
     ]
   },
-  "668":{
+  "668": {
     "name": "Pyroar",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -7865,9 +7903,9 @@
       }
     ]
   },
-  "669":{
+  "669": {
     "name": "Flabébé",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fairy",
@@ -7875,9 +7913,9 @@
       }
     ]
   },
-  "670":{
+  "670": {
     "name": "Floette",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fairy",
@@ -7885,9 +7923,9 @@
       }
     ]
   },
-  "671":{
+  "671": {
     "name": "Florges",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fairy",
@@ -7895,9 +7933,9 @@
       }
     ]
   },
-  "672":{
+  "672": {
     "name": "Skiddo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -7905,9 +7943,9 @@
       }
     ]
   },
-  "673":{
+  "673": {
     "name": "Gogoat",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -7915,9 +7953,9 @@
       }
     ]
   },
-  "674":{
+  "674": {
     "name": "Pancham",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -7925,9 +7963,9 @@
       }
     ]
   },
-  "675":{
+  "675": {
     "name": "Pangoro",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -7939,9 +7977,9 @@
       }
     ]
   },
-  "676":{
+  "676": {
     "name": "Furfrou",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -7949,9 +7987,9 @@
       }
     ]
   },
-  "677":{
+  "677": {
     "name": "Espurr",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -7959,9 +7997,9 @@
       }
     ]
   },
-  "678":{
+  "678": {
     "name": "Meowstic",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -7969,9 +8007,9 @@
       }
     ]
   },
-  "679":{
+  "679": {
     "name": "Honedge",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -7983,9 +8021,9 @@
       }
     ]
   },
-  "680":{
+  "680": {
     "name": "Doublade",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -7997,9 +8035,9 @@
       }
     ]
   },
-  "682":{
+  "682": {
     "name": "Spritzee",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fairy",
@@ -8007,9 +8045,9 @@
       }
     ]
   },
-  "683":{
+  "683": {
     "name": "Aromatisse",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fairy",
@@ -8017,9 +8055,9 @@
       }
     ]
   },
-  "684":{
+  "684": {
     "name": "Swirlix",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fairy",
@@ -8027,9 +8065,9 @@
       }
     ]
   },
-  "685":{
+  "685": {
     "name": "Slurpuff",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fairy",
@@ -8037,9 +8075,9 @@
       }
     ]
   },
-  "686":{
+  "686": {
     "name": "Inkay",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -8051,9 +8089,9 @@
       }
     ]
   },
-  "687":{
+  "687": {
     "name": "Malamar",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -8065,9 +8103,9 @@
       }
     ]
   },
-  "688":{
+  "688": {
     "name": "Binacle",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -8079,9 +8117,9 @@
       }
     ]
   },
-  "689":{
+  "689": {
     "name": "Barbaracle",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -8093,9 +8131,9 @@
       }
     ]
   },
-  "690":{
+  "690": {
     "name": "Skrelp",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -8107,9 +8145,9 @@
       }
     ]
   },
-  "691":{
+  "691": {
     "name": "Dragalge",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -8121,9 +8159,9 @@
       }
     ]
   },
-  "692":{
+  "692": {
     "name": "Clauncher",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -8131,9 +8169,9 @@
       }
     ]
   },
-  "693":{
+  "693": {
     "name": "Clawitzer",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -8141,9 +8179,9 @@
       }
     ]
   },
-  "694":{
+  "694": {
     "name": "Helioptile",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -8155,9 +8193,9 @@
       }
     ]
   },
-  "695":{
+  "695": {
     "name": "Heliolisk",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -8169,9 +8207,9 @@
       }
     ]
   },
-  "696":{
+  "696": {
     "name": "Tyrunt",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -8183,9 +8221,9 @@
       }
     ]
   },
-  "697":{
+  "697": {
     "name": "Tyrantrum",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -8197,9 +8235,9 @@
       }
     ]
   },
-  "698":{
+  "698": {
     "name": "Amaura",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -8211,9 +8249,9 @@
       }
     ]
   },
-  "699":{
+  "699": {
     "name": "Aurorus",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -8225,9 +8263,9 @@
       }
     ]
   },
-  "700":{
+  "700": {
     "name": "Sylveon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fairy",
@@ -8235,9 +8273,9 @@
       }
     ]
   },
-  "701":{
+  "701": {
     "name": "Hawlucha",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -8249,9 +8287,9 @@
       }
     ]
   },
-  "702":{
+  "702": {
     "name": "Dedenne",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -8263,9 +8301,9 @@
       }
     ]
   },
-  "703":{
+  "703": {
     "name": "Carbink",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -8277,9 +8315,9 @@
       }
     ]
   },
-  "704":{
+  "704": {
     "name": "Goomy",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -8287,9 +8325,9 @@
       }
     ]
   },
-  "705":{
+  "705": {
     "name": "Sliggoo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -8297,9 +8335,9 @@
       }
     ]
   },
-  "706":{
+  "706": {
     "name": "Goodra",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -8307,9 +8345,9 @@
       }
     ]
   },
-  "707":{
+  "707": {
     "name": "Klefki",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -8321,9 +8359,9 @@
       }
     ]
   },
-  "708":{
+  "708": {
     "name": "Phantump",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -8335,9 +8373,9 @@
       }
     ]
   },
-  "709":{
+  "709": {
     "name": "Trevenant",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -8349,9 +8387,9 @@
       }
     ]
   },
-  "710":{
+  "710": {
     "name": "Pumpkaboo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -8363,9 +8401,9 @@
       }
     ]
   },
-  "711":{
+  "711": {
     "name": "Gourgeist",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -8377,9 +8415,9 @@
       }
     ]
   },
-  "712":{
+  "712": {
     "name": "Bergmite",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -8387,9 +8425,9 @@
       }
     ]
   },
-  "713":{
+  "713": {
     "name": "Avalugg",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ice",
@@ -8397,9 +8435,9 @@
       }
     ]
   },
-  "714":{
+  "714": {
     "name": "Noibat",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Flying",
@@ -8411,9 +8449,9 @@
       }
     ]
   },
-  "715":{
+  "715": {
     "name": "Noivern",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Flying",
@@ -8425,9 +8463,9 @@
       }
     ]
   },
-  "716":{
+  "716": {
     "name": "Xerneas",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fairy",
@@ -8435,9 +8473,9 @@
       }
     ]
   },
-  "717":{
+  "717": {
     "name": "Yveltal",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -8449,9 +8487,9 @@
       }
     ]
   },
-  "718":{
+  "718": {
     "name": "Zygarde",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -8463,9 +8501,9 @@
       }
     ]
   },
-  "719":{
+  "719": {
     "name": "Diancie",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -8477,9 +8515,9 @@
       }
     ]
   },
-  "721":{
+  "721": {
     "name": "Volcanion",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -8491,9 +8529,9 @@
       }
     ]
   },
-  "722":{
+  "722": {
     "name": "Rowlet",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -8505,9 +8543,9 @@
       }
     ]
   },
-  "723":{
+  "723": {
     "name": "Dartrix",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -8519,9 +8557,9 @@
       }
     ]
   },
-  "724":{
+  "724": {
     "name": "Decidueye",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -8533,9 +8571,9 @@
       }
     ]
   },
-  "725":{
+  "725": {
     "name": "Litten",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -8543,9 +8581,9 @@
       }
     ]
   },
-  "726":{
+  "726": {
     "name": "Torracat",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -8553,9 +8591,9 @@
       }
     ]
   },
-  "727":{
+  "727": {
     "name": "Incineroar",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -8567,9 +8605,9 @@
       }
     ]
   },
-  "728":{
+  "728": {
     "name": "Popplio",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -8577,9 +8615,9 @@
       }
     ]
   },
-  "729":{
+  "729": {
     "name": "Brionne",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -8587,9 +8625,9 @@
       }
     ]
   },
-  "730":{
+  "730": {
     "name": "Primarina",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -8601,9 +8639,9 @@
       }
     ]
   },
-  "731":{
+  "731": {
     "name": "Pikipek",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -8615,9 +8653,9 @@
       }
     ]
   },
-  "732":{
+  "732": {
     "name": "Trumbeak",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -8629,9 +8667,9 @@
       }
     ]
   },
-  "733":{
+  "733": {
     "name": "Toucannon",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -8643,9 +8681,9 @@
       }
     ]
   },
-  "734":{
+  "734": {
     "name": "Yungoos",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -8653,9 +8691,9 @@
       }
     ]
   },
-  "735":{
+  "735": {
     "name": "Gumshoos",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -8663,9 +8701,9 @@
       }
     ]
   },
-  "736":{
+  "736": {
     "name": "Grubbin",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -8673,9 +8711,9 @@
       }
     ]
   },
-  "737":{
+  "737": {
     "name": "Charjabug",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -8687,9 +8725,9 @@
       }
     ]
   },
-  "738":{
+  "738": {
     "name": "Vikavolt",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -8701,9 +8739,9 @@
       }
     ]
   },
-  "739":{
+  "739": {
     "name": "Crabrawler",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -8711,9 +8749,9 @@
       }
     ]
   },
-  "740":{
+  "740": {
     "name": "Crabominable",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -8725,9 +8763,9 @@
       }
     ]
   },
-  "741":{
+  "741": {
     "name": "Oricorio",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -8739,9 +8777,9 @@
       }
     ]
   },
-  "742":{
+  "742": {
     "name": "Cutiefly",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -8753,9 +8791,9 @@
       }
     ]
   },
-  "743":{
+  "743": {
     "name": "Ribombee",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -8767,9 +8805,9 @@
       }
     ]
   },
-  "744":{
+  "744": {
     "name": "Rockruff",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -8777,9 +8815,9 @@
       }
     ]
   },
-  "745":{
+  "745": {
     "name": "Lycanroc",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -8787,9 +8825,9 @@
       }
     ]
   },
-  "746":{
+  "746": {
     "name": "Wishiwashi",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -8797,9 +8835,9 @@
       }
     ]
   },
-  "747":{
+  "747": {
     "name": "Mareanie",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -8811,9 +8849,9 @@
       }
     ]
   },
-  "748":{
+  "748": {
     "name": "Toxapex",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -8825,9 +8863,9 @@
       }
     ]
   },
-  "749":{
+  "749": {
     "name": "Mudbray",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -8835,9 +8873,9 @@
       }
     ]
   },
-  "750":{
+  "750": {
     "name": "Mudsdale",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ground",
@@ -8845,9 +8883,9 @@
       }
     ]
   },
-  "751":{
+  "751": {
     "name": "Dewpider",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -8859,9 +8897,9 @@
       }
     ]
   },
-  "752":{
+  "752": {
     "name": "Araquanid",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -8873,9 +8911,9 @@
       }
     ]
   },
-  "753":{
+  "753": {
     "name": "Fomantis",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -8883,9 +8921,9 @@
       }
     ]
   },
-  "754":{
+  "754": {
     "name": "Lurantis",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -8893,9 +8931,9 @@
       }
     ]
   },
-  "755":{
+  "755": {
     "name": "Morelull",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -8907,9 +8945,9 @@
       }
     ]
   },
-  "756":{
+  "756": {
     "name": "Shiinotic",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -8921,9 +8959,9 @@
       }
     ]
   },
-  "757":{
+  "757": {
     "name": "Salandit",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -8935,9 +8973,9 @@
       }
     ]
   },
-  "758":{
+  "758": {
     "name": "Salazzle",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Poison",
@@ -8949,9 +8987,9 @@
       }
     ]
   },
-  "759":{
+  "759": {
     "name": "Stufful",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -8963,9 +9001,9 @@
       }
     ]
   },
-  "760":{
+  "760": {
     "name": "Bewear",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -8977,9 +9015,9 @@
       }
     ]
   },
-  "761":{
+  "761": {
     "name": "Bounsweet",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -8987,9 +9025,9 @@
       }
     ]
   },
-  "762":{
+  "762": {
     "name": "Steenee",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -8997,9 +9035,9 @@
       }
     ]
   },
-  "763":{
+  "763": {
     "name": "Tsareena",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -9007,9 +9045,9 @@
       }
     ]
   },
-  "764":{
+  "764": {
     "name": "Comfey",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fairy",
@@ -9017,9 +9055,9 @@
       }
     ]
   },
-  "765":{
+  "765": {
     "name": "Oranguru",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -9031,9 +9069,9 @@
       }
     ]
   },
-  "766":{
+  "766": {
     "name": "Passimian",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fighting",
@@ -9041,9 +9079,9 @@
       }
     ]
   },
-  "767":{
+  "767": {
     "name": "Wimpod",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -9055,9 +9093,9 @@
       }
     ]
   },
-  "768":{
+  "768": {
     "name": "Golisopod",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -9069,9 +9107,9 @@
       }
     ]
   },
-  "769":{
+  "769": {
     "name": "Sandygast",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -9083,9 +9121,9 @@
       }
     ]
   },
-  "770":{
+  "770": {
     "name": "Palossand",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -9097,9 +9135,9 @@
       }
     ]
   },
-  "771":{
+  "771": {
     "name": "Pyukumuku",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -9107,9 +9145,9 @@
       }
     ]
   },
-  "772":{
+  "772": {
     "name": "Type: Null",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -9117,9 +9155,9 @@
       }
     ]
   },
-  "773":{
+  "773": {
     "name": "Silvally",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -9127,9 +9165,9 @@
       }
     ]
   },
-  "774":{
+  "774": {
     "name": "Minior (Core)",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -9141,9 +9179,9 @@
       }
     ]
   },
-  "775":{
+  "775": {
     "name": "Komala",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -9151,9 +9189,9 @@
       }
     ]
   },
-  "776":{
+  "776": {
     "name": "Turtonator",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Fire",
@@ -9165,9 +9203,9 @@
       }
     ]
   },
-  "777":{
+  "777": {
     "name": "Togedemaru",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -9179,9 +9217,9 @@
       }
     ]
   },
-  "778":{
+  "778": {
     "name": "Mimikyu",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -9193,9 +9231,9 @@
       }
     ]
   },
-  "779":{
+  "779": {
     "name": "Bruxish",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -9207,9 +9245,9 @@
       }
     ]
   },
-  "780":{
+  "780": {
     "name": "Drampa",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Normal",
@@ -9221,9 +9259,9 @@
       }
     ]
   },
-  "781":{
+  "781": {
     "name": "Dhelmise",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Ghost",
@@ -9235,9 +9273,9 @@
       }
     ]
   },
-  "782":{
+  "782": {
     "name": "Jangmo-o",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -9245,9 +9283,9 @@
       }
     ]
   },
-  "783":{
+  "783": {
     "name": "Hakamo-o",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -9259,9 +9297,9 @@
       }
     ]
   },
-  "784":{
+  "784": {
     "name": "Kommo-o",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dragon",
@@ -9273,9 +9311,9 @@
       }
     ]
   },
-  "785":{
+  "785": {
     "name": "Tapu Koko",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -9287,9 +9325,9 @@
       }
     ]
   },
-  "786":{
+  "786": {
     "name": "Tapu Lele",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -9301,9 +9339,9 @@
       }
     ]
   },
-  "787":{
+  "787": {
     "name": "Tapu Bulu",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -9315,9 +9353,9 @@
       }
     ]
   },
-  "788":{
+  "788": {
     "name": "Tapu Fini",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Water",
@@ -9329,9 +9367,9 @@
       }
     ]
   },
-  "789":{
+  "789": {
     "name": "Cosmog",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -9339,9 +9377,9 @@
       }
     ]
   },
-  "790":{
+  "790": {
     "name": "Cosmoem",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -9349,9 +9387,9 @@
       }
     ]
   },
-  "791":{
+  "791": {
     "name": "Solgaleo",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -9363,9 +9401,9 @@
       }
     ]
   },
-  "792":{
+  "792": {
     "name": "Lunala",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -9377,9 +9415,9 @@
       }
     ]
   },
-  "793":{
+  "793": {
     "name": "Nihilego",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Rock",
@@ -9391,9 +9429,9 @@
       }
     ]
   },
-  "794":{
+  "794": {
     "name": "Buzzwole",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -9405,9 +9443,9 @@
       }
     ]
   },
-  "795":{
+  "795": {
     "name": "Pheromosa",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Bug",
@@ -9419,9 +9457,9 @@
       }
     ]
   },
-  "796":{
+  "796": {
     "name": "Xurkitree",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Electric",
@@ -9429,9 +9467,9 @@
       }
     ]
   },
-  "797":{
+  "797": {
     "name": "Celesteela",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
@@ -9443,9 +9481,9 @@
       }
     ]
   },
-  "798":{
+  "798": {
     "name": "Kartana",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Grass",
@@ -9457,9 +9495,9 @@
       }
     ]
   },
-  "799":{
+  "799": {
     "name": "Guzzlord",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Dark",
@@ -9471,9 +9509,9 @@
       }
     ]
   },
-  "800":{
+  "800": {
     "name": "Necrozma",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Psychic",
@@ -9481,9 +9519,9 @@
       }
     ]
   },
-  "801":{
+  "801": {
     "name": "Magearna",
-    "rarity":"",
+    "rarity": "",
     "types": [
       {
         "type": "Steel",
