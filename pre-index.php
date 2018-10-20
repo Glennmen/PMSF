@@ -69,7 +69,7 @@ if ($blockIframe) {
         $i = 0;
         $z = 0;
         foreach ($mons as $k => $pokemon) {
-            if ($k > 386) {
+            if ($k > 493) {
                 break;
             }
             echo "<span class='pokemon-icon-sprite' data-value='" . $k . "'><span class='$k inner-bg' style='background-position:-" . $i * 48.25 . "px -" . $z . "px'></span>";
