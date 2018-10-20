@@ -1801,7 +1801,7 @@
   },
   "288": {
     "name": "Psycho Boost",
-    "type": "Psy",
+    "type": "Psychic",
     "damage": 70,
     "duration": 4000,
     "energy": 50,
