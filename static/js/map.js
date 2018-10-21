@@ -23,6 +23,7 @@ var $selectMaxGymLevel
 var $selectMinRaidLevel
 var $selectMaxRaidLevel
 var $selectLuredPokestopsOnly
+var $showTimers
 var $selectGymMarkerStyle
 var $selectLocationIconMarker
 var $switchGymSidebar
@@ -391,6 +392,8 @@ function initSidebar() {
     $('#pokestops-switch').prop('checked', Store.get('showPokestops'))
     $('#lured-pokestops-only-switch').val(Store.get('showLuredPokestopsOnly'))
     $('#lured-pokestops-only-wrapper').toggle(Store.get('showPokestops'))
+    $('#timer-switch').prop('checked', Store.get('showTimers'))
+    $('#hide-timers-at-zoom-level').val(Store.get('hideTimersAtZoomLevel'))
     $('#start-at-user-location-switch').prop('checked', Store.get('startAtUserLocation'))
     $('#start-at-last-location-switch').prop('checked', Store.get('startAtLastLocation'))
     $('#follow-my-location-switch').prop('checked', Store.get('followMyLocation'))
@@ -2117,6 +2120,34 @@ var updateLabelDiffTime = function updateLabelDiffTime() {
     })
 }
 
+var updateIconDiffTime = function updateIconDiffTime() {
+    $('.icon-countdown').each(function (index, element) {
+        var disappearsAt = getTimeUntil(parseInt(element.getAttribute('disappears-at')))
+
+        var hours = disappearsAt.hour
+        var minutes = disappearsAt.min
+        var seconds = disappearsAt.sec
+        var timestring = ''
+
+        if (disappearsAt.time < disappearsAt.now) {
+            if (element.hasAttribute('end')) {
+                timestring = i8ln('ended')
+            } else {
+                timestring = i8ln('expired')
+            }
+        } else {
+            if (hours > 0) {
+                timestring += hours + 'h'
+            }
+
+            timestring += lpad(minutes, 2, 0) + 'm'
+            timestring += lpad(seconds, 2, 0) + 's'
+        }
+
+        $(element).text(timestring)
+    })
+}
+
 function getPointDistance(pointA, pointB) {
     return google.maps.geometry.spherical.computeDistanceBetween(pointA, pointB)
 }
@@ -2911,6 +2942,14 @@ $(function () {
         })
         updateMap()
     })
+    $showTimers = $('#timer-switch')
+
+    $showTimers.on('change', function () {
+        Store.set('showTimers', this.checked)
+        redrawPokemon(mapData.pokemons)
+        redrawPokemon(mapData.lurePokemons)
+    })
+
     $switchExEligible = $('#ex-eligible-switch')
 
     $switchExEligible.on('change', function () {
@@ -3212,6 +3251,7 @@ $(function () {
 
     // run interval timers to regularly update map and timediffs
     window.setInterval(updateLabelDiffTime, 1000)
+    window.setInterval(updateIconDiffTime, 1000)
     window.setInterval(updateMap, 5000)
     window.setInterval(updateWeatherOverlay, 60000)
     window.setInterval(updateGeoLocation, 1000)

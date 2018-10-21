@@ -843,17 +843,19 @@ var StoreTypes = {
         }
     }
 
-// set the default parameters for you map here
+    // set the default parameters for you map here
 }
 var StoreOptions = {
-    'map_style': {
-        default: mapStyle, // roadmap, satellite, hybrid, nolabels_style, dark_style, style_light2, style_pgo, dark_style_nl, style_pgo_day, style_pgo_night, style_pgo_dynamic
-        type: StoreTypes.String
-    },
-    'remember_select_exclude': {
-        default: hidePokemon,
-        type: StoreTypes.JSON
-    },
+    'map_style':
+        {
+            default: mapStyle, // roadmap, satellite, hybrid, nolabels_style, dark_style, style_light2, style_pgo, dark_style_nl, style_pgo_day, style_pgo_night, style_pgo_dynamic
+            type: StoreTypes.String
+        },
+    'remember_select_exclude':
+        {
+            default: hidePokemon,
+            type: StoreTypes.JSON
+        },
     'remember_select_exclude_min_iv':
         {
             default: excludeMinIV,
@@ -1123,6 +1125,16 @@ var StoreOptions = {
         {
             default: exEligible,
             type: StoreTypes.Boolean
+        },
+    'showTimers':
+        {
+            default: enableTimers,
+            type: StoreTypes.Boolean
+        },
+    'hideTimersAtZoomLevel':
+        {
+            default: hideTimersAtZoomLevel,
+            type: StoreTypes.Number
         }
 }
 
@@ -1189,29 +1201,49 @@ function getGoogleSprite(index, sprite, displayHeight, weather = 0) {
 }
 
 function setupPokemonMarker(item, map, isBounceDisabled) {
-// Scale icon size up with the map exponentially
+    // Scale icon size up with the map exponentially
     var iconSize = 2 + (map.getZoom() - 3) * (map.getZoom() - 3) * 0.2 + Store.get('iconSizeModifier')
     if (isNotifiedPokemon(item) === true) {
         iconSize += Store.get('iconNotifySizeModifier')
     }
     var pokemonIndex = item['pokemon_id'] - 1
     var icon = getGoogleSprite(pokemonIndex, pokemonSprites, iconSize, item['weather_boosted_condition'])
+    var hideTimersAtZoomLevel = Store.get('hideTimersAtZoomLevel')
+    var showTimers = Store.get('showTimers')
 
     var animationDisabled = false
     if (isBounceDisabled === true) {
         animationDisabled = true
     }
 
-    return new google.maps.Marker({
-        position: {
-            lat: item['latitude'],
-            lng: item['longitude']
-        },
-        zIndex: 9999,
-        map: map,
-        icon: icon,
-        animationDisabled: animationDisabled
-    })
+    var marker
+    if (showTimers && (map.getZoom() >= hideTimersAtZoomLevel)) {
+        marker = new MarkerWithLabel({ // eslint-disable-line no-undef
+            position: {
+                lat: item['latitude'],
+                lng: item['longitude']
+            },
+            zIndex: 9999,
+            map: map,
+            icon: icon,
+            labelAnchor: new google.maps.Point(25, -iconSize / 2.4),
+            labelContent: '<span class=\'icon-countdown\' disappears-at=\'' + item['disappear_time'] + '\'> </span>',
+            labelClass: 'pokemonlabel',
+            animationDisabled: animationDisabled
+        })
+    } else {
+        marker = new google.maps.Marker({
+            position: {
+                lat: item['latitude'],
+                lng: item['longitude']
+            },
+            zIndex: 9999,
+            map: map,
+            icon: icon,
+            animationDisabled: animationDisabled
+        })
+    }
+    return marker
 }
 
 function isNotifiedPokemon(item) {
@@ -1231,11 +1263,11 @@ function isNotifiedPokemon(item) {
 }
 
 function isTouchDevice() {
-// Should cover most browsers
+    // Should cover most browsers
     return 'ontouchstart' in window || navigator.maxTouchPoints
 }
 
 function isMobileDevice() {
-//  Basic mobile OS (not browser) detection
+    //  Basic mobile OS (not browser) detection
     return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
 }
