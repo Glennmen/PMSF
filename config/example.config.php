@@ -250,6 +250,7 @@ $enableDebug = false;
 
 $map = "monocle";                                                   // monocle/rm
 $fork = "default";                                                  // default/asner/sloppy/alternate
+$alternateKeepGymHistory = false;                                   // alternate - KEEP_GYM_HISTORY is on
 
 $db = new Medoo([// required
     'database_type' => 'mysql',                                     // mysql/mariadb/pgsql/sybase/oracle/mssql/sqlite

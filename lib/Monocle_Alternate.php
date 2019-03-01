@@ -244,9 +244,10 @@ class Monocle_Alternate extends Monocle
 
     public function query_gyms($conds, $params)
     {
-        global $db;
+        global $db, $alternateKeepGymHistory;
 
-        $query = "SELECT f.external_id AS gym_id,
+        $query = "SELECT
+        f.external_id AS gym_id,
         fs.last_modified AS last_modified,
         updated AS last_scanned,
         f.lat AS latitude,
@@ -265,10 +266,16 @@ class Monocle_Alternate extends Monocle
         r.move_1 AS raid_pokemon_move_1,
         r.move_2 AS raid_pokemon_move_2
         FROM forts f
-        LEFT JOIN fort_sightings fs ON fs.fort_id = f.id
-        LEFT JOIN raids r ON r.fort_id = f.id
+        LEFT JOIN fort_sightings fs ON (fs.fort_id = f.id AND :fort_condition)
+        LEFT JOIN raids r ON (r.fort_id = f.id AND r.time_end >= :time)
         WHERE :conditions";
 
+        if ($alternateKeepGymHistory) {
+            $query = str_replace(":fort_condition", "fs.last_modified = (SELECT MAX(last_modified) FROM fort_sightings fs2 WHERE fs2.fort_id=f.id)", $query);
+        } else {
+            $query = str_replace(":fort_condition", "1=1", $query);
+        }
+        $query = str_replace(":time", time(), $query);
         $query = str_replace(":conditions", join(" AND ", $conds), $query);
         $gyms = $db->query($query, $params)->fetchAll(\PDO::FETCH_ASSOC);
 
