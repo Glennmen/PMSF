@@ -611,6 +611,7 @@ function gymLabel(item) {
     var lastScanned = item['last_scanned']
     var lastModified = item['last_modified']
     var name = item['name']
+    var url = item['url']
     var members = item['pokemon']
 
     var raidSpawned = item['raid_level'] != null
@@ -700,6 +701,7 @@ function gymLabel(item) {
             '<b style="color:rgba(' + gymColor[teamId] + ')">' + i8ln(teamName) + '</b><br>' +
             '<img height="70px" style="padding: 5px;" src="static/forts/' + teamName + '_large.png">' +
             raidIcon +
+            '<img height="70px" style="padding: 5px;" src="' + url + '">' +
             '</div>' +
             nameStr +
             raidStr +
@@ -735,6 +737,7 @@ function gymLabel(item) {
             '<b style="color:rgba(' + gymColor[teamId] + ')">' + i8ln('Team') + ' ' + i8ln(teamName) + '</b><br>' +
             '<img height="70px" style="padding: 5px;" src="static/forts/' + teamName + '_large.png">' +
             raidIcon +
+            '<img height="70px" style="padding: 5px;" src="' + url + '">' +
             '</div>' +
             nameStr +
             raidStr +
@@ -763,7 +766,7 @@ function gymLabel(item) {
     return str
 }
 
-function pokestopLabel(expireTime, latitude, longitude, stopName) {
+function pokestopLabel(expireTime, latitude, longitude, stopName, stopUrl) {
     var str
     if (stopName === undefined) {
         stopName = 'Pokéstop'
@@ -773,6 +776,7 @@ function pokestopLabel(expireTime, latitude, longitude, stopName) {
             '<div>' +
             '<b>' + stopName + ' (Lured)</b>' +
             '</div>' +
+            '<img height="70px" style="padding: 5px;" align="middle" src="' + stopUrl + '">' +
             '<div>' +
             i8ln('Lure expires at') + ' ' + getTimeStr(expireTime) +
             ' <span class="label-countdown" disappears-at="' + expireTime + '">(00m00s)</span>' +
@@ -785,6 +789,7 @@ function pokestopLabel(expireTime, latitude, longitude, stopName) {
             '<div>' +
             '<b>' + stopName + '</b>' +
             '</div>' +
+            '<img height="70px" style="padding: 5px;" align="middle" src="' + stopUrl + '">' +
             '<div>' +
             'Location: <a href="javascript:void(0)" onclick="javascript:openMapDirections(' + latitude + ',' + longitude + ')" title="' + i8ln('View in Maps') + '">' + latitude.toFixed(6) + ', ' + longitude.toFixed(7) + '</a>' +
             '</div>'
@@ -1177,7 +1182,7 @@ function setupPokestopMarker(item) {
     }
 
     marker.infoWindow = new google.maps.InfoWindow({
-        content: pokestopLabel(item['lure_expiration'], item['latitude'], item['longitude'], item['pokestop_name']),
+        content: pokestopLabel(item['lure_expiration'], item['latitude'], item['longitude'], item['pokestop_name'], item['pokestop_url']),
         disableAutoPan: true
     })
 
@@ -2484,6 +2489,7 @@ function showGymDetails(id) { // eslint-disable-line no-unused-vars
             '<div>' +
             '<img height="100px" style="padding: 5px;" src="static/forts/' + gymTypes[result.team_id] + '_large.png">' +
             raidIcon +
+            '<img height="70px" style="padding: 5px;" src="' + result.url + '">' +
             '</div>' +
             raidStr +
             gymLevelStr +
