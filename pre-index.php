@@ -147,6 +147,12 @@ if ($blockIframe) {
                  title="PayPal - The safer, easier way to pay online!" alt="Donate" style="float: right;">
         </a>';
         }
+        if ($helplink != "") {
+            echo '<a href="' . $helplink . '" target="_blank" style="margin-bottom: 5px; vertical-align: middle; padding:0 5px;">
+            <img src="static/images/help.png" border="0" name="submit"
+                 title="Help for this map." alt="Help" style="float: right;">
+        </a>';
+        }
         ?>
         <?php if (!$noWeatherOverlay) {
             ?>
